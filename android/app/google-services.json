@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "600377931351",
+    "project_id": "online-course-app-bcc96",
+    "storage_bucket": "online-course-app-bcc96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600377931351:android:72afd2b05ddc24cbcfd512",
+        "android_client_info": {
+          "package_name": "asia.goldenowl.online_course_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "600377931351-qb0voj5ti15j2e698t931pk2k8epmt2b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvG_Y9oq7pC2zopPqcNqRKBUKyIO3BwO8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600377931351-qb0voj5ti15j2e698t931pk2k8epmt2b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
