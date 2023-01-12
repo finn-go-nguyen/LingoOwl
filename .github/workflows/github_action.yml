@@ -24,18 +24,25 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: stable
-      - name: decode keystore file
-        run: >
+      - name: Decode keystore file
+        run: |
           echo "${{ secrets.UPLOAD_KEYSTORE }}" > upload-keystore.jks.asc
 
           gpg -d --passphrase "${{ secrets.UPLOAD_KEYSTORE_PASSPHRASE }}" --batch upload-keystore.jks.asc > android/app/upload-keystore.jks
+
       - name: Decode key.properties file
         env:
           SECRETS_PROPERTIES: ${{ secrets.KEY_PROPERTIES }}
-        run: echo "$SECRETS_PROPERTIES" | base64 -d > android/key.properties
+        run: echo "${{ secrets.KEY_PROPERTIES }}" | base64 -d > android/key.properties
+
+      - name: Decode strings.xml file
+        env:
+          SECRETS_PROPERTIES: ${{ secrets.STRINGS_XML }}
+        run: echo "${{ secrets.STRINGS_XML }}" | base64 -d > android/app/src/main/res/values/strings.xml
+
       - id: flutter-build
         name: Flutter Build
-        run: >
+        run: |
           flutter clean
           flutter pub get
 
@@ -78,13 +85,13 @@ jobs:
         env:
           CI_TOKEN: ${{ secrets.CI_TOKEN }}
           username: finn-go-nguyen
-      - name: setup firebase cli
+      - name: Setup firebase cli
         run: |
           npm install -g firebase-tools
           firebase --version
         shell: pwsh
       - name: Firebase App Distribution
-        run: >
+        run: |
           $isRelease = '${{ github.ref == 'refs/heads/main' || github.ref ==
           'refs/heads/development' && github.event_name == 'push' }}'
 
@@ -101,7 +108,7 @@ jobs:
             git --no-pager log --pretty=format:%s ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} > changelog.txt
           }
 
-          firebase appdistribution:distribute 'build/app/outputs/flutter-apk/app-release.apk' --app ${{ secrets.APP_ID }} --token '${{ secrets.APP_DISTRIBUTION_TOKEN }}' --groups "personal" --release-notes-file changelog.txt
+          firebase appdistribution:distribute 'build/app/outputs/flutter-apk/app-release.apk' --app ${{ secrets.APP_ID }} --token '${{ secrets.APP_DISTRIBUTION_TOKEN }}' --groups "android_testers" --release-notes-file changelog.txt
         shell: pwsh
   build-success:
     if: ${{ github.ref != 'refs/heads/main' || github.base_ref != 'main' }}
