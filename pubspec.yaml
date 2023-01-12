@@ -59,6 +59,7 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   flutter_svg: ^1.1.6
   google_fonts: ^3.0.1
+  firebase_auth_oauth: ^1.2.2
 
 dev_dependencies:
   flutter_test:

@@ -110,9 +110,11 @@ class SignInScreen extends ConsumerWidget {
                     label: 'Sign in with Facebook',
                   ),
                   _SignInButton(
-                    onPressed: () {},
-                    image: Assets.icons.apple.path,
-                    label: 'Sign in with Apple',
+                    onPressed: ref
+                        .read(socialSignInControllerProvider.notifier)
+                        .signInWithMicrosoft,
+                    image: Assets.icons.microsoft.path,
+                    label: 'Sign in with Microsoft',
                   ),
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -31,6 +32,7 @@ abstract class AuthenticationRepository {
   });
   Future<LAuthUser?> signInWithGoogle();
   Future<LAuthUser?> signInWithFacebook();
+  Future<LAuthUser?> signInWithMicrosoft();
   Future<LAuthUser?> signInWithEmailAndPassword({
     required String email,
     required String password,
@@ -172,6 +174,13 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
     final userCredential =
         await FirebaseAuth.instance.signInWithCredential(credential);
     return LAuthUser.fromFirebaseUser(userCredential.user!);
+  }
+
+  @override
+  Future<LAuthUser?> signInWithMicrosoft() async {
+    final user = await FirebaseAuthOAuth()
+        .openSignInFlow('microsoft.com', ['email', 'profile']);
+    return LAuthUser.fromFirebaseUser(user!);
   }
 
   @override

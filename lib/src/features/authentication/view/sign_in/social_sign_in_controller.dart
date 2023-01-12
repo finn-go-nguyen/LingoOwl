@@ -24,4 +24,10 @@ class SocialSignInController extends StateNotifier<AsyncValue<void>> {
     state = await AsyncValue.guard(
         () => _authenticationRepository.signInWithFacebook());
   }
+
+  void signInWithMicrosoft() async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(
+        () => _authenticationRepository.signInWithMicrosoft());
+  }
 }
