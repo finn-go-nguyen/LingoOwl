@@ -2,9 +2,9 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'src/locator.dart';
 
 import 'src/app.dart';
+import 'src/locator.dart';
 
 Future<void> main() async {
   await initializeApp();

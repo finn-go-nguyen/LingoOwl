@@ -1,17 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:online_course_app/gen/assets.gen.dart';
-import 'package:online_course_app/src/constants/app_sizes.dart';
-import 'package:online_course_app/src/router/app_router.dart';
+import 'package:online_course_app/src/features/authentication/view/sign_in/social_sign_in_controller.dart';
+import '../../../../../gen/assets.gen.dart';
+import '../../../../constants/app_sizes.dart';
+import '../../../../router/app_router.dart';
 
 import '../../../../widgets/common/scaffold.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(socialSignInControllerProvider, (previous, next) {
+      if (next.isLoading) {
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (context) =>
+              const Center(child: CircularProgressIndicator()),
+        );
+      }
+
+      if ((previous?.isLoading ?? false) && !next.isLoading) {
+        if (Navigator.canPop(context)) Navigator.pop(context);
+      }
+
+      if (!next.isRefreshing && next.hasError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            backgroundColor: Colors.red,
+            content: Text(
+              next.error.toString(),
+            ),
+          ),
+        );
+      }
+    });
     return LScaffold(
       child: SizedBox.expand(
         child: Column(
@@ -69,12 +96,16 @@ class SignInScreen extends StatelessWidget {
                     label: 'Sign in with email',
                   ),
                   _SignInButton(
-                    onPressed: () {},
+                    onPressed: ref
+                        .read(socialSignInControllerProvider.notifier)
+                        .signInWithGoogle,
                     image: Assets.icons.google.path,
                     label: 'Sign in with Google',
                   ),
                   _SignInButton(
-                    onPressed: () {},
+                    onPressed: ref
+                        .read(socialSignInControllerProvider.notifier)
+                        .signInWithFacebook,
                     image: Assets.icons.facebook.path,
                     label: 'Sign in with Facebook',
                   ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:online_course_app/src/constants/app_sizes.dart';
-import 'package:online_course_app/src/features/authentication/view/sign_in/email_password_sign_in_controller.dart';
+import '../../../../constants/app_sizes.dart';
+import 'email_password_sign_in_controller.dart';
 
 import '../../../../widgets/common/scaffold.dart';
 

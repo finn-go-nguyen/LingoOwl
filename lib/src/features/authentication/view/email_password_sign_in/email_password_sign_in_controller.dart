@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:online_course_app/src/features/authentication/data/authentication_repository.dart';
-import 'package:online_course_app/src/features/authentication/view/sign_in/email_password_sign_in_state.dart';
+
+import '../../data/authentication_repository.dart';
+import 'email_password_sign_in_state.dart';
 
 final emailPasswordSignInControllerProvider = StateNotifierProvider<
     EmailPasswordSignInController, EmailPasswordSignInState>((ref) {

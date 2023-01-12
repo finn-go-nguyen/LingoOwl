@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
-import 'package:online_course_app/src/constants/app_sizes.dart';
-import 'package:online_course_app/src/router/app_router.dart';
+import '../../../constants/app_sizes.dart';
+import '../../../router/app_router.dart';
 
 import '../../../../gen/assets.gen.dart';
 
