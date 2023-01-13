@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import '../../../../constants/forms/error_text.dart';
 
 import '../../../../constants/app_sizes.dart';
 import '../../../../constants/forms/account_create_form.dart';
@@ -90,7 +91,7 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
             validator: FormBuilderValidators.compose([
               FormBuilderValidators.required(),
               FormBuilderValidators.email(
-                errorText: AccountCreateFormConstants.invalidEmailErrorText,
+                errorText: ErrorTextConstants.invalidEmailErrorText,
               ),
             ]),
           ),
@@ -108,11 +109,11 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
               FormBuilderValidators.required(),
               FormBuilderValidators.minLength(
                 8,
-                errorText: AccountCreateFormConstants.passwordLengthErrorText,
+                errorText: ErrorTextConstants.passwordLengthErrorText,
               ),
               FormBuilderValidators.maxLength(
                 64,
-                errorText: AccountCreateFormConstants.passwordLengthErrorText,
+                errorText: ErrorTextConstants.passwordLengthErrorText,
               ),
             ]),
           ),

@@ -7,8 +7,7 @@ part 'email_password_sign_in_state.freezed.dart';
 class EmailPasswordSignInState with _$EmailPasswordSignInState {
   const factory EmailPasswordSignInState({
     @Default('') String email,
-    @Default('') String password,
-    @Default(false) bool isPasswordShowed,
+    @Default(false) bool obscureText,
     @Default(AsyncData(null)) AsyncValue<void> status,
   }) = _EmailPasswordSignInState;
 }

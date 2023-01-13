@@ -3,18 +3,23 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../constants/app_sizes.dart';
+import '../../../../constants/forms/error_text.dart';
+import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
+import '../../../../widgets/common/term_privacy.dart';
 import 'email_password_sign_in_controller.dart';
+import 'email_password_sign_in_form.dart';
 
-class EmailPasswordSignInScreen extends StatefulWidget {
+class EmailPasswordSignInScreen extends ConsumerStatefulWidget {
   const EmailPasswordSignInScreen({super.key});
 
   @override
-  State<EmailPasswordSignInScreen> createState() =>
+  ConsumerState<EmailPasswordSignInScreen> createState() =>
       _EmailPasswordSignInScreenState();
 }
 
-class _EmailPasswordSignInScreenState extends State<EmailPasswordSignInScreen> {
+class _EmailPasswordSignInScreenState
+    extends ConsumerState<EmailPasswordSignInScreen> {
   final _pageController = PageController();
 
   @override
@@ -25,6 +30,10 @@ class _EmailPasswordSignInScreenState extends State<EmailPasswordSignInScreen> {
 
   @override
   Widget build(BuildContext context) {
+    ref.listen(emailPasswordSignInControllerProvider, (previous, next) {
+      next.status.showError(context,
+          errorMessage: ErrorTextConstants.wrongPasswordOrUserNotFound);
+    });
     return LScaffold(
       body: SizedBox.expand(
         child: Padding(
@@ -42,13 +51,7 @@ class _EmailPasswordSignInScreenState extends State<EmailPasswordSignInScreen> {
                   );
                 },
               ),
-              Consumer(
-                builder: (context, ref, child) => PasswordInputView(
-                  onSubmitted: ref
-                      .read(emailPasswordSignInControllerProvider.notifier)
-                      .signInWithEmailAndPassword,
-                ),
-              ),
+              const PasswordInputView()
             ],
           ),
         ),
@@ -82,117 +85,46 @@ class EmailInputView extends ConsumerWidget {
           style: Theme.of(context).textTheme.bodyText2,
         ),
         Gaps.h64,
-        TextFormField(
-          onChanged: ref
-              .read(emailPasswordSignInControllerProvider.notifier)
-              .onEmailChanged,
-          autofocus: true,
-          autocorrect: false,
-          keyboardType: TextInputType.emailAddress,
-          decoration: const InputDecoration(labelText: 'Email'),
+        EmailForm(
+          onSubmitted: onNextPressed,
         ),
-        Gaps.h24,
-        Align(
-          alignment: Alignment.topRight,
-          child: SizedBox(
-            height: 50,
-            width: 100,
-            child: ElevatedButton(
-              onPressed: onNextPressed,
-              child: Text(
-                'Next',
-                style: Theme.of(context).textTheme.button!,
-              ),
-            ),
-          ),
-        )
+        const Spacer(),
+        const TermPrivacy(),
+        Gaps.h32,
       ],
     );
   }
 }
 
 class PasswordInputView extends ConsumerWidget {
-  const PasswordInputView({
-    super.key,
-    required this.onSubmitted,
-  });
-
-  final VoidCallback onSubmitted;
+  const PasswordInputView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return LScaffold(
-      body: SizedBox.expand(
-        child: Padding(
-          padding: Sizes.screenPadding,
-          child: Column(
-            children: [
-              Gaps.h64,
-              Text(
-                'Almost there!',
-                style: Theme.of(context).textTheme.headline3!.copyWith(
-                      fontFamily: GoogleFonts.ebGaramond().fontFamily,
-                    ),
+    return Column(
+      children: [
+        Gaps.h64,
+        Text(
+          'Almost there!',
+          style: Theme.of(context).textTheme.headline3!.copyWith(
+                fontFamily: GoogleFonts.ebGaramond().fontFamily,
               ),
-              Gaps.h20,
-              Consumer(
-                builder: (context, ref, child) {
-                  final email =
-                      ref.watch(emailPasswordSignInControllerProvider).email;
-                  return Text(
-                    'Enter your password to sign in with\n$email',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyText1,
-                  );
-                },
-              ),
-              Gaps.h64,
-              TextFormField(
-                onChanged: ref
-                    .read(emailPasswordSignInControllerProvider.notifier)
-                    .onPasswordChanged,
-                autofocus: true,
-                autocorrect: false,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Password (8+ characters)',
-                  suffix: IconButton(
-                    onPressed: onSubmitted,
-                    icon: const Icon(Icons.visibility_off),
-                  ),
-                ),
-              ),
-              Gaps.h24,
-              Align(
-                alignment: Alignment.topRight,
-                child: SizedBox(
-                  height: 50,
-                  width: 100,
-                  child: Consumer(
-                    builder: (context, ref, child) {
-                      var status = ref
-                          .watch(emailPasswordSignInControllerProvider)
-                          .status;
-                      return ElevatedButton(
-                        onPressed: status.isLoading ? null : onSubmitted,
-                        child: status.isLoading
-                            ? const Padding(
-                                padding: EdgeInsets.all(2.0),
-                                child: CircularProgressIndicator(),
-                              )
-                            : Text(
-                                'Sign In',
-                                style: Theme.of(context).textTheme.button!,
-                              ),
-                      );
-                    },
-                  ),
-                ),
-              )
-            ],
-          ),
         ),
-      ),
+        Gaps.h20,
+        Consumer(
+          builder: (context, ref, child) {
+            final email = ref.watch(emailPasswordSignInControllerProvider
+                .select((value) => value.email));
+            return Text(
+              'Enter your password to sign in with\n$email',
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyText1,
+            );
+          },
+        ),
+        Gaps.h64,
+        const PasswordForm(),
+      ],
     );
   }
 }

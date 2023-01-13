@@ -44,12 +44,23 @@ class $AssetsIllustrationsGen {
   List<String> get values => [untitled, welcome1];
 }
 
+class $AssetsLottiesGen {
+  const $AssetsLottiesGen();
+
+  /// File path: assets/lotties/sent.json
+  String get sent => 'assets/lotties/sent.json';
+
+  /// List of all assets
+  List<String> get values => [sent];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsIllustrationsGen illustrations =
       $AssetsIllustrationsGen();
+  static const $AssetsLottiesGen lotties = $AssetsLottiesGen();
 }
 
 class AssetGenImage {

@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 
 import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
@@ -15,6 +16,7 @@ enum LRoute {
   signIn,
   signInWithEmail,
   accountCreate,
+  forgotPassword,
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -27,7 +29,8 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     refreshListenable: RefreshListenable(
         ref.watch(authenticationRepositoryProvider).authStateChanges()),
     redirect: (context, state) {
-      final isSignedIn = ref.watch(authenticationRepositoryProvider).isSignedIn;
+      final isSignedIn = ref.watch(
+          authenticationRepositoryProvider.select((value) => value.isSignedIn));
       if (isSignedIn) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return '/';
@@ -40,6 +43,25 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: LRoute.welcome.name,
         path: '/welcome',
         builder: (context, state) => const WelcomeScreen(),
+        routes: [
+          GoRoute(
+            name: LRoute.signIn.name,
+            path: 'signIn',
+            builder: (context, state) => const SignInScreen(),
+            routes: [
+              GoRoute(
+                name: LRoute.signInWithEmail.name,
+                path: 'email',
+                builder: (context, state) => const EmailPasswordSignInScreen(),
+              ),
+              GoRoute(
+                name: LRoute.accountCreate.name,
+                path: 'create',
+                builder: (context, state) => const AccountCreateScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
       GoRoute(
         name: LRoute.home.name,
@@ -47,21 +69,10 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-        name: LRoute.signIn.name,
-        path: '/signIn',
-        builder: (context, state) => const SignInScreen(),
-        routes: [
-          GoRoute(
-            name: LRoute.signInWithEmail.name,
-            path: 'email',
-            builder: (context, state) => const EmailPasswordSignInScreen(),
-          ),
-          GoRoute(
-            name: LRoute.accountCreate.name,
-            path: 'create',
-            builder: (context, state) => const AccountCreateScreen(),
-          ),
-        ],
+        name: LRoute.forgotPassword.name,
+        path: '/forgotPassword',
+        builder: (context, state) =>
+            ForgotPasswordScreen(email: state.extra as String?),
       ),
     ],
   );

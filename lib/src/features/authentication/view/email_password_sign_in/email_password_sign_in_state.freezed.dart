@@ -17,8 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$EmailPasswordSignInState {
   String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  bool get isPasswordShowed => throw _privateConstructorUsedError;
+  bool get obscureText => throw _privateConstructorUsedError;
   AsyncValue<void> get status => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -32,11 +31,7 @@ abstract class $EmailPasswordSignInStateCopyWith<$Res> {
           $Res Function(EmailPasswordSignInState) then) =
       _$EmailPasswordSignInStateCopyWithImpl<$Res, EmailPasswordSignInState>;
   @useResult
-  $Res call(
-      {String email,
-      String password,
-      bool isPasswordShowed,
-      AsyncValue<void> status});
+  $Res call({String email, bool obscureText, AsyncValue<void> status});
 }
 
 /// @nodoc
@@ -54,8 +49,7 @@ class _$EmailPasswordSignInStateCopyWithImpl<$Res,
   @override
   $Res call({
     Object? email = null,
-    Object? password = null,
-    Object? isPasswordShowed = null,
+    Object? obscureText = null,
     Object? status = null,
   }) {
     return _then(_value.copyWith(
@@ -63,13 +57,9 @@ class _$EmailPasswordSignInStateCopyWithImpl<$Res,
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      isPasswordShowed: null == isPasswordShowed
-          ? _value.isPasswordShowed
-          : isPasswordShowed // ignore: cast_nullable_to_non_nullable
+      obscureText: null == obscureText
+          ? _value.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
       status: null == status
           ? _value.status
@@ -88,11 +78,7 @@ abstract class _$$_EmailPasswordSignInStateCopyWith<$Res>
       __$$_EmailPasswordSignInStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String email,
-      String password,
-      bool isPasswordShowed,
-      AsyncValue<void> status});
+  $Res call({String email, bool obscureText, AsyncValue<void> status});
 }
 
 /// @nodoc
@@ -108,8 +94,7 @@ class __$$_EmailPasswordSignInStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? email = null,
-    Object? password = null,
-    Object? isPasswordShowed = null,
+    Object? obscureText = null,
     Object? status = null,
   }) {
     return _then(_$_EmailPasswordSignInState(
@@ -117,13 +102,9 @@ class __$$_EmailPasswordSignInStateCopyWithImpl<$Res>
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      isPasswordShowed: null == isPasswordShowed
-          ? _value.isPasswordShowed
-          : isPasswordShowed // ignore: cast_nullable_to_non_nullable
+      obscureText: null == obscureText
+          ? _value.obscureText
+          : obscureText // ignore: cast_nullable_to_non_nullable
               as bool,
       status: null == status
           ? _value.status
@@ -138,8 +119,7 @@ class __$$_EmailPasswordSignInStateCopyWithImpl<$Res>
 class _$_EmailPasswordSignInState implements _EmailPasswordSignInState {
   const _$_EmailPasswordSignInState(
       {this.email = '',
-      this.password = '',
-      this.isPasswordShowed = false,
+      this.obscureText = false,
       this.status = const AsyncData(null)});
 
   @override
@@ -147,17 +127,14 @@ class _$_EmailPasswordSignInState implements _EmailPasswordSignInState {
   final String email;
   @override
   @JsonKey()
-  final String password;
-  @override
-  @JsonKey()
-  final bool isPasswordShowed;
+  final bool obscureText;
   @override
   @JsonKey()
   final AsyncValue<void> status;
 
   @override
   String toString() {
-    return 'EmailPasswordSignInState(email: $email, password: $password, isPasswordShowed: $isPasswordShowed, status: $status)';
+    return 'EmailPasswordSignInState(email: $email, obscureText: $obscureText, status: $status)';
   }
 
   @override
@@ -166,16 +143,13 @@ class _$_EmailPasswordSignInState implements _EmailPasswordSignInState {
         (other.runtimeType == runtimeType &&
             other is _$_EmailPasswordSignInState &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.isPasswordShowed, isPasswordShowed) ||
-                other.isPasswordShowed == isPasswordShowed) &&
+            (identical(other.obscureText, obscureText) ||
+                other.obscureText == obscureText) &&
             (identical(other.status, status) || other.status == status));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, email, password, isPasswordShowed, status);
+  int get hashCode => Object.hash(runtimeType, email, obscureText, status);
 
   @JsonKey(ignore: true)
   @override
@@ -188,16 +162,13 @@ class _$_EmailPasswordSignInState implements _EmailPasswordSignInState {
 abstract class _EmailPasswordSignInState implements EmailPasswordSignInState {
   const factory _EmailPasswordSignInState(
       {final String email,
-      final String password,
-      final bool isPasswordShowed,
+      final bool obscureText,
       final AsyncValue<void> status}) = _$_EmailPasswordSignInState;
 
   @override
   String get email;
   @override
-  String get password;
-  @override
-  bool get isPasswordShowed;
+  bool get obscureText;
   @override
   AsyncValue<void> get status;
   @override

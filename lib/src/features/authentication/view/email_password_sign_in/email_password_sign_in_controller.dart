@@ -3,11 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../data/authentication_repository.dart';
 import 'email_password_sign_in_state.dart';
 
-final emailPasswordSignInControllerProvider = StateNotifierProvider<
-    EmailPasswordSignInController, EmailPasswordSignInState>((ref) {
-  final authRepository = ref.watch(authenticationRepositoryProvider);
-  return EmailPasswordSignInController(authRepository);
-});
+final emailPasswordSignInControllerProvider = StateNotifierProvider.autoDispose<
+    EmailPasswordSignInController, EmailPasswordSignInState>(
+  (ref) {
+    final authRepository = ref.watch(authenticationRepositoryProvider);
+    return EmailPasswordSignInController(authRepository);
+  },
+);
 
 class EmailPasswordSignInController
     extends StateNotifier<EmailPasswordSignInState> {
@@ -16,20 +18,20 @@ class EmailPasswordSignInController
 
   final AuthenticationRepository _authenticationRepository;
 
-  void onEmailChanged(String email) {
+  void setEmail(String email) {
     state = state.copyWith(email: email);
   }
 
-  void onPasswordChanged(String password) {
-    state = state.copyWith(password: password);
+  void toggleObscureText() {
+    state = state.copyWith(obscureText: !state.obscureText);
   }
 
-  void signInWithEmailAndPassword() async {
+  void signInWithEmailAndPassword(String password) async {
     state = state.copyWith(status: const AsyncLoading());
     final value = await AsyncValue.guard(
       () => _authenticationRepository.signInWithEmailAndPassword(
         email: state.email,
-        password: state.password,
+        password: password,
       ),
     );
     state = state.copyWith(status: value);
