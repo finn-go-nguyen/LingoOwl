@@ -3,11 +3,9 @@ import 'package:firebase_auth_oauth/firebase_auth_oauth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:logger/logger.dart';
 
+import '../../../utils/logger.dart';
 import '../model/auth_user.dart';
-
-final log = Logger();
 
 final authenticationRepositoryProvider =
     Provider<AuthenticationRepository>((ref) {
@@ -26,7 +24,7 @@ abstract class AuthenticationRepository {
 
   LAuthUser? get currentUser;
   Stream<LAuthUser?> authStateChanges();
-  Future<LAuthUser?> createUserWithEmailAndPassword({
+  Future<LAuthUser> createUserWithEmailAndPassword({
     required String email,
     required String password,
   });
@@ -40,10 +38,10 @@ abstract class AuthenticationRepository {
   Future<void> signOut();
 
   Future<void> resetPassword(String email);
-  Future<void> changePassword(
-    String currentPassword,
-    String newPassword,
-  );
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  });
 
   Future<void> deleteUser();
 
@@ -75,16 +73,24 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<void> changePassword(String currentPassword, String newPassword) {
+  Future<void> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) {
     // TODO: implement changePassword
     throw UnimplementedError();
   }
 
   @override
-  Future<LAuthUser?> createUserWithEmailAndPassword(
-      {required String email, required String password}) {
-    // TODO: implement createUserWithEmailAndPassword
-    throw UnimplementedError();
+  Future<LAuthUser> createUserWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return LAuthUser.fromFirebaseUser(userCredential.user!);
   }
 
   @override
@@ -142,7 +148,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   @override
   Future<LAuthUser?> signInWithFacebook() async {
     // Trigger the sign-in flow
-    final loginResult = await FacebookAuth.instance.login();
+    final loginResult = await _facebookAuth.login();
 
     // Create a credential from the access token
     final OAuthCredential facebookAuthCredential =
@@ -158,7 +164,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   @override
   Future<LAuthUser?> signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =

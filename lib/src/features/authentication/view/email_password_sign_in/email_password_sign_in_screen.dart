@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../constants/app_sizes.dart';
-import 'email_password_sign_in_controller.dart';
 
+import '../../../../constants/app_sizes.dart';
 import '../../../../widgets/common/scaffold.dart';
+import 'email_password_sign_in_controller.dart';
 
 class EmailPasswordSignInScreen extends StatefulWidget {
   const EmailPasswordSignInScreen({super.key});
@@ -26,7 +26,7 @@ class _EmailPasswordSignInScreenState extends State<EmailPasswordSignInScreen> {
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      child: SizedBox.expand(
+      body: SizedBox.expand(
         child: Padding(
           padding: Sizes.screenPadding,
           child: PageView(
@@ -122,7 +122,7 @@ class PasswordInputView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return LScaffold(
-      child: SizedBox.expand(
+      body: SizedBox.expand(
         child: Padding(
           padding: Sizes.screenPadding,
           child: Column(

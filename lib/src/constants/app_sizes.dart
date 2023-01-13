@@ -8,11 +8,12 @@ class Sizes {
   static const p16 = 16.0;
   static const p20 = 20.0;
   static const p24 = 24.0;
+  static const p28 = 28.0;
   static const p32 = 32.0;
   static const p48 = 48.0;
   static const p64 = 64.0;
 
-  static const iconSize = p32;
+  static const iconSize = p28;
   static const screenPadding = EdgeInsets.symmetric(horizontal: p16);
 }
 

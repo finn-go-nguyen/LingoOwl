@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class LScaffold extends StatelessWidget {
   const LScaffold({
     super.key,
-    required this.child,
+    required this.body,
   });
 
-  final Widget child;
+  final Widget body;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class LScaffold extends StatelessWidget {
         _hideKeyboard(context);
       },
       child: Scaffold(
-        body: SafeArea(child: child),
+        body: SafeArea(child: body),
       ),
     );
   }

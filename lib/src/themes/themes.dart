@@ -30,14 +30,11 @@ class LTheme {
           style: ElevatedButton.styleFrom(),
         ),
         outlinedButtonTheme: OutlinedButtonThemeData(
-            style: OutlinedButton.styleFrom(
-          side: const BorderSide(),
-          // shape: const RoundedRectangleBorder(),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20.0,
-            vertical: 10.0,
-          ),
-        )),
+          style: OutlinedButton.styleFrom(
+              // side: const BorderSide(),
+              // shape: const RoundedRectangleBorder(),
+              ),
+        ),
 
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(),
