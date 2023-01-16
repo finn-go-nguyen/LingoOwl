@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:online_course_app/src/themes/themes.dart';
+
 import 'router/app_router.dart';
+import 'themes/themes.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});

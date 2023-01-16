@@ -1,11 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:online_course_app/src/features/authentication/data/authentication_repository.dart';
-import 'package:online_course_app/src/features/authentication/view/sign_in/sign_in_screen.dart';
-import 'package:online_course_app/src/features/authentication/view/sign_in/email_password_sign_in_screen.dart';
-import 'package:online_course_app/src/features/home/view/home_screen.dart';
-import 'package:online_course_app/src/utils/refresh_listenable.dart';
+
+import '../features/authentication/data/authentication_repository.dart';
+import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
+import '../features/authentication/view/sign_in/sign_in_screen.dart';
+import '../features/home/view/home_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
+import '../utils/refresh_listenable.dart';
 
 enum LRoute {
   welcome,
@@ -17,7 +18,7 @@ enum LRoute {
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: '/signIn',
+    initialLocation: '/welcome',
 
     /// Every time the [stream] receives an event the [GoRouter] will refresh its
     /// current route.

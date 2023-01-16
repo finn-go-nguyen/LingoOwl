@@ -12,13 +12,6 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/apple.png
-  AssetGenImage get apple => const AssetGenImage('assets/icons/apple.png');
-
-  /// File path: assets/icons/apple_dark.png
-  AssetGenImage get appleDark =>
-      const AssetGenImage('assets/icons/apple_dark.png');
-
   /// File path: assets/icons/envelope.png
   AssetGenImage get envelope =>
       const AssetGenImage('assets/icons/envelope.png');
@@ -34,9 +27,13 @@ class $AssetsIconsGen {
   /// File path: assets/icons/google.png
   AssetGenImage get google => const AssetGenImage('assets/icons/google.png');
 
+  /// File path: assets/icons/microsoft.png
+  AssetGenImage get microsoft =>
+      const AssetGenImage('assets/icons/microsoft.png');
+
   /// List of all assets
   List<AssetGenImage> get values =>
-      [apple, appleDark, envelope, envelopeDark, facebook, google];
+      [envelope, envelopeDark, facebook, google, microsoft];
 }
 
 class $AssetsIllustrationsGen {
