@@ -45,5 +45,16 @@ class LTheme {
         iconTheme: const IconThemeData(),
       );
 
+  static InputDecorationTheme profileViewFormInputDecoration() =>
+      const InputDecorationTheme(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: 6,
+          horizontal: 16.0,
+        ),
+      );
+
   static ThemeData dark() => ThemeData.dark(useMaterial3: true);
 }

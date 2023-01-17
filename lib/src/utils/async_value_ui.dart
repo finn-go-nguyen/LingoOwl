@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../widgets/common/snack_bars.dart';
+
 extension AsyncValueUi on AsyncValue {
   void showError(BuildContext context, {String? errorMessage}) {
     if (!isRefreshing && hasError) {
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.red,
-            content: Text(
-              errorMessage ?? error.toString(),
-              style: Theme.of(context)
-                  .textTheme
-                  .subtitle1
-                  ?.copyWith(color: Colors.white),
-            ),
-            duration: const Duration(seconds: 8),
+          LSnackBar.failure(
+            errorMessage: errorMessage ?? error.toString(),
           ),
         );
     }

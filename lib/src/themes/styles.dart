@@ -45,7 +45,7 @@ class LStyles {
   );
 
   static const subtitle2 = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     fontSize: 14,
     letterSpacing: 0.1,
   );

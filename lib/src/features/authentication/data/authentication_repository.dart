@@ -16,6 +16,16 @@ final authenticationRepositoryProvider =
   );
 });
 
+final uidProvider = Provider<String?>((ref) {
+  final authRepository = ref.watch(authenticationRepositoryProvider);
+  return authRepository.currentUser?.id;
+});
+
+final isLoggingInProvider = Provider<bool>((ref) {
+  final authRepository = ref.watch(authenticationRepositoryProvider);
+  return authRepository.currentUser != null;
+});
+
 abstract class AuthenticationRepository {
   bool get isSignInWithEmail;
   bool get isSignInWithGoogle;
@@ -28,10 +38,10 @@ abstract class AuthenticationRepository {
     required String email,
     required String password,
   });
-  Future<LAuthUser?> signInWithGoogle();
-  Future<LAuthUser?> signInWithFacebook();
-  Future<LAuthUser?> signInWithMicrosoft();
-  Future<LAuthUser?> signInWithEmailAndPassword({
+  Future<LAuthUser> signInWithGoogle();
+  Future<LAuthUser> signInWithFacebook();
+  Future<LAuthUser> signInWithMicrosoft();
+  Future<LAuthUser> signInWithEmailAndPassword({
     required String email,
     required String password,
   });
@@ -130,7 +140,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
       _firebaseAuth.sendPasswordResetEmail(email: email);
 
   @override
-  Future<LAuthUser?> signInWithEmailAndPassword({
+  Future<LAuthUser> signInWithEmailAndPassword({
     required String email,
     required String password,
   }) async {
@@ -138,13 +148,12 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
       email: email,
       password: password,
     );
-    if (credential.user == null) return null;
 
     return LAuthUser.fromFirebaseUser(credential.user!);
   }
 
   @override
-  Future<LAuthUser?> signInWithFacebook() async {
+  Future<LAuthUser> signInWithFacebook() async {
     // Trigger the sign-in flow
     final loginResult = await _facebookAuth.login();
 
@@ -160,7 +169,7 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<LAuthUser?> signInWithGoogle() async {
+  Future<LAuthUser> signInWithGoogle() async {
     // Trigger the authentication flow
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
@@ -181,14 +190,15 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<LAuthUser?> signInWithMicrosoft() async {
+  Future<LAuthUser> signInWithMicrosoft() async {
     final user = await FirebaseAuthOAuth()
         .openSignInFlow('microsoft.com', ['email', 'profile']);
     return LAuthUser.fromFirebaseUser(user!);
   }
 
   @override
-  Future<void> signOut() => _firebaseAuth.signOut();
+  Future<void> signOut() =>
+      Future.delayed(const Duration(seconds: 1), _firebaseAuth.signOut);
 
   @override
   bool get isSignedIn => currentUser != null;

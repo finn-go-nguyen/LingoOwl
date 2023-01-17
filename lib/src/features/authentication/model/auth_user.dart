@@ -9,14 +9,16 @@ class LAuthUser with _$LAuthUser {
   const LAuthUser._();
   const factory LAuthUser({
     required String id,
-    String? email,
+    required String email,
+    String? displayName,
     String? photoURL,
   }) = _LAuthUser;
 
   factory LAuthUser.fromFirebaseUser(User user) {
     return LAuthUser(
       id: user.uid,
-      email: user.email,
+      displayName: user.displayName,
+      email: user.email!,
       photoURL: user.photoURL,
     );
   }

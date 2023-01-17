@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import '../../../../constants/forms/error_text.dart';
 
 import '../../../../constants/app_sizes.dart';
 import '../../../../constants/forms/account_create_form.dart';
+import '../../../../constants/forms/error_text.dart';
 import 'account_create_screen_controller.dart';
 
 class AccountCreateForm extends ConsumerStatefulWidget {

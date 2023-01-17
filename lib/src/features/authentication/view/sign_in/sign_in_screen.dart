@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../../../utils/async_value_ui.dart';
-import 'social_sign_in_controller.dart';
-import '../../../../widgets/common/term_privacy.dart';
+
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../router/app_router.dart';
-
+import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
+import '../../../../widgets/common/term_privacy.dart';
+import 'social_sign_in_controller.dart';
 
 class SignInScreen extends ConsumerWidget {
   const SignInScreen({super.key});
