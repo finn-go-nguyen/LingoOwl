@@ -4,7 +4,10 @@ import 'package:flutter/services.dart';
 import 'styles.dart';
 
 class LTheme {
-  static const barOverLayStyle = SystemUiOverlayStyle.light;
+  static const barOverLayStyleLight = SystemUiOverlayStyle(
+    statusBarColor: Colors.white,
+    statusBarIconBrightness: Brightness.dark,
+  );
 
   static ThemeData light() => ThemeData(
         useMaterial3: true,
@@ -16,7 +19,7 @@ class LTheme {
 
         appBarTheme: const AppBarTheme(
           // default system app bar icon is white
-          systemOverlayStyle: barOverLayStyle,
+          systemOverlayStyle: barOverLayStyleLight,
         ),
 
         /// input

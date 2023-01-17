@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../utils/async_value_ui.dart';
 import 'social_sign_in_controller.dart';
 import '../../../../widgets/common/term_privacy.dart';
 import '../../../../../gen/assets.gen.dart';
@@ -16,29 +17,8 @@ class SignInScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(socialSignInControllerProvider, (previous, next) {
-      if (next.isLoading) {
-        showDialog(
-          barrierDismissible: false,
-          context: context,
-          builder: (context) =>
-              const Center(child: CircularProgressIndicator()),
-        );
-      }
-
-      if ((previous?.isLoading ?? false) && !next.isLoading) {
-        if (Navigator.canPop(context)) Navigator.pop(context);
-      }
-
-      if (!next.isRefreshing && next.hasError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            backgroundColor: Colors.red,
-            content: Text(
-              next.error.toString(),
-            ),
-          ),
-        );
-      }
+      next.showError(context);
+      next.showLoadingDialog(context, previous);
     });
     return LScaffold(
       body: SizedBox.expand(

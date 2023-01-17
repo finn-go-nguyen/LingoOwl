@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'router/app_router.dart';
@@ -10,6 +11,8 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final router = ref.watch(goRouterProvider);
+
+    SystemChrome.setSystemUIOverlayStyle(LTheme.barOverLayStyleLight);
     return MaterialApp.router(
       theme: LTheme.light(),
       debugShowCheckedModeBanner: false,

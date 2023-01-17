@@ -126,10 +126,8 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   bool get isSignInWithGoogle => throw UnimplementedError();
 
   @override
-  Future<void> resetPassword(String email) {
-    // TODO: implement resetPassword
-    throw UnimplementedError();
-  }
+  Future<void> resetPassword(String email) =>
+      _firebaseAuth.sendPasswordResetEmail(email: email);
 
   @override
   Future<LAuthUser?> signInWithEmailAndPassword({
