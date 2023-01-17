@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      child: Center(
+      body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

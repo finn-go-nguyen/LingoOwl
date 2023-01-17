@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:online_course_app/src/features/authentication/data/authentication_repository.dart';
+
+import '../../data/authentication_repository.dart';
 
 final socialSignInControllerProvider =
     StateNotifierProvider<SocialSignInController, AsyncValue<void>>((ref) {

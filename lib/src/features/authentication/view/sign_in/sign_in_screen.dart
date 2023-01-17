@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:online_course_app/src/features/authentication/view/sign_in/social_sign_in_controller.dart';
+import 'social_sign_in_controller.dart';
+import '../../../../widgets/common/term_privacy.dart';
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_sizes.dart';
 import '../../../../router/app_router.dart';
@@ -40,7 +41,7 @@ class SignInScreen extends ConsumerWidget {
       }
     });
     return LScaffold(
-      child: SizedBox.expand(
+      body: SizedBox.expand(
         child: Column(
           children: [
             Gaps.h64,
@@ -51,39 +52,7 @@ class SignInScreen extends ConsumerWidget {
                   ),
             ),
             Gaps.h20,
-            Text(
-              'By using our services you are agreeing to our',
-              style: Theme.of(context).textTheme.caption,
-            ),
-            Gaps.h4,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'Terms',
-                    style: Theme.of(context).textTheme.caption!.copyWith(
-                          color: Colors.black87,
-                        ),
-                  ),
-                ),
-                Text(
-                  ' and ',
-                  style: Theme.of(context).textTheme.caption,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    'Privacy Statement',
-                    style: Theme.of(context).textTheme.caption!.copyWith(
-                          color: Colors.black87,
-                          fontWeight: FontWeight.w500,
-                        ),
-                  ),
-                ),
-              ],
-            ),
+            const TermPrivacy(),
             const Spacer(),
             Padding(
               padding: Sizes.screenPadding,
@@ -125,7 +94,7 @@ class SignInScreen extends ConsumerWidget {
               children: [
                 const Text('New here?'),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => context.goNamed(LRoute.accountCreate.name),
                   child: const Text('Create an account'),
                 )
               ],

@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../features/authentication/data/authentication_repository.dart';
+import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
 import '../features/home/view/home_screen.dart';
@@ -13,6 +14,7 @@ enum LRoute {
   home,
   signIn,
   signInWithEmail,
+  accountCreate,
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -45,16 +47,22 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const HomeScreen(),
       ),
       GoRoute(
-          name: LRoute.signIn.name,
-          path: '/signIn',
-          builder: (context, state) => const SignInScreen(),
-          routes: [
-            GoRoute(
-              name: LRoute.signInWithEmail.name,
-              path: 'email',
-              builder: (context, state) => const EmailPasswordSignInScreen(),
-            ),
-          ]),
+        name: LRoute.signIn.name,
+        path: '/signIn',
+        builder: (context, state) => const SignInScreen(),
+        routes: [
+          GoRoute(
+            name: LRoute.signInWithEmail.name,
+            path: 'email',
+            builder: (context, state) => const EmailPasswordSignInScreen(),
+          ),
+          GoRoute(
+            name: LRoute.accountCreate.name,
+            path: 'create',
+            builder: (context, state) => const AccountCreateScreen(),
+          ),
+        ],
+      ),
     ],
   );
 });
