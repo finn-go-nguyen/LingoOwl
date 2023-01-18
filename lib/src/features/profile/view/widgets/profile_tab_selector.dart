@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/settings/profile_settings.dart';
 import '../../../../router/app_router.dart';
 import '../profile_details_controller.dart';
@@ -64,7 +64,7 @@ class _ListTile extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Padding(
-          padding: Sizes.screenPadding,
+          padding: UiParameters.screenPadding,
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(

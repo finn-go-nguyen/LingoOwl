@@ -7,6 +7,10 @@ import 'package:flutter/widgets.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/account_circle.png
+  AssetGenImage get accountCircle =>
+      const AssetGenImage('assets/icons/account_circle.png');
+
   /// File path: assets/icons/envelope.png
   AssetGenImage get envelope =>
       const AssetGenImage('assets/icons/envelope.png');
@@ -28,7 +32,7 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<AssetGenImage> get values =>
-      [envelope, envelopeDark, facebook, google, microsoft];
+      [accountCircle, envelope, envelopeDark, facebook, google, microsoft];
 }
 
 class $AssetsIllustrationsGen {

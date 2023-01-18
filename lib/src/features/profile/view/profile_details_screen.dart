@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../constants/app_sizes.dart';
+import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../router/app_router.dart';
 import '../../../widgets/common/scaffold.dart';
 import '../../../widgets/state/error.dart';
@@ -25,12 +25,12 @@ class ProfileDetailsScreen extends StatelessWidget {
     return LScaffold(
       body: SizedBox.expand(
         child: SingleChildScrollView(
-          padding: Sizes.screenPadding,
+          padding: UiParameters.screenPadding,
           child: Column(
             children: [
               Consumer(builder: (context, ref, child) {
                 final uid = ref.watch(uidProvider);
-                final user = ref.watch(userFutureProvider(uid!));
+                final user = ref.watch(userStreamProvider(uid!));
                 return user.when(
                   data: (user) => ProfileAvatarNameHeadline(user: user),
                   loading: () =>
@@ -40,6 +40,7 @@ class ProfileDetailsScreen extends StatelessWidget {
               }),
               Gaps.h12,
               ProfileTabSelector(current: current),
+              Gaps.h16,
               child,
             ],
           ),

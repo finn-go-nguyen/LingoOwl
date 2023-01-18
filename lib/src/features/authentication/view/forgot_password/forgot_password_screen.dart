@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../gen/assets.gen.dart';
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../router/app_router.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
@@ -75,7 +75,7 @@ class ForgotPasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LScaffold(
       body: SingleChildScrollView(
-        padding: Sizes.screenPadding,
+        padding: UiParameters.screenPadding,
         child: Column(
           children: [
             Gaps.h64,
@@ -118,7 +118,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
       child: LScaffold(
         body: SizedBox.expand(
           child: Padding(
-            padding: Sizes.screenPadding,
+            padding: UiParameters.screenPadding,
             child: Column(
               children: [
                 Gaps.h64,

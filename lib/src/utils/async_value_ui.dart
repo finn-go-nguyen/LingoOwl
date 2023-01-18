@@ -29,4 +29,12 @@ extension AsyncValueUi on AsyncValue {
       if (Navigator.canPop(context)) Navigator.pop(context);
     }
   }
+
+  void showSuccess(BuildContext context, {required String content}) {
+    if (!isRefreshing && hasValue) {
+      ScaffoldMessenger.of(context)
+        ..hideCurrentSnackBar()
+        ..showSnackBar(LSnackBar.success(content: content));
+    }
+  }
 }

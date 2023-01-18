@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../../../utils/text_helpers.dart';
-import '../../../../widgets/state/loading.dart';
 
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_sizes.dart';
+import '../../../../constants/app_parameters/ui_parameters.dart';
+import '../../../../utils/text_helpers.dart';
 import '../../../../widgets/common/network_image.dart';
+import '../../../../widgets/state/loading.dart';
 import '../../model/app_user.dart';
 
 class ProfileAvatarNameHeadline extends StatelessWidget {
@@ -25,8 +26,8 @@ class ProfileAvatarNameHeadline extends StatelessWidget {
               LNetworkImage(
                 user!.photoUrl ?? '',
                 fit: BoxFit.cover,
-                dimension: Sizes.avatar,
-                radius: Sizes.circleBorderRadius,
+                dimension: UiParameters.avatar,
+                radius: UiParameters.circleBorderRadius,
               ),
               Gaps.h12,
               Text(
@@ -34,6 +35,9 @@ class ProfileAvatarNameHeadline extends StatelessWidget {
                   firstName: user!.firstName,
                   lastName: user!.lastName,
                 ),
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
                 style: Theme.of(context).textTheme.headline6,
               ),
               Gaps.h12,

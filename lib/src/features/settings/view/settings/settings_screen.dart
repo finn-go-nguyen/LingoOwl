@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../authentication/data/authentication_repository.dart';
-import '../../../profile/data/user_repository.dart';
-import '../../../profile/view/widgets/profile_avatar_name_email.dart';
-import '../../../../widgets/state/error.dart';
 
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/settings/app_settings.dart';
 import '../../../../router/app_router.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
+import '../../../../widgets/state/error.dart';
+import '../../../authentication/data/authentication_repository.dart';
+import '../../../profile/data/user_repository.dart';
+import '../../../profile/view/widgets/profile_avatar_name_email.dart';
 import '../../model/setting.dart';
 import 'settings_controller.dart';
 
@@ -27,7 +27,7 @@ class SettingsScreen extends ConsumerWidget {
 
     // TODO: Implement not log in case
     final uid = ref.watch(uidProvider)!;
-    final user = ref.watch(userFutureProvider(uid));
+    final user = ref.watch(userStreamProvider(uid));
     return LScaffold(
       body: SizedBox.expand(
         child: SingleChildScrollView(
@@ -93,7 +93,7 @@ class SettingSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Padding(
-          padding: Sizes.screenPadding,
+          padding: UiParameters.screenPadding,
           child: Text(
             settingSection.sectionName,
             style: Theme.of(context).textTheme.caption,
@@ -104,7 +104,7 @@ class SettingSection extends StatelessWidget {
           (index) {
             final option = settingSection.options[index];
             return ListTile(
-              contentPadding: Sizes.screenPadding,
+              contentPadding: UiParameters.screenPadding,
               onTap: () => context.pushNamed(option.route.name),
               title: Text(option.name),
               trailing: const Icon(Icons.arrow_forward_ios),

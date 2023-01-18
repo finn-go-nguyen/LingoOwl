@@ -3,7 +3,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_sizes.dart';
 import '../../../../constants/forms/error_text.dart';
 import '../../../../constants/forms/forgot_password_form.dart';
 import 'forgot_password_controller.dart';
