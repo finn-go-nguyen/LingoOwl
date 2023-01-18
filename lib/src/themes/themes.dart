@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import '../constants/app_parameters/app_parameters.dart';
 
 import 'styles.dart';
 
@@ -48,13 +49,18 @@ class LTheme {
   static InputDecorationTheme profileViewFormInputDecoration() =>
       const InputDecorationTheme(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.zero,
+          borderRadius: UiParameters.borderRadius,
         ),
         contentPadding: EdgeInsets.symmetric(
           vertical: 6,
-          horizontal: 16.0,
+          horizontal: 20.0,
         ),
       );
+
+  static ElevatedButtonThemeData alertButtonTheme() => ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.red,
+      ));
 
   static ThemeData dark() => ThemeData.dark(useMaterial3: true);
 }

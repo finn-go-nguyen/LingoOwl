@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 class LScaffold extends StatelessWidget {
   const LScaffold({
     super.key,
+    this.appBar,
     required this.body,
   });
 
+  final PreferredSizeWidget? appBar;
   final Widget body;
 
   @override
@@ -16,6 +18,7 @@ class LScaffold extends StatelessWidget {
         _hideKeyboard(context);
       },
       child: Scaffold(
+        appBar: appBar,
         body: SafeArea(child: body),
       ),
     );

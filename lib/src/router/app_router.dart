@@ -1,5 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../features/profile/view/close_account/close_account_confirmation_screen.dart';
+import '../features/profile/view/close_account/close_account_view.dart';
 import '../features/profile/view/photo/photo_view.dart';
 
 import '../features/authentication/data/authentication_repository.dart';
@@ -27,7 +29,9 @@ enum LRoute {
   settings,
   profile,
   photo,
-  accountSecurity;
+  accountSecurity,
+  closeAccount,
+  closeAccountConfirmation;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoute.profile || this == LRoute.accountSecurity;
@@ -49,7 +53,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return '/';
         }
-      } else {}
+      } else {
+        if (state.location.contains(RegExp(r'profile|photo|security|close'))) {
+          return '/welcome';
+        }
+      }
       return null;
     },
     routes: [
@@ -122,6 +130,24 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 child: AccountSecurityView(),
               ),
             ),
+          ),
+          GoRoute(
+            name: LRoute.closeAccount.name,
+            path: 'close',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileDetailsScreen(
+                current: LRoute.closeAccount,
+                child: CloseAccountView(),
+              ),
+            ),
+            routes: [
+              GoRoute(
+                name: LRoute.closeAccountConfirmation.name,
+                path: 'confirm',
+                builder: (context, state) =>
+                    const CloseAccountConfirmationScreen(),
+              )
+            ],
           ),
         ],
       ),

@@ -61,4 +61,8 @@ class UserService {
       rethrow;
     }
   }
+
+  Future<AsyncValue<void>> closeAccount(String password) {
+    return AsyncValue.guard(() => _authRepository.deleteUser(password));
+  }
 }

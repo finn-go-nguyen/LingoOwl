@@ -16,7 +16,7 @@ final authenticationRepositoryProvider =
   );
 });
 
-final uidProvider = Provider<String?>((ref) {
+final uidProvider = Provider.autoDispose<String?>((ref) {
   final authRepository = ref.watch(authenticationRepositoryProvider);
   return authRepository.currentUser?.id;
 });
@@ -53,7 +53,7 @@ abstract class AuthenticationRepository {
     required String newPassword,
   });
 
-  Future<void> deleteUser();
+  Future<void> deleteUser(String password);
 
   List<String> getUserProviderIds();
 }
@@ -112,9 +112,15 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<void> deleteUser() {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<void> deleteUser(String password) async {
+    final user = _firebaseAuth.currentUser!;
+    final cred = EmailAuthProvider.credential(
+      email: user.email!,
+      password: password,
+    );
+
+    await user.reauthenticateWithCredential(cred);
+    await user.delete();
   }
 
   @override

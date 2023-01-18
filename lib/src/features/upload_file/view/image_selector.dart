@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../widgets/common/network_image.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../utils/text_helpers.dart';
+import '../../../widgets/common/network_image.dart';
 import 'image_selector_controller.dart';
 
 class ImageSelector extends ConsumerWidget {
