@@ -30,9 +30,9 @@ class ImageSelectorController extends StateNotifier<ImageSelectorState> {
 
     final storageRepository = _ref.read(storageRepositoryProvider);
 
-    state = state.copyWith(
+    state = const ImageSelectorState(
       isUploadStarted: true,
-      status: const AsyncLoading(),
+      status: AsyncLoading(),
     );
     final uid = _ref.read(uidProvider)!;
 

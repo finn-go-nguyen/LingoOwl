@@ -39,7 +39,7 @@ class ImageSelector extends ConsumerWidget {
               return Expanded(
                 child: ProgressBar(
                   progress: state.progress,
-                  isUploadStarted: state.isUploadInProgress,
+                  showProgress: state.isUploadStarted,
                 ),
               );
             }),
@@ -142,11 +142,11 @@ class ProgressBar extends StatelessWidget {
   const ProgressBar({
     super.key,
     required this.progress,
-    required this.isUploadStarted,
+    required this.showProgress,
   });
 
   final double progress;
-  final bool isUploadStarted;
+  final bool showProgress;
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,7 @@ class ProgressBar extends StatelessWidget {
         border: Border.all(),
         borderRadius: UiParameters.borderRadius,
       ),
-      child: isUploadStarted
+      child: showProgress
           ? Stack(
               fit: StackFit.expand,
               children: [
