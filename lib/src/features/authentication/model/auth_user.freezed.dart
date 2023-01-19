@@ -21,7 +21,8 @@ LAuthUser _$LAuthUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LAuthUser {
   String get id => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  String? get displayName => throw _privateConstructorUsedError;
   String? get photoURL => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +36,7 @@ abstract class $LAuthUserCopyWith<$Res> {
   factory $LAuthUserCopyWith(LAuthUser value, $Res Function(LAuthUser) then) =
       _$LAuthUserCopyWithImpl<$Res, LAuthUser>;
   @useResult
-  $Res call({String id, String? email, String? photoURL});
+  $Res call({String id, String email, String? displayName, String? photoURL});
 }
 
 /// @nodoc
@@ -52,7 +53,8 @@ class _$LAuthUserCopyWithImpl<$Res, $Val extends LAuthUser>
   @override
   $Res call({
     Object? id = null,
-    Object? email = freezed,
+    Object? email = null,
+    Object? displayName = freezed,
     Object? photoURL = freezed,
   }) {
     return _then(_value.copyWith(
@@ -60,9 +62,13 @@ class _$LAuthUserCopyWithImpl<$Res, $Val extends LAuthUser>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String?,
       photoURL: freezed == photoURL
           ? _value.photoURL
@@ -79,7 +85,7 @@ abstract class _$$_LAuthUserCopyWith<$Res> implements $LAuthUserCopyWith<$Res> {
       __$$_LAuthUserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String? email, String? photoURL});
+  $Res call({String id, String email, String? displayName, String? photoURL});
 }
 
 /// @nodoc
@@ -94,7 +100,8 @@ class __$$_LAuthUserCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? email = freezed,
+    Object? email = null,
+    Object? displayName = freezed,
     Object? photoURL = freezed,
   }) {
     return _then(_$_LAuthUser(
@@ -102,9 +109,13 @@ class __$$_LAuthUserCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      email: freezed == email
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
               as String?,
       photoURL: freezed == photoURL
           ? _value.photoURL
@@ -117,7 +128,9 @@ class __$$_LAuthUserCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_LAuthUser extends _LAuthUser {
-  const _$_LAuthUser({required this.id, this.email, this.photoURL}) : super._();
+  const _$_LAuthUser(
+      {required this.id, required this.email, this.displayName, this.photoURL})
+      : super._();
 
   factory _$_LAuthUser.fromJson(Map<String, dynamic> json) =>
       _$$_LAuthUserFromJson(json);
@@ -125,13 +138,15 @@ class _$_LAuthUser extends _LAuthUser {
   @override
   final String id;
   @override
-  final String? email;
+  final String email;
+  @override
+  final String? displayName;
   @override
   final String? photoURL;
 
   @override
   String toString() {
-    return 'LAuthUser(id: $id, email: $email, photoURL: $photoURL)';
+    return 'LAuthUser(id: $id, email: $email, displayName: $displayName, photoURL: $photoURL)';
   }
 
   @override
@@ -141,13 +156,16 @@ class _$_LAuthUser extends _LAuthUser {
             other is _$_LAuthUser &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.email, email) || other.email == email) &&
+            (identical(other.displayName, displayName) ||
+                other.displayName == displayName) &&
             (identical(other.photoURL, photoURL) ||
                 other.photoURL == photoURL));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, email, photoURL);
+  int get hashCode =>
+      Object.hash(runtimeType, id, email, displayName, photoURL);
 
   @JsonKey(ignore: true)
   @override
@@ -166,7 +184,8 @@ class _$_LAuthUser extends _LAuthUser {
 abstract class _LAuthUser extends LAuthUser {
   const factory _LAuthUser(
       {required final String id,
-      final String? email,
+      required final String email,
+      final String? displayName,
       final String? photoURL}) = _$_LAuthUser;
   const _LAuthUser._() : super._();
 
@@ -176,7 +195,9 @@ abstract class _LAuthUser extends LAuthUser {
   @override
   String get id;
   @override
-  String? get email;
+  String get email;
+  @override
+  String? get displayName;
   @override
   String? get photoURL;
   @override

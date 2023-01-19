@@ -1,22 +1,34 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 
 import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
+import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
 import '../features/home/view/home_screen.dart';
+import '../features/profile/view/account_security/account_security_view.dart';
+import '../features/profile/view/profile/profile_view.dart';
+import '../features/profile/view/profile_details_screen.dart';
+import '../features/settings/view/settings/settings_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
+import '../widgets/state/unimplemented.dart';
 
 enum LRoute {
+  unimplemented,
   welcome,
   home,
   signIn,
   signInWithEmail,
   accountCreate,
   forgotPassword,
+  settings,
+  profile,
+  accountSecurity;
+
+  bool get isProfileDetailsSubRoute =>
+      this == LRoute.profile || this == LRoute.accountSecurity;
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
@@ -73,6 +85,38 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/forgotPassword',
         builder: (context, state) =>
             ForgotPasswordScreen(email: state.extra as String?),
+      ),
+      GoRoute(
+        name: LRoute.settings.name,
+        path: '/settings',
+        builder: (context, state) => const SettingsScreen(),
+        routes: [
+          GoRoute(
+            name: LRoute.profile.name,
+            path: 'profile',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileDetailsScreen(
+                current: LRoute.profile,
+                child: ProfileView(),
+              ),
+            ),
+          ),
+          GoRoute(
+            name: LRoute.accountSecurity.name,
+            path: 'security',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileDetailsScreen(
+                current: LRoute.accountSecurity,
+                child: AccountSecurityView(),
+              ),
+            ),
+          ),
+        ],
+      ),
+      GoRoute(
+        name: LRoute.unimplemented.name,
+        path: '/unimplemented',
+        builder: (context, state) => const Unimplemented(),
       ),
     ],
   );

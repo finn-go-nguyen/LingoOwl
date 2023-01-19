@@ -15,6 +15,11 @@ class Sizes {
 
   static const iconSize = p28;
   static const screenPadding = EdgeInsets.symmetric(horizontal: p16);
+  static const rowContentPadding = EdgeInsets.all(p16);
+
+  static const circleBorderRadius = 1000.0;
+
+  static const avatar = 150.0;
 }
 
 /// Constant gap width and height using [SizedBox]

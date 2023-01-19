@@ -47,11 +47,14 @@ class $AssetsIllustrationsGen {
 class $AssetsLottiesGen {
   const $AssetsLottiesGen();
 
+  /// File path: assets/lotties/maintenance.json
+  String get maintenance => 'assets/lotties/maintenance.json';
+
   /// File path: assets/lotties/sent.json
   String get sent => 'assets/lotties/sent.json';
 
   /// List of all assets
-  List<String> get values => [sent];
+  List<String> get values => [maintenance, sent];
 }
 
 class Assets {

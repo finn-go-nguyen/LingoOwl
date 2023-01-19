@@ -1,34 +1,30 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../data/authentication_repository.dart';
+import '../../../profile/application/user_service.dart';
 
 final socialSignInControllerProvider =
     StateNotifierProvider<SocialSignInController, AsyncValue<void>>((ref) {
-  final authRepository = ref.watch(authenticationRepositoryProvider);
-  return SocialSignInController(authRepository);
+  final userService = ref.watch(userServiceProvider);
+  return SocialSignInController(userService);
 });
 
 class SocialSignInController extends StateNotifier<AsyncValue<void>> {
-  SocialSignInController(this._authenticationRepository)
-      : super(const AsyncData(null));
+  SocialSignInController(this._userService) : super(const AsyncData(null));
 
-  final AuthenticationRepository _authenticationRepository;
+  final UserService _userService;
 
   void signInWithGoogle() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-        () => _authenticationRepository.signInWithGoogle());
+    state = await AsyncValue.guard(() => _userService.signInWithGoogle());
   }
 
   void signInWithFacebook() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-        () => _authenticationRepository.signInWithFacebook());
+    state = await AsyncValue.guard(() => _userService.signInWithFacebook());
   }
 
   void signInWithMicrosoft() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(
-        () => _authenticationRepository.signInWithMicrosoft());
+    state = await AsyncValue.guard(() => _userService.signInWithMicrosoft());
   }
 }

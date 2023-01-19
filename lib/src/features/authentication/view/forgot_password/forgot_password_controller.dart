@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../utils/logger.dart';
 
+import '../../../../utils/logger.dart';
 import '../../data/authentication_repository.dart';
 
 final forgotPasswordControllerProvider = StateNotifierProvider.autoDispose<
