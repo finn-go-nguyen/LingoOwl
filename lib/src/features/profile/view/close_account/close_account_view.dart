@@ -16,11 +16,10 @@ class CloseAccountView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<void>>(closeAccountControllerProvider,
         (previous, next) {
-      next.showError(context);
-      next.showLoadingDialog(context, previous);
-      next.showSuccess(
+      next.showErrorLoadingSuccessState(
         context,
-        content:
+        previousState: previous,
+        successMessage:
             'Your account has been closed! We at LingoOwl are sorry to see you go!',
       );
     });

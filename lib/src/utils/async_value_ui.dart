@@ -37,4 +37,15 @@ extension AsyncValueUi on AsyncValue {
         ..showSnackBar(LSnackBar.success(content: content));
     }
   }
+
+  void showErrorLoadingSuccessState(
+    BuildContext context, {
+    required AsyncValue<dynamic>? previousState,
+    String? errorMessage,
+    required String successMessage,
+  }) {
+    showError(context);
+    showLoadingDialog(context, previousState);
+    showSuccess(context, content: successMessage);
+  }
 }
