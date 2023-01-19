@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../features/profile/view/photo/photo_view.dart';
 
 import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
@@ -25,6 +26,7 @@ enum LRoute {
   forgotPassword,
   settings,
   profile,
+  photo,
   accountSecurity;
 
   bool get isProfileDetailsSubRoute =>
@@ -98,6 +100,16 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               child: ProfileDetailsScreen(
                 current: LRoute.profile,
                 child: ProfileView(),
+              ),
+            ),
+          ),
+          GoRoute(
+            name: LRoute.photo.name,
+            path: 'photo',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileDetailsScreen(
+                current: LRoute.photo,
+                child: PhotoView(),
               ),
             ),
           ),

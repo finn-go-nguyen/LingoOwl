@@ -13,7 +13,7 @@ class ProfileSettings {
     ),
     LSetting(
       'Photo',
-      route: LRoute.unimplemented,
+      route: LRoute.photo,
     ),
     LSetting(
       'Account security',

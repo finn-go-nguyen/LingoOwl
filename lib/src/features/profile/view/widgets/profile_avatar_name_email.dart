@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../utils/text_helpers.dart';
 
 import '../../../../../gen/assets.gen.dart';
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
+import '../../../../utils/text_helpers.dart';
 import '../../../../widgets/common/network_image.dart';
 import '../../../../widgets/state/loading.dart';
 import '../../model/app_user.dart';
@@ -26,8 +26,8 @@ class ProfileAvatarNameEmail extends StatelessWidget {
               LNetworkImage(
                 user!.photoUrl ?? '',
                 fit: BoxFit.cover,
-                radius: Sizes.circleBorderRadius,
-                dimension: Sizes.avatar,
+                radius: UiParameters.circleBorderRadius,
+                dimension: UiParameters.avatar,
               ),
               Gaps.h20,
               Text(
@@ -45,7 +45,7 @@ class ProfileAvatarNameEmail extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox.square(
-                    dimension: Sizes.iconSize * .8,
+                    dimension: UiParameters.iconSize * .8,
                     child: Assets.icons.google.image(),
                   ),
                   Gaps.w8,

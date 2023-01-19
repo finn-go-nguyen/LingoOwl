@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/app_sizes.dart';
+import '../../constants/app_parameters/app_sizes.dart';
 
 class TermPrivacy extends StatelessWidget {
   const TermPrivacy({super.key});

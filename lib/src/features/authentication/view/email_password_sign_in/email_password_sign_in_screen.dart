@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../constants/app_parameters/ui_parameters.dart';
 
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_sizes.dart';
 import '../../../../constants/forms/error_text.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
@@ -37,7 +38,7 @@ class _EmailPasswordSignInScreenState
     return LScaffold(
       body: SizedBox.expand(
         child: Padding(
-          padding: Sizes.screenPadding,
+          padding: UiParameters.screenPadding,
           child: PageView(
             // * Disable swiping between pages
             physics: const NeverScrollableScrollPhysics(),

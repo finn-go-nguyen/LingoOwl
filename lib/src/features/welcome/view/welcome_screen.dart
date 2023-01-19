@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../gen/assets.gen.dart';
-import '../../../constants/app_sizes.dart';
+import '../../../constants/app_parameters/app_sizes.dart';
 import '../../../router/app_router.dart';
 
 class WelcomeScreen extends StatelessWidget {

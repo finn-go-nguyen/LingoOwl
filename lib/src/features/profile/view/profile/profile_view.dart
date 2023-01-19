@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
+import '../../../../utils/async_value_ui.dart';
+import '../../../../widgets/state/error.dart';
+import '../../../../widgets/state/loading.dart';
+import '../../../authentication/data/authentication_repository.dart';
+import '../../data/user_repository.dart';
+import 'profile_controller.dart';
 import 'public_profile_edit_form.dart';
 
 class ProfileView extends StatelessWidget {
@@ -11,12 +18,12 @@ class ProfileView extends StatelessWidget {
     return Column(
       children: [
         Table(
-          border: TableBorder.all(),
+          border: UiParameters.tableBorder,
           children: [
             TableRow(
               children: [
                 Padding(
-                  padding: Sizes.rowContentPadding,
+                  padding: UiParameters.rowContentPadding,
                   child: Column(
                     children: [
                       Text(
@@ -32,11 +39,30 @@ class ProfileView extends StatelessWidget {
             TableRow(
               children: [
                 Padding(
-                  padding: Sizes.rowContentPadding,
+                  padding: UiParameters.rowContentPadding,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      PublicProfileEditForm(),
+                    children: [
+                      Consumer(
+                        builder: (context, ref, child) {
+                          ref.listen(profileControllerProvider, (_, next) {
+                            next.showSuccess(
+                              context,
+                              content: 'Your profile update successfully!',
+                            );
+                          });
+
+                          final uid = ref.watch(uidProvider);
+                          // * uid cannot be null because this view only visible
+                          // * for logged in user
+                          final user = ref.watch(userStreamProvider(uid!));
+                          return user.when(
+                            data: (user) => PublicProfileEditForm(user: user),
+                            error: (_, __) => const ErrorState(),
+                            loading: () => const LoadingState(),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

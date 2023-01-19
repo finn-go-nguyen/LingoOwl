@@ -14,4 +14,16 @@ class LSnackBar {
         ),
         duration: const Duration(seconds: 8),
       );
+  static SnackBar success({required String content}) => SnackBar(
+        /// need to set following properties for best effect of awesome_snackbar_content
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          contentType: ContentType.success,
+          title: 'Congratulations!',
+          message: content,
+        ),
+        duration: const Duration(seconds: 5),
+      );
 }

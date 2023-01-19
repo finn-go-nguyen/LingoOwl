@@ -32,10 +32,7 @@ class LNetworkImage extends StatelessWidget {
             child: Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                color: LColors.loading,
-                shape: BoxShape.circle,
-              ),
+              color: LColors.loading,
             ),
           ),
           errorWidget: (context, url, error) => const FlutterLogo(),

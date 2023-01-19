@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../gen/assets.gen.dart';
-import '../../../../constants/app_sizes.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../router/app_router.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
@@ -35,7 +35,7 @@ class SignInScreen extends ConsumerWidget {
             const TermPrivacy(),
             const Spacer(),
             Padding(
-              padding: Sizes.screenPadding,
+              padding: UiParameters.screenPadding,
               child: Column(
                 children: [
                   _SignInButton(
@@ -113,7 +113,7 @@ class _SignInButton extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: SizedBox.square(
-                dimension: Sizes.iconSize,
+                dimension: UiParameters.iconSize,
                 child: Image.asset(
                   image,
                   fit: BoxFit.contain,
