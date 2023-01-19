@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:online_course_app/src/features/authentication/data/authentication_repository.dart';
 
-import '../features/authentication/data/authentication_repository.dart';
+import '../domain_manager.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
 import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
@@ -44,11 +45,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 
     /// Every time the [stream] receives an event the [GoRouter] will refresh its
     /// current route.
-    refreshListenable: RefreshListenable(
-        ref.watch(authenticationRepositoryProvider).authStateChanges()),
+    refreshListenable:
+        RefreshListenable(ref.watch(authStateChangeStreamProvider.stream)),
     redirect: (context, state) {
-      final isSignedIn = ref.watch(
-          authenticationRepositoryProvider.select((value) => value.isSignedIn));
+      final isSignedIn = ref.watch(DomainManager.instance.authRepositoryProvider
+          .select((value) => value.isSignedIn));
       if (isSignedIn) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return '/';

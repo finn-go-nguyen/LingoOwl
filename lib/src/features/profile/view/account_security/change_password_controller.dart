@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../authentication/data/authentication_repository.dart';
+import '../../../../domain_manager.dart';
 
 final changePasswordControllerProvider =
     StateNotifierProvider<ChangePasswordController, AsyncValue<void>>((ref) {
@@ -14,7 +14,8 @@ class ChangePasswordController extends StateNotifier<AsyncValue<void>> {
 
   void changePassword(String currentPassword, String newPassword) async {
     state = const AsyncLoading();
-    final authRepository = _ref.read(authenticationRepositoryProvider);
+    final authRepository =
+        _ref.read(DomainManager.instance.authRepositoryProvider);
 
     state = await AsyncValue.guard(() => authRepository.changePassword(
           currentPassword: currentPassword,

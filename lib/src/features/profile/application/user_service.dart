@@ -1,13 +1,16 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../domain_manager.dart';
 import '../../authentication/data/authentication_repository.dart';
 import '../../authentication/model/auth_user.dart';
 import '../data/user_repository.dart';
 import '../model/app_user.dart';
 
 final userServiceProvider = Provider<UserService>((ref) {
-  final authRepository = ref.watch(authenticationRepositoryProvider);
-  final userRepository = ref.watch(userRepositoryProvider);
+  final authRepository =
+      ref.watch(DomainManager.instance.authRepositoryProvider);
+  final userRepository =
+      ref.watch(DomainManager.instance.userRepositoryProvider);
   return UserService(authRepository, userRepository);
 });
 
