@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
+import '../../../router/coordinator.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../constants/app_parameters/app_sizes.dart';
@@ -43,13 +43,13 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextButton(
-                    onPressed: () => context.goNamed(LRoute.home.name),
+                    onPressed: () => LCoordinator.goNamed(LRoute.home.name),
                     child: const Text('Browse'),
                   ),
                 ),
                 Expanded(
                   child: TextButton(
-                    onPressed: () => context.pushNamed(LRoute.signIn.name),
+                    onPressed: () => LCoordinator.pushNamed(LRoute.signIn.name),
                     child: const Text('Sign In'),
                   ),
                 )

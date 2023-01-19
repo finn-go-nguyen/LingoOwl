@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import '../../../../router/coordinator.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/settings/profile_settings.dart';
@@ -29,7 +29,7 @@ class ProfileTabSelector extends ConsumerWidget {
             onTap: selected
                 ? null
                 : () {
-                    context.pushReplacementNamed(option.route.name);
+                    LCoordinator.pushReplacementNamed(option.route.name);
                     ref
                         .read(profileDetailsControllerProvider.notifier)
                         .set(option.route);

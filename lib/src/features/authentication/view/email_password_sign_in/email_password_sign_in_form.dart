@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:go_router/go_router.dart';
+import '../../../../router/coordinator.dart';
 
 import '../../../../constants/app_parameters/app_sizes.dart';
 import '../../../../constants/forms/email_password_sign_in_form.dart';
@@ -127,7 +127,7 @@ class _PasswordFormState extends ConsumerState<PasswordForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: () => context.pushNamed(
+                onPressed: () => LCoordinator.pushNamed(
                   LRoute.forgotPassword.name,
                   extra: ref.read(emailPasswordSignInControllerProvider).email,
                 ),

@@ -4,9 +4,9 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import '../../../../router/coordinator.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
@@ -136,7 +136,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     _onOpenMailAppPressed();
-                    context.goNamed(LRoute.signInWithEmail.name);
+                    LCoordinator.goNamed(LRoute.signInWithEmail.name);
                   },
                   child: Text(
                     'Open email app',
@@ -145,7 +145,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 ),
                 Gaps.h20,
                 TextButton(
-                  onPressed: () => context.goNamed(LRoute.signIn.name),
+                  onPressed: () => LCoordinator.goNamed(LRoute.signIn.name),
                   child: const Text(
                     'Skip, I\'ll confirm later',
                   ),

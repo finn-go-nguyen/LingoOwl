@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:online_course_app/src/router/coordinator.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../utils/async_value_ui.dart';
@@ -43,7 +44,7 @@ class AccountCreateScreen extends ConsumerWidget {
                 children: [
                   const Text('Have an account?'),
                   TextButton(
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () => LCoordinator.onBack(),
                     child: const Text('Sign In'),
                   ),
                 ],

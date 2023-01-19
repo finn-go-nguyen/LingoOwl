@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/settings/app_settings.dart';
 import '../../../../router/app_router.dart';
+import '../../../../router/coordinator.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
@@ -63,7 +63,7 @@ class SettingsScreen extends ConsumerWidget {
                         .signOut()
                         .then((isSuccess) {
                       if (isSuccess) {
-                        context.goNamed(LRoute.welcome.name);
+                        LCoordinator.goNamed(LRoute.welcome.name);
                       }
                     });
                   }
@@ -105,7 +105,7 @@ class SettingSection extends StatelessWidget {
             final option = settingSection.options[index];
             return ListTile(
               contentPadding: UiParameters.screenPadding,
-              onTap: () => context.pushNamed(option.route.name),
+              onTap: () => LCoordinator.pushNamed(option.route.name),
               title: Text(option.name),
               trailing: const Icon(Icons.arrow_forward_ios),
             );

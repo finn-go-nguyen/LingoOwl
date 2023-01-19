@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../../router/coordinator.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
@@ -40,7 +40,7 @@ class SignInScreen extends ConsumerWidget {
                 children: [
                   _SignInButton(
                     onPressed: () =>
-                        context.goNamed(LRoute.signInWithEmail.name),
+                        LCoordinator.goNamed(LRoute.signInWithEmail.name),
                     image: Assets.icons.envelope.path,
                     label: 'Sign in with email',
                   ),
@@ -74,7 +74,8 @@ class SignInScreen extends ConsumerWidget {
               children: [
                 const Text('New here?'),
                 TextButton(
-                  onPressed: () => context.goNamed(LRoute.accountCreate.name),
+                  onPressed: () =>
+                      LCoordinator.goNamed(LRoute.accountCreate.name),
                   child: const Text('Create an account'),
                 )
               ],
