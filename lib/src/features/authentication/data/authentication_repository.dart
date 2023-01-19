@@ -86,9 +86,15 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   Future<void> changePassword({
     required String currentPassword,
     required String newPassword,
-  }) {
-    // TODO: implement changePassword
-    throw UnimplementedError();
+  }) async {
+    final user = _firebaseAuth.currentUser!;
+    final cred = EmailAuthProvider.credential(
+      email: user.email!,
+      password: currentPassword,
+    );
+
+    await user.reauthenticateWithCredential(cred);
+    user.updatePassword(newPassword);
   }
 
   @override

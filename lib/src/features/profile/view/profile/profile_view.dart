@@ -7,6 +7,7 @@ import '../../../../widgets/state/error.dart';
 import '../../../../widgets/state/loading.dart';
 import '../../../authentication/data/authentication_repository.dart';
 import '../../data/user_repository.dart';
+import '../widgets/profile_view_header.dart';
 import 'profile_controller.dart';
 import 'public_profile_edit_form.dart';
 
@@ -20,19 +21,11 @@ class ProfileView extends StatelessWidget {
         Table(
           border: UiParameters.tableBorder,
           children: [
-            TableRow(
+            const TableRow(
               children: [
-                Padding(
-                  padding: UiParameters.rowContentPadding,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Public profile',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                      const Text('Add information about yourself'),
-                    ],
-                  ),
+                ProfileViewHeader(
+                  title: 'Public profile',
+                  subTitle: 'Add information about yourself.',
                 ),
               ],
             ),

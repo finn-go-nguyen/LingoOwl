@@ -7,6 +7,7 @@ import '../../../../router/app_router.dart';
 import '../../../../themes/themes.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
+import '../widgets/profile_view_header.dart';
 import 'close_account_controller.dart';
 
 class CloseAccountView extends ConsumerWidget {
@@ -29,20 +30,12 @@ class CloseAccountView extends ConsumerWidget {
         Table(
           border: UiParameters.tableBorder,
           children: [
-            TableRow(
+            const TableRow(
               children: [
-                Padding(
-                  padding: UiParameters.rowContentPadding,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Close Account',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                      const Text('Close your account permanently.'),
-                    ],
-                  ),
-                )
+                ProfileViewHeader(
+                  title: 'Close Account',
+                  subTitle: 'Close your account permanently.',
+                ),
               ],
             ),
             TableRow(

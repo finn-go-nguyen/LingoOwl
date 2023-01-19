@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../upload_file/view/image_selector.dart';
+import '../widgets/profile_view_header.dart';
 import 'photo_controller.dart';
 
 class PhotoView extends ConsumerWidget {
@@ -21,20 +22,11 @@ class PhotoView extends ConsumerWidget {
         Table(
           border: UiParameters.tableBorder,
           children: [
-            TableRow(
+            const TableRow(
               children: [
-                Padding(
-                  padding: UiParameters.rowContentPadding,
-                  child: Column(
-                    children: [
-                      Text(
-                        'Photo',
-                        style: Theme.of(context).textTheme.headline5,
-                      ),
-                      const Text(
-                          'Add a nice photo of yourself for your profile.'),
-                    ],
-                  ),
+                ProfileViewHeader(
+                  title: 'Photo',
+                  subTitle: 'Add a nice photo of yourself for your profile.',
                 ),
               ],
             ),
