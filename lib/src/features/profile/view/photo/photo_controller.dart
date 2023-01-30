@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../domain_manager.dart';
 import '../../../authentication/data/authentication_repository.dart';
-import '../../data/user_repository.dart';
 
 final photoControllerProvider =
     StateNotifierProvider<PhotoController, AsyncValue<void>>((ref) {
@@ -16,7 +16,8 @@ class PhotoController extends StateNotifier<AsyncValue<void>> {
   void onSavePressed(String photoUrl) async {
     state = const AsyncLoading();
     final uid = _ref.read(uidProvider)!;
-    final userRepository = _ref.read(userRepositoryProvider);
+    final userRepository =
+        _ref.read(DomainManager.instance.userRepositoryProvider);
     state = await AsyncValue.guard(
         () => userRepository.updateAvatarUrl(uid, photoUrl));
   }

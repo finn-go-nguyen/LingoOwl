@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'change_password_controller.dart';
-import 'change_password_form.dart';
-import '../widgets/profile_view_header.dart';
-import '../../../../utils/async_value_ui.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
+import '../../../../utils/async_value_ui.dart';
+import '../widgets/profile_view_header.dart';
+import 'change_password_controller.dart';
+import 'change_password_form.dart';
 
 class AccountSecurityView extends ConsumerWidget {
   const AccountSecurityView({super.key});

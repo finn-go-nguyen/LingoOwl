@@ -4,26 +4,26 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../../domain_manager.dart';
 import '../../../utils/logger.dart';
 import '../model/auth_user.dart';
 
-final authenticationRepositoryProvider =
-    Provider<AuthenticationRepository>((ref) {
-  return FirebaseAuthenticationRepository(
-    FirebaseAuth.instance,
-    GoogleSignIn(),
-    FacebookAuth.instance,
-  );
-});
-
 final uidProvider = Provider.autoDispose<String?>((ref) {
-  final authRepository = ref.watch(authenticationRepositoryProvider);
+  final authRepository =
+      ref.watch(DomainManager.instance.authRepositoryProvider);
   return authRepository.currentUser?.id;
 });
 
 final isLoggingInProvider = Provider<bool>((ref) {
-  final authRepository = ref.watch(authenticationRepositoryProvider);
+  final authRepository =
+      ref.watch(DomainManager.instance.authRepositoryProvider);
   return authRepository.currentUser != null;
+});
+
+final authStateChangeStreamProvider = StreamProvider<LAuthUser?>((ref) {
+  final authRepository =
+      ref.watch(DomainManager.instance.authRepositoryProvider);
+  return authRepository.authStateChanges();
 });
 
 abstract class AuthenticationRepository {

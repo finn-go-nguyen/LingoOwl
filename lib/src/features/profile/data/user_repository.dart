@@ -1,15 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../domain_manager.dart';
 import '../model/app_user.dart';
-
-final userRepositoryProvider = Provider<UserRepository>((ref) {
-  return FirestoreUserRepository(FirebaseFirestore.instance);
-});
 
 final userFutureProvider =
     FutureProvider.family<LAppUser, String>((ref, uid) async {
-  final userRepository = ref.watch(userRepositoryProvider);
+  final userRepository =
+      ref.watch(DomainManager.instance.userRepositoryProvider);
   return userRepository.get(uid);
 });
 
@@ -17,7 +15,8 @@ final userFutureProvider =
 /// [See document](https://pub.dev/documentation/riverpod/latest/riverpod/StreamProvider-class.html)
 final userStreamProvider =
     StreamProvider.family.autoDispose<LAppUser, String>((ref, uid) {
-  final userRepository = ref.watch(userRepositoryProvider);
+  final userRepository =
+      ref.watch(DomainManager.instance.userRepositoryProvider);
   return userRepository.getSnapshot(uid);
 });
 
