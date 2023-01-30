@@ -111,10 +111,6 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
                 8,
                 errorText: ErrorTextConstants.passwordLengthErrorText,
               ),
-              FormBuilderValidators.maxLength(
-                64,
-                errorText: ErrorTextConstants.passwordLengthErrorText,
-              ),
             ]),
           ),
           Gaps.h32,

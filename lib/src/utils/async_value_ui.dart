@@ -17,6 +17,7 @@ extension AsyncValueUi on AsyncValue {
     }
   }
 
+  // TODO: Handle will pop
   void showLoadingDialog(BuildContext context, AsyncValue<dynamic>? previous) {
     if (isLoading) {
       showDialog(
