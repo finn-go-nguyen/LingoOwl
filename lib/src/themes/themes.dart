@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import '../constants/app_parameters/app_parameters.dart';
 
+import '../constants/app_parameters/app_parameters.dart';
 import 'styles.dart';
 
 class LTheme {

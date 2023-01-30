@@ -63,7 +63,7 @@ class SettingsScreen extends ConsumerWidget {
                         .signOut()
                         .then((isSuccess) {
                       if (isSuccess) {
-                        LCoordinator.goNamed(LRoute.welcome.name);
+                        LCoordinator.showWelcomeScreen();
                       }
                     });
                   }

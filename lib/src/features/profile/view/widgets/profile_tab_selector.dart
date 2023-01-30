@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../router/coordinator.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/settings/profile_settings.dart';
 import '../../../../router/app_router.dart';
+import '../../../../router/coordinator.dart';
 import '../profile_details_controller.dart';
 
 class ProfileTabSelector extends ConsumerWidget {

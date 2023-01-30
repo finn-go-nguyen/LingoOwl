@@ -1,6 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import 'app_router.dart';
+
 class LCoordinator {
   static final navigatorKey = GlobalKey<NavigatorState>();
   static BuildContext get context => navigatorKey.currentState!.context;
@@ -55,4 +57,45 @@ class LCoordinator {
         queryParams: queryParams,
         extra: extra,
       );
+
+  static void showForgotPasswordScreen(String? email) {
+    pushNamed(
+      LRoute.forgotPassword.name,
+      extra: email,
+    );
+  }
+
+  static void showEmailSignInScreen() {
+    goNamed(
+      LRoute.signInWithEmail.name,
+    );
+  }
+
+  static void showSignInScreen({bool isPushed = false}) {
+    isPushed
+        ? pushNamed(LRoute.signIn.name)
+        : goNamed(
+            LRoute.signIn.name,
+          );
+  }
+
+  static void showAccountCreateScreen() {
+    goNamed(LRoute.accountCreate.name);
+  }
+
+  static void showSettingsScreen() {
+    goNamed(LRoute.settings.name);
+  }
+
+  static void showCloseAccountConfirmationScreen() {
+    goNamed(LRoute.closeAccountConfirmation.name);
+  }
+
+  static void showWelcomeScreen() {
+    goNamed(LRoute.welcome.name);
+  }
+
+  static void showHomeScreen() {
+    goNamed(LRoute.home.name);
+  }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
-import '../../../../router/app_router.dart';
 import '../../../../router/coordinator.dart';
 import '../../../../themes/themes.dart';
 import '../../../../utils/async_value_ui.dart';
@@ -87,8 +86,8 @@ class CloseAccountView extends ConsumerWidget {
                               ).then(
                                 (isConfirmed) {
                                   if (isConfirmed ?? false) {
-                                    LCoordinator.goNamed(
-                                        LRoute.closeAccountConfirmation.name);
+                                    LCoordinator
+                                        .showCloseAccountConfirmationScreen();
                                   }
                                 },
                               );
