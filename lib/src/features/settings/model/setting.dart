@@ -6,7 +6,7 @@ class LSetting {
     required this.route,
   });
   final String name;
-  final LRoute route;
+  final LRoutes route;
 }
 
 class LSettingSection {

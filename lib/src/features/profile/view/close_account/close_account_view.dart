@@ -82,7 +82,7 @@ class CloseAccountView extends ConsumerWidget {
                                 (isConfirmed) {
                                   if (isConfirmed ?? false) {
                                     context.goNamed(
-                                        LRoute.closeAccountConfirmation.name);
+                                        LRoutes.closeAccountConfirmation.name);
                                   }
                                 },
                               );

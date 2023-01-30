@@ -72,6 +72,7 @@ dependencies:
   image_cropper: ^3.0.1
   image_picker: ^0.8.6
   firebase_storage: ^11.0.10
+  font_awesome_flutter: ^10.3.0
   
 
 dev_dependencies:

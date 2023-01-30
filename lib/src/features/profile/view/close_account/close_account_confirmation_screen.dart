@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'close_account_controller.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/forms/close_account_confirmation_form.dart';
 import '../../../../themes/themes.dart';
 import '../../../../widgets/common/scaffold.dart';
+import 'close_account_controller.dart';
 
 class CloseAccountConfirmationScreen extends ConsumerStatefulWidget {
   const CloseAccountConfirmationScreen({super.key});

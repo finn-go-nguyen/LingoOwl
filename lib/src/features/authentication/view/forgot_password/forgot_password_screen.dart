@@ -136,7 +136,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     _onOpenMailAppPressed();
-                    context.goNamed(LRoute.signInWithEmail.name);
+                    context.goNamed(LRoutes.signInWithEmail.name);
                   },
                   child: Text(
                     'Open email app',
@@ -145,7 +145,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 ),
                 Gaps.h20,
                 TextButton(
-                  onPressed: () => context.goNamed(LRoute.signIn.name),
+                  onPressed: () => context.goNamed(LRoutes.signIn.name),
                   child: const Text(
                     'Skip, I\'ll confirm later',
                   ),

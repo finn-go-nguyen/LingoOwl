@@ -40,7 +40,7 @@ class SignInScreen extends ConsumerWidget {
                 children: [
                   _SignInButton(
                     onPressed: () =>
-                        context.goNamed(LRoute.signInWithEmail.name),
+                        context.goNamed(LRoutes.signInWithEmail.name),
                     image: Assets.icons.envelope.path,
                     label: 'Sign in with email',
                   ),
@@ -74,7 +74,7 @@ class SignInScreen extends ConsumerWidget {
               children: [
                 const Text('New here?'),
                 TextButton(
-                  onPressed: () => context.goNamed(LRoute.accountCreate.name),
+                  onPressed: () => context.goNamed(LRoutes.accountCreate.name),
                   child: const Text('Create an account'),
                 )
               ],

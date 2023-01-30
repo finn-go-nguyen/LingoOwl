@@ -128,7 +128,7 @@ class _PasswordFormState extends ConsumerState<PasswordForm> {
             children: [
               TextButton(
                 onPressed: () => context.pushNamed(
-                  LRoute.forgotPassword.name,
+                  LRoutes.forgotPassword.name,
                   extra: ref.read(emailPasswordSignInControllerProvider).email,
                 ),
                 child: const Text('Forgot password'),

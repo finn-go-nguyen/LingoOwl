@@ -17,7 +17,7 @@ class ProfileDetailsScreen extends StatelessWidget {
     required this.child,
   });
 
-  final LRoute current;
+  final LRoutes current;
   final Widget child;
 
   @override

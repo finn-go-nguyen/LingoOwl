@@ -43,13 +43,13 @@ class WelcomeScreen extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextButton(
-                    onPressed: () => context.goNamed(LRoute.home.name),
+                    onPressed: () => context.goNamed(LRoutes.home.name),
                     child: const Text('Browse'),
                   ),
                 ),
                 Expanded(
                   child: TextButton(
-                    onPressed: () => context.pushNamed(LRoute.signIn.name),
+                    onPressed: () => context.pushNamed(LRoutes.signIn.name),
                     child: const Text('Sign In'),
                   ),
                 )

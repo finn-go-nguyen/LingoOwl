@@ -3,14 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../router/app_router.dart';
 
 final profileDetailsControllerProvider =
-    StateNotifierProvider.autoDispose<ProfileDetailsController, LRoute>((ref) {
+    StateNotifierProvider.autoDispose<ProfileDetailsController, LRoutes>((ref) {
   return ProfileDetailsController();
 });
 
-class ProfileDetailsController extends StateNotifier<LRoute> {
-  ProfileDetailsController() : super(LRoute.accountSecurity);
+class ProfileDetailsController extends StateNotifier<LRoutes> {
+  ProfileDetailsController() : super(LRoutes.accountSecurity);
 
-  void set(LRoute route) {
+  void set(LRoutes route) {
     if (route.isProfileDetailsSubRoute) {
       state = route;
     }
