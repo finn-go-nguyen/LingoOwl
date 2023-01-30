@@ -37,7 +37,7 @@ class ProfileSettings {
     ),
     LSetting(
       'Close account',
-      route: LRoute.unimplemented,
+      route: LRoute.closeAccount,
     ),
   ];
 }

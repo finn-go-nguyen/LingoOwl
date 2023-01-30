@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../features/profile/view/photo/photo_view.dart';
 
 import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
@@ -9,12 +8,16 @@ import '../features/authentication/view/forgot_password/forgot_password_screen.d
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
 import '../features/home/view/home_screen.dart';
 import '../features/profile/view/account_security/account_security_view.dart';
+import '../features/profile/view/close_account/close_account_confirmation_screen.dart';
+import '../features/profile/view/close_account/close_account_view.dart';
+import '../features/profile/view/photo/photo_view.dart';
 import '../features/profile/view/profile/profile_view.dart';
 import '../features/profile/view/profile_details_screen.dart';
 import '../features/settings/view/settings/settings_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
 import '../widgets/state/unimplemented.dart';
+import 'coordinator.dart';
 
 enum LRoute {
   unimplemented,
@@ -27,7 +30,9 @@ enum LRoute {
   settings,
   profile,
   photo,
-  accountSecurity;
+  accountSecurity,
+  closeAccount,
+  closeAccountConfirmation;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoute.profile || this == LRoute.accountSecurity;
@@ -35,6 +40,7 @@ enum LRoute {
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
+    navigatorKey: LCoordinator.navigatorKey,
     debugLogDiagnostics: true,
     initialLocation: '/welcome',
 
@@ -49,7 +55,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return '/';
         }
-      } else {}
+      } else {
+        if (state.location.contains(RegExp(r'profile|photo|security|close'))) {
+          return '/welcome';
+        }
+      }
       return null;
     },
     routes: [
@@ -122,6 +132,24 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 child: AccountSecurityView(),
               ),
             ),
+          ),
+          GoRoute(
+            name: LRoute.closeAccount.name,
+            path: 'close',
+            pageBuilder: (context, state) => const NoTransitionPage(
+              child: ProfileDetailsScreen(
+                current: LRoute.closeAccount,
+                child: CloseAccountView(),
+              ),
+            ),
+            routes: [
+              GoRoute(
+                name: LRoute.closeAccountConfirmation.name,
+                path: 'confirm',
+                builder: (context, state) =>
+                    const CloseAccountConfirmationScreen(),
+              )
+            ],
           ),
         ],
       ),

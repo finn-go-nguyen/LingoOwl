@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../router/coordinator.dart';
 
 import '../widgets/common/snack_bars.dart';
 
@@ -26,7 +27,7 @@ extension AsyncValueUi on AsyncValue {
     }
 
     if ((previous?.isLoading ?? false) && !isLoading) {
-      if (Navigator.canPop(context)) Navigator.pop(context);
+      LCoordinator.onBack();
     }
   }
 
@@ -36,5 +37,16 @@ extension AsyncValueUi on AsyncValue {
         ..hideCurrentSnackBar()
         ..showSnackBar(LSnackBar.success(content: content));
     }
+  }
+
+  void showErrorLoadingSuccessState(
+    BuildContext context, {
+    required AsyncValue<dynamic>? previousState,
+    String? errorMessage,
+    required String successMessage,
+  }) {
+    showError(context);
+    showLoadingDialog(context, previousState);
+    showSuccess(context, content: successMessage);
   }
 }
