@@ -1,11 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../domain_manager.dart';
 import '../../data/user_repository.dart';
 import '../../model/app_user.dart';
 
 final profileControllerProvider =
     StateNotifierProvider<ProfileController, AsyncValue<void>>((ref) {
-  final userRepository = ref.watch(userRepositoryProvider);
+  final userRepository =
+      ref.watch(DomainManager.instance.userRepositoryProvider);
   return ProfileController(userRepository);
 });
 

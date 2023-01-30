@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../router/coordinator.dart';
+
 Future<bool?> showAlertDialog({
   required BuildContext context,
   required String title,
@@ -16,11 +18,11 @@ Future<bool?> showAlertDialog({
         if (cancelActionText != null)
           TextButton(
             child: Text(cancelActionText),
-            onPressed: () => Navigator.of(context).pop(false),
+            onPressed: () => LCoordinator.onBack(false),
           ),
         TextButton(
           child: Text(defaultActionText),
-          onPressed: () => Navigator.of(context).pop(true),
+          onPressed: () => LCoordinator.onBack(true),
         ),
       ],
     ),

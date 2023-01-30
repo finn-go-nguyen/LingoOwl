@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../domain_manager.dart';
 import '../../../authentication/data/authentication_repository.dart';
 
 final settingsControllerProvider =
     StateNotifierProvider<SettingsController, AsyncValue<void>>((ref) {
-  final authRepository = ref.watch(authenticationRepositoryProvider);
+  final authRepository =
+      ref.watch(DomainManager.instance.authRepositoryProvider);
   return SettingsController(authRepository);
 });
 

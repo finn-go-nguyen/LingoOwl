@@ -4,13 +4,12 @@ import 'package:android_intent_plus/android_intent.dart';
 import 'package:android_intent_plus/flag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
-import '../../../../router/app_router.dart';
+import '../../../../router/coordinator.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
 import 'forgot_password_controller.dart';
@@ -136,7 +135,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     _onOpenMailAppPressed();
-                    context.goNamed(LRoutes.signInWithEmail.name);
+                    LCoordinator.showEmailSignInScreen();
                   },
                   child: Text(
                     'Open email app',
@@ -145,7 +144,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 ),
                 Gaps.h20,
                 TextButton(
-                  onPressed: () => context.goNamed(LRoutes.signIn.name),
+                  onPressed: () => LCoordinator.showSignInScreen(),
                   child: const Text(
                     'Skip, I\'ll confirm later',
                   ),

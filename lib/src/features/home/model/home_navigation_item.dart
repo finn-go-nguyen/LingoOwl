@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../router/app_router.dart';
 
 part 'home_navigation_item.freezed.dart';

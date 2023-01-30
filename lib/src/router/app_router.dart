@@ -1,14 +1,15 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../features/home/model/home_navigation_item.dart';
-import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
+import '../features/authentication/data/authentication_repository.dart';
 
 import '../constants/app_constants/home_navigation_items.dart';
-import '../features/authentication/data/authentication_repository.dart';
+import '../domain_manager.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
 import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
+import '../features/home/model/home_navigation_item.dart';
+import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
 import '../features/profile/view/account_security/account_security_view.dart';
 import '../features/profile/view/close_account/close_account_confirmation_screen.dart';
 import '../features/profile/view/close_account/close_account_view.dart';
@@ -18,6 +19,7 @@ import '../features/profile/view/profile_details_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
 import '../widgets/state/unimplemented.dart';
+import 'coordinator.dart';
 
 enum LRoutes {
   unimplemented,
@@ -44,16 +46,17 @@ enum LRoutes {
 final goRouterProvider = Provider<GoRouter>((ref) {
   final homePath = HomeNavigationItems.items[0].path;
   return GoRouter(
+    navigatorKey: LCoordinator.navigatorKey,
     debugLogDiagnostics: true,
     initialLocation: '/welcome',
 
     /// Every time the [stream] receives an event the [GoRouter] will refresh its
     /// current route.
-    refreshListenable: RefreshListenable(
-        ref.watch(authenticationRepositoryProvider).authStateChanges()),
+    refreshListenable:
+        RefreshListenable(ref.watch(authStateChangeStreamProvider.stream)),
     redirect: (context, state) {
-      final isSignedIn = ref.watch(
-          authenticationRepositoryProvider.select((value) => value.isSignedIn));
+      final isSignedIn = ref.watch(DomainManager.instance.authRepositoryProvider
+          .select((value) => value.isSignedIn));
       if (isSignedIn) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return homePath;

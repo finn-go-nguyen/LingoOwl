@@ -13,9 +13,11 @@ class PhotoView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<void>>(photoControllerProvider, (previous, next) {
-      next.showError(context);
-      next.showLoadingDialog(context, previous);
-      next.showSuccess(context, content: 'Avatar update successfully!');
+      next.showErrorLoadingSuccessState(
+        context,
+        previousState: previous,
+        successMessage: 'Avatar update successfully!',
+      );
     });
     return Column(
       children: [

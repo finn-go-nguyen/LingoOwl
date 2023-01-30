@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../domain_manager.dart';
 import '../../../../utils/logger.dart';
 import '../../data/authentication_repository.dart';
 
 final forgotPasswordControllerProvider = StateNotifierProvider.autoDispose<
     ForgotPasswordController, AsyncValue<void>>((ref) {
   log.d('ForgotPasswordController created');
-  final authRepository = ref.watch(authenticationRepositoryProvider);
+  final authRepository =
+      ref.watch(DomainManager.instance.authRepositoryProvider);
   return ForgotPasswordController(authRepository);
 });
 

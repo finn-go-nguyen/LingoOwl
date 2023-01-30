@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
-import '../../../../router/app_router.dart';
+import '../../../../router/coordinator.dart';
 import '../../../../themes/themes.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
@@ -17,11 +16,10 @@ class CloseAccountView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<void>>(closeAccountControllerProvider,
         (previous, next) {
-      next.showError(context);
-      next.showLoadingDialog(context, previous);
-      next.showSuccess(
+      next.showErrorLoadingSuccessState(
         context,
-        content:
+        previousState: previous,
+        successMessage:
             'Your account has been closed! We at LingoOwl are sorry to see you go!',
       );
     });
@@ -81,8 +79,8 @@ class CloseAccountView extends ConsumerWidget {
                               ).then(
                                 (isConfirmed) {
                                   if (isConfirmed ?? false) {
-                                    context.goNamed(
-                                        LRoutes.closeAccountConfirmation.name);
+                                    LCoordinator
+                                        .showCloseAccountConfirmationScreen();
                                   }
                                 },
                               );

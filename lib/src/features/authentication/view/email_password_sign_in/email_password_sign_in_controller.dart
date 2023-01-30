@@ -1,12 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../domain_manager.dart';
 import '../../data/authentication_repository.dart';
 import 'email_password_sign_in_state.dart';
 
 final emailPasswordSignInControllerProvider = StateNotifierProvider.autoDispose<
     EmailPasswordSignInController, EmailPasswordSignInState>(
   (ref) {
-    final authRepository = ref.watch(authenticationRepositoryProvider);
+    final authRepository =
+        ref.watch(DomainManager.instance.authRepositoryProvider);
     return EmailPasswordSignInController(authRepository);
   },
 );
