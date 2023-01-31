@@ -98,4 +98,11 @@ class LCoordinator {
   static void showHomeScreen() {
     goNamed(LRoutes.home.name);
   }
+
+  static void showCourseDetails(String courseId) {
+    pushNamed(
+      LRoutes.course.name,
+      params: {'courseId': courseId},
+    );
+  }
 }

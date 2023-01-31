@@ -1,13 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../features/authentication/data/authentication_repository.dart';
 
 import '../constants/app_constants/home_navigation_items.dart';
 import '../domain_manager.dart';
+import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
 import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
+import '../features/course/view/course_screen.dart';
 import '../features/home/model/home_navigation_item.dart';
 import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
 import '../features/profile/view/account_security/account_security_view.dart';
@@ -37,7 +38,8 @@ enum LRoutes {
   closeAccountConfirmation,
   search,
   myLearning,
-  wishlist;
+  wishlist,
+  course;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -98,7 +100,20 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return ScaffoldWithBottomNavigationBar(child: child);
         },
         routes: [
-          _bottomNavigationItemBuilder(HomeNavigationItems.items[0], ref),
+          _bottomNavigationItemBuilder(
+            HomeNavigationItems.items[0],
+            ref,
+            routes: [
+              GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
+                name: LRoutes.course.name,
+                path: 'course/:courseId',
+                builder: (context, state) => CourseScreen(
+                  courseId: state.params['courseId']!,
+                ),
+              ),
+            ],
+          ),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[1], ref),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[2], ref),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[3], ref),

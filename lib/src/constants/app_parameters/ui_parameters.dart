@@ -21,4 +21,16 @@ class UiParameters {
   );
 
   static const imagePadding = EdgeInsets.all(4.0);
+
+  // Course card
+  static const courseCardPadding = EdgeInsets.all(8.0);
+  static const courseCardPortraitSize = Size(200.0, 300.0);
+  static const courseCardThumbnailDimension = 60.0;
+  static const courseCardBorderRadius = 6.0;
+
+  // Rating bar
+  static const starSize = 20.0;
+
+  // Course screen
+  static const thumbnailBorderRadius = BorderRadius.all(Radius.circular(6.0));
 }

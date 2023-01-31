@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class LColors {
   static const shimmerGradient = LinearGradient(
@@ -18,4 +18,9 @@ class LColors {
   );
 
   static const loading = Color.fromARGB(255, 224, 224, 224);
+
+  static const unratedColor = Color.fromARGB(255, 224, 224, 224);
+
+  static const rating = Colors.orange;
+  static const strikeThrough = Colors.black54;
 }
