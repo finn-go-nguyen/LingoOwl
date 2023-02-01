@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
-import '../../../../router/app_router.dart';
 import '../../../../router/coordinator.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
@@ -27,7 +26,7 @@ class SignInScreen extends ConsumerWidget {
             Gaps.h64,
             Text(
               'Sign In',
-              style: Theme.of(context).textTheme.headline3!.copyWith(
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
                     fontFamily: GoogleFonts.ebGaramond().fontFamily,
                   ),
             ),
@@ -123,7 +122,7 @@ class _SignInButton extends StatelessWidget {
           ),
           label: Text(
             label,
-            style: Theme.of(context).textTheme.button,
+            style: Theme.of(context).textTheme.labelLarge,
           ),
         ),
       ),

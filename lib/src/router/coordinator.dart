@@ -60,42 +60,49 @@ class LCoordinator {
 
   static void showForgotPasswordScreen(String? email) {
     pushNamed(
-      LRoute.forgotPassword.name,
+      LRoutes.forgotPassword.name,
       extra: email,
     );
   }
 
   static void showEmailSignInScreen() {
     goNamed(
-      LRoute.signInWithEmail.name,
+      LRoutes.signInWithEmail.name,
     );
   }
 
   static void showSignInScreen({bool isPushed = false}) {
     isPushed
-        ? pushNamed(LRoute.signIn.name)
+        ? pushNamed(LRoutes.signIn.name)
         : goNamed(
-            LRoute.signIn.name,
+            LRoutes.signIn.name,
           );
   }
 
   static void showAccountCreateScreen() {
-    goNamed(LRoute.accountCreate.name);
+    goNamed(LRoutes.accountCreate.name);
   }
 
   static void showSettingsScreen() {
-    goNamed(LRoute.settings.name);
+    goNamed(LRoutes.settings.name);
   }
 
   static void showCloseAccountConfirmationScreen() {
-    goNamed(LRoute.closeAccountConfirmation.name);
+    goNamed(LRoutes.closeAccountConfirmation.name);
   }
 
   static void showWelcomeScreen() {
-    goNamed(LRoute.welcome.name);
+    goNamed(LRoutes.welcome.name);
   }
 
   static void showHomeScreen() {
-    goNamed(LRoute.home.name);
+    goNamed(LRoutes.home.name);
+  }
+
+  static void showCourseDetails(String courseId) {
+    pushNamed(
+      LRoutes.course.name,
+      params: {'courseId': courseId},
+    );
   }
 }

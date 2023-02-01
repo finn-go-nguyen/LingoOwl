@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../domain_manager.dart';
 
+import '../../../../domain_manager.dart';
 import '../../data/user_repository.dart';
 import '../../model/app_user.dart';
 

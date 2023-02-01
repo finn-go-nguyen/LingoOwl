@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/state/error.dart';
-import '../../../../widgets/state/loading.dart';
+import '../../../../widgets/state/loading/loading.dart';
 import '../../../authentication/data/authentication_repository.dart';
 import '../../data/user_repository.dart';
 import '../widgets/profile_view_header.dart';

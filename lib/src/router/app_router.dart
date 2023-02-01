@@ -1,26 +1,28 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:online_course_app/src/features/authentication/data/authentication_repository.dart';
 
+import '../constants/app_constants/home_navigation_items.dart';
 import '../domain_manager.dart';
+import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
 import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
-import '../features/home/view/home_screen.dart';
+import '../features/course/view/course_screen.dart';
+import '../features/home/model/home_navigation_item.dart';
+import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
 import '../features/profile/view/account_security/account_security_view.dart';
 import '../features/profile/view/close_account/close_account_confirmation_screen.dart';
 import '../features/profile/view/close_account/close_account_view.dart';
 import '../features/profile/view/photo/photo_view.dart';
 import '../features/profile/view/profile/profile_view.dart';
 import '../features/profile/view/profile_details_screen.dart';
-import '../features/settings/view/settings/settings_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
 import '../widgets/state/unimplemented.dart';
 import 'coordinator.dart';
 
-enum LRoute {
+enum LRoutes {
   unimplemented,
   welcome,
   home,
@@ -33,13 +35,18 @@ enum LRoute {
   photo,
   accountSecurity,
   closeAccount,
-  closeAccountConfirmation;
+  closeAccountConfirmation,
+  search,
+  myLearning,
+  wishlist,
+  course;
 
   bool get isProfileDetailsSubRoute =>
-      this == LRoute.profile || this == LRoute.accountSecurity;
+      this == LRoutes.profile || this == LRoutes.accountSecurity;
 }
 
 final goRouterProvider = Provider<GoRouter>((ref) {
+  final homePath = HomeNavigationItems.items[0].path;
   return GoRouter(
     navigatorKey: LCoordinator.navigatorKey,
     debugLogDiagnostics: true,
@@ -54,7 +61,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           .select((value) => value.isSignedIn));
       if (isSignedIn) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
-          return '/';
+          return homePath;
         }
       } else {
         if (state.location.contains(RegExp(r'profile|photo|security|close'))) {
@@ -65,22 +72,22 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     },
     routes: [
       GoRoute(
-        name: LRoute.welcome.name,
+        name: LRoutes.welcome.name,
         path: '/welcome',
         builder: (context, state) => const WelcomeScreen(),
         routes: [
           GoRoute(
-            name: LRoute.signIn.name,
+            name: LRoutes.signIn.name,
             path: 'signIn',
             builder: (context, state) => const SignInScreen(),
             routes: [
               GoRoute(
-                name: LRoute.signInWithEmail.name,
+                name: LRoutes.signInWithEmail.name,
                 path: 'email',
                 builder: (context, state) => const EmailPasswordSignInScreen(),
               ),
               GoRoute(
-                name: LRoute.accountCreate.name,
+                name: LRoutes.accountCreate.name,
                 path: 'create',
                 builder: (context, state) => const AccountCreateScreen(),
               ),
@@ -88,77 +95,108 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           ),
         ],
       ),
-      GoRoute(
-        name: LRoute.home.name,
-        path: '/',
-        builder: (context, state) => const HomeScreen(),
-      ),
-      GoRoute(
-        name: LRoute.forgotPassword.name,
-        path: '/forgotPassword',
-        builder: (context, state) =>
-            ForgotPasswordScreen(email: state.extra as String?),
-      ),
-      GoRoute(
-        name: LRoute.settings.name,
-        path: '/settings',
-        builder: (context, state) => const SettingsScreen(),
+      ShellRoute(
+        builder: (_, state, child) {
+          return ScaffoldWithBottomNavigationBar(child: child);
+        },
         routes: [
-          GoRoute(
-            name: LRoute.profile.name,
-            path: 'profile',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ProfileDetailsScreen(
-                current: LRoute.profile,
-                child: ProfileView(),
-              ),
-            ),
-          ),
-          GoRoute(
-            name: LRoute.photo.name,
-            path: 'photo',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ProfileDetailsScreen(
-                current: LRoute.photo,
-                child: PhotoView(),
-              ),
-            ),
-          ),
-          GoRoute(
-            name: LRoute.accountSecurity.name,
-            path: 'security',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ProfileDetailsScreen(
-                current: LRoute.accountSecurity,
-                child: AccountSecurityView(),
-              ),
-            ),
-          ),
-          GoRoute(
-            name: LRoute.closeAccount.name,
-            path: 'close',
-            pageBuilder: (context, state) => const NoTransitionPage(
-              child: ProfileDetailsScreen(
-                current: LRoute.closeAccount,
-                child: CloseAccountView(),
-              ),
-            ),
+          _bottomNavigationItemBuilder(
+            HomeNavigationItems.items[0],
+            ref,
             routes: [
               GoRoute(
-                name: LRoute.closeAccountConfirmation.name,
-                path: 'confirm',
-                builder: (context, state) =>
-                    const CloseAccountConfirmationScreen(),
-              )
+                parentNavigatorKey: LCoordinator.navigatorKey,
+                name: LRoutes.course.name,
+                path: 'course/:courseId',
+                builder: (context, state) => CourseScreen(
+                  courseId: state.params['courseId']!,
+                ),
+              ),
+            ],
+          ),
+          _bottomNavigationItemBuilder(HomeNavigationItems.items[1], ref),
+          _bottomNavigationItemBuilder(HomeNavigationItems.items[2], ref),
+          _bottomNavigationItemBuilder(HomeNavigationItems.items[3], ref),
+          _bottomNavigationItemBuilder(
+            HomeNavigationItems.items[4],
+            ref,
+            routes: [
+              GoRoute(
+                name: LRoutes.profile.name,
+                path: 'profile',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: ProfileDetailsScreen(
+                    current: LRoutes.profile,
+                    child: ProfileView(),
+                  ),
+                ),
+              ),
+              GoRoute(
+                name: LRoutes.photo.name,
+                path: 'photo',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: ProfileDetailsScreen(
+                    current: LRoutes.photo,
+                    child: PhotoView(),
+                  ),
+                ),
+              ),
+              GoRoute(
+                name: LRoutes.accountSecurity.name,
+                path: 'security',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: ProfileDetailsScreen(
+                    current: LRoutes.accountSecurity,
+                    child: AccountSecurityView(),
+                  ),
+                ),
+              ),
+              GoRoute(
+                name: LRoutes.closeAccount.name,
+                path: 'close',
+                pageBuilder: (context, state) => const NoTransitionPage(
+                  child: ProfileDetailsScreen(
+                    current: LRoutes.closeAccount,
+                    child: CloseAccountView(),
+                  ),
+                ),
+                routes: [
+                  GoRoute(
+                    name: LRoutes.closeAccountConfirmation.name,
+                    path: 'confirm',
+                    builder: (context, state) =>
+                        const CloseAccountConfirmationScreen(),
+                  )
+                ],
+              ),
             ],
           ),
         ],
       ),
       GoRoute(
-        name: LRoute.unimplemented.name,
+        name: LRoutes.forgotPassword.name,
+        path: '/forgotPassword',
+        builder: (context, state) =>
+            ForgotPasswordScreen(email: state.extra as String?),
+      ),
+      GoRoute(
+        name: LRoutes.unimplemented.name,
         path: '/unimplemented',
         builder: (context, state) => const Unimplemented(),
       ),
     ],
   );
 });
+
+GoRoute _bottomNavigationItemBuilder(HomeNavigationItem item, Ref ref,
+        {List<RouteBase> routes = const <RouteBase>[]}) =>
+    GoRoute(
+      path: item.path,
+      name: item.route.name,
+      pageBuilder: (_, __) {
+        return NoTransitionPage(
+          child: item.view,
+        );
+      },
+      routes: routes,
+    );

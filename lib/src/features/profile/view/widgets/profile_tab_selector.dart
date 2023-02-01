@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constants/app_constants/profile_settings.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
-import '../../../../constants/settings/profile_settings.dart';
 import '../../../../router/app_router.dart';
 import '../../../../router/coordinator.dart';
 import '../profile_details_controller.dart';
@@ -13,7 +13,7 @@ class ProfileTabSelector extends ConsumerWidget {
     required this.current,
   });
 
-  final LRoute current;
+  final LRoutes current;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

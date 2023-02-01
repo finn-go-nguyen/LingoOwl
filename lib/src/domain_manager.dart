@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'features/authentication/data/authentication_repository.dart';
+import 'features/course/data/course_repository.dart';
 import 'features/profile/data/user_repository.dart';
 
 class DomainManager {
@@ -24,5 +25,9 @@ class DomainManager {
 
   late final userRepositoryProvider = Provider<UserRepository>((ref) {
     return FirestoreUserRepository(FirebaseFirestore.instance);
+  });
+
+  final courseRepositoryProvider = Provider<CourseRepository>((ref) {
+    return MockCourseRepository();
   });
 }

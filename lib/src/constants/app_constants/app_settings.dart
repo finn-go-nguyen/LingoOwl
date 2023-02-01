@@ -7,11 +7,11 @@ class AppSettings {
     <LSetting>[
       LSetting(
         'Download options',
-        route: LRoute.unimplemented,
+        route: LRoutes.unimplemented,
       ),
       LSetting(
         'Video playback options',
-        route: LRoute.unimplemented,
+        route: LRoutes.unimplemented,
       ),
     ],
   );
@@ -21,11 +21,11 @@ class AppSettings {
     <LSetting>[
       LSetting(
         'Account security',
-        route: LRoute.accountSecurity,
+        route: LRoutes.accountSecurity,
       ),
       LSetting(
         'Learning reminders',
-        route: LRoute.unimplemented,
+        route: LRoutes.unimplemented,
       ),
     ],
   );

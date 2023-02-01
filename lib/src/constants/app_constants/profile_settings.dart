@@ -5,39 +5,39 @@ class ProfileSettings {
   static const list = <LSetting>[
     LSetting(
       'View public profile',
-      route: LRoute.unimplemented,
+      route: LRoutes.unimplemented,
     ),
     LSetting(
       'Profile',
-      route: LRoute.profile,
+      route: LRoutes.profile,
     ),
     LSetting(
       'Photo',
-      route: LRoute.photo,
+      route: LRoutes.photo,
     ),
     LSetting(
       'Account security',
-      route: LRoute.accountSecurity,
+      route: LRoutes.accountSecurity,
     ),
     LSetting(
       'Subscriptions',
-      route: LRoute.unimplemented,
+      route: LRoutes.unimplemented,
     ),
     LSetting(
       'Payment methods',
-      route: LRoute.unimplemented,
+      route: LRoutes.unimplemented,
     ),
     LSetting(
       'Privacy',
-      route: LRoute.unimplemented,
+      route: LRoutes.unimplemented,
     ),
     LSetting(
       'Notifications',
-      route: LRoute.unimplemented,
+      route: LRoutes.unimplemented,
     ),
     LSetting(
       'Close account',
-      route: LRoute.closeAccount,
+      route: LRoutes.closeAccount,
     ),
   ];
 }

@@ -4,7 +4,7 @@ import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../utils/text_helpers.dart';
 import '../../../../widgets/common/network_image.dart';
-import '../../../../widgets/state/loading.dart';
+import '../../../../widgets/state/loading/loading.dart';
 import '../../model/app_user.dart';
 
 class ProfileAvatarNameEmail extends StatelessWidget {
@@ -38,7 +38,7 @@ class ProfileAvatarNameEmail extends StatelessWidget {
                 textAlign: TextAlign.center,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headline4,
+                style: Theme.of(context).textTheme.headlineMedium,
               ),
               Gaps.h12,
               Row(
@@ -51,7 +51,7 @@ class ProfileAvatarNameEmail extends StatelessWidget {
                   Gaps.w8,
                   Text(
                     user!.email,
-                    style: Theme.of(context).textTheme.bodyText2,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),

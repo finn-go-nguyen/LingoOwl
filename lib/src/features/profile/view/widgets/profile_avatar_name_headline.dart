@@ -4,7 +4,7 @@ import '../../../../constants/app_parameters/app_sizes.dart';
 import '../../../../constants/app_parameters/ui_parameters.dart';
 import '../../../../utils/text_helpers.dart';
 import '../../../../widgets/common/network_image.dart';
-import '../../../../widgets/state/loading.dart';
+import '../../../../widgets/state/loading/loading.dart';
 import '../../model/app_user.dart';
 
 class ProfileAvatarNameHeadline extends StatelessWidget {

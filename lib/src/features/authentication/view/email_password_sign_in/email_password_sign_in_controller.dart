@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../../domain_manager.dart';
 
+import '../../../../domain_manager.dart';
 import '../../data/authentication_repository.dart';
 import 'email_password_sign_in_state.dart';
 

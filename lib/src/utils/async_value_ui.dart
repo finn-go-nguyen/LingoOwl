@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../router/coordinator.dart';
 
+import '../router/coordinator.dart';
 import '../widgets/common/snack_bars.dart';
 
 extension AsyncValueUi on AsyncValue {
