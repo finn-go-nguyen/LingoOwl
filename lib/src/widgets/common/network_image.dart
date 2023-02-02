@@ -9,13 +9,13 @@ class LNetworkImage extends StatelessWidget {
     this.url, {
     super.key,
     this.fit = BoxFit.contain,
-    this.radius = 0.0,
+    this.borderRadius = const BorderRadius.all(Radius.circular(6.0)),
     this.dimension,
   });
 
   final String url;
   final BoxFit fit;
-  final double radius;
+  final BorderRadius borderRadius;
   final double? dimension;
 
   @override
@@ -23,7 +23,7 @@ class LNetworkImage extends StatelessWidget {
     return SizedBox.square(
       dimension: dimension,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(radius),
+        borderRadius: borderRadius,
         child: CachedNetworkImage(
           imageUrl: url,
           fit: fit,

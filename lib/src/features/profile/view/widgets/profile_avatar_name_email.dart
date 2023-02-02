@@ -26,7 +26,7 @@ class ProfileAvatarNameEmail extends StatelessWidget {
               LNetworkImage(
                 user!.photoUrl ?? '',
                 fit: BoxFit.cover,
-                radius: UiParameters.circleBorderRadius,
+                borderRadius: UiParameters.circleBorderRadius,
                 dimension: UiParameters.avatar,
               ),
               Gaps.h20,

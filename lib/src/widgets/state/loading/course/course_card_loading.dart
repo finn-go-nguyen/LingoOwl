@@ -22,8 +22,7 @@ class CourseCardPortraitLoading extends StatelessWidget {
             AspectRatio(
               aspectRatio: 16 / 9,
               child: ClipRRect(
-                borderRadius:
-                    BorderRadius.circular(UiParameters.courseCardBorderRadius),
+                borderRadius: UiParameters.courseCardBorderRadius,
                 child: ColoredSizedBox(
                   width: UiParameters.courseCardPortraitSize.width,
                 ),
@@ -69,36 +68,39 @@ class CourseCardLandscapeLoading extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       child: Column(
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const ColoredSizedBox(
-                height: UiParameters.courseCardThumbnailDimension,
-                width: UiParameters.courseCardThumbnailDimension,
-                borderRadius: UiParameters.courseCardBorderRadius,
-              ),
-              Gaps.w12,
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    ColoredSizedBox(
-                      height: 20.0,
-                      width: double.infinity,
-                    ),
-                    Gaps.h4,
-                    ColoredSizedBox(
-                      height: 20.0,
-                      width: 250,
-                    ),
-                    Gaps.h8,
-                    RatingBarLoading(),
-                    Gaps.h8,
-                    PriceLabelLoading(),
-                  ],
+          Padding(
+            padding: UiParameters.courseCardPadding,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const ColoredSizedBox(
+                  height: UiParameters.courseCardThumbnailDimension,
+                  width: UiParameters.courseCardThumbnailDimension,
+                  borderRadius: UiParameters.courseCardBorderRadius,
                 ),
-              ),
-            ],
+                Gaps.w12,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      ColoredSizedBox(
+                        height: 20.0,
+                        width: double.infinity,
+                      ),
+                      Gaps.h4,
+                      ColoredSizedBox(
+                        height: 20.0,
+                        width: 250,
+                      ),
+                      Gaps.h8,
+                      RatingBarLoading(),
+                      Gaps.h8,
+                      PriceLabelLoading(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           const Divider(),
         ],

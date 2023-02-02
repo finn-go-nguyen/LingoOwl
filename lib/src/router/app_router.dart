@@ -8,6 +8,7 @@ import '../features/authentication/view/create_account/account_create_screen.dar
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
 import '../features/authentication/view/forgot_password/forgot_password_screen.dart';
 import '../features/authentication/view/sign_in/sign_in_screen.dart';
+import '../features/cart/view/cart_screen/cart_screen.dart';
 import '../features/course/view/course_screen.dart';
 import '../features/home/model/home_navigation_item.dart';
 import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
@@ -39,7 +40,8 @@ enum LRoutes {
   search,
   myLearning,
   wishlist,
-  course;
+  course,
+  cart;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -183,6 +185,12 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: LRoutes.unimplemented.name,
         path: '/unimplemented',
         builder: (context, state) => const Unimplemented(),
+      ),
+      GoRoute(
+        parentNavigatorKey: LCoordinator.navigatorKey,
+        name: LRoutes.cart.name,
+        path: '/cart',
+        builder: (_, __) => const CartScreen(),
       ),
     ],
   );

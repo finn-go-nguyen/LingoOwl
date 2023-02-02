@@ -27,7 +27,7 @@ class ProfileAvatarNameHeadline extends StatelessWidget {
                 user!.photoUrl ?? '',
                 fit: BoxFit.cover,
                 dimension: UiParameters.avatar,
-                radius: UiParameters.circleBorderRadius,
+                borderRadius: UiParameters.circleBorderRadius,
               ),
               Gaps.h12,
               Text(
@@ -38,14 +38,14 @@ class ProfileAvatarNameHeadline extends StatelessWidget {
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               Gaps.h12,
               user!.headline == null
                   ? const SizedBox.shrink()
                   : Text(
                       user!.headline!,
-                      style: Theme.of(context).textTheme.caption,
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
             ],
           );

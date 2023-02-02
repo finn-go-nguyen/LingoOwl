@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'src/app.dart';
+import 'src/domain_manager.dart';
+import 'src/features/cart/application/cart_sync_service.dart';
+import 'src/features/cart/data/local/local__cart_repository.dart';
 import 'src/locator.dart';
 
 Future<void> main() async {
@@ -24,10 +27,25 @@ Future<void> main() async {
     return true;
   };
 
+  // * Local cart repository
+  final localCartRepository = await SembastCartRepository.makeDefault();
+  // * Create ProviderContainer with any required overrides
+  final container = ProviderContainer(overrides: [
+    DomainManager.instance.localCartRepositoryProvider.overrideWith(
+      (ref) {
+        ref.onDispose(localCartRepository.dispose);
+        return localCartRepository;
+      },
+    ),
+  ]);
+  // * Initialize CartSyncService to start the listener
+  container.read(cartSyncServiceProvider);
+
   // * Entry point of the app
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    UncontrolledProviderScope(
+      container: container,
+      child: const MyApp(),
     ),
   );
 }

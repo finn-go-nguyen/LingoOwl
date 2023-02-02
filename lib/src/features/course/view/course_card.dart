@@ -19,7 +19,7 @@ class CourseCardPortrait extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       clipBehavior: Clip.hardEdge,
       child: InkWell(
-        onTap: () => LCoordinator.showCourseDetails(course.id),
+        onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
         child: Padding(
           padding: UiParameters.courseCardPadding,
           child: SizedBox(
@@ -32,7 +32,7 @@ class CourseCardPortrait extends StatelessWidget {
                   aspectRatio: 16 / 9,
                   child: LNetworkImage(
                     course.thumbnail,
-                    radius: UiParameters.courseCardBorderRadius,
+                    borderRadius: UiParameters.courseCardBorderRadius,
                   ),
                 ),
                 Gaps.h8,
@@ -83,19 +83,17 @@ class CourseCardLandscape extends StatelessWidget {
       child: Column(
         children: [
           InkWell(
-            onTap: () => LCoordinator.showCourseDetails(course.id),
+            onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
             child: Padding(
               padding: UiParameters.courseCardPadding,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox.square(
+                  LNetworkImage(
+                    course.thumbnail,
                     dimension: UiParameters.courseCardThumbnailDimension,
-                    child: LNetworkImage(
-                      course.thumbnail,
-                      fit: BoxFit.cover,
-                      radius: UiParameters.courseCardBorderRadius,
-                    ),
+                    fit: BoxFit.cover,
+                    borderRadius: UiParameters.courseCardBorderRadius,
                   ),
                   Gaps.w12,
                   Expanded(

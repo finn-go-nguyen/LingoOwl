@@ -21,6 +21,7 @@ final courseProvider = FutureProvider.family<LCourse, String>((ref, id) {
 abstract class CourseRepository {
   Future<List<LCourse>> fetch({int limit = 10, LCourse? course});
   Future<LCourse> fetchById(String id);
+  Future<List<LCourse>> fetchByIds(Iterable<String> ids);
 }
 
 class MockCourseRepository implements CourseRepository {
@@ -34,5 +35,11 @@ class MockCourseRepository implements CourseRepository {
   Future<LCourse> fetchById(String id) async {
     await Future.delayed(const Duration(seconds: 1));
     return courses.firstWhere((element) => element.id == id);
+  }
+
+  @override
+  Future<List<LCourse>> fetchByIds(Iterable<String> ids) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return courses.where((element) => ids.contains(element.id)).toList();
   }
 }
