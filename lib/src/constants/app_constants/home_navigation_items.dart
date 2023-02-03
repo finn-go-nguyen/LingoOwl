@@ -56,7 +56,7 @@ class HomeNavigationItems {
     selectedIcon: FontAwesomeIcons.solidCircleUser,
     tooltip: 'Account',
     label: 'Account',
-    view: SettingsView(),
+    view: SettingsScreen(),
   );
 
   static const items = <HomeNavigationItem>[

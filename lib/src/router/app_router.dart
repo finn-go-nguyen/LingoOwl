@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -20,6 +21,7 @@ import '../features/profile/view/profile/profile_view.dart';
 import '../features/profile/view/profile_details_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
+import '../widgets/common/common.dart';
 import '../widgets/state/unimplemented.dart';
 import 'coordinator.dart';
 
@@ -66,7 +68,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           return homePath;
         }
       } else {
-        if (state.location.contains(RegExp(r'profile|photo|security|close'))) {
+        if (state.location.contains('settings')) {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              LSnackBar.warning(
+                title: 'Authentication is required',
+                content: 'Your need to sign in to your account!',
+              ),
+            );
           return '/welcome';
         }
       }
@@ -124,6 +134,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ref,
             routes: [
               GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
                 name: LRoutes.profile.name,
                 path: 'profile',
                 pageBuilder: (context, state) => const NoTransitionPage(
@@ -134,6 +145,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 ),
               ),
               GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
                 name: LRoutes.photo.name,
                 path: 'photo',
                 pageBuilder: (context, state) => const NoTransitionPage(
@@ -144,6 +156,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 ),
               ),
               GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
                 name: LRoutes.accountSecurity.name,
                 path: 'security',
                 pageBuilder: (context, state) => const NoTransitionPage(
@@ -154,6 +167,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 ),
               ),
               GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
                 name: LRoutes.closeAccount.name,
                 path: 'close',
                 pageBuilder: (context, state) => const NoTransitionPage(
@@ -164,6 +178,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 ),
                 routes: [
                   GoRoute(
+                    parentNavigatorKey: LCoordinator.navigatorKey,
                     name: LRoutes.closeAccountConfirmation.name,
                     path: 'confirm',
                     builder: (context, state) =>
