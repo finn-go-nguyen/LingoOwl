@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import 'features/authentication/data/authentication_repository.dart';
+import 'features/cart/data/local/local__cart_repository.dart';
+import 'features/cart/data/remote/remote_cart_repository.dart';
 import 'features/course/data/course_repository.dart';
 import 'features/profile/data/user_repository.dart';
 
@@ -29,5 +31,14 @@ class DomainManager {
 
   final courseRepositoryProvider = Provider<CourseRepository>((ref) {
     return MockCourseRepository();
+  });
+
+  final localCartRepositoryProvider = Provider<LocalCartRepository>((ref) {
+    // * Override this in the main method
+    throw UnimplementedError();
+  });
+
+  final remoteCartRepositoryProvider = Provider<RemoteCartRepository>((ref) {
+    return FirestoreCartRepository(FirebaseFirestore.instance);
   });
 }

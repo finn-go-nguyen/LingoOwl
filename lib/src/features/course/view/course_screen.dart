@@ -5,6 +5,8 @@ import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
+import '../../cart/view/add_to_cart/add_to_cart_button.dart';
+import '../../cart/view/cart_icon/cart_icon.dart';
 import '../data/course_repository.dart';
 import 'course_information_section.dart';
 import 'course_what_you_will_learn_section.dart';
@@ -29,13 +31,7 @@ class CourseScreen extends ConsumerWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.share),
               ),
-              IconButton(
-                onPressed: () {},
-                icon: Badge.count(
-                  count: 10,
-                  child: const Icon(Icons.shopping_bag_outlined),
-                ),
-              )
+              const CartIcon()
             ],
           ),
           SliverList(
@@ -83,9 +79,8 @@ class CourseScreen extends ConsumerWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: const Text('Add to cart'),
+                              child: AddToCartButton(
+                                courseId: courseId,
                               ),
                             ),
                             Gaps.w8,

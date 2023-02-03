@@ -5,7 +5,7 @@ class UiParameters {
   static const screenPadding = EdgeInsets.symmetric(horizontal: 16.0);
   static const rowContentPadding = EdgeInsets.all(16.0);
 
-  static const circleBorderRadius = 1000.0;
+  static const circleBorderRadius = BorderRadius.all(Radius.circular(1000.0));
 
   static const avatar = 150.0;
 
@@ -26,11 +26,17 @@ class UiParameters {
   static const courseCardPadding = EdgeInsets.all(8.0);
   static const courseCardPortraitSize = Size(200.0, 300.0);
   static const courseCardThumbnailDimension = 60.0;
-  static const courseCardBorderRadius = 6.0;
+  static const courseCardBorderRadius = BorderRadius.all(Radius.circular(6.0));
 
   // Rating bar
   static const starSize = 20.0;
 
   // Course screen
   static const thumbnailBorderRadius = BorderRadius.all(Radius.circular(6.0));
+
+  // Cart screen
+  static const cartItemCardContentPadding = EdgeInsets.symmetric(
+    horizontal: 16.0,
+    vertical: 8.0,
+  );
 }

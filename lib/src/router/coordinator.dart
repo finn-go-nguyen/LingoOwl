@@ -99,10 +99,14 @@ class LCoordinator {
     goNamed(LRoutes.home.name);
   }
 
-  static void showCourseDetails(String courseId) {
+  static void showCourseDetailsScreen(String courseId) {
     pushNamed(
       LRoutes.course.name,
       params: {'courseId': courseId},
     );
+  }
+
+  static void showCartScreen() {
+    pushNamed(LRoutes.cart.name);
   }
 }

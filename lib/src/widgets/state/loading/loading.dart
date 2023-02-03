@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 
 class LoadingState extends StatelessWidget {
-  const LoadingState({super.key});
+  const LoadingState({
+    super.key,
+    this.dimension = 100.0,
+  });
+
+  final double dimension;
 
   @override
   Widget build(BuildContext context) {
-    return const SizedBox.square(
-      dimension: 100,
-      child: Center(
+    return SizedBox.square(
+      dimension: dimension,
+      child: const Center(
         child: CircularProgressIndicator(),
       ),
     );

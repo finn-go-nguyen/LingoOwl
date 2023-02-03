@@ -6,18 +6,18 @@ class ColoredSizedBox extends StatelessWidget {
     this.height,
     this.width,
     this.color = Colors.white,
-    this.borderRadius = 6.0,
+    this.borderRadius = const BorderRadius.all(Radius.circular(6.0)),
   });
 
   final double? height;
   final double? width;
   final Color color;
-  final double borderRadius;
+  final BorderRadius borderRadius;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: borderRadius,
       child: ColoredBox(
         color: color,
         child: SizedBox(
