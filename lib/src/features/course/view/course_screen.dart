@@ -5,8 +5,10 @@ import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
+import '../../authentication/data/authentication_repository.dart';
 import '../../cart/view/add_to_cart/add_to_cart_button.dart';
 import '../../cart/view/cart_icon/cart_icon.dart';
+import '../../wishlist/view/add_to_wishlist/add_to_wishlist_button.dart';
 import '../data/course_repository.dart';
 import 'course_information_section.dart';
 import 'course_what_you_will_learn_section.dart';
@@ -76,21 +78,31 @@ class CourseScreen extends ConsumerWidget {
                             child: const Text('Buy now'),
                           ),
                         ),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: AddToCartButton(
-                                courseId: courseId,
-                              ),
-                            ),
-                            Gaps.w8,
-                            Expanded(
-                              child: OutlinedButton(
-                                onPressed: () {},
-                                child: const Text('Add to wishlist'),
-                              ),
-                            )
-                          ],
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final isSignedIn = ref.watch(isSignedInProvider);
+                            return Row(
+                              children: [
+                                Expanded(
+                                  child: AddToCartButton(
+                                    courseId: courseId,
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: isSignedIn,
+                                  child: Gaps.w8,
+                                ),
+                                Visibility(
+                                  visible: isSignedIn,
+                                  child: Expanded(
+                                    child: AddToWishlistButton(
+                                      id: courseId,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            );
+                          },
                         ),
                         Gaps.h12,
                         WhatYouWillLearn(

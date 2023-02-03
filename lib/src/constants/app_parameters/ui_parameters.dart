@@ -21,6 +21,8 @@ class UiParameters {
   );
 
   static const imagePadding = EdgeInsets.all(4.0);
+  static const appBarSize = Size.fromHeight(60.0);
+  static const lottiesDimension = 300.0;
 
   // Course card
   static const courseCardPadding = EdgeInsets.all(8.0);

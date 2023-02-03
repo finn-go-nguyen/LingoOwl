@@ -9,6 +9,7 @@ import 'features/cart/data/local/local__cart_repository.dart';
 import 'features/cart/data/remote/remote_cart_repository.dart';
 import 'features/course/data/course_repository.dart';
 import 'features/profile/data/user_repository.dart';
+import 'features/wishlist/data/wishlist_repository.dart';
 
 class DomainManager {
   static DomainManager? _instance;
@@ -40,5 +41,9 @@ class DomainManager {
 
   final remoteCartRepositoryProvider = Provider<RemoteCartRepository>((ref) {
     return FirestoreCartRepository(FirebaseFirestore.instance);
+  });
+
+  final wishlistRepositoryProvider = Provider<WishlistRepository>((ref) {
+    return FirestoreWishlistRepository(FirebaseFirestore.instance);
   });
 }

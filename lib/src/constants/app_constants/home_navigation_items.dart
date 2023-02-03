@@ -4,6 +4,7 @@ import '../../features/home/model/home_navigation_item.dart';
 import '../../features/home/view/featured_view.dart';
 import '../../features/search/view/search_view.dart';
 import '../../features/settings/view/settings/settings_screen.dart';
+import '../../features/wishlist/view/wishlist_screen/wishlist_screen.dart';
 import '../../router/app_router.dart';
 import '../../widgets/state/unimplemented.dart';
 
@@ -45,7 +46,7 @@ class HomeNavigationItems {
     selectedIcon: FontAwesomeIcons.solidHeart,
     tooltip: 'Wishlist',
     label: 'Wishlist',
-    view: Unimplemented(),
+    view: WishlistScreen(),
   );
 
   static const settings = HomeNavigationItem(

@@ -28,3 +28,9 @@ Future<bool?> showAlertDialog({
     ),
   );
 }
+
+Future<void> showNotImplementedAlertDialog({required BuildContext context}) =>
+    showAlertDialog(
+      context: context,
+      title: 'Not implemented',
+    );
