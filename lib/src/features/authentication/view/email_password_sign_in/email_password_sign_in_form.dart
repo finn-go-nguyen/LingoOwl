@@ -67,7 +67,7 @@ class _EmailFormState extends ConsumerState<EmailForm> {
             },
             child: Text(
               'Next',
-              style: Theme.of(context).textTheme.button!,
+              style: Theme.of(context).textTheme.labelLarge!,
             ),
           ),
         )
@@ -108,7 +108,7 @@ class _PasswordFormState extends ConsumerState<PasswordForm> {
               controller: _passwordTextController,
               decoration: InputDecoration(
                 labelText: 'Password',
-                suffix: PasswordVisibilityToggleButton(
+                suffixIcon: PasswordVisibilityToggleButton(
                   onPressed: ref
                       .read(emailPasswordSignInControllerProvider.notifier)
                       .toggleObscureText,
@@ -153,7 +153,7 @@ class _PasswordFormState extends ConsumerState<PasswordForm> {
                         ? const CircularProgressIndicator()
                         : Text(
                             'Sign In',
-                            style: Theme.of(context).textTheme.button!,
+                            style: Theme.of(context).textTheme.labelLarge!,
                           ),
                   );
                 },

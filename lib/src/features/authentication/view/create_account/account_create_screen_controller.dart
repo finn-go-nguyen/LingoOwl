@@ -1,16 +1,18 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../profile/application/user_service.dart';
+import 'account_create_form_state.dart';
 
 final accountCreateScreenControllerProvider = StateNotifierProvider.autoDispose<
-    AccountCreateScreenController, AsyncValue<void>>((ref) {
+    AccountCreateScreenController, AccountCreateFormState>((ref) {
   final userService = ref.watch(userServiceProvider);
   return AccountCreateScreenController(userService);
 });
 
-class AccountCreateScreenController extends StateNotifier<AsyncValue<void>> {
+class AccountCreateScreenController
+    extends StateNotifier<AccountCreateFormState> {
   AccountCreateScreenController(this._userService)
-      : super(const AsyncData(null));
+      : super(const AccountCreateFormState());
 
   final UserService _userService;
 
@@ -19,12 +21,19 @@ class AccountCreateScreenController extends StateNotifier<AsyncValue<void>> {
     required String email,
     required String password,
   }) async {
-    state = const AsyncLoading();
-    state = await AsyncValue.guard(
+    state = state.copyWith(status: const AsyncLoading());
+    state = state.copyWith(
+      status: await AsyncValue.guard(
         () => _userService.createUserWithEmailAndPassword(
-              name: name,
-              email: email,
-              password: password,
-            ));
+          name: name,
+          email: email,
+          password: password,
+        ),
+      ),
+    );
+  }
+
+  void toggleObscureText() {
+    state = state.copyWith(obscureText: !state.obscureText);
   }
 }

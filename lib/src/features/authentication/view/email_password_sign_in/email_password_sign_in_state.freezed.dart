@@ -119,7 +119,7 @@ class __$$_EmailPasswordSignInStateCopyWithImpl<$Res>
 class _$_EmailPasswordSignInState implements _EmailPasswordSignInState {
   const _$_EmailPasswordSignInState(
       {this.email = '',
-      this.obscureText = false,
+      this.obscureText = true,
       this.status = const AsyncData(null)});
 
   @override
