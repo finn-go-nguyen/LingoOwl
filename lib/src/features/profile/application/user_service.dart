@@ -36,7 +36,7 @@ class UserService {
 
       final update = authUser.copyWith(displayName: name);
 
-      return _userRepository.set(LAppUser.fromAuthUser(update));
+      return _userRepository.setUser(LAppUser.fromAuthUser(update));
     } catch (e) {
       rethrow;
     }
@@ -57,9 +57,9 @@ class UserService {
       final authUser = await signIn();
 
       // * No need to add to firestore if already has document
-      if (await _userRepository.hasDocument(authUser.id)) return;
+      if (await _userRepository.isExist(authUser.id)) return;
 
-      return _userRepository.set(LAppUser.fromAuthUser(authUser));
+      return _userRepository.setUser(LAppUser.fromAuthUser(authUser));
     } catch (e) {
       rethrow;
     }

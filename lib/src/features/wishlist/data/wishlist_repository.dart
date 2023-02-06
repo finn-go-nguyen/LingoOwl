@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/firestore/collection_name.dart';
 import '../../../domain_manager.dart';
+import '../../../utils/base_collection_reference.dart';
 import '../../authentication/data/authentication_repository.dart';
 import '../model/wishlist.dart';
 
@@ -30,41 +31,30 @@ abstract class WishlistRepository {
   Future<void> setWishlist(String uid, LWishList cart);
 }
 
-class FirestoreWishlistRepository implements WishlistRepository {
-  FirestoreWishlistRepository(this._firestore);
-
-  final FirebaseFirestore _firestore;
+class FirestoreWishlistRepository extends BaseCollectionReference<LWishList>
+    implements WishlistRepository {
+  FirestoreWishlistRepository(FirebaseFirestore firestore)
+      : super(
+          firestore.collection(CollectionName.wishlist).withConverter(
+                fromFirestore: (snapshot, options) =>
+                    LWishList.fromJson(snapshot.data()!),
+                toFirestore: (value, options) => value.toJson(),
+              ),
+        );
 
   @override
   Future<LWishList> fetchWishlist(String uid) async {
-    final docSnapshot =
-        await _firestore.collection(CollectionName.wishlist).doc(uid).get();
-    if (docSnapshot.exists) {
-      return LWishList.fromJson(docSnapshot.data()!);
-    }
-    return const LWishList();
+    final result = await get(uid);
+    return result ?? const LWishList();
   }
 
   @override
   Future<void> setWishlist(String uid, LWishList cart) {
-    return _firestore
-        .collection(CollectionName.wishlist)
-        .doc(uid)
-        .set(cart.toJson());
+    return set(uid, cart);
   }
 
   @override
-  Stream<LWishList> watchWishlist(String uid) async* {
-    final docRef = _firestore
-        .collection(CollectionName.wishlist)
-        .withConverter<LWishList>(
-          fromFirestore: (snapshot, options) =>
-              LWishList.fromJson(snapshot.data()!),
-          toFirestore: (value, options) => value.toJson(),
-        )
-        .doc(uid);
-    await for (var doc in docRef.snapshots()) {
-      yield doc.data() ?? const LWishList();
-    }
+  Stream<LWishList> watchWishlist(String uid) {
+    return snapshots(uid);
   }
 }

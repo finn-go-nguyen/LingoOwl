@@ -19,6 +19,6 @@ class PhotoController extends StateNotifier<AsyncValue<void>> {
     final userRepository =
         _ref.read(DomainManager.instance.userRepositoryProvider);
     state = await AsyncValue.guard(
-        () => userRepository.updateAvatarUrl(uid, photoUrl));
+        () => userRepository.updateUserAvatarUrl(uid, photoUrl));
   }
 }
