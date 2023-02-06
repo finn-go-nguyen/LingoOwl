@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../../utils/base_collection_reference.dart';
 
 import '../../../../constants/firestore/collection_name.dart';
 import '../../model/cart.dart';
@@ -9,41 +10,30 @@ abstract class RemoteCartRepository {
   Future<void> setCart(String uid, LCart cart);
 }
 
-class FirestoreCartRepository implements RemoteCartRepository {
-  FirestoreCartRepository(this._firestore);
-
-  final FirebaseFirestore _firestore;
+class FirestoreCartRepository extends BaseCollectionReference<LCart>
+    implements RemoteCartRepository {
+  FirestoreCartRepository(FirebaseFirestore firestore)
+      : super(
+          firestore.collection(CollectionName.cart).withConverter(
+                fromFirestore: (snapshot, options) =>
+                    LCart.fromJson(snapshot.data()!),
+                toFirestore: (value, options) => value.toJson(),
+              ),
+        );
 
   @override
   Future<LCart> fetchCart(String uid) async {
-    final docSnapshot =
-        await _firestore.collection(CollectionName.cart).doc(uid).get();
-    if (docSnapshot.exists) {
-      return LCart.fromJson(docSnapshot.data()!);
-    }
-    return const LCart();
+    final cart = await get(uid);
+    return cart ?? const LCart();
   }
 
   @override
   Future<void> setCart(String uid, LCart cart) {
-    return _firestore
-        .collection(CollectionName.cart)
-        .doc(uid)
-        .set(cart.toJson());
+    return set(uid, cart);
   }
 
   @override
-  Stream<LCart> watchCart(String uid) async* {
-    final docRef = _firestore
-        .collection(CollectionName.cart)
-        .withConverter<LCart>(
-          fromFirestore: (snapshot, options) =>
-              LCart.fromJson(snapshot.data()!),
-          toFirestore: (value, options) => value.toJson(),
-        )
-        .doc(uid);
-    await for (var doc in docRef.snapshots()) {
-      yield doc.data() ?? const LCart();
-    }
+  Stream<LCart> watchCart(String uid) {
+    return snapshots(uid);
   }
 }
