@@ -71,7 +71,7 @@ class _ListTile extends StatelessWidget {
               name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.button?.copyWith(
+              style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: selected ? Colors.white : null,
                   ),
             ),

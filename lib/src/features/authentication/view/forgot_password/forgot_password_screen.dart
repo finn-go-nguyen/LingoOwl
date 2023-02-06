@@ -81,7 +81,7 @@ class ForgotPasswordView extends StatelessWidget {
             Text(
               'Reset password',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3!.copyWith(
+              style: Theme.of(context).textTheme.displaySmall!.copyWith(
                     fontFamily: GoogleFonts.ebGaramond().fontFamily,
                   ),
             ),
@@ -129,7 +129,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                 Text(
                   'We have sent a password recover instructions to your email.',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText1,
+                  style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Gaps.h32,
                 ElevatedButton(
@@ -139,7 +139,7 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                   },
                   child: Text(
                     'Open email app',
-                    style: Theme.of(context).textTheme.button,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 ),
                 Gaps.h20,

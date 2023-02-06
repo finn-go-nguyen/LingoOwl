@@ -2,97 +2,83 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LStyles {
-  static const headline1 = TextStyle(
+  static const displayLarge = TextStyle(
     fontWeight: FontWeight.w300,
     fontSize: 96,
     letterSpacing: -1.5,
   );
 
-  static const headline2 = TextStyle(
+  static const displayMedium = TextStyle(
     fontWeight: FontWeight.w300,
     fontSize: 60,
     letterSpacing: -0.5,
   );
 
-  static const headline3 = TextStyle(
+  static const displaySmall = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 48,
     letterSpacing: 0,
   );
 
-  static const headline4 = TextStyle(
+  static const headlineMedium = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 34,
     letterSpacing: 0.25,
   );
 
-  static const headline5 = TextStyle(
+  static const headlineSmall = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 24,
     letterSpacing: 0,
   );
 
-  static const headline6 = TextStyle(
+  static const titleLarge = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 20,
     letterSpacing: 0.15,
   );
 
-  static const subtitle1 = TextStyle(
+  static const titleMedium = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 16,
     letterSpacing: 0.15,
   );
 
-  static const subtitle2 = TextStyle(
+  static const titleSmall = TextStyle(
     fontWeight: FontWeight.w600,
     fontSize: 14,
     letterSpacing: 0.1,
   );
 
-  static const body1 = TextStyle(
+  static const bodyLarge = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 16,
     letterSpacing: 0.5,
   );
 
-  static const body2 = TextStyle(
+  static const bodyMedium = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 14,
     letterSpacing: 0.25,
   );
 
-  static const button = TextStyle(
+  static const labelLarge = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 14,
     letterSpacing: 1.25,
   );
 
-  static const caption = TextStyle(
+  static const bodySmall = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 12,
     letterSpacing: 0.4,
   );
 
-  static const overline = TextStyle(
+  static const labelSmall = TextStyle(
     fontWeight: FontWeight.w400,
     fontSize: 10,
     letterSpacing: 1.5,
   );
 
-  static final lightTextTheme = GoogleFonts.poppinsTextTheme(TextTheme(
-    headline1: headline1,
-    headline2: headline2,
-    headline3: headline3.copyWith(color: Colors.black),
-    headline4: headline4.copyWith(color: Colors.black),
-    headline5: headline5,
-    headline6: headline6,
-    subtitle1: subtitle1,
-    subtitle2: subtitle2,
-    bodyText1: body1,
-    bodyText2: body2,
-    button: button,
-    caption: caption,
-    overline: overline,
-  ));
+  static final lightTextTheme = GoogleFonts.poppinsTextTheme();
 }

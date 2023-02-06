@@ -29,7 +29,7 @@ class ImageSelector extends ConsumerWidget {
         Gaps.h16,
         Text(
           'Add / Change Image',
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         Gaps.h16,
         Row(
@@ -99,7 +99,7 @@ class ImagePreviewer extends StatelessWidget {
       children: [
         Text(
           'Image preview',
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Theme.of(context).textTheme.titleSmall,
         ),
         Gaps.h16,
         Container(
@@ -168,7 +168,7 @@ class ProgressBar extends StatelessWidget {
                 Center(
                   child: Text(
                     TextHelpers.toProgress(progress),
-                    style: Theme.of(context).textTheme.subtitle2,
+                    style: Theme.of(context).textTheme.titleSmall,
                   ),
                 )
               ],
@@ -179,7 +179,7 @@ class ProgressBar extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'No file selected',
-                  style: Theme.of(context).textTheme.overline,
+                  style: Theme.of(context).textTheme.labelSmall,
                 ),
               ),
             ),

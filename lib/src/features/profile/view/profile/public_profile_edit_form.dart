@@ -61,7 +61,7 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
           children: [
             Text(
               'Basics:',
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             Gaps.h16,
             FormBuilderTextField(
@@ -89,7 +89,7 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
             const Divider(),
             Text(
               'Links:',
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             Gaps.h16,
             FormBuilderTextField(
@@ -125,7 +125,7 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
                       ? const CircularProgressIndicator()
                       : Text(
                           'Save',
-                          style: Theme.of(context).textTheme.button,
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
                 );
               }),

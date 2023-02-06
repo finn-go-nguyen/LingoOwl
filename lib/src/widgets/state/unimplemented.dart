@@ -21,7 +21,7 @@ class Unimplemented extends StatelessWidget {
             Gaps.h32,
             Text(
               'Unimplemented feature',
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),

@@ -11,7 +11,7 @@ class TermPrivacy extends StatelessWidget {
       children: [
         Text(
           'By using our services you are agreeing to our',
-          style: Theme.of(context).textTheme.caption,
+          style: Theme.of(context).textTheme.bodySmall,
         ),
         Gaps.h4,
         Row(
@@ -21,20 +21,20 @@ class TermPrivacy extends StatelessWidget {
               onTap: () {},
               child: Text(
                 'Terms',
-                style: Theme.of(context).textTheme.caption!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.black87,
                     ),
               ),
             ),
             Text(
               ' and ',
-              style: Theme.of(context).textTheme.caption,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
             InkWell(
               onTap: () {},
               child: Text(
                 'Privacy Statement',
-                style: Theme.of(context).textTheme.caption!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: Colors.black87,
                       fontWeight: FontWeight.w500,
                     ),
