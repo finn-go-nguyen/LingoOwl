@@ -22,7 +22,7 @@ class SettingsScreen extends ConsumerWidget {
     });
 
     return LScaffold(
-      appBar: const LAppBar(title: 'Account'),
+      appBar: const LAppBarWithCartIcon(title: 'Account'),
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,

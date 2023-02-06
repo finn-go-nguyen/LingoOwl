@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../router/app_router.dart';
 import '../../../widgets/common/common.dart';
-import '../../../widgets/common/scaffold.dart';
 import 'widgets/profile_avatar_name_headline.dart';
 import 'widgets/profile_tab_selector.dart';
 
@@ -20,7 +19,7 @@ class ProfileDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      appBar: AppBar(title: const Text('Account Security')),
+      appBar: const LAppBar(title: 'Account Security'),
       body: SizedBox.expand(
         child: SingleChildScrollView(
           padding: UiParameters.screenPadding,

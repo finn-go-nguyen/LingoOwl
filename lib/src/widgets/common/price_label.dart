@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../constants/app_parameters/app_parameters.dart';
-import '../../utils/currency_formatter.dart';
+import '../../utils/formatter.dart';
 import '../../utils/text_style_helper.dart';
 
 class PriceLabel extends ConsumerWidget {

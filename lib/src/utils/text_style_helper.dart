@@ -12,6 +12,10 @@ class TextStyleHelpers {
   const TextStyleHelpers(this.context);
   final BuildContext context;
 
+  TextStyle? get description => Theme.of(context).textTheme.bodyLarge?.copyWith(
+        color: Colors.grey[700],
+      );
+
   TextStyle? get majorPriceMedium =>
       Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
@@ -46,14 +50,25 @@ class TextStyleHelpers {
             fontWeight: FontWeight.bold,
           );
 
-  TextStyle? get courseDescription =>
-      Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: Colors.black87,
-          );
-
   TextStyle? get ratingValue =>
       Theme.of(context).textTheme.labelLarge?.copyWith(
             color: Colors.orange,
+            fontWeight: FontWeight.bold,
+          );
+
+  TextStyle? get courseRating =>
+      Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          );
+
+  TextStyle? get reviewerName =>
+      Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontWeight: FontWeight.bold,
+          );
+
+  TextStyle? get studentFeedback =>
+      Theme.of(context).textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.bold,
           );
 }

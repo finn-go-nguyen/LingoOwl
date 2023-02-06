@@ -19,6 +19,7 @@ import '../features/profile/view/close_account/close_account_view.dart';
 import '../features/profile/view/photo/photo_view.dart';
 import '../features/profile/view/profile/profile_view.dart';
 import '../features/profile/view/profile_details_screen.dart';
+import '../features/reviews/view/reviews_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
 import '../widgets/common/common.dart';
@@ -43,7 +44,8 @@ enum LRoutes {
   myLearning,
   wishlist,
   course,
-  cart;
+  cart,
+  reviews;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -119,11 +121,31 @@ final goRouterProvider = Provider<GoRouter>((ref) {
               GoRoute(
                 parentNavigatorKey: LCoordinator.navigatorKey,
                 name: LRoutes.course.name,
-                path: 'course/:courseId',
+                path: 'course',
                 builder: (context, state) => CourseScreen(
-                  courseId: state.params['courseId']!,
+                  courseId: state.queryParams['courseId']!,
                 ),
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: LCoordinator.navigatorKey,
+                    name: LRoutes.reviews.name,
+                    path: 'reviews',
+                    builder: (context, state) => ReviewsScreen(
+                      courseId: state.queryParams['courseId']!,
+                      courseName: state.extra as String,
+                    ),
+                  ),
+                ],
               ),
+              // GoRoute(
+              //   parentNavigatorKey: LCoordinator.navigatorKey,
+              //   name: LRoutes.reviews.name,
+              //   path: 'reviews',
+              //   builder: (context, state) => ReviewsScreen(
+              //     courseId: state.queryParams['courseId']!,
+              //     courseName: state.extra as String,
+              //   ),
+              // ),
             ],
           ),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[1], ref),

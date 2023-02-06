@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
+import '../../../router/coordinator.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
 import '../../authentication/data/authentication_repository.dart';
 import '../../cart/view/add_to_cart/add_to_cart_button.dart';
 import '../../cart/view/cart_icon/cart_icon.dart';
+import '../../reviews/view/review_list.dart';
+import '../../reviews/view/review_star_count_section.dart';
 import '../../wishlist/view/add_to_wishlist/add_to_wishlist_button.dart';
 import '../data/course_repository.dart';
 import 'course_information_section.dart';
@@ -109,7 +112,25 @@ class CourseScreen extends ConsumerWidget {
                         Gaps.h12,
                         WhatYouWillLearn(
                           contents: course.youWillLearn,
-                        )
+                        ),
+                        Gaps.h12,
+                        ReviewStarCountSection(
+                          courseId: courseId,
+                        ),
+                        const ReviewList(),
+                        Gaps.h20,
+                        SizedBox.fromSize(
+                          size: const Size.fromHeight(50.0),
+                          child: OutlinedButton(
+                            onPressed: () =>
+                                LCoordinator.showSeeMoreReviewsScreen(
+                              course.name,
+                              courseId,
+                            ),
+                            child: const Text('See More Reviews'),
+                          ),
+                        ),
+                        Gaps.h20,
                       ],
                     ),
                   ),

@@ -7,7 +7,7 @@ import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/forms/close_account_confirmation_form.dart';
 import '../../../../router/coordinator.dart';
 import '../../../../themes/themes.dart';
-import '../../../../widgets/common/scaffold.dart';
+import '../../../../widgets/common/common.dart';
 import 'close_account_controller.dart';
 
 class CloseAccountConfirmationScreen extends ConsumerStatefulWidget {
@@ -32,8 +32,8 @@ class _CloseAccountConfirmationScreenState
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      appBar: AppBar(
-        title: const Text('Account security'),
+      appBar: const LAppBar(
+        title: 'Account security',
       ),
       body: SingleChildScrollView(
         padding: UiParameters.screenPadding,
