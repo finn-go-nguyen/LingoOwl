@@ -5,6 +5,7 @@ import '../../../../constants/app_constants/app_settings.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../router/coordinator.dart';
 import '../../../../utils/async_value_ui.dart';
+import '../../../../widgets/common/app_bar.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
 import '../../../../widgets/state/error.dart';
 import '../../../authentication/data/authentication_repository.dart';
@@ -27,48 +28,56 @@ class SettingsView extends ConsumerWidget {
     final uid = ref.watch(uidProvider)!;
     final user = ref.watch(userStreamProvider(uid));
     return SizedBox.expand(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            user.when(
-              data: (user) => ProfileAvatarNameEmail(user: user),
-              error: (error, stackTrace) => const ErrorState(),
-              loading: () => const ProfileAvatarNameEmail(isLoading: true),
-            ),
-            Gaps.h32,
-            ...List.generate(
-              AppSettings.settingList.length,
-              (index) => SettingSection(
-                settingSection: AppSettings.settingList[index],
+      child: Column(
+        children: [
+          const LAppBar(title: 'Account'),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  user.when(
+                    data: (user) => ProfileAvatarNameEmail(user: user),
+                    error: (error, stackTrace) => const ErrorState(),
+                    loading: () =>
+                        const ProfileAvatarNameEmail(isLoading: true),
+                  ),
+                  Gaps.h32,
+                  ...List.generate(
+                    AppSettings.settingList.length,
+                    (index) => SettingSection(
+                      settingSection: AppSettings.settingList[index],
+                    ),
+                  ),
+                  Gaps.h20,
+                  TextButton(
+                    onPressed: () async {
+                      final isConfirmed = await showAlertDialog(
+                        context: context,
+                        title: 'Sign Out',
+                        content: 'Sign out from LingoOwl?',
+                        defaultActionText: 'Sign Out',
+                        cancelActionText: 'Cancel',
+                      );
+
+                      if (isConfirmed ?? false) {
+                        ref
+                            .read(settingsControllerProvider.notifier)
+                            .signOut()
+                            .then((isSuccess) {
+                          if (isSuccess) {
+                            LCoordinator.showWelcomeScreen();
+                          }
+                        });
+                      }
+                    },
+                    child: const Text('Sign out'),
+                  )
+                ],
               ),
             ),
-            Gaps.h20,
-            TextButton(
-              onPressed: () async {
-                final isConfirmed = await showAlertDialog(
-                  context: context,
-                  title: 'Sign Out',
-                  content: 'Sign out from LingoOwl?',
-                  defaultActionText: 'Sign Out',
-                  cancelActionText: 'Cancel',
-                );
-
-                if (isConfirmed ?? false) {
-                  ref
-                      .read(settingsControllerProvider.notifier)
-                      .signOut()
-                      .then((isSuccess) {
-                    if (isSuccess) {
-                      LCoordinator.showWelcomeScreen();
-                    }
-                  });
-                }
-              },
-              child: const Text('Sign out'),
-            )
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

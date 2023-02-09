@@ -10,10 +10,12 @@ class LoadingState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: dimension,
-      child: const Center(
-        child: CircularProgressIndicator(),
+    return Center(
+      child: SizedBox.square(
+        dimension: dimension,
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }

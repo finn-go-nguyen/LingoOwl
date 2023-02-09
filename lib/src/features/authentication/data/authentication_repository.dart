@@ -14,7 +14,7 @@ final uidProvider = Provider.autoDispose<String?>((ref) {
   return authRepository.currentUser?.id;
 });
 
-final isLoggingInProvider = Provider<bool>((ref) {
+final isSignedInProvider = Provider<bool>((ref) {
   final authRepository =
       ref.watch(DomainManager.instance.authRepositoryProvider);
   return authRepository.currentUser != null;

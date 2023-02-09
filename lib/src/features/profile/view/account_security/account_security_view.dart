@@ -14,9 +14,11 @@ class AccountSecurityView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue<void>>(changePasswordControllerProvider,
         (previous, next) {
-      next.showError(context);
-      next.showSuccess(context, content: 'Your password has been changed!');
-      next.showLoadingDialog(context, previous);
+      next.showErrorLoadingSuccessState(
+        context,
+        previousState: previous,
+        successMessage: 'Your password has been changed!',
+      );
     });
     return Column(
       children: [

@@ -2,6 +2,11 @@
 /// *****************************************************
 ///  FlutterGen
 /// *****************************************************
+
+// coverage:ignore-file
+// ignore_for_file: type=lint
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+
 import 'package:flutter/widgets.dart';
 
 class $AssetsIconsGen {
@@ -51,6 +56,9 @@ class $AssetsIllustrationsGen {
 class $AssetsLottiesGen {
   const $AssetsLottiesGen();
 
+  /// File path: assets/lotties/empty.json
+  String get empty => 'assets/lotties/empty.json';
+
   /// File path: assets/lotties/maintenance.json
   String get maintenance => 'assets/lotties/maintenance.json';
 
@@ -58,7 +66,7 @@ class $AssetsLottiesGen {
   String get sent => 'assets/lotties/sent.json';
 
   /// List of all assets
-  List<String> get values => [maintenance, sent];
+  List<String> get values => [empty, maintenance, sent];
 }
 
 class Assets {

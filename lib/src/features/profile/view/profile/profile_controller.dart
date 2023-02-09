@@ -18,6 +18,6 @@ class ProfileController extends StateNotifier<AsyncValue<void>> {
 
   void save(LAppUser user) async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => _userRepository.set(user));
+    state = await AsyncValue.guard(() => _userRepository.setUser(user));
   }
 }

@@ -1,3 +1,4 @@
+export 'app_bar.dart';
 export 'colored_sized_box.dart';
 export 'network_image.dart';
 export 'password_visibility_toggle_button.dart';
