@@ -6,6 +6,7 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import '../../../../constants/app_parameters/app_sizes.dart';
 import '../../../../constants/forms/account_create_form.dart';
 import '../../../../constants/forms/error_text.dart';
+import '../../../../widgets/common/common.dart';
 import 'account_create_screen_controller.dart';
 
 class AccountCreateForm extends ConsumerStatefulWidget {
@@ -96,29 +97,44 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
             ]),
           ),
           Gaps.h32,
-          FormBuilderTextField(
-            name: AccountCreateFormConstants.passwordField,
-            focusNode: _passwordFocusNode,
-            controller: _passwordTextController,
-            decoration:
-                const InputDecoration(labelText: 'Password (8+ characters)'),
-            textInputAction: TextInputAction.done,
-            obscureText: true,
-            keyboardType: TextInputType.text,
-            validator: FormBuilderValidators.compose([
-              FormBuilderValidators.required(),
-              FormBuilderValidators.minLength(
-                8,
-                errorText: ErrorTextConstants.passwordLengthErrorText,
-              ),
-            ]),
+          Consumer(
+            builder: (context, ref, child) {
+              final obscureText = ref.watch(
+                  accountCreateScreenControllerProvider
+                      .select((value) => value.obscureText));
+              return FormBuilderTextField(
+                name: AccountCreateFormConstants.passwordField,
+                focusNode: _passwordFocusNode,
+                controller: _passwordTextController,
+                decoration: InputDecoration(
+                  labelText: 'Password (8+ characters)',
+                  suffixIcon: PasswordVisibilityToggleButton(
+                    onPressed: ref
+                        .read(accountCreateScreenControllerProvider.notifier)
+                        .toggleObscureText,
+                    isShown: !obscureText,
+                  ),
+                ),
+                textInputAction: TextInputAction.done,
+                obscureText: obscureText,
+                keyboardType: TextInputType.text,
+                validator: FormBuilderValidators.compose([
+                  FormBuilderValidators.required(),
+                  FormBuilderValidators.minLength(
+                    8,
+                    errorText: ErrorTextConstants.passwordLengthErrorText,
+                  ),
+                ]),
+              );
+            },
           ),
           Gaps.h32,
           SizedBox.fromSize(
             size: const Size.fromHeight(60.0),
             child: Consumer(
               builder: (context, ref, child) {
-                final status = ref.watch(accountCreateScreenControllerProvider);
+                final status = ref.watch(accountCreateScreenControllerProvider
+                    .select((state) => state.status));
                 return ElevatedButton(
                   onPressed: status.isLoading
                       ? null
@@ -139,7 +155,7 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
                       ? const CircularProgressIndicator()
                       : Text(
                           'Create Account',
-                          style: Theme.of(context).textTheme.button,
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
                 );
               },

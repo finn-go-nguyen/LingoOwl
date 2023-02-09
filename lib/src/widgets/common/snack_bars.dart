@@ -26,4 +26,18 @@ class LSnackBar {
         ),
         duration: const Duration(seconds: 5),
       );
+
+  static SnackBar warning({required String title, required String content}) =>
+      SnackBar(
+        /// need to set following properties for best effect of awesome_snackbar_content
+        elevation: 0,
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        content: AwesomeSnackbarContent(
+          contentType: ContentType.warning,
+          title: title,
+          message: content,
+        ),
+        duration: const Duration(seconds: 5),
+      );
 }

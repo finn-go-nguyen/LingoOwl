@@ -16,7 +16,7 @@ class AccountCreateScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen<AsyncValue>(
-      accountCreateScreenControllerProvider,
+      accountCreateScreenControllerProvider.select((state) => state.status),
       (_, state) {
         state.showError(context);
       },
@@ -30,7 +30,7 @@ class AccountCreateScreen extends ConsumerWidget {
               Gaps.h64,
               Text(
                 'Create an account',
-                style: Theme.of(context).textTheme.headline3!.copyWith(
+                style: Theme.of(context).textTheme.displaySmall!.copyWith(
                       fontFamily: GoogleFonts.ebGaramond().fontFamily,
                     ),
               ),

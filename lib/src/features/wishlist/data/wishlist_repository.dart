@@ -9,12 +9,14 @@ import '../model/wishlist.dart';
 
 final wishlistProvider = StreamProvider.autoDispose<LWishList>((ref) async* {
   final uid = ref.watch(uidProvider);
-
-  if (uid == null) yield const LWishList.empty();
-
   final wishlistRepository =
       ref.watch(DomainManager.instance.wishlistRepositoryProvider);
-  yield* wishlistRepository.watchWishlist(uid!);
+
+  if (uid == null) {
+    yield LWishList.empty();
+  } else {
+    yield* wishlistRepository.watchWishlist(uid);
+  }
 });
 
 final isAddedToWishlistProvider =
