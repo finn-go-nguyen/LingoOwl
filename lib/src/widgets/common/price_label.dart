@@ -2,27 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../constants/app_parameters/app_parameters.dart';
-import '../../themes/colors.dart';
-import '../../utils/currency_formarter.dart';
+import '../../utils/currency_formatter.dart';
+import '../../utils/text_style_helper.dart';
 
 class PriceLabel extends ConsumerWidget {
   const PriceLabel({
     super.key,
     required this.price,
     required this.salePrice,
+    this.isLargeText = false,
   });
 
   final double price;
   final double? salePrice;
+  final bool isLargeText;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final textStyleHelper = ref.watch(textStyleHelperProvider(context));
     return salePrice == null
         ? Text(
             ref.read(currencyFormatterProvider).format(
                   price,
                 ),
-            style: Theme.of(context).textTheme.titleLarge,
+            style: isLargeText
+                ? textStyleHelper.majorPriceLarge
+                : textStyleHelper.majorPriceMedium,
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
@@ -30,15 +35,16 @@ class PriceLabel extends ConsumerWidget {
             children: [
               Text(
                 ref.read(currencyFormatterProvider).format(salePrice),
-                style: Theme.of(context).textTheme.titleLarge,
+                style: isLargeText
+                    ? textStyleHelper.majorPriceLarge
+                    : textStyleHelper.majorPriceMedium,
               ),
-              Gaps.w4,
+              Gaps.w8,
               Text(
                 ref.read(currencyFormatterProvider).format(price),
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: LColors.strikeThrough,
-                      decoration: TextDecoration.lineThrough,
-                    ),
+                style: isLargeText
+                    ? textStyleHelper.lineThroughPriceLarge
+                    : textStyleHelper.lineThroughPriceMedium,
               )
             ],
           );

@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../router/coordinator.dart';
+import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/common.dart';
+import '../../../widgets/common/instruction_name.dart';
 import '../model/course.dart';
 
-class CourseCardPortrait extends StatelessWidget {
+class CourseCardPortrait extends ConsumerWidget {
   const CourseCardPortrait({
     super.key,
     required this.course,
@@ -14,7 +17,8 @@ class CourseCardPortrait extends StatelessWidget {
   final LCourse course;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textStyleHelper = ref.watch(textStyleHelperProvider(context));
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
       clipBehavior: Clip.hardEdge,
@@ -38,16 +42,13 @@ class CourseCardPortrait extends StatelessWidget {
                 Gaps.h8,
                 Text(
                   course.name,
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: textStyleHelper.courseNameMedium,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Gaps.h8,
-                Text(
-                  course.instructorName,
-                  style: Theme.of(context).textTheme.bodySmall,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+                InstructionNameLabel(
+                  name: course.instructorName,
                 ),
                 Gaps.h8,
                 RatingBar(
@@ -68,7 +69,7 @@ class CourseCardPortrait extends StatelessWidget {
   }
 }
 
-class CourseCardLandscape extends StatelessWidget {
+class CourseCardLandscape extends ConsumerWidget {
   const CourseCardLandscape({
     super.key,
     required this.course,
@@ -77,7 +78,8 @@ class CourseCardLandscape extends StatelessWidget {
   final LCourse course;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textStyleHelper = ref.watch(textStyleHelperProvider(context));
     return SizedBox(
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -102,16 +104,13 @@ class CourseCardLandscape extends StatelessWidget {
                       children: [
                         Text(
                           course.name,
-                          style: Theme.of(context).textTheme.titleSmall,
+                          style: textStyleHelper.courseNameMedium,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         Gaps.h4,
-                        Text(
-                          course.instructorName,
-                          style: Theme.of(context).textTheme.bodySmall,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        InstructionNameLabel(
+                          name: course.instructorName,
                         ),
                         Gaps.h4,
                         RatingBar(

@@ -79,7 +79,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                   ? const CircularProgressIndicator()
                   : Text(
                       'Reset password',
-                      style: Theme.of(context).textTheme.button!,
+                      style: Theme.of(context).textTheme.labelLarge!,
                     ),
             );
           }),

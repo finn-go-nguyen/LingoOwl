@@ -44,7 +44,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
           children: [
             Text(
               'Password:',
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             Gaps.h16,
             FormBuilderTextField(
@@ -115,7 +115,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                         },
                   child: Text(
                     'Save',
-                    style: Theme.of(context).textTheme.button,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 );
               }),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
+import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/common.dart';
 
-class CourseInformationSection extends StatelessWidget {
+class CourseInformationSection extends ConsumerWidget {
   const CourseInformationSection({
     super.key,
     required this.name,
@@ -20,20 +22,29 @@ class CourseInformationSection extends StatelessWidget {
   final String instructorName;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textStyleHelper = ref.watch(textStyleHelperProvider(context));
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(name),
+        Text(
+          name,
+          style: textStyleHelper.courseNameLarge,
+        ),
         Gaps.h12,
-        Text(description),
+        Text(
+          description,
+          style: textStyleHelper.courseDescription,
+        ),
         Gaps.h12,
         RatingBar(
           rating: rating,
           ratingCount: ratingCount,
         ),
         Gaps.h12,
-        Text('Created by $instructorName'),
+        Text(
+          'Created by $instructorName',
+        ),
         Gaps.h12,
         Row(
           children: const [

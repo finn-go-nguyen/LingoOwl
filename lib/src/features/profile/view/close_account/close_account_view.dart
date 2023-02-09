@@ -50,7 +50,7 @@ class CloseAccountView extends ConsumerWidget {
                               text: 'Warning: ',
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1
+                                  .titleMedium
                                   ?.copyWith(
                                     color: Colors.red,
                                   ),
@@ -89,7 +89,7 @@ class CloseAccountView extends ConsumerWidget {
                               'Close account',
                               style: Theme.of(context)
                                   .textTheme
-                                  .button
+                                  .labelLarge
                                   ?.copyWith(color: Colors.white),
                             ),
                           ),

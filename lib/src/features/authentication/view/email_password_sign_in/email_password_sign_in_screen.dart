@@ -76,14 +76,14 @@ class EmailInputView extends ConsumerWidget {
         Gaps.h64,
         Text(
           'Welcome back!',
-          style: Theme.of(context).textTheme.headline3!.copyWith(
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
                 fontFamily: GoogleFonts.ebGaramond().fontFamily,
               ),
         ),
         Gaps.h20,
         Text(
           'Enter your email to sign in to your account',
-          style: Theme.of(context).textTheme.bodyText2,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         Gaps.h64,
         EmailForm(
@@ -107,7 +107,7 @@ class PasswordInputView extends ConsumerWidget {
         Gaps.h64,
         Text(
           'Almost there!',
-          style: Theme.of(context).textTheme.headline3!.copyWith(
+          style: Theme.of(context).textTheme.displaySmall!.copyWith(
                 fontFamily: GoogleFonts.ebGaramond().fontFamily,
               ),
         ),
@@ -119,7 +119,7 @@ class PasswordInputView extends ConsumerWidget {
             return Text(
               'Enter your password to sign in with\n$email',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context).textTheme.bodyLarge,
             );
           },
         ),

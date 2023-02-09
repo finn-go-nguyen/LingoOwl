@@ -66,9 +66,11 @@ class CourseScreen extends ConsumerWidget {
                           ratingCount: course.ratingCount,
                           instructorName: course.instructorName,
                         ),
+                        Gaps.h16,
                         PriceLabel(
                           price: course.price,
                           salePrice: course.salePrice,
+                          isLargeText: true,
                         ),
                         Gaps.h16,
                         SizedBox(

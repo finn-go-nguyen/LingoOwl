@@ -46,7 +46,7 @@ class _CloseAccountConfirmationScreenState
               children: [
                 Text(
                   'Close your account?',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
                 IconButton(
                   onPressed: () => LCoordinator.onBack(),
@@ -57,7 +57,7 @@ class _CloseAccountConfirmationScreenState
             Gaps.h20,
             Text(
               'Are you sure you want to close your account?',
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Theme.of(context).textTheme.titleSmall,
             ),
             Gaps.h12,
             FormBuilder(
@@ -96,7 +96,7 @@ class _CloseAccountConfirmationScreenState
                   'Close account',
                   style: Theme.of(context)
                       .textTheme
-                      .button
+                      .labelLarge
                       ?.copyWith(color: Colors.white),
                 ),
               ),

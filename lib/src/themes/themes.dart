@@ -16,7 +16,7 @@ class LTheme {
         textTheme: LStyles.lightTextTheme,
 
         /// ColorScheme
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+        colorSchemeSeed: Colors.purple,
 
         appBarTheme: const AppBarTheme(
           // default system app bar icon is white
