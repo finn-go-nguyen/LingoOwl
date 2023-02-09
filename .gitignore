@@ -45,3 +45,4 @@ app.*.map.json
 /android/app/release
 /android/app/src/main/res/values/strings.xml
 /.firebase
+functions/package-lock.json

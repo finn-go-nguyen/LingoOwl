@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../constants/app_constants/home_navigation_items.dart';
-import '../domain_manager.dart';
 import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
@@ -19,7 +18,8 @@ import '../features/profile/view/close_account/close_account_view.dart';
 import '../features/profile/view/photo/photo_view.dart';
 import '../features/profile/view/profile/profile_view.dart';
 import '../features/profile/view/profile_details_screen.dart';
-import '../features/reviews/view/reviews_screen.dart';
+import '../features/reviews/view/leave_review_screen/leave_review_screen.dart';
+import '../features/reviews/view/review_screen/reviews_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/refresh_listenable.dart';
 import '../widgets/common/common.dart';
@@ -45,7 +45,8 @@ enum LRoutes {
   wishlist,
   course,
   cart,
-  reviews;
+  reviews,
+  leaveReview;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -63,14 +64,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     refreshListenable:
         RefreshListenable(ref.watch(authStateChangeStreamProvider.stream)),
     redirect: (context, state) {
-      final isSignedIn = ref.watch(DomainManager.instance.authRepositoryProvider
-          .select((value) => value.isSignedIn));
+      final isSignedIn = ref.watch(isSignedInProvider);
       if (isSignedIn) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return homePath;
         }
       } else {
-        if (state.location.contains('settings')) {
+        if (state.location.contains(RegExp(r'settings|leave-review'))) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -228,6 +228,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         name: LRoutes.cart.name,
         path: '/cart',
         builder: (_, __) => const CartScreen(),
+      ),
+      GoRoute(
+        parentNavigatorKey: LCoordinator.navigatorKey,
+        name: LRoutes.leaveReview.name,
+        path: '/leave-review',
+        pageBuilder: (context, state) => MaterialPage(
+          fullscreenDialog: true,
+          child: LeaveReviewScreen(courseId: state.extra as String),
+        ),
       ),
     ],
   );

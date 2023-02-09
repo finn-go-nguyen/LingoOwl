@@ -8,8 +8,8 @@ import '../../constants/app_parameters/app_parameters.dart';
 import '../../themes/colors.dart';
 import '../../utils/text_style_helper.dart';
 
-class RatingBar extends ConsumerWidget {
-  const RatingBar({
+class LRatingBar extends ConsumerWidget {
+  const LRatingBar({
     super.key,
     required this.rating,
     required this.ratingCount,
@@ -54,10 +54,19 @@ class LRatingBarIndicator extends StatelessWidget {
       rating: rating,
       itemSize: 16,
       unratedColor: LColors.unratedColor,
-      itemBuilder: (context, _) => const FaIcon(
-        Icons.star,
-        color: LColors.rating,
-      ),
+      itemBuilder: (_, __) => const RatingItem(),
+    );
+  }
+}
+
+class RatingItem extends StatelessWidget {
+  const RatingItem({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const FaIcon(
+      Icons.star,
+      color: LColors.rating,
     );
   }
 }

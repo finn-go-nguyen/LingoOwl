@@ -84,7 +84,7 @@ class WishlistItem extends ConsumerWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                           Gaps.h4,
-                          RatingBar(
+                          LRatingBar(
                             rating: course.rating,
                             ratingCount: course.ratingCount,
                           ),

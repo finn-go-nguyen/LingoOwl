@@ -9,10 +9,10 @@ part 'review.g.dart';
 class LReview with _$LReview {
   const LReview._();
   const factory LReview({
-    required ReviewId reviewId,
+    required ReviewId id,
+    required UserId userId,
     required CourseId courseId,
-    required String reviewerName,
-    required int star,
+    required int rating,
     required TimeStamp timeStamp,
     required String content,
   }) = _LReview;
