@@ -29,21 +29,35 @@ class RatingBar extends ConsumerWidget {
           style: textStyleHelpers.ratingValue,
         ),
         Gaps.w4,
-        RatingBarIndicator(
-          rating: rating,
-          itemSize: 16,
-          unratedColor: LColors.unratedColor,
-          itemBuilder: (context, _) => const FaIcon(
-            Icons.star,
-            color: LColors.rating,
-          ),
-        ),
+        LRatingBarIndicator(rating: rating),
         Gaps.w4,
         Text(
           '(${NumberFormat().format(ratingCount)})',
           style: Theme.of(context).textTheme.bodySmall,
         ),
       ],
+    );
+  }
+}
+
+class LRatingBarIndicator extends StatelessWidget {
+  const LRatingBarIndicator({
+    super.key,
+    required this.rating,
+  });
+
+  final double rating;
+
+  @override
+  Widget build(BuildContext context) {
+    return RatingBarIndicator(
+      rating: rating,
+      itemSize: 16,
+      unratedColor: LColors.unratedColor,
+      itemBuilder: (context, _) => const FaIcon(
+        Icons.star,
+        color: LColors.rating,
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
 
+import '../constants/type_defs/type_defs.dart';
 import 'app_router.dart';
 
 class LCoordinator {
@@ -102,11 +103,22 @@ class LCoordinator {
   static void showCourseDetailsScreen(String courseId) {
     pushNamed(
       LRoutes.course.name,
-      params: {'courseId': courseId},
+      queryParams: <String, CourseId>{'courseId': courseId},
     );
   }
 
   static void showCartScreen() {
     pushNamed(LRoutes.cart.name);
+  }
+
+  static void showSeeMoreReviewsScreen(
+    String title,
+    CourseId courseId,
+  ) {
+    goNamed(
+      LRoutes.reviews.name,
+      extra: title,
+      queryParams: <String, CourseId>{'courseId': courseId},
+    );
   }
 }

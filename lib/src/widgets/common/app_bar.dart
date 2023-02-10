@@ -15,10 +15,21 @@ class LAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      actions: const [CartIcon()],
     );
   }
 
   @override
   Size get preferredSize => UiParameters.appBarSize;
+}
+
+class LAppBarWithCartIcon extends LAppBar {
+  const LAppBarWithCartIcon({super.key, required super.title});
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(title),
+      actions: const [CartIcon()],
+    );
+  }
 }

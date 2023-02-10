@@ -21,9 +21,7 @@ class CartScreen extends ConsumerWidget {
 
     final cartAsync = ref.watch(cartProvider);
     return LScaffold(
-      appBar: AppBar(
-        title: const Text('Cart'),
-      ),
+      appBar: const LAppBar(title: 'Cart'),
       body: SizedBox.expand(
         child: cartAsync.when(
           loading: () => const LoadingState(),
