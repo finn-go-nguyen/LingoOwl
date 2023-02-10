@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../constants/type_defs/type_defs.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../utils/text_style_helper.dart';
@@ -10,16 +11,14 @@ class CourseInformationSection extends ConsumerWidget {
     super.key,
     required this.name,
     required this.description,
-    required this.rating,
-    required this.ratingCount,
     required this.instructorName,
+    required this.courseId,
   });
 
   final String name;
   final String description;
-  final double rating;
-  final int ratingCount;
   final String instructorName;
+  final CourseId courseId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -38,8 +37,7 @@ class CourseInformationSection extends ConsumerWidget {
         ),
         Gaps.h12,
         LRatingBar(
-          rating: rating,
-          ratingCount: ratingCount,
+          courseId: courseId,
         ),
         Gaps.h12,
         Text(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../constants/type_defs/type_defs.dart';
+import '../../rating_count/data/rating_count_repository.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../router/coordinator.dart';
@@ -12,7 +14,7 @@ import '../../cart/view/cart_icon/cart_icon.dart';
 import '../../reviews/application/review_service.dart';
 import '../../reviews/view/review_screen/reviews_screen_controller.dart';
 import '../../reviews/view/review_screen/widgets/review_list_view.dart';
-import '../../reviews/view/review_screen/widgets/review_star_count_section.dart';
+import '../../rating_count/view/review_star_count_section.dart';
 import '../../wishlist/view/add_to_wishlist/add_to_wishlist_button.dart';
 import '../data/course_repository.dart';
 import 'course_information_section.dart';
@@ -24,7 +26,7 @@ class CourseScreen extends ConsumerWidget {
     required this.courseId,
   });
 
-  final String courseId;
+  final CourseId courseId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -33,6 +35,7 @@ class CourseScreen extends ConsumerWidget {
       onRefresh: () async {
         // * Force providers fetch new data
         ref.invalidate(courseProvider(courseId));
+        ref.invalidate(starCountProvider(courseId));
         ref.invalidate(reviewsProvider(courseId));
         ref.invalidate(reviewsControllerProvider);
         await Future.delayed(const Duration(seconds: 1));
@@ -74,9 +77,8 @@ class CourseScreen extends ConsumerWidget {
                         CourseInformationSection(
                           name: course.name,
                           description: course.description,
-                          rating: course.rating,
-                          ratingCount: course.ratingCount,
                           instructorName: course.instructorName,
+                          courseId: courseId,
                         ),
                         Gaps.h16,
                         PriceLabel(

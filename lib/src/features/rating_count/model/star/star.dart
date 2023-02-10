@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'star.freezed.dart';
-part 'star.g.dart';
 
 @freezed
 class LStar with _$LStar {
@@ -21,6 +20,4 @@ class LStar with _$LStar {
         four: (_) => 4,
         five: (_) => 5,
       );
-
-  factory LStar.fromJson(Map<String, Object?> json) => _$LStarFromJson(json);
 }

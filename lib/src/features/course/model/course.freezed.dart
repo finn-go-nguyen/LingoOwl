@@ -25,8 +25,6 @@ mixin _$LCourse {
   String get description => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
   String get instructorName => throw _privateConstructorUsedError;
-  double get rating => throw _privateConstructorUsedError;
-  int get ratingCount => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   double? get salePrice => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
@@ -48,8 +46,6 @@ abstract class $LCourseCopyWith<$Res> {
       String description,
       String thumbnail,
       String instructorName,
-      double rating,
-      int ratingCount,
       double price,
       double? salePrice,
       String category,
@@ -74,8 +70,6 @@ class _$LCourseCopyWithImpl<$Res, $Val extends LCourse>
     Object? description = null,
     Object? thumbnail = null,
     Object? instructorName = null,
-    Object? rating = null,
-    Object? ratingCount = null,
     Object? price = null,
     Object? salePrice = freezed,
     Object? category = null,
@@ -102,14 +96,6 @@ class _$LCourseCopyWithImpl<$Res, $Val extends LCourse>
           ? _value.instructorName
           : instructorName // ignore: cast_nullable_to_non_nullable
               as String,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      ratingCount: null == ratingCount
-          ? _value.ratingCount
-          : ratingCount // ignore: cast_nullable_to_non_nullable
-              as int,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -143,8 +129,6 @@ abstract class _$$_LCourseCopyWith<$Res> implements $LCourseCopyWith<$Res> {
       String description,
       String thumbnail,
       String instructorName,
-      double rating,
-      int ratingCount,
       double price,
       double? salePrice,
       String category,
@@ -166,8 +150,6 @@ class __$$_LCourseCopyWithImpl<$Res>
     Object? description = null,
     Object? thumbnail = null,
     Object? instructorName = null,
-    Object? rating = null,
-    Object? ratingCount = null,
     Object? price = null,
     Object? salePrice = freezed,
     Object? category = null,
@@ -194,14 +176,6 @@ class __$$_LCourseCopyWithImpl<$Res>
           ? _value.instructorName
           : instructorName // ignore: cast_nullable_to_non_nullable
               as String,
-      rating: null == rating
-          ? _value.rating
-          : rating // ignore: cast_nullable_to_non_nullable
-              as double,
-      ratingCount: null == ratingCount
-          ? _value.ratingCount
-          : ratingCount // ignore: cast_nullable_to_non_nullable
-              as int,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -231,8 +205,6 @@ class _$_LCourse extends _LCourse {
       required this.description,
       required this.thumbnail,
       required this.instructorName,
-      required this.rating,
-      required this.ratingCount,
       required this.price,
       this.salePrice,
       required this.category,
@@ -254,10 +226,6 @@ class _$_LCourse extends _LCourse {
   @override
   final String instructorName;
   @override
-  final double rating;
-  @override
-  final int ratingCount;
-  @override
   final double price;
   @override
   final double? salePrice;
@@ -273,7 +241,7 @@ class _$_LCourse extends _LCourse {
 
   @override
   String toString() {
-    return 'LCourse(id: $id, name: $name, description: $description, thumbnail: $thumbnail, instructorName: $instructorName, rating: $rating, ratingCount: $ratingCount, price: $price, salePrice: $salePrice, category: $category, youWillLearn: $youWillLearn)';
+    return 'LCourse(id: $id, name: $name, description: $description, thumbnail: $thumbnail, instructorName: $instructorName, price: $price, salePrice: $salePrice, category: $category, youWillLearn: $youWillLearn)';
   }
 
   @override
@@ -289,9 +257,6 @@ class _$_LCourse extends _LCourse {
                 other.thumbnail == thumbnail) &&
             (identical(other.instructorName, instructorName) ||
                 other.instructorName == instructorName) &&
-            (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.ratingCount, ratingCount) ||
-                other.ratingCount == ratingCount) &&
             (identical(other.price, price) || other.price == price) &&
             (identical(other.salePrice, salePrice) ||
                 other.salePrice == salePrice) &&
@@ -310,8 +275,6 @@ class _$_LCourse extends _LCourse {
       description,
       thumbnail,
       instructorName,
-      rating,
-      ratingCount,
       price,
       salePrice,
       category,
@@ -338,8 +301,6 @@ abstract class _LCourse extends LCourse {
       required final String description,
       required final String thumbnail,
       required final String instructorName,
-      required final double rating,
-      required final int ratingCount,
       required final double price,
       final double? salePrice,
       required final String category,
@@ -358,10 +319,6 @@ abstract class _LCourse extends LCourse {
   String get thumbnail;
   @override
   String get instructorName;
-  @override
-  double get rating;
-  @override
-  int get ratingCount;
   @override
   double get price;
   @override

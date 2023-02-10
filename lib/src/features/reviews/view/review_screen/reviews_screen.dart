@@ -7,9 +7,9 @@ import '../../../../constants/type_defs/type_defs.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/common.dart';
 import '../../../../widgets/state/error.dart';
+import '../../../rating_count/view/review_star_count_section.dart';
 import 'reviews_screen_controller.dart';
 import 'widgets/review_list_view.dart';
-import 'widgets/review_star_count_section.dart';
 
 class ReviewsScreen extends ConsumerStatefulWidget {
   const ReviewsScreen({
