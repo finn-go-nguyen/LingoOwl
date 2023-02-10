@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../constants/type_defs/type_defs.dart';
-import '../../rating_count/data/rating_count_repository.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
+import '../../../constants/type_defs/type_defs.dart';
 import '../../../router/coordinator.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
@@ -11,10 +10,11 @@ import '../../../widgets/state/loading/loading.dart';
 import '../../authentication/data/authentication_repository.dart';
 import '../../cart/view/add_to_cart/add_to_cart_button.dart';
 import '../../cart/view/cart_icon/cart_icon.dart';
+import '../../rating_count/data/rating_count_repository.dart';
+import '../../rating_count/view/review_star_count_section.dart';
 import '../../reviews/application/review_service.dart';
 import '../../reviews/view/review_screen/reviews_screen_controller.dart';
 import '../../reviews/view/review_screen/widgets/review_list_view.dart';
-import '../../rating_count/view/review_star_count_section.dart';
 import '../../wishlist/view/add_to_wishlist/add_to_wishlist_button.dart';
 import '../data/course_repository.dart';
 import 'course_information_section.dart';
