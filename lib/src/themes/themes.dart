@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../constants/app_parameters/app_parameters.dart';
+import 'colors.dart';
 import 'styles.dart';
 
 class LTheme {
@@ -16,7 +17,7 @@ class LTheme {
         textTheme: LStyles.lightTextTheme,
 
         /// ColorScheme
-        colorSchemeSeed: Colors.purple,
+        colorSchemeSeed: LColors.primary,
 
         appBarTheme: const AppBarTheme(
           // default system app bar icon is white

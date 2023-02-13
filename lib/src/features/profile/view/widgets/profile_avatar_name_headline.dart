@@ -22,6 +22,7 @@ class ProfileAvatarNameHeadline extends ConsumerWidget {
     if (uid == null) return const SizedBox.shrink();
 
     final userAsync = ref.watch(userStreamProvider(uid));
+    final textHelpers = ref.watch(textHelpersProvider);
     return userAsync.when(
       data: (user) => Column(
         children: [
@@ -33,7 +34,7 @@ class ProfileAvatarNameHeadline extends ConsumerWidget {
           ),
           Gaps.h12,
           Text(
-            TextHelpers.toDisplayName(
+            textHelpers.toDisplayName(
               firstName: user.firstName,
               lastName: user.lastName,
             ),

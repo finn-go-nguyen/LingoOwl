@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../constants/type_defs/type_defs.dart';
+import '../../../router/coordinator.dart';
 import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
@@ -29,7 +30,7 @@ class EnrolledCourseCard extends ConsumerWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () => LCoordinator.showLectureScreen(),
               child: Padding(
                 padding: UiParameters.courseCardPadding,
                 child: Row(
