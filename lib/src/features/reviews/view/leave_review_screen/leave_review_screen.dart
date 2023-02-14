@@ -127,21 +127,18 @@ class _LeaveReviewFormState extends ConsumerState<LeaveReviewForm> {
                 leaveReviewControllerProvider(widget.courseId)
                     .select((state) => state.status));
             return SubmitButton(
-              onSubmitted: canSubmit ? _onSubmitted : null,
+              onSubmitted: canSubmit
+                  ? () => ref
+                      .read(leaveReviewControllerProvider(widget.courseId)
+                          .notifier)
+                      .onSubmitted(widget.courseId, _controller.text,
+                          onSubmitSuccessfully: LCoordinator.onBack)
+                  : null,
               isLoading: status.isLoading,
             );
           },
         ),
       ],
     );
-  }
-
-  void _onSubmitted() async {
-    final success = await ref
-        .read(leaveReviewControllerProvider(widget.courseId).notifier)
-        .submitReview(widget.courseId, _controller.text);
-    if (success) {
-      LCoordinator.onBack();
-    }
   }
 }
