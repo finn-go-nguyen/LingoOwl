@@ -3,13 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../constants/app_parameters/app_parameters.dart';
-import '../../../constants/type_defs/type_defs.dart';
-import '../../../utils/formatter.dart';
-import '../../../utils/text_style_helper.dart';
-import '../../../widgets/common/rating_bar.dart';
-import '../model/star/star.dart';
-import '../model/star_count/star_count.dart';
+import '../../../../../constants/app_parameters/app_parameters.dart';
+import '../../../../../constants/type_defs/type_defs.dart';
+import '../../../../../utils/formatter.dart';
+import '../../../../../utils/text_style_helper.dart';
+import '../../../../../widgets/common/rating_bar.dart';
+import '../../../model/star/star.dart';
+import '../../../model/star_count/star_count.dart';
+import 'review_button.dart';
 
 class ReviewStarCountSection extends ConsumerWidget {
   const ReviewStarCountSection({
@@ -61,6 +62,8 @@ class ReviewStarCountSection extends ConsumerWidget {
             count: e.value.count,
           ),
         ),
+        // TODO: Move this button to appropriate place
+        ReviewButton(courseId: courseId),
       ],
     );
   }

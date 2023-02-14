@@ -5,7 +5,6 @@ import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../router/coordinator.dart';
 import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/common.dart';
-import '../../../widgets/common/instruction_name.dart';
 import '../model/course.dart';
 
 class CourseCardPortrait extends ConsumerWidget {
@@ -51,7 +50,7 @@ class CourseCardPortrait extends ConsumerWidget {
                   name: course.instructorName,
                 ),
                 Gaps.h8,
-                RatingBar(
+                LRatingBar(
                   rating: course.rating,
                   ratingCount: course.ratingCount,
                 ),
@@ -113,7 +112,7 @@ class CourseCardLandscape extends ConsumerWidget {
                           name: course.instructorName,
                         ),
                         Gaps.h4,
-                        RatingBar(
+                        LRatingBar(
                           rating: course.rating,
                           ratingCount: course.ratingCount,
                         ),

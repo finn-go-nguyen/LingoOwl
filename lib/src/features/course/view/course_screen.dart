@@ -9,8 +9,10 @@ import '../../../widgets/state/loading/loading.dart';
 import '../../authentication/data/authentication_repository.dart';
 import '../../cart/view/add_to_cart/add_to_cart_button.dart';
 import '../../cart/view/cart_icon/cart_icon.dart';
-import '../../reviews/view/review_list.dart';
-import '../../reviews/view/review_star_count_section.dart';
+import '../../reviews/application/review_service.dart';
+import '../../reviews/view/review_screen/reviews_screen_controller.dart';
+import '../../reviews/view/review_screen/widgets/review_list_view.dart';
+import '../../reviews/view/review_screen/widgets/review_star_count_section.dart';
 import '../../wishlist/view/add_to_wishlist/add_to_wishlist_button.dart';
 import '../data/course_repository.dart';
 import 'course_information_section.dart';
@@ -28,6 +30,13 @@ class CourseScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final courseValue = ref.watch(courseProvider(courseId));
     return LScaffold(
+      onRefresh: () async {
+        // * Force providers fetch new data
+        ref.invalidate(courseProvider(courseId));
+        ref.invalidate(reviewsProvider(courseId));
+        ref.invalidate(reviewsControllerProvider);
+        await Future.delayed(const Duration(seconds: 1));
+      },
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -117,7 +126,17 @@ class CourseScreen extends ConsumerWidget {
                         ReviewStarCountSection(
                           courseId: courseId,
                         ),
-                        const ReviewList(),
+                        Consumer(
+                          builder: (context, ref, child) {
+                            final reviewsAsync =
+                                ref.watch(reviewsProvider(courseId));
+                            return reviewsAsync.maybeWhen(
+                              data: (reviews) =>
+                                  FixedReviewListView(reviews: reviews),
+                              orElse: SizedBox.shrink,
+                            );
+                          },
+                        ),
                         Gaps.h20,
                         SizedBox.fromSize(
                           size: const Size.fromHeight(50.0),

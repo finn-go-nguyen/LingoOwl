@@ -37,7 +37,7 @@ class CourseInformationSection extends ConsumerWidget {
           style: textStyleHelper.description,
         ),
         Gaps.h12,
-        RatingBar(
+        LRatingBar(
           rating: rating,
           ratingCount: ratingCount,
         ),

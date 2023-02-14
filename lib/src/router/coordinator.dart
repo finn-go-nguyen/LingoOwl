@@ -121,4 +121,8 @@ class LCoordinator {
       queryParams: <String, CourseId>{'courseId': courseId},
     );
   }
+
+  static void showLeaveReviewScreen(CourseId courseId) {
+    pushNamed(LRoutes.leaveReview.name, extra: courseId);
+  }
 }

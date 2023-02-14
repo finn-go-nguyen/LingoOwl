@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../../utils/base_collection_reference.dart';
 
 import '../../../../constants/firestore/collection_name.dart';
+import '../../../../utils/base_collection_reference.dart';
 import '../../model/cart.dart';
 
 abstract class RemoteCartRepository {

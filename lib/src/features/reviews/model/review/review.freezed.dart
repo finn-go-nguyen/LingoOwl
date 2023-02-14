@@ -20,10 +20,10 @@ LReview _$LReviewFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LReview {
-  String get reviewId => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get courseId => throw _privateConstructorUsedError;
-  String get reviewerName => throw _privateConstructorUsedError;
-  int get star => throw _privateConstructorUsedError;
+  int get rating => throw _privateConstructorUsedError;
   int get timeStamp => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
 
@@ -38,10 +38,10 @@ abstract class $LReviewCopyWith<$Res> {
       _$LReviewCopyWithImpl<$Res, LReview>;
   @useResult
   $Res call(
-      {String reviewId,
+      {String id,
+      String userId,
       String courseId,
-      String reviewerName,
-      int star,
+      int rating,
       int timeStamp,
       String content});
 }
@@ -59,29 +59,29 @@ class _$LReviewCopyWithImpl<$Res, $Val extends LReview>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewId = null,
+    Object? id = null,
+    Object? userId = null,
     Object? courseId = null,
-    Object? reviewerName = null,
-    Object? star = null,
+    Object? rating = null,
     Object? timeStamp = null,
     Object? content = null,
   }) {
     return _then(_value.copyWith(
-      reviewId: null == reviewId
-          ? _value.reviewId
-          : reviewId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       courseId: null == courseId
           ? _value.courseId
           : courseId // ignore: cast_nullable_to_non_nullable
               as String,
-      reviewerName: null == reviewerName
-          ? _value.reviewerName
-          : reviewerName // ignore: cast_nullable_to_non_nullable
-              as String,
-      star: null == star
-          ? _value.star
-          : star // ignore: cast_nullable_to_non_nullable
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as int,
       timeStamp: null == timeStamp
           ? _value.timeStamp
@@ -103,10 +103,10 @@ abstract class _$$_LReviewCopyWith<$Res> implements $LReviewCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String reviewId,
+      {String id,
+      String userId,
       String courseId,
-      String reviewerName,
-      int star,
+      int rating,
       int timeStamp,
       String content});
 }
@@ -121,29 +121,29 @@ class __$$_LReviewCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? reviewId = null,
+    Object? id = null,
+    Object? userId = null,
     Object? courseId = null,
-    Object? reviewerName = null,
-    Object? star = null,
+    Object? rating = null,
     Object? timeStamp = null,
     Object? content = null,
   }) {
     return _then(_$_LReview(
-      reviewId: null == reviewId
-          ? _value.reviewId
-          : reviewId // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String,
       courseId: null == courseId
           ? _value.courseId
           : courseId // ignore: cast_nullable_to_non_nullable
               as String,
-      reviewerName: null == reviewerName
-          ? _value.reviewerName
-          : reviewerName // ignore: cast_nullable_to_non_nullable
-              as String,
-      star: null == star
-          ? _value.star
-          : star // ignore: cast_nullable_to_non_nullable
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as int,
       timeStamp: null == timeStamp
           ? _value.timeStamp
@@ -161,10 +161,10 @@ class __$$_LReviewCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_LReview extends _LReview {
   const _$_LReview(
-      {required this.reviewId,
+      {required this.id,
+      required this.userId,
       required this.courseId,
-      required this.reviewerName,
-      required this.star,
+      required this.rating,
       required this.timeStamp,
       required this.content})
       : super._();
@@ -173,13 +173,13 @@ class _$_LReview extends _LReview {
       _$$_LReviewFromJson(json);
 
   @override
-  final String reviewId;
+  final String id;
+  @override
+  final String userId;
   @override
   final String courseId;
   @override
-  final String reviewerName;
-  @override
-  final int star;
+  final int rating;
   @override
   final int timeStamp;
   @override
@@ -187,7 +187,7 @@ class _$_LReview extends _LReview {
 
   @override
   String toString() {
-    return 'LReview(reviewId: $reviewId, courseId: $courseId, reviewerName: $reviewerName, star: $star, timeStamp: $timeStamp, content: $content)';
+    return 'LReview(id: $id, userId: $userId, courseId: $courseId, rating: $rating, timeStamp: $timeStamp, content: $content)';
   }
 
   @override
@@ -195,13 +195,11 @@ class _$_LReview extends _LReview {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LReview &&
-            (identical(other.reviewId, reviewId) ||
-                other.reviewId == reviewId) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.courseId, courseId) ||
                 other.courseId == courseId) &&
-            (identical(other.reviewerName, reviewerName) ||
-                other.reviewerName == reviewerName) &&
-            (identical(other.star, star) || other.star == star) &&
+            (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.timeStamp, timeStamp) ||
                 other.timeStamp == timeStamp) &&
             (identical(other.content, content) || other.content == content));
@@ -210,7 +208,7 @@ class _$_LReview extends _LReview {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, reviewId, courseId, reviewerName, star, timeStamp, content);
+      runtimeType, id, userId, courseId, rating, timeStamp, content);
 
   @JsonKey(ignore: true)
   @override
@@ -228,10 +226,10 @@ class _$_LReview extends _LReview {
 
 abstract class _LReview extends LReview {
   const factory _LReview(
-      {required final String reviewId,
+      {required final String id,
+      required final String userId,
       required final String courseId,
-      required final String reviewerName,
-      required final int star,
+      required final int rating,
       required final int timeStamp,
       required final String content}) = _$_LReview;
   const _LReview._() : super._();
@@ -239,13 +237,13 @@ abstract class _LReview extends LReview {
   factory _LReview.fromJson(Map<String, dynamic> json) = _$_LReview.fromJson;
 
   @override
-  String get reviewId;
+  String get id;
+  @override
+  String get userId;
   @override
   String get courseId;
   @override
-  String get reviewerName;
-  @override
-  int get star;
+  int get rating;
   @override
   int get timeStamp;
   @override
