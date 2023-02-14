@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constants/type_defs/type_defs.dart';
@@ -25,20 +26,6 @@ class LeaveReviewController extends StateNotifier<LeaveReviewState> {
     state = state.copyWith(rating: rating);
   }
 
-  Future<bool> submitReview(CourseId courseId, String content) async {
-    state = state.copyWith(status: const AsyncLoading());
-    final async = await AsyncValue.guard(
-      () => _reviewService.addReview(
-        reviewId: state.reviewId,
-        courseId: courseId,
-        rating: state.rating,
-        content: content,
-      ),
-    );
-    state = state.copyWith(status: async);
-    return !state.status.hasError;
-  }
-
   void _fetchReview() async {
     final reviewAsync =
         await AsyncValue.guard(() => _reviewService.fetchReview(courseId));
@@ -51,5 +38,23 @@ class LeaveReviewController extends StateNotifier<LeaveReviewState> {
 
     if (review == null) return;
     state = state.copyWith(rating: review.rating, reviewId: review.id);
+  }
+
+  void onSubmitted(CourseId courseId, String content,
+      {required VoidCallback? onSubmitSuccessfully}) async {
+    state = state.copyWith(status: const AsyncLoading());
+    final async = await AsyncValue.guard(
+      () => _reviewService.addReview(
+        reviewId: state.reviewId,
+        courseId: courseId,
+        rating: state.rating,
+        content: content,
+      ),
+    );
+    if (!async.hasError) {
+      onSubmitSuccessfully?.call();
+    }
+
+    state = state.copyWith(status: async);
   }
 }

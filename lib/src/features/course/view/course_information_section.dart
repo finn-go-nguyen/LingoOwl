@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../constants/type_defs/type_defs.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
+import '../../../constants/type_defs/type_defs.dart';
 import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/common.dart';
 
