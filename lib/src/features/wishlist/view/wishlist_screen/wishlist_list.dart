@@ -85,8 +85,7 @@ class WishlistItem extends ConsumerWidget {
                           ),
                           Gaps.h4,
                           LRatingBar(
-                            rating: course.rating,
-                            ratingCount: course.ratingCount,
+                            courseId: course.id,
                           ),
                           Gaps.h4,
                           PriceLabel(

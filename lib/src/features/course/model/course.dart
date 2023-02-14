@@ -13,8 +13,6 @@ class LCourse with _$LCourse {
     required String description,
     required String thumbnail,
     required String instructorName,
-    required double rating,
-    required int ratingCount,
     required double price,
     double? salePrice,
     required String category,

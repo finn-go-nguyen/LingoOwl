@@ -35,18 +35,8 @@ class FirestoreReviewRepository extends BaseCollectionReference<LReview>
   }
 
   @override
-  Future<void> addReview(LReview review) async {
-    Future.forEach(List.generate(15, (index) => index), (element) {
-      final review = LReview(
-        id: '$element',
-        userId: 'iYmOIIPPs7fob33BTP0eKnlIkli1',
-        courseId: '1',
-        rating: element % 5,
-        timeStamp: DateTime.now().millisecondsSinceEpoch,
-        content: '$element',
-      );
-      set(review.id, review);
-    });
+  Future<void> addReview(LReview review) {
+    return set(review.id, review);
   }
 
   @override

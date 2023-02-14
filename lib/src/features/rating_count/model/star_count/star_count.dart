@@ -3,7 +3,6 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import '../star/star.dart';
 
 part 'star_count.freezed.dart';
-part 'star_count.g.dart';
 
 @freezed
 class LStarCount with _$LStarCount {
@@ -43,6 +42,15 @@ class LStarCount with _$LStarCount {
     return sum / total;
   }
 
-  factory LStarCount.fromJson(Map<String, Object?> json) =>
-      _$LStarCountFromJson(json);
+  factory LStarCount.fromDocument(Map<String, Object?> json) => LStarCount(
+        stars: <int, LStar>{
+          5: LStar.five(json['5'] as int),
+          4: LStar.four(json['4'] as int),
+          3: LStar.three(json['3'] as int),
+          2: LStar.two(json['2'] as int),
+          1: LStar.one(json['1'] as int),
+        },
+      );
+
+  Map<String, Object?> toDocument() => throw UnimplementedError();
 }

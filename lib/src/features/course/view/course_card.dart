@@ -51,8 +51,7 @@ class CourseCardPortrait extends ConsumerWidget {
                 ),
                 Gaps.h8,
                 LRatingBar(
-                  rating: course.rating,
-                  ratingCount: course.ratingCount,
+                  courseId: course.id,
                 ),
                 Gaps.h8,
                 PriceLabel(
@@ -113,8 +112,7 @@ class CourseCardLandscape extends ConsumerWidget {
                         ),
                         Gaps.h4,
                         LRatingBar(
-                          rating: course.rating,
-                          ratingCount: course.ratingCount,
+                          courseId: course.id,
                         ),
                         Gaps.h4,
                         PriceLabel(

@@ -5,37 +5,43 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
 import '../../constants/app_parameters/app_parameters.dart';
+import '../../constants/type_defs/type_defs.dart';
+import '../../features/rating_count/data/rating_count_repository.dart';
 import '../../themes/colors.dart';
 import '../../utils/text_style_helper.dart';
+import '../state/loading/rating/rating_bar_loading.dart';
 
 class LRatingBar extends ConsumerWidget {
   const LRatingBar({
     super.key,
-    required this.rating,
-    required this.ratingCount,
+    required this.courseId,
   });
 
-  final double rating;
-  final int ratingCount;
+  final CourseId courseId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyleHelpers = ref.watch(textStyleHelperProvider(context));
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          rating.toStringAsFixed(1),
-          style: textStyleHelpers.ratingValue,
-        ),
-        Gaps.w4,
-        LRatingBarIndicator(rating: rating),
-        Gaps.w4,
-        Text(
-          '(${NumberFormat().format(ratingCount)})',
-          style: Theme.of(context).textTheme.bodySmall,
-        ),
-      ],
+    final ratingCountAsync = ref.watch(starCountProvider(courseId));
+    return ratingCountAsync.when(
+      loading: RatingBarLoading.new,
+      error: (_, __) => const SizedBox.shrink(),
+      data: (ratingCount) => Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(
+            ratingCount.average.toStringAsFixed(1),
+            style: textStyleHelpers.ratingValue,
+          ),
+          Gaps.w4,
+          LRatingBarIndicator(rating: ratingCount.average),
+          Gaps.w4,
+          Text(
+            '(${NumberFormat().format(ratingCount.total)})',
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
+      ),
     );
   }
 }
