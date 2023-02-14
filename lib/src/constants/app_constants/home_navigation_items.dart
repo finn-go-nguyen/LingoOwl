@@ -1,12 +1,12 @@
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../features/enrolled_course/view/enrolled_courses_screen.dart';
 import '../../features/home/model/home_navigation_item.dart';
 import '../../features/home/view/featured_view.dart';
 import '../../features/search/view/search_view.dart';
 import '../../features/settings/view/settings/settings_screen.dart';
 import '../../features/wishlist/view/wishlist_screen/wishlist_screen.dart';
 import '../../router/app_router.dart';
-import '../../widgets/state/unimplemented.dart';
 
 class HomeNavigationItems {
   static const featured = HomeNavigationItem(
@@ -36,7 +36,7 @@ class HomeNavigationItems {
     selectedIcon: FontAwesomeIcons.solidCirclePlay,
     tooltip: 'My learning',
     label: 'My learning',
-    view: Unimplemented(),
+    view: EnrolledCoursesScreen(),
   );
 
   static const wishlist = HomeNavigationItem(
