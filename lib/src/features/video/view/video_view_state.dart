@@ -12,5 +12,6 @@ class VideoViewState with _$VideoViewState {
     @Default(false) bool isPlaying,
     @Default(Duration()) Duration position,
     @Default(Duration()) Duration duration,
+    @Default(false) bool isFullscreen,
   }) = _VideoViewState;
 }

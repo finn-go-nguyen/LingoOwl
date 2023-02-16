@@ -65,9 +65,15 @@ class LectureScreen extends ConsumerWidget {
                     final video =
                         ref.watch(videoProvider(data.selected.videoId!));
                     return video.when(
-                      loading: LoadingState.new,
+                      loading: () => VideoView(
+                        url: null,
+                        urlKey: UniqueKey(),
+                      ),
                       error: (_, __) => const ErrorState(),
-                      data: (data) => VideoView(videoUrl: data.url),
+                      data: (data) => VideoView(
+                        url: data.url,
+                        urlKey: UniqueKey(),
+                      ),
                     );
                   },
                 ),

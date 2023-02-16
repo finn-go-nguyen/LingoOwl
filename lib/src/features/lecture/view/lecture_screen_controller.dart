@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain_manager.dart';
-import '../model/lecture/lecture.dart';
 
 import '../../../constants/type_defs/type_defs.dart';
+import '../../../domain_manager.dart';
 import '../data/lecture_repository.dart';
+import '../model/lecture/lecture.dart';
 import 'lecture_screen_state.dart';
 
 final lectureScreenControllerProvider = StateNotifierProvider.autoDispose

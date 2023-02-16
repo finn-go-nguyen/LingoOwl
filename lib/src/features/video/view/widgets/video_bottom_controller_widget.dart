@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
@@ -7,6 +5,7 @@ import 'package:video_player/video_player.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../utils/text_helpers.dart';
 import '../video_view_controller.dart';
+import 'fullscreen_switch_button.dart';
 import 'video_progress_bar.dart';
 
 class VideoBottomControllerWidget extends ConsumerWidget {
@@ -46,13 +45,7 @@ class VideoBottomControllerWidget extends ConsumerWidget {
             duration.inSeconds,
             showHour: duration.inSeconds > Duration.secondsPerHour,
           )),
-          Transform.rotate(
-            angle: pi / 4,
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.unfold_more),
-            ),
-          )
+          const FullscreenSwitchButton(),
         ],
       );
     });

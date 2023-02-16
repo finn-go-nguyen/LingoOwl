@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../router/coordinator.dart';
+
 class VideoTopControllerWidget extends StatelessWidget {
   const VideoTopControllerWidget({
     super.key,
@@ -13,9 +15,9 @@ class VideoTopControllerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.expand_more),
+        const IconButton(
+          onPressed: LCoordinator.onBack,
+          icon: Icon(Icons.expand_more),
         ),
         const Spacer(),
         TextButton(

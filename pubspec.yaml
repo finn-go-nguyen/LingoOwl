@@ -82,6 +82,7 @@ dependencies:
   uuid: ^3.0.7
   easy_debounce: ^2.0.3
   video_player: ^2.5.1
+  wakelock: ^0.6.2
   
 
 dev_dependencies:

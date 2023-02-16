@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
@@ -16,7 +18,8 @@ class VideoProgressBar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     int position = controller.value.position.inMilliseconds;
-    int duration = controller.value.duration.inMilliseconds;
+    // * Avoid assign with 0;
+    int duration = max(controller.value.duration.inMilliseconds, 1);
     int maxBuffering = 0;
     for (final DurationRange range in controller.value.buffered) {
       final int end = range.end.inMilliseconds;
