@@ -4,3 +4,4 @@ typedef CourseId = String;
 typedef TimeStamp = int;
 typedef ReviewId = String;
 typedef UserId = String;
+typedef LectureId = String;

@@ -19,4 +19,13 @@ class TabItems {
       icon: Icon(Icons.archive),
     ),
   ];
+
+  static const lecture = <Tab>[
+    Tab(
+      text: 'Lectures',
+    ),
+    Tab(
+      text: 'More',
+    ),
+  ];
 }
