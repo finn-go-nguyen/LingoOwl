@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/app_constants/tab_items.dart';
-import '../../../widgets/dialog/alert_dialog.dart';
+import '../../../../constants/app_constants/tab_items.dart';
+import '../../../../widgets/dialog/alert_dialog.dart';
 
 class LectureTabBar extends StatelessWidget {
   const LectureTabBar({super.key});

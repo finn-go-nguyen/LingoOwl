@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../widgets/dialog/alert_dialog.dart';
+import '../../../../widgets/dialog/alert_dialog.dart';
+import '../../model/lecture/lecture.dart';
 
-class LectureListTile extends StatelessWidget {
+class LectureListTile extends ConsumerWidget {
   const LectureListTile({
     super.key,
+    required this.lecture,
     this.isSelected = false,
+    required this.onTap,
   });
 
+  final LLecture lecture;
   final bool isSelected;
+  final VoidCallback onTap;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return ListTile(
-      onTap: () => showNotImplementedAlertDialog(context: context),
+      onTap: onTap,
       horizontalTitleGap: 0.0,
       selected: isSelected,
       contentPadding: EdgeInsets.zero,
@@ -21,7 +27,7 @@ class LectureListTile extends StatelessWidget {
         dimension: 50.0,
         child: Center(
           child: Text(
-            '1',
+            lecture.index.toString(),
             style: Theme.of(context).textTheme.headlineSmall,
           ),
         ),
@@ -31,7 +37,7 @@ class LectureListTile extends StatelessWidget {
         icon: const Icon(Icons.download_for_offline_outlined),
       ),
       title: Text(
-        'Introduction',
+        lecture.name,
         overflow: TextOverflow.ellipsis,
         maxLines: 1,
         style: Theme.of(context)

@@ -126,7 +126,7 @@ class LCoordinator {
     pushNamed(LRoutes.leaveReview.name, extra: courseId);
   }
 
-  static void showLectureScreen() {
-    pushNamed(LRoutes.lecture.name);
+  static void showLectureScreen(CourseId courseId) {
+    pushNamed(LRoutes.lecture.name, extra: courseId);
   }
 }

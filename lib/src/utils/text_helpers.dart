@@ -19,10 +19,11 @@ class TextHelpers {
     assert(seconds >= 0);
     String result =
         (seconds % Duration.secondsPerMinute).toString().padLeft(2, '0');
-    String minutes = (seconds / Duration.secondsPerMinute)
-        .floor()
-        .toString()
-        .padLeft(2, '0');
+    String minutes =
+        ((seconds / Duration.secondsPerMinute) % Duration.minutesPerHour)
+            .floor()
+            .toString()
+            .padLeft(2, '0');
     result = '$minutes:$result';
 
     if (showHour) {

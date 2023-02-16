@@ -30,7 +30,7 @@ class EnrolledCourseCard extends ConsumerWidget {
         child: Column(
           children: [
             InkWell(
-              onTap: () => LCoordinator.showLectureScreen(),
+              onTap: () => LCoordinator.showLectureScreen(course.id),
               child: Padding(
                 padding: UiParameters.courseCardPadding,
                 child: Row(
