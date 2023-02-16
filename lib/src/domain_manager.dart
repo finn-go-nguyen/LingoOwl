@@ -9,9 +9,11 @@ import 'features/cart/data/local/local__cart_repository.dart';
 import 'features/cart/data/remote/remote_cart_repository.dart';
 import 'features/course/data/course_repository.dart';
 import 'features/enrolled_course/data/enrolled_course_repository.dart';
+import 'features/lecture/data/lecture_repository.dart';
 import 'features/profile/data/user_repository.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
 import 'features/reviews/data/review_repository.dart';
+import 'features/video/data/video_repository.dart';
 import 'features/wishlist/data/wishlist_repository.dart';
 
 class DomainManager {
@@ -61,5 +63,13 @@ class DomainManager {
   final enrolledCourseRepositoryProvider =
       Provider<EnrolledCourseRepository>((ref) {
     return FirestoreEnrolledCourseRepository(FirebaseFirestore.instance);
+  });
+
+  final lectureRepositoryProvider = Provider<LectureRepository>((ref) {
+    return FirestoreLectureRepository(FirebaseFirestore.instance);
+  });
+
+  final videoRepositoryProvider = Provider<VideoRepository>((ref) {
+    return FirestoreVideoRepository(FirebaseFirestore.instance);
   });
 }

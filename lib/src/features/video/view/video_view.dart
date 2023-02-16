@@ -43,12 +43,6 @@ class _VideoViewState extends ConsumerState<VideoView> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final isInitialized = ref
         .watch(videoControllerProvider.select((state) => state.isInitialized));

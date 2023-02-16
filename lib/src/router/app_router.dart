@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../constants/app_constants/home_navigation_items.dart';
+import '../constants/type_defs/type_defs.dart';
 import '../features/authentication/data/authentication_repository.dart';
 import '../features/authentication/view/create_account/account_create_screen.dart';
 import '../features/authentication/view/email_password_sign_in/email_password_sign_in_screen.dart';
@@ -237,16 +238,16 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         path: '/leave-review',
         pageBuilder: (context, state) => MaterialPage(
           fullscreenDialog: true,
-          child: LeaveReviewScreen(courseId: state.extra as String),
+          child: LeaveReviewScreen(courseId: state.extra as CourseId),
         ),
       ),
       GoRoute(
         parentNavigatorKey: LCoordinator.navigatorKey,
         name: LRoutes.lecture.name,
         path: '/lecture',
-        pageBuilder: (context, state) => const MaterialPage(
+        pageBuilder: (context, state) => MaterialPage(
           fullscreenDialog: true,
-          child: LectureScreen(),
+          child: LectureScreen(courseId: state.extra as CourseId),
         ),
       ),
     ],
