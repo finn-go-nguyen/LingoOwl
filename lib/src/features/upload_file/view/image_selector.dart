@@ -138,7 +138,7 @@ class ImagePreviewer extends StatelessWidget {
   }
 }
 
-class ProgressBar extends StatelessWidget {
+class ProgressBar extends ConsumerWidget {
   const ProgressBar({
     super.key,
     required this.progress,
@@ -149,7 +149,8 @@ class ProgressBar extends StatelessWidget {
   final bool showProgress;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final textHelpers = ref.watch(textHelpersProvider);
     return Container(
       height: UiParameters.imageSelectorUploadButtonHeight,
       padding: const EdgeInsets.all(1.0),
@@ -167,7 +168,7 @@ class ProgressBar extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    TextHelpers.toProgress(progress),
+                    textHelpers.toProgress(progress),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
                 )

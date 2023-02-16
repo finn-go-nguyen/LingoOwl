@@ -81,6 +81,7 @@ dependencies:
   path_provider: ^2.0.12
   uuid: ^3.0.7
   easy_debounce: ^2.0.3
+  video_player: ^2.5.1
   
 
 dev_dependencies:

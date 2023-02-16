@@ -28,9 +28,10 @@ class ReviewCard extends ConsumerWidget {
         Consumer(
           builder: (context, ref, child) {
             final user = ref.watch(userFutureProvider(review.userId));
+            final textHelpers = ref.watch(textHelpersProvider);
             return user.maybeWhen(
               data: (user) => Text(
-                TextHelpers.toDisplayName(
+                textHelpers.toDisplayName(
                   firstName: user.firstName,
                   lastName: user.lastName,
                 ),

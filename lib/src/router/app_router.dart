@@ -12,6 +12,7 @@ import '../features/cart/view/cart_screen/cart_screen.dart';
 import '../features/course/view/course_screen.dart';
 import '../features/home/model/home_navigation_item.dart';
 import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
+import '../features/lecture/view/lecture_screen.dart';
 import '../features/profile/view/account_security/account_security_view.dart';
 import '../features/profile/view/close_account/close_account_confirmation_screen.dart';
 import '../features/profile/view/close_account/close_account_view.dart';
@@ -46,7 +47,8 @@ enum LRoutes {
   course,
   cart,
   reviews,
-  leaveReview;
+  leaveReview,
+  lecture;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -236,6 +238,15 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         pageBuilder: (context, state) => MaterialPage(
           fullscreenDialog: true,
           child: LeaveReviewScreen(courseId: state.extra as String),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: LCoordinator.navigatorKey,
+        name: LRoutes.lecture.name,
+        path: '/lecture',
+        pageBuilder: (context, state) => const MaterialPage(
+          fullscreenDialog: true,
+          child: LectureScreen(),
         ),
       ),
     ],

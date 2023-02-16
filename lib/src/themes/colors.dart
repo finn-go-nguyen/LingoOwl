@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LColors {
+  static const primary = Colors.purple;
   static const shimmerGradient = LinearGradient(
     colors: [
       Color(0xFFEBEBF4),
@@ -23,4 +24,7 @@ class LColors {
 
   static const rating = Colors.orange;
   static const strikeThrough = Colors.black54;
+  static const videoDimBackground = Color.fromARGB(125, 0, 0, 0);
+  static const videoProgressBarBackground = Color.fromARGB(50, 255, 255, 255);
+  static const videoProgressBarBuffer = Color.fromARGB(50, 255, 255, 255);
 }

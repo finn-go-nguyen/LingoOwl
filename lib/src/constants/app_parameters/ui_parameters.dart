@@ -44,4 +44,11 @@ class UiParameters {
 
   // Review
   static const reviewCardPadding = EdgeInsets.symmetric(vertical: 8.0);
+
+  static const videoAspectRatio = 16.0 / 9.0;
+
+  static const videoMidControllerButtonSize = 45.0;
+
+  static const scrubberSize = 15.0;
+  static const halfScrubberSize = 7.5;
 }
