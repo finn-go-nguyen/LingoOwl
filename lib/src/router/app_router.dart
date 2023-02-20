@@ -14,6 +14,7 @@ import '../features/course/view/course_screen.dart';
 import '../features/home/model/home_navigation_item.dart';
 import '../features/home/view/scaffold_with_bottom_navigation_bar.dart';
 import '../features/lecture/view/lecture_screen.dart';
+import '../features/note/view/note/note_screen.dart';
 import '../features/profile/view/account_security/account_security_view.dart';
 import '../features/profile/view/close_account/close_account_confirmation_screen.dart';
 import '../features/profile/view/close_account/close_account_view.dart';
@@ -49,7 +50,8 @@ enum LRoutes {
   cart,
   reviews,
   leaveReview,
-  lecture;
+  lecture,
+  notes;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -222,6 +224,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ForgotPasswordScreen(email: state.extra as String?),
       ),
       GoRoute(
+        parentNavigatorKey: LCoordinator.navigatorKey,
         name: LRoutes.unimplemented.name,
         path: '/unimplemented',
         builder: (context, state) => const Unimplemented(),
@@ -249,6 +252,16 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           fullscreenDialog: true,
           child: LectureScreen(courseId: state.extra as CourseId),
         ),
+        routes: [
+          GoRoute(
+            parentNavigatorKey: LCoordinator.navigatorKey,
+            name: LRoutes.notes.name,
+            path: 'notes',
+            pageBuilder: (context, state) => const DialogPage(
+              child: NoteScreen(),
+            ),
+          ),
+        ],
       ),
     ],
   );
@@ -266,3 +279,16 @@ GoRoute _bottomNavigationItemBuilder(HomeNavigationItem item, Ref ref,
       },
       routes: routes,
     );
+
+class DialogPage<T> extends Page<T> {
+  final Widget child;
+
+  const DialogPage({required this.child, super.key});
+
+  @override
+  Route<T> createRoute(BuildContext context) => DialogRoute<T>(
+        context: context,
+        settings: this,
+        builder: (context) => child,
+      );
+}

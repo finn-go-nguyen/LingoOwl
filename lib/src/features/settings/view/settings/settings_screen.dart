@@ -41,26 +41,17 @@ class SettingsScreen extends ConsumerWidget {
             ),
             Gaps.h20,
             TextButton(
-              onPressed: () async {
-                final isConfirmed = await showAlertDialog(
-                  context: context,
-                  title: 'Sign Out',
-                  content: 'Sign out from LingoOwl?',
-                  defaultActionText: 'Sign Out',
-                  cancelActionText: 'Cancel',
-                );
-
-                if (isConfirmed ?? false) {
-                  ref
-                      .read(settingsControllerProvider.notifier)
-                      .signOut()
-                      .then((isSuccess) {
-                    if (isSuccess) {
-                      LCoordinator.showWelcomeScreen();
-                    }
-                  });
-                }
-              },
+              onPressed: () => showAlertDialog(
+                context: context,
+                title: 'Sign Out',
+                content: 'Sign out from LingoOwl?',
+                defaultActionText: 'Sign Out',
+                cancelActionText: 'Cancel',
+                onConfirmPressed: () =>
+                    ref.read(settingsControllerProvider.notifier).signOut(
+                          onSignOutSuccessful: LCoordinator.showWelcomeScreen,
+                        ),
+              ),
               child: const Text('Sign out'),
             )
           ],

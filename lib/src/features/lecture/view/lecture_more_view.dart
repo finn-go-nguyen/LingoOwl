@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_constants/lecture_more_items.dart';
-import '../../../widgets/dialog/alert_dialog.dart';
+import '../../../router/coordinator.dart';
 
 class LectureMoreView extends StatefulWidget {
   const LectureMoreView({super.key});
@@ -22,7 +22,7 @@ class _LectureMoreViewState extends State<LectureMoreView>
           (index) {
             final item = LectureMoreItem.items[index];
             return ListTile(
-              onTap: () => showNotImplementedAlertDialog(context: context),
+              onTap: () => LCoordinator.pushNamed(item.route.name),
               leading: Icon(item.iconData),
               title: Text(item.label),
             );

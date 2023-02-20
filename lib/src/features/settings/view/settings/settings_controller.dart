@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../domain_manager.dart';
@@ -17,9 +18,11 @@ class SettingsController extends StateNotifier<AsyncValue<void>> {
   final AuthenticationRepository _authenticationRepository;
 
   /// return true if sign out successfully
-  Future<bool> signOut() async {
+  void signOut({VoidCallback? onSignOutSuccessful}) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() => _authenticationRepository.signOut());
-    return !state.hasError;
+    if (!state.hasError) {
+      onSignOutSuccessful?.call();
+    }
   }
 }

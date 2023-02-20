@@ -9,8 +9,7 @@ import '../../../constants/mocks/videos.dart';
 import 'video_view_state.dart';
 
 final videoControllerProvider =
-    StateNotifierProvider.autoDispose<VideoViewController, VideoViewState>(
-        (ref) {
+    StateNotifierProvider<VideoViewController, VideoViewState>((ref) {
   return VideoViewController();
 });
 
@@ -123,6 +122,9 @@ class VideoViewController extends StateNotifier<VideoViewState> {
       state = state.copyWith(status: AsyncError(e, StackTrace.current));
     }
   }
+
+  void onAddNoteButtonPressed(VideoPlayerController controller) =>
+      _pause(controller);
 
   void _seekTo(VideoPlayerController controller, Duration position) async {
     final async = await AsyncValue.guard(() => controller.seekTo(position));

@@ -8,6 +8,8 @@ Future<bool?> showAlertDialog({
   String? content,
   String? cancelActionText,
   String defaultActionText = 'OK',
+  VoidCallback? onConfirmPressed,
+  VoidCallback? onCancelPressed,
 }) async {
   return showDialog(
     context: context,
@@ -18,11 +20,17 @@ Future<bool?> showAlertDialog({
         if (cancelActionText != null)
           TextButton(
             child: Text(cancelActionText),
-            onPressed: () => LCoordinator.onBack(false),
+            onPressed: () {
+              LCoordinator.onBack(false);
+              onCancelPressed?.call();
+            },
           ),
         TextButton(
           child: Text(defaultActionText),
-          onPressed: () => LCoordinator.onBack(true),
+          onPressed: () {
+            LCoordinator.onBack(true);
+            onConfirmPressed?.call();
+          },
         ),
       ],
     ),

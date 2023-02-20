@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../utils/text_helpers.dart';
+import '../../../note/view/add_note/add_note_button.dart';
 import '../video_view_controller.dart';
 import 'fullscreen_switch_button.dart';
 import 'video_progress_bar.dart';
@@ -24,11 +25,14 @@ class VideoBottomControllerWidget extends ConsumerWidget {
           ref.watch(videoControllerProvider.select((state) => state.position));
       final duration =
           ref.watch(videoControllerProvider.select((state) => state.duration));
+
       return Row(
         children: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.edit_note),
+          AddNoteButton(
+            onAddButtonPressed: () => ref
+                .read(videoControllerProvider.notifier)
+                .onAddNoteButtonPressed(controller),
+            position: controller.value.position,
           ),
           Text(textHelpers.toTimeLabel(
             position.inSeconds,

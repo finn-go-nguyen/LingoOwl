@@ -56,50 +56,57 @@ class LectureScreen extends ConsumerWidget {
       body: state.when(
         loading: LoadingState.new,
         error: (_, __) => const ErrorState(),
-        data: (data) => LScaffold(
-          body: Column(
-            children: [
-              if (data.selected.type.isVideo)
-                Consumer(
-                  builder: (context, ref, child) {
-                    final video =
-                        ref.watch(videoProvider(data.selected.videoId!));
-                    return video.when(
-                      loading: () => VideoView(
-                        url: null,
-                        urlKey: UniqueKey(),
-                      ),
-                      error: (_, __) => const ErrorState(),
-                      data: (data) => VideoView(
-                        url: data.url,
-                        urlKey: UniqueKey(),
-                      ),
-                    );
-                  },
-                ),
-              Expanded(
-                child: DefaultTabController(
-                  length: 2,
-                  child: NestedScrollView(
-                    headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                      header,
-                      const LectureTabBar(),
-                    ],
-                    body: TabBarView(
-                      children: [
-                        LectureSelectionView(
-                          courseId: courseId,
-                          lectures: data.lectures,
-                          sections: data.sections,
-                          selectedIndex: data.selected.index,
+        data: (data) => ProviderScope(
+          overrides: [
+            lectureScreenCurrentCourseIdProvider.overrideWithValue(courseId),
+            lectureScreenCurrentIndexProvider
+                .overrideWithValue(data.selected.index),
+          ],
+          child: LScaffold(
+            body: Column(
+              children: [
+                if (data.selected.type.isVideo)
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final video =
+                          ref.watch(videoProvider(data.selected.videoId!));
+                      return video.when(
+                        loading: () => VideoView(
+                          url: null,
+                          urlKey: UniqueKey(),
                         ),
-                        const LectureMoreView(),
+                        error: (_, __) => const ErrorState(),
+                        data: (data) => VideoView(
+                          url: data.url,
+                          urlKey: UniqueKey(),
+                        ),
+                      );
+                    },
+                  ),
+                Expanded(
+                  child: DefaultTabController(
+                    length: 2,
+                    child: NestedScrollView(
+                      headerSliverBuilder: (context, innerBoxIsScrolled) => [
+                        header,
+                        const LectureTabBar(),
                       ],
+                      body: TabBarView(
+                        children: [
+                          LectureSelectionView(
+                            courseId: courseId,
+                            lectures: data.lectures,
+                            sections: data.sections,
+                            selectedIndex: data.selected.index,
+                          ),
+                          const LectureMoreView(),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

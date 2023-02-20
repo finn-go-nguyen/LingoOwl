@@ -32,8 +32,4 @@ class BaseCollectionReference<T> {
       yield snapshot.data()!;
     }
   }
-
-  Future<void> add(T item) {
-    return ref.add(item);
-  }
 }
