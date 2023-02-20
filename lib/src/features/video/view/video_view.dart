@@ -15,11 +15,9 @@ class VideoView extends StatelessWidget {
   const VideoView({
     super.key,
     required this.url,
-    required this.urlKey,
   });
 
   final String? url;
-  final UniqueKey urlKey;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class VideoView extends StatelessWidget {
         ? const VideoLoading()
         : LVideoPlayer(
             videoUrl: url!,
-            key: urlKey,
+            key: ValueKey(url),
           );
   }
 }
