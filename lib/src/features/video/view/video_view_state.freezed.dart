@@ -22,6 +22,7 @@ mixin _$VideoViewState {
   bool get isPlaying => throw _privateConstructorUsedError;
   Duration get position => throw _privateConstructorUsedError;
   Duration get duration => throw _privateConstructorUsedError;
+  bool get isFullscreen => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VideoViewStateCopyWith<VideoViewState> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $VideoViewStateCopyWith<$Res> {
       AsyncValue<void> status,
       bool isPlaying,
       Duration position,
-      Duration duration});
+      Duration duration,
+      bool isFullscreen});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$VideoViewStateCopyWithImpl<$Res, $Val extends VideoViewState>
     Object? isPlaying = null,
     Object? position = null,
     Object? duration = null,
+    Object? isFullscreen = null,
   }) {
     return _then(_value.copyWith(
       isInitialized: null == isInitialized
@@ -88,6 +91,10 @@ class _$VideoViewStateCopyWithImpl<$Res, $Val extends VideoViewState>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      isFullscreen: null == isFullscreen
+          ? _value.isFullscreen
+          : isFullscreen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$_VideoViewStateCopyWith<$Res>
       AsyncValue<void> status,
       bool isPlaying,
       Duration position,
-      Duration duration});
+      Duration duration,
+      bool isFullscreen});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$_VideoViewStateCopyWithImpl<$Res>
     Object? isPlaying = null,
     Object? position = null,
     Object? duration = null,
+    Object? isFullscreen = null,
   }) {
     return _then(_$_VideoViewState(
       isInitialized: null == isInitialized
@@ -152,6 +161,10 @@ class __$$_VideoViewStateCopyWithImpl<$Res>
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as Duration,
+      isFullscreen: null == isFullscreen
+          ? _value.isFullscreen
+          : isFullscreen // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -165,7 +178,8 @@ class _$_VideoViewState implements _VideoViewState {
       this.status = const AsyncLoading(),
       this.isPlaying = false,
       this.position = const Duration(),
-      this.duration = const Duration()});
+      this.duration = const Duration(),
+      this.isFullscreen = false});
 
   @override
   @JsonKey()
@@ -185,10 +199,13 @@ class _$_VideoViewState implements _VideoViewState {
   @override
   @JsonKey()
   final Duration duration;
+  @override
+  @JsonKey()
+  final bool isFullscreen;
 
   @override
   String toString() {
-    return 'VideoViewState(isInitialized: $isInitialized, showController: $showController, status: $status, isPlaying: $isPlaying, position: $position, duration: $duration)';
+    return 'VideoViewState(isInitialized: $isInitialized, showController: $showController, status: $status, isPlaying: $isPlaying, position: $position, duration: $duration, isFullscreen: $isFullscreen)';
   }
 
   @override
@@ -206,12 +223,14 @@ class _$_VideoViewState implements _VideoViewState {
             (identical(other.position, position) ||
                 other.position == position) &&
             (identical(other.duration, duration) ||
-                other.duration == duration));
+                other.duration == duration) &&
+            (identical(other.isFullscreen, isFullscreen) ||
+                other.isFullscreen == isFullscreen));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, isInitialized, showController,
-      status, isPlaying, position, duration);
+      status, isPlaying, position, duration, isFullscreen);
 
   @JsonKey(ignore: true)
   @override
@@ -227,7 +246,8 @@ abstract class _VideoViewState implements VideoViewState {
       final AsyncValue<void> status,
       final bool isPlaying,
       final Duration position,
-      final Duration duration}) = _$_VideoViewState;
+      final Duration duration,
+      final bool isFullscreen}) = _$_VideoViewState;
 
   @override
   bool get isInitialized;
@@ -241,6 +261,8 @@ abstract class _VideoViewState implements VideoViewState {
   Duration get position;
   @override
   Duration get duration;
+  @override
+  bool get isFullscreen;
   @override
   @JsonKey(ignore: true)
   _$$_VideoViewStateCopyWith<_$_VideoViewState> get copyWith =>

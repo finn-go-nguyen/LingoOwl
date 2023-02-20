@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
+import 'package:wakelock/wakelock.dart';
 
 import '../../../constants/mocks/videos.dart';
 import 'video_view_state.dart';
@@ -66,6 +68,7 @@ class VideoViewController extends StateNotifier<VideoViewState> {
     state = state.copyWith(showController: false);
   }
 
+  /// Update current time
   void updateOnPlaying({required Duration position}) {
     state = state.copyWith(position: position);
   }
@@ -103,6 +106,24 @@ class VideoViewController extends StateNotifier<VideoViewState> {
     onHorizontalDragEnd(controller);
   }
 
+  void onFullscreenButtonPressed() async {
+    try {
+      await _enterFullscreenMode();
+      state = state.copyWith(isFullscreen: true);
+    } catch (e) {
+      state = state.copyWith(status: AsyncError(e, StackTrace.current));
+    }
+  }
+
+  void onExitFullscreenButtonPressed() async {
+    try {
+      await _exitFullscreenMode();
+      state = state.copyWith(isFullscreen: false);
+    } catch (e) {
+      state = state.copyWith(status: AsyncError(e, StackTrace.current));
+    }
+  }
+
   void _seekTo(VideoPlayerController controller, Duration position) async {
     final async = await AsyncValue.guard(() => controller.seekTo(position));
     state = state.copyWith(status: async);
@@ -124,9 +145,35 @@ class VideoViewController extends StateNotifier<VideoViewState> {
     );
   }
 
+  Future<void> _enterFullscreenMode() async {
+    await Wakelock.enable();
+    Future.wait([
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: List.empty(),
+      ),
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ]),
+    ]);
+  }
+
+  Future<void> _exitFullscreenMode() async {
+    await Wakelock.disable();
+    Future.wait([
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge),
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+      ]),
+    ]);
+  }
+
   @override
   void dispose() {
     timer?.cancel();
-    super.dispose();
+    _exitFullscreenMode().then(
+      (_) => super.dispose(),
+    );
   }
 }
