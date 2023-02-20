@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../themes/colors.dart';
+import '../../../utils/logger.dart';
 import '../../../widgets/state/loading/video/video_loading.dart';
 import 'video_view_controller.dart';
 import 'widgets/video_bottom_controller_widget.dart';
@@ -22,6 +23,7 @@ class VideoView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    log.wtf('VideoView building...');
     return url == null
         ? const VideoLoading()
         : LVideoPlayer(
