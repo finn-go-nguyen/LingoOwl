@@ -6,7 +6,7 @@ import '../../../constants/enums/enrolled_course_status.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
-import '../../cart/view/cart_icon/cart_icon.dart';
+import '../../cart/view/cart_icon_button/cart_icon_button.dart';
 import '../data/enrolled_course_repository.dart';
 import '../model/enrolled_course.dart';
 import 'enrolled_course_list_view.dart';
@@ -21,7 +21,7 @@ class EnrolledCoursesScreen extends StatelessWidget {
         title: 'My courses',
         actions: [
           // TODO: Add search icon button
-          CartIcon(),
+          CartIconButton(),
         ],
       ),
       body: DefaultTabController(
