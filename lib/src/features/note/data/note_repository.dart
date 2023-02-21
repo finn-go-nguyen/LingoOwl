@@ -5,4 +5,5 @@ abstract class NoteRepository {
   Future<void> addNote(LNote note);
   Future<void> editNote(LNote note);
   Future<void> deleteNote(NoteId id);
+  Future<List<LNote>> fetchByCourse(UserId userId, CourseId courseId);
 }

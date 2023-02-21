@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../router/coordinator.dart';
-import '../../../../utils/async_value_ui.dart';
 import '../../../lecture/view/lecture_screen_controller.dart';
 import 'add_note_bottom_sheet.dart';
 import 'add_note_controller.dart';
@@ -19,10 +18,6 @@ class AddNoteButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(addNoteControllerProvider, (previous, next) {
-      next.showSuccess(context, content: 'Note added!');
-      next.showError(context);
-    });
     final controller = ref.watch(addNoteControllerProvider.notifier);
     return IconButton(
       onPressed: () async {

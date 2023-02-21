@@ -5,6 +5,7 @@ import '../../../constants/firestore/collection_name.dart';
 import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
 import '../../../utils/base_collection_reference.dart';
+import '../model/lecture/lecture.dart';
 import '../model/wrapper/lecture_wrapper.dart';
 
 final lectureWrapperProvider =
@@ -13,6 +14,13 @@ final lectureWrapperProvider =
       ref.watch(DomainManager.instance.lectureRepositoryProvider);
 
   return lectureRepository.getLecture(courseId);
+});
+
+final lecturesProvider =
+    FutureProvider.family<List<LLecture>, CourseId>((ref, courseId) async {
+  final lectureWrapper =
+      await ref.watch(lectureWrapperProvider(courseId).future);
+  return lectureWrapper.lectures;
 });
 
 abstract class LectureRepository {

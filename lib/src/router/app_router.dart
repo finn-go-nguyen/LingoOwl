@@ -24,6 +24,7 @@ import '../features/profile/view/profile_details_screen.dart';
 import '../features/reviews/view/leave_review_screen/leave_review_screen.dart';
 import '../features/reviews/view/review_screen/reviews_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
+import '../utils/dialog_page_route.dart';
 import '../utils/refresh_listenable.dart';
 import '../widgets/common/common.dart';
 import '../widgets/state/unimplemented.dart';
@@ -115,6 +116,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
         ],
       ),
       ShellRoute(
+        navigatorKey: LCoordinator.shellKey,
         builder: (_, state, child) {
           return ScaffoldWithBottomNavigationBar(child: child);
         },
@@ -154,7 +156,31 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             ],
           ),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[1], ref),
-          _bottomNavigationItemBuilder(HomeNavigationItems.items[2], ref),
+          _bottomNavigationItemBuilder(
+            HomeNavigationItems.items[2],
+            ref,
+            routes: [
+              GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
+                name: LRoutes.lecture.name,
+                path: 'lecture',
+                pageBuilder: (context, state) => MaterialPage(
+                  fullscreenDialog: true,
+                  child: LectureScreen(courseId: state.extra as CourseId),
+                ),
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: LCoordinator.navigatorKey,
+                    name: LRoutes.notes.name,
+                    path: 'notes',
+                    pageBuilder: (context, state) => DialogPage(
+                      child: NoteScreen(courseId: state.extra as CourseId),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[3], ref),
           _bottomNavigationItemBuilder(
             HomeNavigationItems.items[4],
@@ -244,25 +270,6 @@ final goRouterProvider = Provider<GoRouter>((ref) {
           child: LeaveReviewScreen(courseId: state.extra as CourseId),
         ),
       ),
-      GoRoute(
-        parentNavigatorKey: LCoordinator.navigatorKey,
-        name: LRoutes.lecture.name,
-        path: '/lecture',
-        pageBuilder: (context, state) => MaterialPage(
-          fullscreenDialog: true,
-          child: LectureScreen(courseId: state.extra as CourseId),
-        ),
-        routes: [
-          GoRoute(
-            parentNavigatorKey: LCoordinator.navigatorKey,
-            name: LRoutes.notes.name,
-            path: 'notes',
-            pageBuilder: (context, state) => const DialogPage(
-              child: NoteScreen(),
-            ),
-          ),
-        ],
-      ),
     ],
   );
 });
@@ -279,16 +286,3 @@ GoRoute _bottomNavigationItemBuilder(HomeNavigationItem item, Ref ref,
       },
       routes: routes,
     );
-
-class DialogPage<T> extends Page<T> {
-  final Widget child;
-
-  const DialogPage({required this.child, super.key});
-
-  @override
-  Route<T> createRoute(BuildContext context) => DialogRoute<T>(
-        context: context,
-        settings: this,
-        builder: (context) => child,
-      );
-}
