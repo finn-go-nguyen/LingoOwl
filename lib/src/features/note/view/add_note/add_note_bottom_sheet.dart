@@ -11,17 +11,19 @@ class AddNoteBottomSheet extends StatefulWidget {
     super.key,
     required this.onSaveButtonPressed,
     required this.position,
+    this.content,
   });
 
   final void Function(String content) onSaveButtonPressed;
   final Duration position;
+  final String? content;
 
   @override
   State<AddNoteBottomSheet> createState() => _AddNoteBottomSheetState();
 }
 
 class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
-  final _controller = TextEditingController();
+  late final _controller = TextEditingController(text: widget.content);
 
   @override
   void dispose() {
@@ -85,11 +87,8 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
                       child: const Text('Cancel'),
                     ),
                     const Spacer(),
-                    Text('Note at ${TextHelpers().toTimeLabel(
-                      widget.position.inSeconds,
-                      showHour:
-                          widget.position.inSeconds > Duration.secondsPerHour,
-                    )}'),
+                    Text(
+                        'Note at ${TextHelpers().toTimeLabel(widget.position.inSeconds)}'),
                     Gaps.w12,
                     FilledButton(
                       onPressed: () =>

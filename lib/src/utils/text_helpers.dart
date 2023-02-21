@@ -15,7 +15,7 @@ class TextHelpers {
     return '${(progress * 100).toStringAsFixed(1)} %';
   }
 
-  String toTimeLabel(int seconds, {required bool showHour}) {
+  String toTimeLabel(int seconds) {
     assert(seconds >= 0);
     String result =
         (seconds % Duration.secondsPerMinute).toString().padLeft(2, '0');
@@ -26,6 +26,7 @@ class TextHelpers {
             .padLeft(2, '0');
     result = '$minutes:$result';
 
+    bool showHour = seconds > Duration.secondsPerHour;
     if (showHour) {
       String hours = (seconds / Duration.secondsPerHour)
           .floor()

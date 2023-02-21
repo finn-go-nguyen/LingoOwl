@@ -6,6 +6,7 @@ import 'app_router.dart';
 
 class LCoordinator {
   static final navigatorKey = GlobalKey<NavigatorState>();
+  static final shellKey = GlobalKey<NavigatorState>();
   static BuildContext get context => navigatorKey.currentState!.context;
 
   static String get location => GoRouter.of(context).location;
@@ -127,6 +128,10 @@ class LCoordinator {
   }
 
   static void showLectureScreen(CourseId courseId) {
-    pushNamed(LRoutes.lecture.name, extra: courseId);
+    goNamed(LRoutes.lecture.name, extra: courseId);
+  }
+
+  static void showNoteScreen(CourseId courseId) {
+    goNamed(LRoutes.notes.name, extra: courseId);
   }
 }

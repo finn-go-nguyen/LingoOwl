@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_constants/lecture_more_items.dart';
+import '../../../constants/type_defs/type_defs.dart';
 import '../../../router/coordinator.dart';
 
 class LectureMoreView extends StatefulWidget {
-  const LectureMoreView({super.key});
+  const LectureMoreView({
+    super.key,
+    required this.courseId,
+  });
+
+  final CourseId courseId;
 
   @override
   State<LectureMoreView> createState() => _LectureMoreViewState();
@@ -22,7 +28,7 @@ class _LectureMoreViewState extends State<LectureMoreView>
           (index) {
             final item = LectureMoreItem.items[index];
             return ListTile(
-              onTap: () => LCoordinator.pushNamed(item.route.name),
+              onTap: () => LCoordinator.showNoteScreen(widget.courseId),
               leading: Icon(item.iconData),
               title: Text(item.label),
             );

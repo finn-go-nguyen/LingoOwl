@@ -8,10 +8,12 @@ import '../../../domain_manager.dart';
 import '../../../utils/logger.dart';
 import '../model/auth_user.dart';
 
-final uidProvider = Provider.autoDispose<String?>((ref) {
-  final authRepository =
-      ref.watch(DomainManager.instance.authRepositoryProvider);
-  return authRepository.currentUser?.id;
+final uidProvider = Provider<String?>((ref) {
+  final userAsync = ref.watch(authStateChangeStreamProvider);
+  return userAsync.maybeWhen(
+    data: (data) => data?.id,
+    orElse: () => null,
+  );
 });
 
 final isSignedInProvider = Provider<bool>((ref) {
