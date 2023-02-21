@@ -25,7 +25,6 @@ import '../features/reviews/view/leave_review_screen/leave_review_screen.dart';
 import '../features/reviews/view/review_screen/reviews_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
 import '../utils/dialog_page_route.dart';
-import '../utils/refresh_listenable.dart';
 import '../widgets/common/common.dart';
 import '../widgets/state/unimplemented.dart';
 import 'coordinator.dart';
@@ -58,8 +57,9 @@ enum LRoutes {
       this == LRoutes.profile || this == LRoutes.accountSecurity;
 }
 
-final goRouterProvider = Provider<GoRouter>((ref) {
+final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
   final homePath = HomeNavigationItems.items[0].path;
+  final authState = ref.watch(authStateChangeStreamProvider);
   return GoRouter(
     navigatorKey: LCoordinator.navigatorKey,
     debugLogDiagnostics: true,
@@ -67,22 +67,27 @@ final goRouterProvider = Provider<GoRouter>((ref) {
 
     /// Every time the [stream] receives an event the [GoRouter] will refresh its
     /// current route.
-    refreshListenable:
-        RefreshListenable(ref.watch(authStateChangeStreamProvider.stream)),
+    // refreshListenable:
+    //     RefreshListenable(ref.watch(authStateChangeStreamProvider.stream)),
     redirect: (context, state) {
-      final isSignedIn = ref.watch(isSignedInProvider);
+      // If our async state is loading, don't perform redirects, yet
+      if (authState.isLoading || authState.hasError) return null;
+
+      final isSignedIn = authState.valueOrNull != null;
+
       if (isSignedIn) {
         if (state.location.contains(RegExp(r'welcome|signIn'))) {
           return homePath;
         }
       } else {
-        if (state.location.contains(RegExp(r'settings|leave-review'))) {
+        if (state.location
+            .contains(RegExp(r'settings|leave-review|learning|wishlist'))) {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
               LSnackBar.warning(
                 title: 'Authentication is required',
-                content: 'Your need to sign in to your account!',
+                content: 'Your need to sign in to use this feature!',
               ),
             );
           return '/welcome';
@@ -144,15 +149,6 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                   ),
                 ],
               ),
-              // GoRoute(
-              //   parentNavigatorKey: LCoordinator.navigatorKey,
-              //   name: LRoutes.reviews.name,
-              //   path: 'reviews',
-              //   builder: (context, state) => ReviewsScreen(
-              //     courseId: state.queryParams['courseId']!,
-              //     courseName: state.extra as String,
-              //   ),
-              // ),
             ],
           ),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[1], ref),
