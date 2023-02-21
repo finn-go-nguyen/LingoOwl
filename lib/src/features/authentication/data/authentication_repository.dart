@@ -213,8 +213,13 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<void> signOut() =>
-      Future.delayed(const Duration(seconds: 1), _firebaseAuth.signOut);
+  Future<void> signOut() async {
+    Future.wait([
+      _googleSignIn.signOut(),
+      _facebookAuth.logOut(),
+      _firebaseAuth.signOut(),
+    ]);
+  }
 
   @override
   bool get isSignedIn => currentUser != null;
