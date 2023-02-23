@@ -35,7 +35,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        inputDecorationTheme: LTheme.profileViewFormInputDecoration(),
+        inputDecorationTheme: LTheme.profileViewFormInputDecoration,
       ),
       child: FormBuilder(
         key: _formKey,
@@ -94,13 +94,14 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                 }
               ]),
             ),
+            Gaps.h8,
             const Divider(),
-            Gaps.h16,
+            Gaps.h8,
             Align(
               alignment: Alignment.centerRight,
               child: Consumer(builder: (context, ref, child) {
                 final status = ref.watch(changePasswordControllerProvider);
-                return ElevatedButton(
+                return FilledButton(
                   onPressed: status.isLoading
                       ? null
                       : () {
@@ -115,7 +116,7 @@ class _ChangePasswordFormState extends State<ChangePasswordForm> {
                         },
                   child: Text(
                     'Save',
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).primaryTextTheme.labelLarge,
                   ),
                 );
               }),

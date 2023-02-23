@@ -132,17 +132,17 @@ class ResetPasswordEmailSentView extends StatelessWidget {
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 Gaps.h32,
-                ElevatedButton(
+                FilledButton(
                   onPressed: () {
                     _onOpenMailAppPressed();
                     LCoordinator.showEmailSignInScreen();
                   },
                   child: Text(
                     'Open email app',
-                    style: Theme.of(context).textTheme.labelLarge,
+                    style: Theme.of(context).primaryTextTheme.labelLarge,
                   ),
                 ),
-                Gaps.h20,
+                Gaps.h12,
                 TextButton(
                   onPressed: () => LCoordinator.showSignInScreen(),
                   child: const Text(

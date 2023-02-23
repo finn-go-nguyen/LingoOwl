@@ -55,7 +55,10 @@ class ImageSelector extends ConsumerWidget {
                           .read(imageSelectorControllerProvider.notifier)
                           .onUploadImagePressed,
                   icon: const Icon(Icons.upload_file),
-                  label: const Text('Upload image'),
+                  label: Text(
+                    'Upload image',
+                    style: Theme.of(context).primaryTextTheme.labelLarge,
+                  ),
                 );
               }),
             ),
@@ -67,7 +70,7 @@ class ImageSelector extends ConsumerWidget {
           child: Consumer(builder: (context, ref, child) {
             final photoUrl = ref.watch(imageSelectorControllerProvider
                 .select((value) => value.downloadUrl));
-            return ElevatedButton(
+            return FilledButton(
               onPressed: photoUrl == null
                   ? null
                   : () {
@@ -76,7 +79,10 @@ class ImageSelector extends ConsumerWidget {
                           .read(imageSelectorControllerProvider.notifier)
                           .onSavePressed();
                     },
-              child: const Text('Save'),
+              child: Text(
+                'Save',
+                style: Theme.of(context).primaryTextTheme.labelLarge,
+              ),
             );
           }),
         )
@@ -164,7 +170,10 @@ class ProgressBar extends ConsumerWidget {
               children: [
                 ClipRRect(
                   borderRadius: UiParameters.borderRadius,
-                  child: LinearProgressIndicator(value: progress),
+                  child: LinearProgressIndicator(
+                    value: progress,
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
                 ),
                 Center(
                   child: Text(

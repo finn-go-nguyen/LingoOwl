@@ -60,7 +60,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
           alignment: Alignment.centerRight,
           child: Consumer(builder: (context, ref, child) {
             final status = ref.watch(forgotPasswordControllerProvider);
-            return ElevatedButton(
+            return FilledButton(
               onPressed: status.isLoading
                   ? null
                   : () {
@@ -79,7 +79,7 @@ class _ForgotPasswordFormState extends State<ForgotPasswordForm> {
                   ? const CircularProgressIndicator()
                   : Text(
                       'Reset password',
-                      style: Theme.of(context).textTheme.labelLarge!,
+                      style: Theme.of(context).primaryTextTheme.labelLarge!,
                     ),
             );
           }),

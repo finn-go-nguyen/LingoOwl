@@ -67,7 +67,7 @@ class _EmailFormState extends ConsumerState<EmailForm> {
             },
             child: Text(
               'Next',
-              style: Theme.of(context).textTheme.labelLarge!,
+              style: Theme.of(context).primaryTextTheme.labelLarge!,
             ),
           ),
         )
@@ -135,7 +135,7 @@ class _PasswordFormState extends ConsumerState<PasswordForm> {
                 builder: (context, ref, child) {
                   var status = ref.watch(emailPasswordSignInControllerProvider
                       .select((value) => value.status));
-                  return ElevatedButton(
+                  return FilledButton(
                     onPressed: status.isLoading
                         ? null
                         : () {
@@ -151,9 +151,8 @@ class _PasswordFormState extends ConsumerState<PasswordForm> {
                           },
                     child: status.isLoading
                         ? const CircularProgressIndicator()
-                        : Text(
+                        : const Text(
                             'Sign In',
-                            style: Theme.of(context).textTheme.labelLarge!,
                           ),
                   );
                 },

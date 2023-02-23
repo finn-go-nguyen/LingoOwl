@@ -14,7 +14,9 @@ class MyApp extends ConsumerWidget {
 
     SystemChrome.setSystemUIOverlayStyle(LTheme.barOverLayStyleLight);
     return MaterialApp.router(
-      theme: LTheme.light(),
+      theme: LTheme.light,
+      darkTheme: LTheme.dark,
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       routerConfig: router,
     );

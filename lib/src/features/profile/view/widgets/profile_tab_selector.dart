@@ -55,24 +55,26 @@ class _ListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 35,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: selected ? Colors.grey : null,
-      ),
+    return Card(
+      elevation: selected ? 10 : 0,
+      shadowColor: Colors.transparent,
       child: InkWell(
         onTap: onTap,
-        child: Padding(
-          padding: UiParameters.screenPadding,
-          child: Align(
-            alignment: Alignment.centerLeft,
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizes.p4,
+              horizontal: Sizes.p16,
+            ),
             child: Text(
               name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    color: selected ? Colors.white : null,
+                    color: selected
+                        ? Theme.of(context).colorScheme.onPrimaryContainer
+                        : null,
                   ),
             ),
           ),

@@ -14,7 +14,10 @@ class PasswordVisibilityToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: onPressed,
-      icon: Icon(isShown ? Icons.visibility : Icons.visibility_off),
+      icon: Icon(
+        isShown ? Icons.visibility : Icons.visibility_off,
+        color: Theme.of(context).colorScheme.primary,
+      ),
     );
   }
 }

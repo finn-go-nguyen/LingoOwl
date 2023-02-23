@@ -1,53 +1,39 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_parameters/app_parameters.dart';
-import 'colors.dart';
-import 'styles.dart';
 
 class LTheme {
-  static const barOverLayStyleLight = SystemUiOverlayStyle(
-    statusBarColor: Colors.white,
-    statusBarIconBrightness: Brightness.dark,
-  );
+  static final _fontFamily = GoogleFonts.poppins().fontFamily;
+  static const _scheme = FlexScheme.deepOrangeM3;
 
-  static ThemeData light() => ThemeData(
+  static ThemeData get light => FlexThemeData.light(
+        appBarElevation: 0.5,
+        scheme: _scheme,
         useMaterial3: true,
-        brightness: Brightness.light,
-        textTheme: LStyles.lightTextTheme,
-
-        /// ColorScheme
-        colorSchemeSeed: LColors.primary,
-
-        appBarTheme: const AppBarTheme(
-          // default system app bar icon is white
-          systemOverlayStyle: barOverLayStyleLight,
-        ),
-
-        /// input
-        inputDecorationTheme: const InputDecorationTheme(
-          contentPadding: EdgeInsets.zero,
-        ),
-
-        /// Button
-        buttonTheme: const ButtonThemeData(),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(),
-        ),
-        outlinedButtonTheme: OutlinedButtonThemeData(
-          style: OutlinedButton.styleFrom(
-              // side: const BorderSide(),
-              // shape: const RoundedRectangleBorder(),
-              ),
-        ),
-
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(),
-        ),
-        iconTheme: const IconThemeData(),
+        useMaterial3ErrorColors: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: _fontFamily,
+        subThemesData: subThemesData,
       );
 
-  static InputDecorationTheme profileViewFormInputDecoration() =>
+  static ThemeData get dark => FlexThemeData.dark(
+        appBarElevation: 2,
+        scheme: _scheme,
+        useMaterial3: true,
+        useMaterial3ErrorColors: true,
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        fontFamily: _fontFamily,
+        subThemesData: subThemesData,
+      );
+
+  static FlexSubThemesData get subThemesData => const FlexSubThemesData(
+        inputDecoratorBorderType: FlexInputBorderType.underline,
+      );
+
+  static InputDecorationTheme get profileViewFormInputDecoration =>
       const InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: UiParameters.borderRadius,
@@ -58,10 +44,10 @@ class LTheme {
         ),
       );
 
-  static ElevatedButtonThemeData alertButtonTheme() => ElevatedButtonThemeData(
-          style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.red,
-      ));
-
-  static ThemeData dark() => ThemeData.dark(useMaterial3: true);
+  static get barOverLayStyleLight => SystemUiOverlayStyle(
+        statusBarColor: Colors.white,
+        statusBarBrightness: Brightness.dark,
+        systemNavigationBarColor:
+            FlexColor.deepOrangeM3LightPrimary.withOpacity(.09),
+      );
 }

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../router/coordinator.dart';
-import '../../../../themes/themes.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
 import '../widgets/profile_view_header.dart';
@@ -64,27 +63,26 @@ class CloseAccountView extends ConsumerWidget {
                       ),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: Theme(
-                          data: Theme.of(context).copyWith(
-                            elevatedButtonTheme: LTheme.alertButtonTheme(),
+                        child: FilledButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor:
+                                Theme.of(context).colorScheme.error,
                           ),
-                          child: ElevatedButton(
-                            onPressed: () => showAlertDialog(
-                              context: context,
-                              title: 'Close your account?',
-                              content:
-                                  'Are you sure you want to close your account?',
-                              cancelActionText: 'Cancel',
-                              onConfirmPressed: LCoordinator
-                                  .showCloseAccountConfirmationScreen,
-                            ),
-                            child: Text(
-                              'Close account',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .labelLarge
-                                  ?.copyWith(color: Colors.white),
-                            ),
+                          onPressed: () => showAlertDialog(
+                            context: context,
+                            title: 'Close your account?',
+                            content:
+                                'Are you sure you want to close your account?',
+                            cancelActionText: 'Cancel',
+                            onConfirmPressed:
+                                LCoordinator.showCloseAccountConfirmationScreen,
+                          ),
+                          child: Text(
+                            'Close account',
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(color: Colors.white),
                           ),
                         ),
                       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LColors {
-  static const primary = Colors.purple;
+  static const primary = Color(0xFFBF360C);
   static const shimmerGradient = LinearGradient(
     colors: [
       Color(0xFFEBEBF4),

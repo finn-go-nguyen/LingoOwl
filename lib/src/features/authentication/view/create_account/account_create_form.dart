@@ -135,7 +135,7 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
               builder: (context, ref, child) {
                 final status = ref.watch(accountCreateScreenControllerProvider
                     .select((state) => state.status));
-                return ElevatedButton(
+                return FilledButton(
                   onPressed: status.isLoading
                       ? null
                       : () {
@@ -155,7 +155,7 @@ class _AccountCreateFormState extends ConsumerState<AccountCreateForm> {
                       ? const CircularProgressIndicator()
                       : Text(
                           'Create Account',
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: Theme.of(context).primaryTextTheme.labelLarge,
                         ),
                 );
               },
