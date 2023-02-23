@@ -83,15 +83,19 @@ class PercentageBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 2.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * .6,
-            child: LinearProgressIndicator(
-              value: count / max(1, total), // Avoid divide by zero
-              minHeight: 16.0,
+          ClipRRect(
+            borderRadius: UiParameters.borderRadius,
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * .6,
+              child: LinearProgressIndicator(
+                value: count / max(1, total), // Avoid divide by zero
+                minHeight: 12.0,
+                backgroundColor: Theme.of(context).colorScheme.outlineVariant,
+              ),
             ),
           ),
           Gaps.w12,

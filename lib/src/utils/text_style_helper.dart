@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../themes/colors.dart';
-
 final textStyleHelperProvider =
     Provider.family<TextStyleHelpers, BuildContext>((ref, context) {
   return TextStyleHelpers(context);
@@ -12,9 +10,10 @@ class TextStyleHelpers {
   const TextStyleHelpers(this.context);
   final BuildContext context;
 
-  TextStyle? get description => Theme.of(context).textTheme.bodyLarge?.copyWith(
-        color: Colors.grey[700],
-      );
+  TextStyle? get description => Theme.of(context)
+      .textTheme
+      .bodyLarge
+      ?.copyWith(color: Theme.of(context).colorScheme.outline);
 
   TextStyle? get majorPriceMedium =>
       Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -29,13 +28,13 @@ class TextStyleHelpers {
 
   TextStyle? get lineThroughPriceMedium =>
       Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: LColors.strikeThrough,
+            color: Theme.of(context).colorScheme.outlineVariant,
             decoration: TextDecoration.lineThrough,
           );
 
   TextStyle? get lineThroughPriceLarge =>
       Theme.of(context).textTheme.bodyLarge?.copyWith(
-            color: LColors.strikeThrough,
+            color: Theme.of(context).colorScheme.outlineVariant,
             decoration: TextDecoration.lineThrough,
             fontSize: 30.0,
           );
@@ -58,7 +57,6 @@ class TextStyleHelpers {
 
   TextStyle? get courseRating =>
       Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: Colors.black,
             fontWeight: FontWeight.bold,
           );
 
