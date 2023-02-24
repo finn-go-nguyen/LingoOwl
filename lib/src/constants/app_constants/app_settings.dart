@@ -25,7 +25,7 @@ class AppSettings {
       ),
       LSetting(
         'Learning reminders',
-        route: LRoutes.unimplemented,
+        route: LRoutes.reminders,
       ),
     ],
   );

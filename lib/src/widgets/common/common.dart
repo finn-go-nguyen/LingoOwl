@@ -1,5 +1,7 @@
 export 'app_bar.dart';
 export 'browse_categories.dart';
+export 'circle_icon_button.dart';
+export 'close_button.dart';
 export 'colored_sized_box.dart';
 export 'instruction_name.dart';
 export 'network_image.dart';
