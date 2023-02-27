@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import '../../model/cart.dart';
 import 'local_cart_repository.dart';
 import 'local_cart_collection_reference.dart';
@@ -11,22 +9,21 @@ class LocalCartRepositoryImpl implements LocalCartRepository {
 
   @override
   Future<LCart> fetchCart() async {
-    final cartJson = await ref.get();
-    if (cartJson == null) return const LCart();
-    return LCart.fromJson(jsonDecode(cartJson));
+    final cart = await ref.get();
+    return cart ?? const LCart();
   }
 
   @override
   Future<void> setCart(LCart cart) {
-    return ref.set(cart.toJson());
+    return ref.set(cart);
   }
 
   @override
   Stream<LCart> watchCart() {
     return ref.snapshots().map(
-      (event) {
-        if (event == null) return const LCart();
-        return LCart.fromJson(jsonDecode(event));
+      (value) {
+        if (value == null) return const LCart();
+        return value;
       },
     );
   }
