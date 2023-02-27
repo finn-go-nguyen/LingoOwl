@@ -69,22 +69,15 @@ class CloseAccountView extends ConsumerWidget {
                             elevatedButtonTheme: LTheme.alertButtonTheme(),
                           ),
                           child: ElevatedButton(
-                            onPressed: () async {
-                              showAlertDialog(
-                                context: context,
-                                title: 'Close your account?',
-                                content:
-                                    'Are you sure you want to close your account?',
-                                cancelActionText: 'Cancel',
-                              ).then(
-                                (isConfirmed) {
-                                  if (isConfirmed ?? false) {
-                                    LCoordinator
-                                        .showCloseAccountConfirmationScreen();
-                                  }
-                                },
-                              );
-                            },
+                            onPressed: () => showAlertDialog(
+                              context: context,
+                              title: 'Close your account?',
+                              content:
+                                  'Are you sure you want to close your account?',
+                              cancelActionText: 'Cancel',
+                              onConfirmPressed: LCoordinator
+                                  .showCloseAccountConfirmationScreen,
+                            ),
                             child: Text(
                               'Close account',
                               style: Theme.of(context)

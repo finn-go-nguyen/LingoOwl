@@ -10,6 +10,8 @@ import 'features/cart/data/remote/remote_cart_repository.dart';
 import 'features/course/data/course_repository.dart';
 import 'features/enrolled_course/data/enrolled_course_repository.dart';
 import 'features/lecture/data/lecture_repository.dart';
+import 'features/note/data/firestore_note_repository.dart';
+import 'features/note/data/note_repository.dart';
 import 'features/profile/data/user_repository.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
 import 'features/reviews/data/review_repository.dart';
@@ -71,5 +73,9 @@ class DomainManager {
 
   final videoRepositoryProvider = Provider<VideoRepository>((ref) {
     return FirestoreVideoRepository(FirebaseFirestore.instance);
+  });
+
+  final noteRepositoryProvider = Provider<NoteRepository>((ref) {
+    return FirestoreNoteRepository();
   });
 }

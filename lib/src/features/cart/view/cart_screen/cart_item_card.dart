@@ -63,15 +63,13 @@ class CartItemCard extends ConsumerWidget {
                         ),
                         Gaps.w8,
                         TextButton(
-                          onPressed: () async {
-                            final confirmed = await showAlertDialog(
+                          onPressed: () {
+                            showAlertDialog(
                               context: context,
                               title: 'Remove course from your cart?',
                               cancelActionText: 'Cancel',
+                              onConfirmPressed: () => onDeleted?.call(courseId),
                             );
-                            if (confirmed ?? false) {
-                              onDeleted?.call(courseId);
-                            }
                           },
                           child: const Text('Remove'),
                         )

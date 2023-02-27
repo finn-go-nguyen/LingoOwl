@@ -6,10 +6,12 @@ import '../../features/cart/view/cart_icon/cart_icon.dart';
 class LAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LAppBar({
     super.key,
+    this.leading,
     required this.title,
     this.actions,
   });
 
+  final Widget? leading;
   final String title;
   final List<Widget>? actions;
 
@@ -18,6 +20,8 @@ class LAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(title),
       actions: actions,
+      automaticallyImplyLeading: leading != null,
+      leading: leading,
     );
   }
 

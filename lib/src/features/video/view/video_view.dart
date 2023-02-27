@@ -186,7 +186,9 @@ class VideoControllerWidget extends ConsumerWidget {
                 const Spacer(),
                 VideoMidControllerWidget(controller: controller),
                 const Spacer(),
-                VideoBottomControllerWidget(controller: controller)
+                VideoBottomControllerWidget(
+                  controller: controller,
+                )
               ],
             ),
           ),

@@ -2,32 +2,42 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
-import '../data/lecture_repository.dart';
 import '../model/lecture/lecture.dart';
 import 'lecture_screen_state.dart';
 
 final lectureScreenControllerProvider = StateNotifierProvider.autoDispose
     .family<LectureScreenController, AsyncValue<LectureScreenState>, CourseId>(
         (ref, courseId) {
-  final lectureRepository =
-      ref.watch(DomainManager.instance.lectureRepositoryProvider);
-  return LectureScreenController(courseId, lectureRepository);
+  return LectureScreenController(ref, courseId);
+});
+
+// * Override every time enter lecture screen
+final lectureScreenCurrentCourseIdProvider = Provider<CourseId>((ref) {
+  throw UnimplementedError();
+});
+
+// * Override every time enter lecture screen
+final lectureScreenCurrentIndexProvider = Provider<Index>((ref) {
+  throw UnimplementedError();
 });
 
 class LectureScreenController
     extends StateNotifier<AsyncValue<LectureScreenState>> {
   LectureScreenController(
-    CourseId courseId,
-    this._lectureRepository,
+    this.ref,
+    this.courseId,
   ) : super(const AsyncLoading()) {
     _init(courseId);
   }
 
-  final LectureRepository _lectureRepository;
+  final Ref ref;
+  final CourseId courseId;
 
   void _init(CourseId courseId) async {
+    final lectureRepository =
+        ref.watch(DomainManager.instance.lectureRepositoryProvider);
     final async =
-        await AsyncValue.guard(() => _lectureRepository.getLecture(courseId));
+        await AsyncValue.guard(() => lectureRepository.getLecture(courseId));
     state = async.when(
       data: (data) {
         final lectures = data.lectures;
