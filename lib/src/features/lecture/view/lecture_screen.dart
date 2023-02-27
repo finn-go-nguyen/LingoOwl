@@ -7,6 +7,7 @@ import '../../../utils/async_value_ui.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
+import '../../note/view/add_note/add_note_controller.dart';
 import '../../video/data/video_repository.dart';
 import '../../video/view/video_view.dart';
 import 'lecture_more_view.dart';
@@ -28,6 +29,11 @@ class LectureScreen extends ConsumerWidget {
         (previous, next) {
       next.showError(context);
     });
+    ref.listen(addNoteControllerProvider, (previous, next) {
+      next.showSuccess(context, content: 'Note added!');
+      next.showError(context);
+    });
+
     final state = ref.watch(lectureScreenControllerProvider(courseId));
 
     final header = SliverToBoxAdapter(
@@ -97,7 +103,9 @@ class LectureScreen extends ConsumerWidget {
                             sections: data.sections,
                             selectedIndex: data.selected.index,
                           ),
-                          const LectureMoreView(),
+                          LectureMoreView(
+                            courseId: courseId,
+                          ),
                         ],
                       ),
                     ),

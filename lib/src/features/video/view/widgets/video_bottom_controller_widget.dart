@@ -34,10 +34,7 @@ class VideoBottomControllerWidget extends ConsumerWidget {
                 .onAddNoteButtonPressed(controller),
             position: controller.value.position,
           ),
-          Text(textHelpers.toTimeLabel(
-            position.inSeconds,
-            showHour: duration.inSeconds > Duration.secondsPerHour,
-          )),
+          Text(textHelpers.toTimeLabel(position.inSeconds)),
           Gaps.w12,
           Expanded(
             child: VideoProgressBar(
@@ -45,10 +42,7 @@ class VideoBottomControllerWidget extends ConsumerWidget {
             ),
           ),
           Gaps.w12,
-          Text(textHelpers.toTimeLabel(
-            duration.inSeconds,
-            showHour: duration.inSeconds > Duration.secondsPerHour,
-          )),
+          Text(textHelpers.toTimeLabel(duration.inSeconds)),
           const FullscreenSwitchButton(),
         ],
       );
