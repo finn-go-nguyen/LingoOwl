@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'src/app.dart';
 import 'src/domain_manager.dart';
 import 'src/features/cart/application/cart_sync_service.dart';
-import 'src/features/cart/data/local/local__cart_repository.dart';
+import 'src/features/cart/data/local/local_cart_repository_impl.dart';
 import 'src/locator.dart';
 import 'src/utils/provider_logger.dart';
 
@@ -29,7 +29,8 @@ Future<void> main() async {
   };
 
   // * Local cart repository
-  final localCartRepository = await SembastCartRepository.makeDefault();
+  final localCartRepository = LocalCartRepositoryImpl();
+  await localCartRepository.init();
   // * Create ProviderContainer with any required overrides
   final container = ProviderContainer(
     overrides: [

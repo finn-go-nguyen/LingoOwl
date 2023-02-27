@@ -68,7 +68,6 @@ dependencies:
   lottie: ^2.2.0
   cached_network_image: ^3.2.3
   shimmer: ^2.0.0
-  image_cropper: ^3.0.1
   image_picker: ^0.8.6
   firebase_storage: ^11.0.10
   font_awesome_flutter: ^10.3.0
