@@ -8,4 +8,5 @@ class CollectionName {
   static const lecture = 'lectures';
   static const video = 'videos';
   static const note = 'notes';
+  static const reminder = 'reminders';
 }

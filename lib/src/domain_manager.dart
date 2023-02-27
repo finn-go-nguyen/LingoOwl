@@ -14,6 +14,7 @@ import 'features/note/data/firestore_note_repository.dart';
 import 'features/note/data/note_repository.dart';
 import 'features/profile/data/user_repository.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
+import 'features/reminder/data/reminder_repository.dart';
 import 'features/reviews/data/review_repository.dart';
 import 'features/video/data/video_repository.dart';
 import 'features/wishlist/data/wishlist_repository.dart';
@@ -77,5 +78,10 @@ class DomainManager {
 
   final noteRepositoryProvider = Provider<NoteRepository>((ref) {
     return FirestoreNoteRepository();
+  });
+
+  final reminderRepositoryProvider = Provider<ReminderRepository>((ref) {
+    // * Override this in the main method
+    throw UnimplementedError();
   });
 }
