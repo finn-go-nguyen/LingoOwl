@@ -18,7 +18,7 @@ final cartServiceProvider = Provider<CartService>((ref) {
   );
 });
 
-final cartProvider = StreamProvider<LCart>((ref) {
+final cartProvider = StreamProvider.autoDispose<LCart>((ref) {
   final user = ref.watch(authStateChangeStreamProvider).value;
   if (user == null) {
     return ref
@@ -31,14 +31,15 @@ final cartProvider = StreamProvider<LCart>((ref) {
   }
 });
 
-final cartItemsCountProvider = Provider<int>((ref) {
+final cartItemsCountProvider = Provider.autoDispose<int>((ref) {
   return ref.watch(cartProvider).maybeMap(
         data: (cart) => cart.value.courses.length,
         orElse: () => 0,
       );
 });
 
-final isAddedToCartProvider = Provider.family<bool, String>((ref, courseId) {
+final isAddedToCartProvider =
+    Provider.autoDispose.family<bool, String>((ref, courseId) {
   return ref.watch(cartProvider).maybeMap(
         data: (cart) => cart.value.courses.containsKey(courseId),
         orElse: () => false,

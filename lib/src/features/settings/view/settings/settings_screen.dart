@@ -7,7 +7,7 @@ import '../../../../router/coordinator.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/common.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
-import '../../../cart/view/cart_icon/cart_icon.dart';
+import '../../../cart/view/cart_icon_button/cart_icon_button.dart';
 import '../../../profile/view/widgets/profile_avatar_name_email.dart';
 import '../../model/setting.dart';
 import 'settings_controller.dart';
@@ -25,7 +25,7 @@ class SettingsScreen extends ConsumerWidget {
     return LScaffold(
       appBar: const LAppBar(
         title: 'Account',
-        actions: [CartIcon()],
+        actions: [CartIconButton()],
       ),
       body: SingleChildScrollView(
         child: Column(

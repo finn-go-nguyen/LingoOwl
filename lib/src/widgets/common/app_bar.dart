@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/app_parameters/app_parameters.dart';
-import '../../features/cart/view/cart_icon/cart_icon.dart';
+import '../../features/cart/view/cart_icon_button/cart_icon_button.dart';
 
 class LAppBar extends StatelessWidget implements PreferredSizeWidget {
   const LAppBar({
@@ -29,14 +29,14 @@ class LAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => UiParameters.appBarSize;
 }
 
-class LAppBarWithCartIcon extends LAppBar {
-  const LAppBarWithCartIcon({super.key, required super.title});
+class LAppBarWithCartIconButton extends LAppBar {
+  const LAppBarWithCartIconButton({super.key, required super.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: Text(title),
-      actions: const [CartIcon()],
+      actions: const [CartIconButton()],
     );
   }
 }

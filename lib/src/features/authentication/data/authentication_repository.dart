@@ -8,7 +8,7 @@ import '../../../domain_manager.dart';
 import '../../../utils/logger.dart';
 import '../model/auth_user.dart';
 
-final uidProvider = Provider<String?>((ref) {
+final uidProvider = Provider.autoDispose<String?>((ref) {
   final userAsync = ref.watch(authStateChangeStreamProvider);
   return userAsync.maybeWhen(
     data: (data) => data?.id,
@@ -16,10 +16,12 @@ final uidProvider = Provider<String?>((ref) {
   );
 });
 
-final isSignedInProvider = Provider<bool>((ref) {
-  final authRepository =
-      ref.watch(DomainManager.instance.authRepositoryProvider);
-  return authRepository.currentUser != null;
+final isSignedInProvider = Provider.autoDispose<bool>((ref) {
+  final authStatus = ref.watch(authStateChangeStreamProvider);
+  return authStatus.maybeWhen(
+    data: (user) => user != null,
+    orElse: () => false,
+  );
 });
 
 final authStateChangeStreamProvider = StreamProvider<LAuthUser?>((ref) {
@@ -211,8 +213,13 @@ class FirebaseAuthenticationRepository implements AuthenticationRepository {
   }
 
   @override
-  Future<void> signOut() =>
-      Future.delayed(const Duration(seconds: 1), _firebaseAuth.signOut);
+  Future<void> signOut() async {
+    Future.wait([
+      _googleSignIn.signOut(),
+      _facebookAuth.logOut(),
+      _firebaseAuth.signOut(),
+    ]);
+  }
 
   @override
   bool get isSignedIn => currentUser != null;

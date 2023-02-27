@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:online_course_app/src/utils/logger.dart';
 
 import '../router/coordinator.dart';
 import '../widgets/common/snack_bars.dart';
@@ -7,23 +9,38 @@ import '../widgets/common/snack_bars.dart';
 extension AsyncValueUi on AsyncValue {
   void showError(BuildContext context, {String? errorMessage}) {
     if (!isRefreshing && hasError) {
+      if (error is! FirebaseException) {
+        log.e(
+          '-------ERROR-------',
+          error,
+          stackTrace,
+        );
+        return;
+      }
+
+      final firebaseError = error as FirebaseException;
+
       ScaffoldMessenger.of(context)
         ..hideCurrentSnackBar()
         ..showSnackBar(
           LSnackBar.failure(
-            errorMessage: errorMessage ?? error.toString(),
+            errorMessage: errorMessage ??
+                firebaseError.message ??
+                'An error has occurred!',
           ),
         );
     }
   }
 
-  // TODO: Handle will pop
   void showLoadingDialog(BuildContext context, AsyncValue<dynamic>? previous) {
     if (isLoading) {
       showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => const Center(child: CircularProgressIndicator()),
+        builder: (context) => WillPopScope(
+          onWillPop: () => Future.value(false),
+          child: const Center(child: CircularProgressIndicator()),
+        ),
       );
     }
 

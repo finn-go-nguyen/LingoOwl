@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../router/coordinator.dart';
 import '../../application/cart_service.dart';
 
-class CartIcon extends ConsumerWidget {
-  const CartIcon({super.key});
+class CartIconButton extends ConsumerWidget {
+  const CartIconButton({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
