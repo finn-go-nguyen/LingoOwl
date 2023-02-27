@@ -8,6 +8,7 @@ import 'src/domain_manager.dart';
 import 'src/features/cart/application/cart_sync_service.dart';
 import 'src/features/cart/data/local/local__cart_repository.dart';
 import 'src/locator.dart';
+import 'src/utils/provider_logger.dart';
 
 Future<void> main() async {
   await initializeApp();
@@ -30,14 +31,19 @@ Future<void> main() async {
   // * Local cart repository
   final localCartRepository = await SembastCartRepository.makeDefault();
   // * Create ProviderContainer with any required overrides
-  final container = ProviderContainer(overrides: [
-    DomainManager.instance.localCartRepositoryProvider.overrideWith(
-      (ref) {
-        ref.onDispose(localCartRepository.dispose);
-        return localCartRepository;
-      },
-    ),
-  ]);
+  final container = ProviderContainer(
+    overrides: [
+      DomainManager.instance.localCartRepositoryProvider.overrideWith(
+        (ref) {
+          ref.onDispose(localCartRepository.dispose);
+          return localCartRepository;
+        },
+      ),
+    ],
+    observers: [
+      ProviderLogger(),
+    ],
+  );
   // * Initialize CartSyncService to start the listener
   container.read(cartSyncServiceProvider);
 
