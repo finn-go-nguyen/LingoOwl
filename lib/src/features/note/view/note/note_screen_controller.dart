@@ -27,18 +27,18 @@ class NoteScreenController extends StateNotifier<NoteScreenState> {
   final Ref ref;
 
   void _init() async {
-    final async = await AsyncValue.guard(
+    final asyncValue = await AsyncValue.guard(
       () => Future.wait([
         ref.read(lecturesProvider(courseId).future),
         ref.read(notesProvider(courseId).future),
         ref.read(courseProvider(courseId).future),
       ]),
     );
-    state = state.copyWith(status: async);
-    if (async.hasError) {
+    state = state.copyWith(status: asyncValue);
+    if (asyncValue.hasError) {
       return;
     }
-    final result = async.value!;
+    final result = asyncValue.value!;
     state = state.copyWith(
       lectures: result[0] as List<LLecture>,
       notes: result[1] as List<LNote>,
@@ -48,18 +48,18 @@ class NoteScreenController extends StateNotifier<NoteScreenState> {
 
   void onSaveButtonPressed(LNote note, String content) async {
     final noteRepo = ref.read(DomainManager.instance.noteRepositoryProvider);
-    final async = await AsyncValue.guard(
+    final asyncValue = await AsyncValue.guard(
         () => noteRepo.editNote(note.copyWith(content: content)));
-    state = state.copyWith(status: async);
-    if (async.hasError) return;
+    state = state.copyWith(status: asyncValue);
+    if (asyncValue.hasError) return;
     ref.invalidateSelf();
   }
 
   void onDeleteButtonPressed(NoteId id) async {
     final noteRepo = ref.read(DomainManager.instance.noteRepositoryProvider);
-    final async = await AsyncValue.guard(() => noteRepo.deleteNote(id));
-    state = state.copyWith(status: async);
-    if (async.hasError) return;
+    final asyncValue = await AsyncValue.guard(() => noteRepo.deleteNote(id));
+    state = state.copyWith(status: asyncValue);
+    if (asyncValue.hasError) return;
     ref.invalidateSelf();
   }
 }
