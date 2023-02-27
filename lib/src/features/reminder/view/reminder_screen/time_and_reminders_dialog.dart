@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:online_course_app/src/features/reminder/data/reminder_repository_impl.dart';
+import 'package:online_course_app/src/features/reminder/view/reminder_controller.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../router/coordinator.dart';
-import '../reminder_controller.dart';
+import '../../../../widgets/state/reminder_state.dart';
 import '../time_and_reminders_view/new_reminder_dialog.dart';
 import 'reminder_list_tile.dart';
 
@@ -34,47 +35,43 @@ class TimeAndRemindersDialog extends StatelessWidget {
   Widget _buildReminderList() {
     return Consumer(
       builder: (context, ref, child) {
-        final reminders = ref.watch(
-            reminderControllerProvider.select((value) => value.reminders));
-        if (reminders.isEmpty) {
-          return Column(
-            children: [
-              Gaps.h12,
-              FaIcon(
-                FontAwesomeIcons.solidBell,
-                color: Theme.of(context).colorScheme.secondary,
-                size: Sizes.p64,
-              ),
-              Gaps.h12,
-              const Text('No reminders for this activity'),
-              Gaps.h12,
-            ],
-          );
-        } else {
-          return ConstrainedBox(
-            constraints: BoxConstraints.loose(
-              Size.fromHeight(MediaQuery.of(context).size.height * .3),
-            ),
-            child: ListView.separated(
-              shrinkWrap: true,
-              itemCount: reminders.length,
-              itemBuilder: (context, index) {
-                final reminder = reminders[index];
-                return ReminderListTile(
-                  onTap: (reminder) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => ReminderDialog(reminder: reminder),
+        final remindersValue = ref.watch(remindersStreamProvider);
+        return remindersValue.when(
+          loading: ReminderListLoading.new,
+          error: (_, __) => const ReminderListEmpty(),
+          data: (reminders) {
+            if (reminders.isEmpty) {
+              return const ReminderListEmpty();
+            } else {
+              return ConstrainedBox(
+                constraints: BoxConstraints.loose(
+                  Size.fromHeight(MediaQuery.of(context).size.height * .3),
+                ),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: reminders.length,
+                  itemBuilder: (context, index) {
+                    final reminder = reminders[index];
+                    return ReminderListTile(
+                      onTap: (reminder) {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              ReminderDialog(reminder: reminder),
+                        );
+                      },
+                      onDeleteButtonPressed: () => ref
+                          .read(reminderControllerProvider.notifier)
+                          .onDeleteButtonPressed(reminder.id),
+                      reminder: reminder,
                     );
                   },
-                  onDeleteButtonPressed: () {},
-                  reminder: reminder,
-                );
-              },
-              separatorBuilder: (_, __) => Gaps.divider,
-            ),
-          );
-        }
+                  separatorBuilder: (_, __) => Gaps.divider,
+                ),
+              );
+            }
+          },
+        );
       },
     );
   }

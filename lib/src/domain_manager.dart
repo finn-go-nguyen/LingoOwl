@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:online_course_app/src/features/reminder/data/reminder_repository.dart';
 
 import 'features/authentication/data/authentication_repository.dart';
 import 'features/cart/data/local/local_cart_repository.dart';
@@ -77,5 +78,10 @@ class DomainManager {
 
   final noteRepositoryProvider = Provider<NoteRepository>((ref) {
     return FirestoreNoteRepository();
+  });
+
+  final reminderRepositoryProvider = Provider<ReminderRepository>((ref) {
+    // * Override this in the main method
+    throw UnimplementedError();
   });
 }

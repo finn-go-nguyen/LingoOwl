@@ -19,11 +19,10 @@ Future<void> initializeApp() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  if (!kIsWeb) {
-    // Only send error to Firebase Crashlytics when not in debug mode.
-    await FirebaseCrashlytics.instance
-        .setCrashlyticsCollectionEnabled(!kDebugMode);
-  }
+  ).then((_) {
+    if (!kIsWeb) {
+      // Only send error to Firebase Crashlytics when not in debug mode.
+      FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(!kDebugMode);
+    }
+  });
 }
