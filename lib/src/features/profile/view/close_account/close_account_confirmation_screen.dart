@@ -64,7 +64,7 @@ class _CloseAccountConfirmationScreenState
               key: _formKey,
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  inputDecorationTheme: LTheme.profileViewFormInputDecoration(),
+                  inputDecorationTheme: LTheme.profileViewFormInputDecoration,
                 ),
                 child: FormBuilderTextField(
                   name: CloseAccountConfirmationFormConstants.passwordField,
@@ -83,7 +83,9 @@ class _CloseAccountConfirmationScreenState
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                style: LTheme.alertButtonTheme().style,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                ),
                 onPressed: () {
                   final isValid = _formKey.currentState!.validate();
                   if (isValid) {

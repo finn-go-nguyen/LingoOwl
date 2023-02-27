@@ -52,7 +52,7 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
   Widget build(BuildContext context) {
     return Theme(
       data: Theme.of(context).copyWith(
-        inputDecorationTheme: LTheme.profileViewFormInputDecoration(),
+        inputDecorationTheme: LTheme.profileViewFormInputDecoration,
       ),
       child: FormBuilder(
         key: _formKey,
@@ -61,7 +61,9 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
           children: [
             Text(
               'Basics:',
-              style: Theme.of(context).textTheme.titleSmall,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: Theme.of(context).colorScheme.onError,
+                  ),
             ),
             Gaps.h16,
             FormBuilderTextField(
@@ -105,7 +107,7 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
               alignment: Alignment.centerRight,
               child: Consumer(builder: (context, ref, child) {
                 final status = ref.watch(profileControllerProvider);
-                return ElevatedButton(
+                return FilledButton(
                   onPressed: status.isLoading
                       ? null
                       : () {
@@ -125,7 +127,7 @@ class _PublicProfileEditFormState extends ConsumerState<PublicProfileEditForm> {
                       ? const CircularProgressIndicator()
                       : Text(
                           'Save',
-                          style: Theme.of(context).textTheme.labelLarge,
+                          style: Theme.of(context).primaryTextTheme.labelLarge,
                         ),
                 );
               }),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../../gen/assets.gen.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../router/coordinator.dart';
+import '../../../../themes/styles.dart';
 import '../../../../utils/async_value_ui.dart';
 import '../../../../widgets/common/scaffold.dart';
 import '../../../../widgets/common/term_privacy.dart';
@@ -26,9 +26,7 @@ class SignInScreen extends ConsumerWidget {
             Gaps.h64,
             Text(
               'Sign In',
-              style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                    fontFamily: GoogleFonts.ebGaramond().fontFamily,
-                  ),
+              style: LStyles.ebGaramond(context),
             ),
             Gaps.h20,
             const TermPrivacy(),

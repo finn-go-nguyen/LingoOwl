@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:online_course_app/src/utils/logger.dart';
+import 'logger.dart';
 
 import '../router/coordinator.dart';
 import '../widgets/common/snack_bars.dart';

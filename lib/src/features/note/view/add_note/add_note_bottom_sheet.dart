@@ -41,6 +41,9 @@ class _AddNoteBottomSheetState extends State<AddNoteBottomSheet> {
       decoration: const InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 6.0),
         border: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        fillColor: Colors.transparent,
         hintText: 'At first, there was nothing...',
       ),
       style: Theme.of(context).textTheme.bodyMedium,

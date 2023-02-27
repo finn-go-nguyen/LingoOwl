@@ -86,7 +86,7 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
             ..hideCurrentSnackBar()
             ..showSnackBar(
               LSnackBar.warning(
-                title: 'Authentication is required',
+                // title: 'Authentication is required',
                 content: 'Your need to sign in to use this feature!',
               ),
             );
