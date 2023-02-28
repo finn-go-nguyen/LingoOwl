@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
 import '../../authentication/data/authentication_repository.dart';
-import '../data/local/local__cart_repository.dart';
+import '../data/local/local_cart_repository.dart';
 import '../data/remote/remote_cart_repository.dart';
 import '../model/cart.dart';
 import '../model/mutable_cart.dart';
