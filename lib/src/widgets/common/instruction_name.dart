@@ -13,7 +13,7 @@ class InstructionNameLabel extends StatelessWidget {
     return Text(
       name,
       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-            color: Colors.black87,
+            color: Theme.of(context).colorScheme.outline,
           ),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,

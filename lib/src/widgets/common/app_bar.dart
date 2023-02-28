@@ -20,7 +20,7 @@ class LAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: Text(title),
       actions: actions,
-      automaticallyImplyLeading: leading != null,
+      automaticallyImplyLeading: leading == null,
       leading: leading,
     );
   }

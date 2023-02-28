@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'logger.dart';
 
 import '../router/coordinator.dart';
 import '../widgets/common/snack_bars.dart';
+import 'logger.dart';
 
 extension AsyncValueUi on AsyncValue {
   void showError(BuildContext context, {String? errorMessage}) {
