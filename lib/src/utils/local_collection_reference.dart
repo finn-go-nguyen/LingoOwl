@@ -1,13 +1,18 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:sembast_web/sembast_web.dart';
 
-class LocalCollectionReference {
-  LocalCollectionReference(this._collectionName);
+class LocalCollectionReference<T> {
+  LocalCollectionReference(
+    this._collectionName, {
+    required this.toJson,
+    required this.fromJson,
+  });
+
+  final String Function(T item) toJson;
+  final T Function(String jsonString) fromJson;
 
   final String _collectionName;
   late DatabaseFactory _dbFactory;
@@ -20,19 +25,23 @@ class LocalCollectionReference {
     db = await _createDatabase(_collectionName);
   }
 
-  Future<void> set(Object object) async {
-    ref.record(_collectionName).put(db, jsonEncode(object));
+  Future<void> set(T item) async {
+    ref.record(_collectionName).put(db, toJson(item));
   }
 
-  Future<String?> get() async {
+  Future<T?> get() async {
     final value = await ref.record(_collectionName).get(db);
-    return value;
+    if (value == null) return null;
+
+    return fromJson(value);
   }
 
-  Stream<String?> snapshots() {
+  Stream<T?> snapshots() {
     final recordRef = ref.record(_collectionName);
     return recordRef.onSnapshot(db).map((snapshot) {
-      return snapshot?.value;
+      if (snapshot == null || snapshot.value == null) return null;
+
+      return fromJson(snapshot.value!);
     });
   }
 
