@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:online_course_app/src/constants/firestore/collection_name.dart';
-import 'package:online_course_app/src/features/cart/model/cart.dart';
-
+import '../../../../constants/firestore/collection_name.dart';
 import '../../../../utils/local_collection_reference.dart';
+import '../../model/cart.dart';
 
 class LocalCartCollectionReference extends LocalCollectionReference<LCart> {
   LocalCartCollectionReference()

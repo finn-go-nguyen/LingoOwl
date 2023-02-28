@@ -36,9 +36,9 @@ class LectureScreenController
   void _init(CourseId courseId) async {
     final lectureRepository =
         ref.watch(DomainManager.instance.lectureRepositoryProvider);
-    final async =
+    final asyncValue =
         await AsyncValue.guard(() => lectureRepository.getLecture(courseId));
-    state = async.when(
+    state = asyncValue.when(
       data: (data) {
         final lectures = data.lectures;
         final selected = lectures.first;

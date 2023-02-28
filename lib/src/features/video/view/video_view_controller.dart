@@ -127,23 +127,24 @@ class VideoViewController extends StateNotifier<VideoViewState> {
       _pause(controller);
 
   void _seekTo(VideoPlayerController controller, Duration position) async {
-    final async = await AsyncValue.guard(() => controller.seekTo(position));
-    state = state.copyWith(status: async);
+    final asyncValue =
+        await AsyncValue.guard(() => controller.seekTo(position));
+    state = state.copyWith(status: asyncValue);
   }
 
   void _play(VideoPlayerController controller) async {
-    final async = await AsyncValue.guard(() => controller.play());
+    final asyncValue = await AsyncValue.guard(() => controller.play());
     state = state.copyWith(
-      isPlaying: async.hasError ? state.isPlaying : true,
-      status: async,
+      isPlaying: asyncValue.hasError ? state.isPlaying : true,
+      status: asyncValue,
     );
   }
 
   void _pause(VideoPlayerController controller) async {
-    final async = await AsyncValue.guard(() => controller.pause());
+    final asyncValue = await AsyncValue.guard(() => controller.pause());
     state = state.copyWith(
-      isPlaying: async.hasError ? state.isPlaying : false,
-      status: async,
+      isPlaying: asyncValue.hasError ? state.isPlaying : false,
+      status: asyncValue,
     );
   }
 

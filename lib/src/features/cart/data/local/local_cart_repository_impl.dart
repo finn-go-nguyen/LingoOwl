@@ -1,6 +1,6 @@
 import '../../model/cart.dart';
-import 'local_cart_repository.dart';
 import 'local_cart_collection_reference.dart';
+import 'local_cart_repository.dart';
 
 class LocalCartRepositoryImpl implements LocalCartRepository {
   final ref = LocalCartCollectionReference();

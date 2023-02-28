@@ -43,7 +43,7 @@ class LeaveReviewController extends StateNotifier<LeaveReviewState> {
   void onSubmitted(CourseId courseId, String content,
       {required VoidCallback? onSubmitSuccessfully}) async {
     state = state.copyWith(status: const AsyncLoading());
-    final async = await AsyncValue.guard(
+    final asyncValue = await AsyncValue.guard(
       () => _reviewService.addReview(
         reviewId: state.reviewId,
         courseId: courseId,
@@ -51,10 +51,10 @@ class LeaveReviewController extends StateNotifier<LeaveReviewState> {
         content: content,
       ),
     );
-    if (!async.hasError) {
+    if (!asyncValue.hasError) {
       onSubmitSuccessfully?.call();
     }
 
-    state = state.copyWith(status: async);
+    state = state.copyWith(status: asyncValue);
   }
 }
