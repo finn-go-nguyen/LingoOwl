@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
-
 import 'search_delegate.dart';
 
 class SearchBar extends StatelessWidget {

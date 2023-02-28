@@ -21,6 +21,7 @@ import '../features/profile/view/close_account/close_account_view.dart';
 import '../features/profile/view/photo/photo_view.dart';
 import '../features/profile/view/profile/profile_view.dart';
 import '../features/profile/view/profile_details_screen.dart';
+import '../features/reminder/view/reminder_screen/reminder_screen.dart';
 import '../features/reviews/view/leave_review_screen/leave_review_screen.dart';
 import '../features/reviews/view/review_screen/reviews_screen.dart';
 import '../features/welcome/view/welcome_screen.dart';
@@ -51,7 +52,8 @@ enum LRoutes {
   reviews,
   leaveReview,
   lecture,
-  notes;
+  notes,
+  reminders;
 
   bool get isProfileDetailsSubRoute =>
       this == LRoutes.profile || this == LRoutes.accountSecurity;
@@ -234,6 +236,12 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
                         const CloseAccountConfirmationScreen(),
                   )
                 ],
+              ),
+              GoRoute(
+                parentNavigatorKey: LCoordinator.navigatorKey,
+                name: LRoutes.reminders.name,
+                path: 'reminders',
+                builder: (_, __) => const ReminderScreen(),
               ),
             ],
           ),

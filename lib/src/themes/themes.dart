@@ -31,6 +31,7 @@ class LTheme {
 
   static FlexSubThemesData get subThemesData => const FlexSubThemesData(
         inputDecoratorBorderType: FlexInputBorderType.underline,
+        segmentedButtonSchemeColor: SchemeColor.inversePrimary,
       );
 
   static InputDecorationTheme get profileViewFormInputDecoration =>
