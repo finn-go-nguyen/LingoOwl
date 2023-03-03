@@ -12,6 +12,7 @@ import 'features/enrolled_course/data/enrolled_course_repository.dart';
 import 'features/lecture/data/lecture_repository.dart';
 import 'features/note/data/firestore_note_repository.dart';
 import 'features/note/data/note_repository.dart';
+import 'features/payment/data/payment_repository.dart';
 import 'features/profile/data/user_repository.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
 import 'features/reviews/data/review_repository.dart';
@@ -77,5 +78,9 @@ class DomainManager {
 
   final noteRepositoryProvider = Provider<NoteRepository>((ref) {
     return FirestoreNoteRepository();
+  });
+
+  final paymentRepositoryProvider = Provider<PaymentRepository>((ref) {
+    return StripeRepository(FirebaseFirestore.instance);
   });
 }

@@ -8,4 +8,6 @@ class CollectionName {
   static const lecture = 'lectures';
   static const video = 'videos';
   static const note = 'notes';
+  static const customer = 'customers';
+  static const checkoutSession = 'checkout_sessions';
 }
