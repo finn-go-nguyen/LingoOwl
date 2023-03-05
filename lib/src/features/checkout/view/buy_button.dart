@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../router/coordinator.dart';
+import '../../../utils/async_value_ui.dart';
+import 'package:uuid/uuid.dart';
 import '../../../constants/type_defs/type_defs.dart';
 import 'checkout_controller.dart';
 import '../../authentication/data/authentication_repository.dart';
@@ -16,6 +19,11 @@ class BuyButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue<void>>(checkoutControllerProvider, (previous, next) {
+      next.showErrorLoadingSuccessState(context,
+          previousState: previous, successMessage: 'Payment successful');
+    });
+
     final isSignedIn = ref.watch(isSignedInProvider);
     return SizedBox(
       width: double.infinity,
@@ -23,13 +31,17 @@ class BuyButton extends ConsumerWidget {
         onPressed: isSignedIn
             ? () async {
                 final order = LOrder(
+                  id: const Uuid().v4(),
                   uid: ref.read(uidProvider)!,
                   timeStamp: DateTime.now().millisecondsSinceEpoch,
-                  items: [LItem(courseId: courseId, amount: price)],
+                  items: <LItem>[LItem(courseId: courseId, amount: price)],
                 );
                 ref
                     .read(checkoutControllerProvider.notifier)
-                    .onBuyButtonPressed(order);
+                    .onBuyButtonPressed(
+                      order,
+                      onPaymentSuccessful: () => LCoordinator.showHomeScreen(),
+                    );
               }
             : () => showSignInRequiredDialog(
                   context: context,
