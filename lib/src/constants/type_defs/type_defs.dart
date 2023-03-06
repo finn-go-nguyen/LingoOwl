@@ -9,3 +9,4 @@ typedef Index = int;
 typedef NoteId = String;
 typedef ReminderId = int;
 typedef SelectedWeekdays = Set<int>;
+typedef ArticleId = String;

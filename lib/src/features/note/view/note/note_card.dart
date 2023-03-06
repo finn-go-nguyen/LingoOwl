@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../course/data/course_repository.dart';
+import '../../../lecture/data/lecture_repository.dart';
+import '../../../../utils/provider_params.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/type_defs/type_defs.dart';
 import '../../../../router/coordinator.dart';
 import '../../../../utils/text_helpers.dart';
-import '../../../course/model/course.dart';
-import '../../../lecture/model/lecture/lecture.dart';
 import '../../model/note.dart';
 import '../add_note/add_note_bottom_sheet.dart';
 import 'note_screen_controller.dart';
@@ -15,14 +16,10 @@ class NoteCard extends ConsumerWidget {
   const NoteCard({
     super.key,
     required this.note,
-    required this.course,
-    required this.lecture,
     this.seekTo,
   });
 
   final LNote note;
-  final LCourse course;
-  final LLecture lecture;
   final void Function(Index lectureIndex, Duration position)? seekTo;
 
   @override
@@ -33,8 +30,7 @@ class NoteCard extends ConsumerWidget {
     return Card(
       elevation: 2,
       child: InkWell(
-        onTap: () =>
-            seekTo?.call(lecture.index, Duration(seconds: note.atSeconds)),
+        onTap: () {},
         child: Padding(
           padding: contentPadding,
           child: Row(
@@ -56,26 +52,37 @@ class NoteCard extends ConsumerWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                lecture.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyLarge
-                                    ?.copyWith(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
+                              Consumer(builder: (context, ref, child) {
+                                final name = ref.watch(lectureNameProvider(
+                                    LectureNameProviderParams(courseId,
+                                        note.sectionIndex, note.lectureIndex)));
+                                return Text(
+                                  name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge
+                                      ?.copyWith(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .primary,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                );
+                              }),
                               Gaps.h8,
-                              Text(
-                                course.name,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
+                              Consumer(builder: (context, ref, child) {
+                                final courseName = ref
+                                    .watch(courseNameProvider(note.courseId));
+                                return Text(
+                                  courseName,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style:
+                                      Theme.of(context).textTheme.labelMedium,
+                                );
+                              }),
                             ],
                           ),
                         ),
@@ -128,8 +135,7 @@ class NoteCard extends ConsumerWidget {
       itemBuilder: (_) => <PopupMenuEntry>[
         PopupMenuItem(
           onTap: () async {
-            final controller =
-                ref.watch(noteScreenControllerProvider(courseId).notifier);
+            final controller = ref.watch(noteScreenControllerProvider.notifier);
             // * Must have to show bottom sheet
             // * https://stackoverflow.com/a/69939955/16037103
             Future.delayed(
@@ -156,7 +162,7 @@ class NoteCard extends ConsumerWidget {
         ),
         PopupMenuItem(
           onTap: () => ref
-              .read(noteScreenControllerProvider(courseId).notifier)
+              .read(noteScreenControllerProvider.notifier)
               .onDeleteButtonPressed(note.id),
           child: Text(
             'Delete',

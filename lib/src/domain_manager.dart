@@ -8,6 +8,7 @@ import 'features/authentication/data/authentication_repository.dart';
 import 'features/cart/data/local/local_cart_repository.dart';
 import 'features/cart/data/remote/remote_cart_repository.dart';
 import 'features/course/data/course_repository.dart';
+import 'features/course/data/course_repository_impl.dart';
 import 'features/enrolled_course/data/enrolled_course_repository.dart';
 import 'features/lecture/data/lecture_repository.dart';
 import 'features/note/data/firestore_note_repository.dart';
@@ -39,7 +40,7 @@ class DomainManager {
   });
 
   final courseRepositoryProvider = Provider<CourseRepository>((ref) {
-    return MockCourseRepository();
+    return CourseRepositoryImpl();
   });
 
   final localCartRepositoryProvider = Provider<LocalCartRepository>((ref) {

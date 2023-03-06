@@ -6,8 +6,8 @@ import '../../../../constants/type_defs/type_defs.dart';
 import '../../../../widgets/common/app_bar.dart';
 import '../../../../widgets/state/error.dart';
 import '../../../../widgets/state/loading/loading.dart';
+import '../../data/firestore_note_repository.dart';
 import 'note_list_view.dart';
-import 'note_screen_controller.dart';
 
 class NoteScreen extends StatelessWidget {
   const NoteScreen({
@@ -43,16 +43,14 @@ class NoteScreen extends StatelessWidget {
                   child: Padding(
                     padding: UiParameters.screenPadding,
                     child: Consumer(builder: (context, ref, child) {
-                      final state =
-                          ref.watch(noteScreenControllerProvider(courseId));
-                      return state.status.when(
+                      final noteValue =
+                          ref.watch(notesStreamProvider(courseId));
+                      return noteValue.when(
                         loading: LoadingState.new,
                         error: (_, __) => const ErrorState(),
-                        data: (_) => NoteListView(
+                        data: (notes) => NoteListView(
                           controller: scrollController,
-                          notes: state.notes!,
-                          lectures: state.lectures!,
-                          course: state.course!,
+                          notes: notes,
                         ),
                       );
                     }),

@@ -9,4 +9,5 @@ class CollectionName {
   static const video = 'videos';
   static const note = 'notes';
   static const reminder = 'reminders';
+  static const course = 'courses';
 }

@@ -18,7 +18,7 @@ class SubmitButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: isLoading ? null : onSubmitted,
-      child: isLoading ? const LoadingState.button() : Text(label),
+      child: isLoading ? const LoadingState.small() : Text(label),
     );
   }
 }

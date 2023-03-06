@@ -18,6 +18,14 @@ class BaseCollectionReference<T> {
     return null;
   }
 
+  Future<List<T>> getAll() async {
+    final querySnapshot = await ref.get();
+    if (querySnapshot.docs.isEmpty) {
+      return <T>[];
+    }
+    return querySnapshot.docs.map((e) => e.data()).toList();
+  }
+
   Future<void> set(String id, T item) async {
     return ref.doc(id).set(item);
   }

@@ -22,6 +22,7 @@ LSection _$LSectionFromJson(Map<String, dynamic> json) {
 mixin _$LSection {
   int get index => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  List<LLecture> get lectures => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $LSectionCopyWith<$Res> {
   factory $LSectionCopyWith(LSection value, $Res Function(LSection) then) =
       _$LSectionCopyWithImpl<$Res, LSection>;
   @useResult
-  $Res call({int index, String name});
+  $Res call({int index, String name, List<LLecture> lectures});
 }
 
 /// @nodoc
@@ -52,6 +53,7 @@ class _$LSectionCopyWithImpl<$Res, $Val extends LSection>
   $Res call({
     Object? index = null,
     Object? name = null,
+    Object? lectures = null,
   }) {
     return _then(_value.copyWith(
       index: null == index
@@ -62,6 +64,10 @@ class _$LSectionCopyWithImpl<$Res, $Val extends LSection>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      lectures: null == lectures
+          ? _value.lectures
+          : lectures // ignore: cast_nullable_to_non_nullable
+              as List<LLecture>,
     ) as $Val);
   }
 }
@@ -73,7 +79,7 @@ abstract class _$$_LSectionCopyWith<$Res> implements $LSectionCopyWith<$Res> {
       __$$_LSectionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int index, String name});
+  $Res call({int index, String name, List<LLecture> lectures});
 }
 
 /// @nodoc
@@ -89,6 +95,7 @@ class __$$_LSectionCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
     Object? name = null,
+    Object? lectures = null,
   }) {
     return _then(_$_LSection(
       index: null == index
@@ -99,14 +106,23 @@ class __$$_LSectionCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      lectures: null == lectures
+          ? _value._lectures
+          : lectures // ignore: cast_nullable_to_non_nullable
+              as List<LLecture>,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_LSection implements _LSection {
-  const _$_LSection({required this.index, required this.name});
+class _$_LSection extends _LSection {
+  const _$_LSection(
+      {required this.index,
+      required this.name,
+      required final List<LLecture> lectures})
+      : _lectures = lectures,
+        super._();
 
   factory _$_LSection.fromJson(Map<String, dynamic> json) =>
       _$$_LSectionFromJson(json);
@@ -115,10 +131,17 @@ class _$_LSection implements _LSection {
   final int index;
   @override
   final String name;
+  final List<LLecture> _lectures;
+  @override
+  List<LLecture> get lectures {
+    if (_lectures is EqualUnmodifiableListView) return _lectures;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_lectures);
+  }
 
   @override
   String toString() {
-    return 'LSection(index: $index, name: $name)';
+    return 'LSection(index: $index, name: $name, lectures: $lectures)';
   }
 
   @override
@@ -127,12 +150,14 @@ class _$_LSection implements _LSection {
         (other.runtimeType == runtimeType &&
             other is _$_LSection &&
             (identical(other.index, index) || other.index == index) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            const DeepCollectionEquality().equals(other._lectures, _lectures));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, index, name);
+  int get hashCode => Object.hash(
+      runtimeType, index, name, const DeepCollectionEquality().hash(_lectures));
 
   @JsonKey(ignore: true)
   @override
@@ -148,9 +173,12 @@ class _$_LSection implements _LSection {
   }
 }
 
-abstract class _LSection implements LSection {
+abstract class _LSection extends LSection {
   const factory _LSection(
-      {required final int index, required final String name}) = _$_LSection;
+      {required final int index,
+      required final String name,
+      required final List<LLecture> lectures}) = _$_LSection;
+  const _LSection._() : super._();
 
   factory _LSection.fromJson(Map<String, dynamic> json) = _$_LSection.fromJson;
 
@@ -158,6 +186,8 @@ abstract class _LSection implements LSection {
   int get index;
   @override
   String get name;
+  @override
+  List<LLecture> get lectures;
   @override
   @JsonKey(ignore: true)
   _$$_LSectionCopyWith<_$_LSection> get copyWith =>

@@ -6,7 +6,7 @@ class LoadingState extends StatelessWidget {
     this.dimension = 100.0,
   });
 
-  const LoadingState.button({super.key}) : dimension = 20.0;
+  const LoadingState.small({super.key}) : dimension = 20.0;
 
   final double dimension;
 

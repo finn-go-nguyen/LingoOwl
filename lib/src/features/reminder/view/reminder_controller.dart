@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../../constants/type_defs/type_defs.dart';
 import '../application/reminder_service.dart';
-
 import '../model/reminder.dart';
 
 final reminderControllerProvider =

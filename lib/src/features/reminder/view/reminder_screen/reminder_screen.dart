@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../data/reminder_repository_impl.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../widgets/common/common.dart';
+import '../../data/reminder_repository_impl.dart';
 import 'time_and_reminders_dialog.dart';
 
 class ReminderScreen extends StatelessWidget {

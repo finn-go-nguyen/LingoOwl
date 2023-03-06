@@ -16,10 +16,12 @@ class AddNoteController extends StateNotifier<AsyncValue<void>> {
   final Ref ref;
 
   void onSaveButtonPressed({
+    required UserId userId,
     required int atSeconds,
     required String content,
     required CourseId courseId,
     required Index lectureIndex,
+    required Index sectionIndex,
     required void Function() onNoteSaved,
   }) async {
     final noteRepository =
@@ -27,8 +29,10 @@ class AddNoteController extends StateNotifier<AsyncValue<void>> {
 
     final note = LNote(
       id: const Uuid().v4(),
+      userId: userId,
       courseId: courseId,
       lectureIndex: lectureIndex,
+      sectionIndex: sectionIndex,
       atSeconds: atSeconds,
       content: content,
       timeStamp: DateTime.now().millisecondsSinceEpoch,
