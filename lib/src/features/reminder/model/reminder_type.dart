@@ -7,4 +7,7 @@ enum ReminderType {
   const ReminderType(this.iconData);
 
   final IconData iconData;
+
+  bool get isNotification => this == ReminderType.notification;
+  bool get isAlarm => this == ReminderType.alarm;
 }

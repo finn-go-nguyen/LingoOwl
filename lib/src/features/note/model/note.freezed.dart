@@ -21,8 +21,10 @@ LNote _$LNoteFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$LNote {
   String get id => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   String get courseId => throw _privateConstructorUsedError;
   int get lectureIndex => throw _privateConstructorUsedError;
+  int get sectionIndex => throw _privateConstructorUsedError;
   int get atSeconds => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   int get timeStamp => throw _privateConstructorUsedError;
@@ -39,8 +41,10 @@ abstract class $LNoteCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String userId,
       String courseId,
       int lectureIndex,
+      int sectionIndex,
       int atSeconds,
       String content,
       int timeStamp});
@@ -60,8 +64,10 @@ class _$LNoteCopyWithImpl<$Res, $Val extends LNote>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
     Object? courseId = null,
     Object? lectureIndex = null,
+    Object? sectionIndex = null,
     Object? atSeconds = null,
     Object? content = null,
     Object? timeStamp = null,
@@ -71,6 +77,10 @@ class _$LNoteCopyWithImpl<$Res, $Val extends LNote>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       courseId: null == courseId
           ? _value.courseId
           : courseId // ignore: cast_nullable_to_non_nullable
@@ -78,6 +88,10 @@ class _$LNoteCopyWithImpl<$Res, $Val extends LNote>
       lectureIndex: null == lectureIndex
           ? _value.lectureIndex
           : lectureIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      sectionIndex: null == sectionIndex
+          ? _value.sectionIndex
+          : sectionIndex // ignore: cast_nullable_to_non_nullable
               as int,
       atSeconds: null == atSeconds
           ? _value.atSeconds
@@ -103,8 +117,10 @@ abstract class _$$_LNoteCopyWith<$Res> implements $LNoteCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
+      String userId,
       String courseId,
       int lectureIndex,
+      int sectionIndex,
       int atSeconds,
       String content,
       int timeStamp});
@@ -120,8 +136,10 @@ class __$$_LNoteCopyWithImpl<$Res> extends _$LNoteCopyWithImpl<$Res, _$_LNote>
   @override
   $Res call({
     Object? id = null,
+    Object? userId = null,
     Object? courseId = null,
     Object? lectureIndex = null,
+    Object? sectionIndex = null,
     Object? atSeconds = null,
     Object? content = null,
     Object? timeStamp = null,
@@ -131,6 +149,10 @@ class __$$_LNoteCopyWithImpl<$Res> extends _$LNoteCopyWithImpl<$Res, _$_LNote>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       courseId: null == courseId
           ? _value.courseId
           : courseId // ignore: cast_nullable_to_non_nullable
@@ -138,6 +160,10 @@ class __$$_LNoteCopyWithImpl<$Res> extends _$LNoteCopyWithImpl<$Res, _$_LNote>
       lectureIndex: null == lectureIndex
           ? _value.lectureIndex
           : lectureIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      sectionIndex: null == sectionIndex
+          ? _value.sectionIndex
+          : sectionIndex // ignore: cast_nullable_to_non_nullable
               as int,
       atSeconds: null == atSeconds
           ? _value.atSeconds
@@ -160,8 +186,10 @@ class __$$_LNoteCopyWithImpl<$Res> extends _$LNoteCopyWithImpl<$Res, _$_LNote>
 class _$_LNote extends _LNote {
   const _$_LNote(
       {required this.id,
+      required this.userId,
       required this.courseId,
       required this.lectureIndex,
+      required this.sectionIndex,
       required this.atSeconds,
       required this.content,
       required this.timeStamp})
@@ -173,9 +201,13 @@ class _$_LNote extends _LNote {
   @override
   final String id;
   @override
+  final String userId;
+  @override
   final String courseId;
   @override
   final int lectureIndex;
+  @override
+  final int sectionIndex;
   @override
   final int atSeconds;
   @override
@@ -185,7 +217,7 @@ class _$_LNote extends _LNote {
 
   @override
   String toString() {
-    return 'LNote(id: $id, courseId: $courseId, lectureIndex: $lectureIndex, atSeconds: $atSeconds, content: $content, timeStamp: $timeStamp)';
+    return 'LNote(id: $id, userId: $userId, courseId: $courseId, lectureIndex: $lectureIndex, sectionIndex: $sectionIndex, atSeconds: $atSeconds, content: $content, timeStamp: $timeStamp)';
   }
 
   @override
@@ -194,10 +226,13 @@ class _$_LNote extends _LNote {
         (other.runtimeType == runtimeType &&
             other is _$_LNote &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.courseId, courseId) ||
                 other.courseId == courseId) &&
             (identical(other.lectureIndex, lectureIndex) ||
                 other.lectureIndex == lectureIndex) &&
+            (identical(other.sectionIndex, sectionIndex) ||
+                other.sectionIndex == sectionIndex) &&
             (identical(other.atSeconds, atSeconds) ||
                 other.atSeconds == atSeconds) &&
             (identical(other.content, content) || other.content == content) &&
@@ -207,8 +242,8 @@ class _$_LNote extends _LNote {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, courseId, lectureIndex, atSeconds, content, timeStamp);
+  int get hashCode => Object.hash(runtimeType, id, userId, courseId,
+      lectureIndex, sectionIndex, atSeconds, content, timeStamp);
 
   @JsonKey(ignore: true)
   @override
@@ -227,8 +262,10 @@ class _$_LNote extends _LNote {
 abstract class _LNote extends LNote {
   const factory _LNote(
       {required final String id,
+      required final String userId,
       required final String courseId,
       required final int lectureIndex,
+      required final int sectionIndex,
       required final int atSeconds,
       required final String content,
       required final int timeStamp}) = _$_LNote;
@@ -239,9 +276,13 @@ abstract class _LNote extends LNote {
   @override
   String get id;
   @override
+  String get userId;
+  @override
   String get courseId;
   @override
   int get lectureIndex;
+  @override
+  int get sectionIndex;
   @override
   int get atSeconds;
   @override

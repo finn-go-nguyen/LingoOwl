@@ -22,9 +22,9 @@ LLecture _$LLectureFromJson(Map<String, dynamic> json) {
 mixin _$LLecture {
   int get index => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  int get sectionIndex => throw _privateConstructorUsedError;
   LectureType get type => throw _privateConstructorUsedError;
   String? get videoId => throw _privateConstructorUsedError;
+  int get seconds => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,11 +38,7 @@ abstract class $LLectureCopyWith<$Res> {
       _$LLectureCopyWithImpl<$Res, LLecture>;
   @useResult
   $Res call(
-      {int index,
-      String name,
-      int sectionIndex,
-      LectureType type,
-      String? videoId});
+      {int index, String name, LectureType type, String? videoId, int seconds});
 }
 
 /// @nodoc
@@ -60,9 +56,9 @@ class _$LLectureCopyWithImpl<$Res, $Val extends LLecture>
   $Res call({
     Object? index = null,
     Object? name = null,
-    Object? sectionIndex = null,
     Object? type = null,
     Object? videoId = freezed,
+    Object? seconds = null,
   }) {
     return _then(_value.copyWith(
       index: null == index
@@ -73,10 +69,6 @@ class _$LLectureCopyWithImpl<$Res, $Val extends LLecture>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      sectionIndex: null == sectionIndex
-          ? _value.sectionIndex
-          : sectionIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -85,6 +77,10 @@ class _$LLectureCopyWithImpl<$Res, $Val extends LLecture>
           ? _value.videoId
           : videoId // ignore: cast_nullable_to_non_nullable
               as String?,
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -97,11 +93,7 @@ abstract class _$$_LLectureCopyWith<$Res> implements $LLectureCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int index,
-      String name,
-      int sectionIndex,
-      LectureType type,
-      String? videoId});
+      {int index, String name, LectureType type, String? videoId, int seconds});
 }
 
 /// @nodoc
@@ -117,9 +109,9 @@ class __$$_LLectureCopyWithImpl<$Res>
   $Res call({
     Object? index = null,
     Object? name = null,
-    Object? sectionIndex = null,
     Object? type = null,
     Object? videoId = freezed,
+    Object? seconds = null,
   }) {
     return _then(_$_LLecture(
       index: null == index
@@ -130,10 +122,6 @@ class __$$_LLectureCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      sectionIndex: null == sectionIndex
-          ? _value.sectionIndex
-          : sectionIndex // ignore: cast_nullable_to_non_nullable
-              as int,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -142,19 +130,24 @@ class __$$_LLectureCopyWithImpl<$Res>
           ? _value.videoId
           : videoId // ignore: cast_nullable_to_non_nullable
               as String?,
+      seconds: null == seconds
+          ? _value.seconds
+          : seconds // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$_LLecture implements _LLecture {
+class _$_LLecture extends _LLecture {
   const _$_LLecture(
       {required this.index,
       required this.name,
-      required this.sectionIndex,
       required this.type,
-      this.videoId});
+      this.videoId,
+      required this.seconds})
+      : super._();
 
   factory _$_LLecture.fromJson(Map<String, dynamic> json) =>
       _$$_LLectureFromJson(json);
@@ -164,15 +157,15 @@ class _$_LLecture implements _LLecture {
   @override
   final String name;
   @override
-  final int sectionIndex;
-  @override
   final LectureType type;
   @override
   final String? videoId;
+  @override
+  final int seconds;
 
   @override
   String toString() {
-    return 'LLecture(index: $index, name: $name, sectionIndex: $sectionIndex, type: $type, videoId: $videoId)';
+    return 'LLecture(index: $index, name: $name, type: $type, videoId: $videoId, seconds: $seconds)';
   }
 
   @override
@@ -182,16 +175,15 @@ class _$_LLecture implements _LLecture {
             other is _$_LLecture &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.sectionIndex, sectionIndex) ||
-                other.sectionIndex == sectionIndex) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.videoId, videoId) || other.videoId == videoId));
+            (identical(other.videoId, videoId) || other.videoId == videoId) &&
+            (identical(other.seconds, seconds) || other.seconds == seconds));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, index, name, sectionIndex, type, videoId);
+      Object.hash(runtimeType, index, name, type, videoId, seconds);
 
   @JsonKey(ignore: true)
   @override
@@ -207,13 +199,14 @@ class _$_LLecture implements _LLecture {
   }
 }
 
-abstract class _LLecture implements LLecture {
+abstract class _LLecture extends LLecture {
   const factory _LLecture(
       {required final int index,
       required final String name,
-      required final int sectionIndex,
       required final LectureType type,
-      final String? videoId}) = _$_LLecture;
+      final String? videoId,
+      required final int seconds}) = _$_LLecture;
+  const _LLecture._() : super._();
 
   factory _LLecture.fromJson(Map<String, dynamic> json) = _$_LLecture.fromJson;
 
@@ -222,11 +215,11 @@ abstract class _LLecture implements LLecture {
   @override
   String get name;
   @override
-  int get sectionIndex;
-  @override
   LectureType get type;
   @override
   String? get videoId;
+  @override
+  int get seconds;
   @override
   @JsonKey(ignore: true)
   _$$_LLectureCopyWith<_$_LLecture> get copyWith =>

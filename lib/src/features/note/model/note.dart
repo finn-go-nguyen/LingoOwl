@@ -10,8 +10,10 @@ class LNote with _$LNote {
   const LNote._();
   const factory LNote({
     required NoteId id,
+    required UserId userId,
     required CourseId courseId,
     required Index lectureIndex,
+    required Index sectionIndex,
     required int atSeconds,
     required String content,
     required TimeStamp timeStamp,

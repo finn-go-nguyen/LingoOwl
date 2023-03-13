@@ -7,6 +7,8 @@ import 'src/app.dart';
 import 'src/domain_manager.dart';
 import 'src/features/cart/application/cart_sync_service.dart';
 import 'src/features/cart/data/local/local_cart_repository_impl.dart';
+import 'src/features/notification/notification_service.dart';
+import 'src/features/reminder/data/reminder_repository_impl.dart';
 import 'src/locator.dart';
 import 'src/utils/provider_logger.dart';
 
@@ -28,9 +30,15 @@ Future<void> main() async {
     return true;
   };
 
-  // * Local cart repository
+  // * Local repositories need init and override
   final localCartRepository = LocalCartRepositoryImpl();
-  await localCartRepository.init();
+  final reminderRepository = ReminderRepositoryImpl();
+
+  await Future.wait([
+    localCartRepository.init(),
+    reminderRepository.init(),
+  ]);
+
   // * Create ProviderContainer with any required overrides
   final container = ProviderContainer(
     overrides: [
@@ -40,6 +48,10 @@ Future<void> main() async {
           return localCartRepository;
         },
       ),
+      DomainManager.instance.reminderRepositoryProvider.overrideWith((ref) {
+        ref.onDispose(reminderRepository.dispose);
+        return reminderRepository;
+      }),
     ],
     observers: [
       ProviderLogger(),
@@ -47,7 +59,7 @@ Future<void> main() async {
   );
   // * Initialize CartSyncService to start the listener
   container.read(cartSyncServiceProvider);
-
+  await container.read(notificationServiceProvider).initialize();
   // * Entry point of the app
   runApp(
     UncontrolledProviderScope(

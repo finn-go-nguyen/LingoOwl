@@ -22,7 +22,9 @@ LVideo _$LVideoFromJson(Map<String, dynamic> json) {
 mixin _$LVideo {
   /// seconds
   int get duration => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
+
+  /// "1080" : "url1"
+  Map<String, String> get urls => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +36,7 @@ abstract class $LVideoCopyWith<$Res> {
   factory $LVideoCopyWith(LVideo value, $Res Function(LVideo) then) =
       _$LVideoCopyWithImpl<$Res, LVideo>;
   @useResult
-  $Res call({int duration, String url});
+  $Res call({int duration, Map<String, String> urls});
 }
 
 /// @nodoc
@@ -51,17 +53,17 @@ class _$LVideoCopyWithImpl<$Res, $Val extends LVideo>
   @override
   $Res call({
     Object? duration = null,
-    Object? url = null,
+    Object? urls = null,
   }) {
     return _then(_value.copyWith(
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
+      urls: null == urls
+          ? _value.urls
+          : urls // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ) as $Val);
   }
 }
@@ -72,7 +74,7 @@ abstract class _$$_LVideoCopyWith<$Res> implements $LVideoCopyWith<$Res> {
       __$$_LVideoCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int duration, String url});
+  $Res call({int duration, Map<String, String> urls});
 }
 
 /// @nodoc
@@ -86,17 +88,17 @@ class __$$_LVideoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? duration = null,
-    Object? url = null,
+    Object? urls = null,
   }) {
     return _then(_$_LVideo(
       duration: null == duration
           ? _value.duration
           : duration // ignore: cast_nullable_to_non_nullable
               as int,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
+      urls: null == urls
+          ? _value._urls
+          : urls // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>,
     ));
   }
 }
@@ -104,7 +106,9 @@ class __$$_LVideoCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_LVideo implements _LVideo {
-  const _$_LVideo({required this.duration, required this.url});
+  const _$_LVideo(
+      {required this.duration, required final Map<String, String> urls})
+      : _urls = urls;
 
   factory _$_LVideo.fromJson(Map<String, dynamic> json) =>
       _$$_LVideoFromJson(json);
@@ -112,12 +116,21 @@ class _$_LVideo implements _LVideo {
   /// seconds
   @override
   final int duration;
+
+  /// "1080" : "url1"
+  final Map<String, String> _urls;
+
+  /// "1080" : "url1"
   @override
-  final String url;
+  Map<String, String> get urls {
+    if (_urls is EqualUnmodifiableMapView) return _urls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_urls);
+  }
 
   @override
   String toString() {
-    return 'LVideo(duration: $duration, url: $url)';
+    return 'LVideo(duration: $duration, urls: $urls)';
   }
 
   @override
@@ -127,12 +140,13 @@ class _$_LVideo implements _LVideo {
             other is _$_LVideo &&
             (identical(other.duration, duration) ||
                 other.duration == duration) &&
-            (identical(other.url, url) || other.url == url));
+            const DeepCollectionEquality().equals(other._urls, _urls));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, duration, url);
+  int get hashCode => Object.hash(
+      runtimeType, duration, const DeepCollectionEquality().hash(_urls));
 
   @JsonKey(ignore: true)
   @override
@@ -150,7 +164,8 @@ class _$_LVideo implements _LVideo {
 
 abstract class _LVideo implements LVideo {
   const factory _LVideo(
-      {required final int duration, required final String url}) = _$_LVideo;
+      {required final int duration,
+      required final Map<String, String> urls}) = _$_LVideo;
 
   factory _LVideo.fromJson(Map<String, dynamic> json) = _$_LVideo.fromJson;
 
@@ -159,7 +174,9 @@ abstract class _LVideo implements LVideo {
   /// seconds
   int get duration;
   @override
-  String get url;
+
+  /// "1080" : "url1"
+  Map<String, String> get urls;
   @override
   @JsonKey(ignore: true)
   _$$_LVideoCopyWith<_$_LVideo> get copyWith =>

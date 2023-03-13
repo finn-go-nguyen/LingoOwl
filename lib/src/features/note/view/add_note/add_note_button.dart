@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../authentication/data/authentication_repository.dart';
 
+import '../../../../constants/type_defs/type_defs.dart';
 import '../../../../router/coordinator.dart';
 import '../../../lecture/view/lecture_screen_controller.dart';
 import 'add_note_bottom_sheet.dart';
@@ -22,7 +24,9 @@ class AddNoteButton extends ConsumerWidget {
     return IconButton(
       onPressed: () async {
         final courseId = ref.read(lectureScreenCurrentCourseIdProvider);
-        final index = ref.read(lectureScreenCurrentIndexProvider);
+        final lectureIndex = ref.read(lectureScreenCurrentLectureIndexProvider);
+        final sectionIndex = ref.read(lectureScreenCurrentSectionIndexProvider);
+        final uid = ref.read(uidProvider)!;
         onAddButtonPressed();
         await showModalBottomSheet(
           useSafeArea: true,
@@ -37,8 +41,10 @@ class AddNoteButton extends ConsumerWidget {
               child: AddNoteBottomSheet(
                 onSaveButtonPressed: (content) {
                   controller.onSaveButtonPressed(
+                    userId: uid,
                     courseId: courseId,
-                    lectureIndex: index,
+                    lectureIndex: lectureIndex,
+                    sectionIndex: sectionIndex,
                     atSeconds: position.inSeconds,
                     content: content,
                     onNoteSaved: LCoordinator.onBack,

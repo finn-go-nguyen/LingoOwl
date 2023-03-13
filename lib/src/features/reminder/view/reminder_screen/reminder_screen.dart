@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../widgets/common/common.dart';
-import '../reminder_controller.dart';
+import '../../data/reminder_repository_impl.dart';
 import 'time_and_reminders_dialog.dart';
 
 class ReminderScreen extends StatelessWidget {
@@ -35,19 +35,13 @@ class ReminderScreen extends StatelessWidget {
   }
 
   Widget _buildLearningReminderTile() {
-    return Consumer(
-      builder: (context, ref, _) {
-        final isEnable = ref
-            .watch(reminderControllerProvider.select((value) => value.enable));
-        return SwitchListTile.adaptive(
-          value: isEnable,
-          onChanged:
-              ref.read(reminderControllerProvider.notifier).toggleReminder,
-          title: const Text(
-            'Learning reminders',
-          ),
-        );
-      },
+    // TODO: Get data from settings provider
+    return SwitchListTile.adaptive(
+      value: true,
+      onChanged: (_) {},
+      title: const Text(
+        'Learning reminders',
+      ),
     );
   }
 
@@ -55,8 +49,8 @@ class ReminderScreen extends StatelessWidget {
     return Builder(builder: (context) {
       return Consumer(
         builder: (context, ref, child) {
-          final isReminderEnabled = ref.watch(
-              reminderControllerProvider.select((value) => value.enable));
+          // TODO: Get data from settings provider
+          const isReminderEnabled = true;
           return ListTile(
             enabled: isReminderEnabled,
             onTap: () => showDialog(
@@ -86,8 +80,7 @@ class ReminderScreen extends StatelessWidget {
         ),
         child: Center(
           child: Consumer(builder: (context, ref, child) {
-            final remindersCount = ref.watch(reminderControllerProvider
-                .select((value) => value.reminders.length));
+            final remindersCount = ref.watch(reminderCountProvider);
             return Text(
               remindersCount.toString(),
               style: Theme.of(context).textTheme.labelLarge?.copyWith(

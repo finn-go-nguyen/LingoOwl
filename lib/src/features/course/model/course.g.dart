@@ -14,7 +14,6 @@ _$_LCourse _$$_LCourseFromJson(Map<String, dynamic> json) => _$_LCourse(
       instructorName: json['instructorName'] as String,
       price: (json['price'] as num).toDouble(),
       salePrice: (json['salePrice'] as num?)?.toDouble(),
-      category: json['category'] as String,
       youWillLearn: (json['youWillLearn'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),
@@ -29,6 +28,5 @@ Map<String, dynamic> _$$_LCourseToJson(_$_LCourse instance) =>
       'instructorName': instance.instructorName,
       'price': instance.price,
       'salePrice': instance.salePrice,
-      'category': instance.category,
       'youWillLearn': instance.youWillLearn,
     };

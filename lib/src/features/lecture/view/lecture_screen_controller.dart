@@ -17,7 +17,12 @@ final lectureScreenCurrentCourseIdProvider = Provider<CourseId>((ref) {
 });
 
 // * Override every time enter lecture screen
-final lectureScreenCurrentIndexProvider = Provider<Index>((ref) {
+final lectureScreenCurrentLectureIndexProvider = Provider<Index>((ref) {
+  throw UnimplementedError();
+});
+
+// * Override every time enter lecture screen
+final lectureScreenCurrentSectionIndexProvider = Provider<Index>((ref) {
   throw UnimplementedError();
 });
 
@@ -37,17 +42,16 @@ class LectureScreenController
     final lectureRepository =
         ref.watch(DomainManager.instance.lectureRepositoryProvider);
     final asyncValue =
-        await AsyncValue.guard(() => lectureRepository.getLecture(courseId));
+        await AsyncValue.guard(() => lectureRepository.getSections(courseId));
     state = asyncValue.when(
       data: (data) {
-        final lectures = data.lectures;
-        final selected = lectures.first;
-        final sections = data.sections;
-        return AsyncData(LectureScreenState(
-          lectures: lectures,
-          selected: selected,
-          sections: sections,
-        ));
+        final sections = data;
+        return AsyncData(
+          LectureScreenState(
+            sections: sections,
+            selected: sections.first.lectures.first,
+          ),
+        );
       },
       error: AsyncError.new,
       loading: AsyncLoading.new,

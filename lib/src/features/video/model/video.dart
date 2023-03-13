@@ -8,7 +8,9 @@ class LVideo with _$LVideo {
   const factory LVideo({
     /// seconds
     required int duration,
-    required String url,
+
+    /// "1080" : "url1"
+    required Map<String, String> urls,
   }) = _LVideo;
 
   factory LVideo.fromJson(Map<String, Object?> json) => _$LVideoFromJson(json);

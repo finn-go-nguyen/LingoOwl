@@ -9,7 +9,6 @@ part 'lecture_screen_state.freezed.dart';
 class LectureScreenState with _$LectureScreenState {
   const factory LectureScreenState({
     required List<LSection> sections,
-    required List<LLecture> lectures,
     required LLecture selected,
   }) = _LectureScreenState;
 }

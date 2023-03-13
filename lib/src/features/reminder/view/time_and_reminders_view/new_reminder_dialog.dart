@@ -266,11 +266,14 @@ class ReminderDialog extends ConsumerWidget {
           Gaps.w8,
           FilledButton(
             onPressed: () {
-              final reminder =
-                  ref.read(newReminderControllerProvider(this.reminder));
+              final update = ref.read(newReminderControllerProvider(reminder));
               ref
                   .read(reminderControllerProvider.notifier)
-                  .onNewReminderConfirmButtonPressed(reminder);
+                  .onNewReminderConfirmButtonPressed(
+                    update,
+                    isUpdate: reminder != null,
+                    oldId: reminder?.id,
+                  );
               LCoordinator.onBack();
             },
             child: const Text('Confirm'),

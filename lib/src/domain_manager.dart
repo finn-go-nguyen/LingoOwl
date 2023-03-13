@@ -8,6 +8,7 @@ import 'features/authentication/data/authentication_repository.dart';
 import 'features/cart/data/local/local_cart_repository.dart';
 import 'features/cart/data/remote/remote_cart_repository.dart';
 import 'features/course/data/course_repository.dart';
+import 'features/course/data/course_repository_impl.dart';
 import 'features/enrolled_course/data/enrolled_course_repository.dart';
 import 'features/lecture/data/lecture_repository.dart';
 import 'features/note/data/firestore_note_repository.dart';
@@ -15,6 +16,7 @@ import 'features/note/data/note_repository.dart';
 import 'features/payment/data/payment_repository.dart';
 import 'features/profile/data/user_repository.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
+import 'features/reminder/data/reminder_repository.dart';
 import 'features/reviews/data/review_repository.dart';
 import 'features/video/data/video_repository.dart';
 import 'features/wishlist/data/wishlist_repository.dart';
@@ -39,7 +41,7 @@ class DomainManager {
   });
 
   final courseRepositoryProvider = Provider<CourseRepository>((ref) {
-    return MockCourseRepository();
+    return CourseRepositoryImpl();
   });
 
   final localCartRepositoryProvider = Provider<LocalCartRepository>((ref) {
@@ -82,5 +84,10 @@ class DomainManager {
 
   final paymentRepositoryProvider = Provider<PaymentRepository>((ref) {
     return StripeRepository(FirebaseFirestore.instance);
+  });
+
+  final reminderRepositoryProvider = Provider<ReminderRepository>((ref) {
+    // * Override this in the main method
+    throw UnimplementedError();
   });
 }

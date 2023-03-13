@@ -15,7 +15,6 @@ class LCourse with _$LCourse {
     required String instructorName,
     required double price,
     double? salePrice,
-    required String category,
     required List<String> youWillLearn,
   }) = _LCourse;
 
