@@ -40,7 +40,7 @@ class VideoMidControllerWidget extends ConsumerWidget {
                   .select((state) => state.status.isLoading));
               Widget centerButton;
               if (isLoading) {
-                centerButton = const LoadingState.button();
+                centerButton = const LoadingState.small();
               } else {
                 final isPlaying = ref.watch(
                     videoControllerProvider.select((state) => state.isPlaying));

@@ -27,7 +27,6 @@ mixin _$LCourse {
   String get instructorName => throw _privateConstructorUsedError;
   double get price => throw _privateConstructorUsedError;
   double? get salePrice => throw _privateConstructorUsedError;
-  String get category => throw _privateConstructorUsedError;
   List<String> get youWillLearn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,7 +47,6 @@ abstract class $LCourseCopyWith<$Res> {
       String instructorName,
       double price,
       double? salePrice,
-      String category,
       List<String> youWillLearn});
 }
 
@@ -72,7 +70,6 @@ class _$LCourseCopyWithImpl<$Res, $Val extends LCourse>
     Object? instructorName = null,
     Object? price = null,
     Object? salePrice = freezed,
-    Object? category = null,
     Object? youWillLearn = null,
   }) {
     return _then(_value.copyWith(
@@ -104,10 +101,6 @@ class _$LCourseCopyWithImpl<$Res, $Val extends LCourse>
           ? _value.salePrice
           : salePrice // ignore: cast_nullable_to_non_nullable
               as double?,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
       youWillLearn: null == youWillLearn
           ? _value.youWillLearn
           : youWillLearn // ignore: cast_nullable_to_non_nullable
@@ -131,7 +124,6 @@ abstract class _$$_LCourseCopyWith<$Res> implements $LCourseCopyWith<$Res> {
       String instructorName,
       double price,
       double? salePrice,
-      String category,
       List<String> youWillLearn});
 }
 
@@ -152,7 +144,6 @@ class __$$_LCourseCopyWithImpl<$Res>
     Object? instructorName = null,
     Object? price = null,
     Object? salePrice = freezed,
-    Object? category = null,
     Object? youWillLearn = null,
   }) {
     return _then(_$_LCourse(
@@ -184,10 +175,6 @@ class __$$_LCourseCopyWithImpl<$Res>
           ? _value.salePrice
           : salePrice // ignore: cast_nullable_to_non_nullable
               as double?,
-      category: null == category
-          ? _value.category
-          : category // ignore: cast_nullable_to_non_nullable
-              as String,
       youWillLearn: null == youWillLearn
           ? _value._youWillLearn
           : youWillLearn // ignore: cast_nullable_to_non_nullable
@@ -207,7 +194,6 @@ class _$_LCourse extends _LCourse {
       required this.instructorName,
       required this.price,
       this.salePrice,
-      required this.category,
       required final List<String> youWillLearn})
       : _youWillLearn = youWillLearn,
         super._();
@@ -229,8 +215,6 @@ class _$_LCourse extends _LCourse {
   final double price;
   @override
   final double? salePrice;
-  @override
-  final String category;
   final List<String> _youWillLearn;
   @override
   List<String> get youWillLearn {
@@ -241,7 +225,7 @@ class _$_LCourse extends _LCourse {
 
   @override
   String toString() {
-    return 'LCourse(id: $id, name: $name, description: $description, thumbnail: $thumbnail, instructorName: $instructorName, price: $price, salePrice: $salePrice, category: $category, youWillLearn: $youWillLearn)';
+    return 'LCourse(id: $id, name: $name, description: $description, thumbnail: $thumbnail, instructorName: $instructorName, price: $price, salePrice: $salePrice, youWillLearn: $youWillLearn)';
   }
 
   @override
@@ -260,8 +244,6 @@ class _$_LCourse extends _LCourse {
             (identical(other.price, price) || other.price == price) &&
             (identical(other.salePrice, salePrice) ||
                 other.salePrice == salePrice) &&
-            (identical(other.category, category) ||
-                other.category == category) &&
             const DeepCollectionEquality()
                 .equals(other._youWillLearn, _youWillLearn));
   }
@@ -277,7 +259,6 @@ class _$_LCourse extends _LCourse {
       instructorName,
       price,
       salePrice,
-      category,
       const DeepCollectionEquality().hash(_youWillLearn));
 
   @JsonKey(ignore: true)
@@ -303,7 +284,6 @@ abstract class _LCourse extends LCourse {
       required final String instructorName,
       required final double price,
       final double? salePrice,
-      required final String category,
       required final List<String> youWillLearn}) = _$_LCourse;
   const _LCourse._() : super._();
 
@@ -323,8 +303,6 @@ abstract class _LCourse extends LCourse {
   double get price;
   @override
   double? get salePrice;
-  @override
-  String get category;
   @override
   List<String> get youWillLearn;
   @override

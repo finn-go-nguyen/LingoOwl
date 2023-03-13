@@ -83,6 +83,7 @@ dependencies:
   wakelock: ^0.6.2
   flex_color_scheme: ^7.0.0-dev.2
   awesome_notifications: ^0.7.4+1
+  flutter_html: ^3.0.0-alpha.6
   
 
 dev_dependencies:

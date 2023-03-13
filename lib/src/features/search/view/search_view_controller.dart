@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../constants/mocks/courses.dart';
+import '../../course/model/course.dart';
 import 'search_view_state.dart';
 
 final searchViewControllerProvider =
@@ -20,7 +20,7 @@ class SearchViewController extends StateNotifier<AsyncValue<SearchViewState>> {
       state = const AsyncLoading();
       await Future.delayed(const Duration(seconds: 1));
       state = AsyncData(SearchViewState(
-        courses: courses,
+        courses: <LCourse>[],
         oldQuery: query,
       ));
     });

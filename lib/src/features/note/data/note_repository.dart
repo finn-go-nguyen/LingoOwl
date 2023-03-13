@@ -6,4 +6,5 @@ abstract class NoteRepository {
   Future<void> editNote(LNote note);
   Future<void> deleteNote(NoteId id);
   Future<List<LNote>> fetchByCourse(UserId userId, CourseId courseId);
+  Stream<List<LNote>> watchNotes(UserId userId, CourseId courseId);
 }

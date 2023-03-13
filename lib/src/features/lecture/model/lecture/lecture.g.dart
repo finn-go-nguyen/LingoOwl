@@ -9,18 +9,18 @@ part of 'lecture.dart';
 _$_LLecture _$$_LLectureFromJson(Map<String, dynamic> json) => _$_LLecture(
       index: json['index'] as int,
       name: json['name'] as String,
-      sectionIndex: json['sectionIndex'] as int,
       type: $enumDecode(_$LectureTypeEnumMap, json['type']),
       videoId: json['videoId'] as String?,
+      seconds: json['seconds'] as int,
     );
 
 Map<String, dynamic> _$$_LLectureToJson(_$_LLecture instance) =>
     <String, dynamic>{
       'index': instance.index,
       'name': instance.name,
-      'sectionIndex': instance.sectionIndex,
       'type': _$LectureTypeEnumMap[instance.type]!,
       'videoId': instance.videoId,
+      'seconds': instance.seconds,
     };
 
 const _$LectureTypeEnumMap = {
