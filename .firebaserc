@@ -1,5 +1,15 @@
 {
   "projects": {
     "default": "online-course-app-bcc96"
-  }
+  },
+  "targets": {
+    "online-course-app-bcc96": {
+      "hosting": {
+        "owllearning": [
+          "owllearning"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

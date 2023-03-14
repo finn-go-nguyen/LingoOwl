@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import 'deep_link/data/deep_link_repository.dart';
 import 'features/authentication/data/authentication_repository.dart';
 import 'features/cart/data/local/local_cart_repository.dart';
 import 'features/cart/data/remote/remote_cart_repository.dart';
@@ -19,6 +21,10 @@ import 'features/reminder/data/reminder_repository.dart';
 import 'features/reviews/data/review_repository.dart';
 import 'features/video/data/video_repository.dart';
 import 'features/wishlist/data/wishlist_repository.dart';
+
+final dioProvider = Provider<Dio>((ref) {
+  return Dio();
+});
 
 class DomainManager {
   static DomainManager? _instance;
@@ -84,5 +90,10 @@ class DomainManager {
   final reminderRepositoryProvider = Provider<ReminderRepository>((ref) {
     // * Override this in the main method
     throw UnimplementedError();
+  });
+
+  final deepLinkRepositoryProvider = Provider<DeepLinkRepository>((ref) {
+    final dio = ref.watch(dioProvider);
+    return FirebaseDynamicLinkRepository(dio);
   });
 }
