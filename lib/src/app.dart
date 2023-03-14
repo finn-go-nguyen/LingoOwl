@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'locator.dart';
 
@@ -26,7 +25,6 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final router = ref.watch(goRouterProvider);
 
-    SystemChrome.setSystemUIOverlayStyle(LTheme.barOverLayStyleLight);
     return MaterialApp.router(
       theme: LTheme.light,
       darkTheme: LTheme.dark,
