@@ -21,6 +21,17 @@ class LCoordinator {
     }
   }
 
+  static void push(
+    String name, {
+    Map<String, String> params = const <String, String>{},
+    Map<String, dynamic> queryParams = const <String, dynamic>{},
+    Object? extra,
+  }) =>
+      context.push(
+        name,
+        extra: extra,
+      );
+
   static void pushNamed(
     String name, {
     Map<String, String> params = const <String, String>{},
@@ -104,7 +115,7 @@ class LCoordinator {
   static void showCourseDetailsScreen(String courseId) {
     pushNamed(
       LRoutes.course.name,
-      queryParams: <String, CourseId>{'courseId': courseId},
+      params: <String, CourseId>{'id': courseId},
     );
   }
 
@@ -119,7 +130,7 @@ class LCoordinator {
     goNamed(
       LRoutes.reviews.name,
       extra: title,
-      queryParams: <String, CourseId>{'courseId': courseId},
+      params: <String, CourseId>{'id': courseId},
     );
   }
 

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../constants/type_defs/type_defs.dart';
+import '../../../deep_link/view/course_share_button.dart';
 import '../../../router/coordinator.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
@@ -45,10 +46,7 @@ class CourseScreen extends ConsumerWidget {
         slivers: [
           SliverAppBar(
             actions: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(Icons.share),
-              ),
+              CourseShareButton(courseId: courseId),
               const CartIconButton()
             ],
           ),

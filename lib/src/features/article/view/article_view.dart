@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import '../../../constants/app_parameters/app_parameters.dart';
 
+import '../../../constants/app_parameters/app_parameters.dart';
 import '../model/article.dart';
 
 class ArticleView extends StatelessWidget {

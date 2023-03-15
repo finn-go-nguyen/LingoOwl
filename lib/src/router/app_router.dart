@@ -128,31 +128,7 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
           return ScaffoldWithBottomNavigationBar(child: child);
         },
         routes: [
-          _bottomNavigationItemBuilder(
-            HomeNavigationItems.items[0],
-            ref,
-            routes: [
-              GoRoute(
-                parentNavigatorKey: LCoordinator.navigatorKey,
-                name: LRoutes.course.name,
-                path: 'course',
-                builder: (context, state) => CourseScreen(
-                  courseId: state.queryParams['courseId']!,
-                ),
-                routes: [
-                  GoRoute(
-                    parentNavigatorKey: LCoordinator.navigatorKey,
-                    name: LRoutes.reviews.name,
-                    path: 'reviews',
-                    builder: (context, state) => ReviewsScreen(
-                      courseId: state.queryParams['courseId']!,
-                      courseName: state.extra as String,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+          _bottomNavigationItemBuilder(HomeNavigationItems.items[0], ref),
           _bottomNavigationItemBuilder(HomeNavigationItems.items[1], ref),
           _bottomNavigationItemBuilder(
             HomeNavigationItems.items[2],
@@ -244,6 +220,25 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
                 builder: (_, __) => const ReminderScreen(),
               ),
             ],
+          ),
+        ],
+      ),
+      GoRoute(
+        parentNavigatorKey: LCoordinator.navigatorKey,
+        name: LRoutes.course.name,
+        path: '/:id',
+        builder: (context, state) => CourseScreen(
+          courseId: state.params['id']!,
+        ),
+        routes: [
+          GoRoute(
+            parentNavigatorKey: LCoordinator.navigatorKey,
+            name: LRoutes.reviews.name,
+            path: 'reviews',
+            builder: (context, state) => ReviewsScreen(
+              courseId: state.params['id']!,
+              courseName: state.extra as String,
+            ),
           ),
         ],
       ),

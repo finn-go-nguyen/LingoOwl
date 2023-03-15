@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../model/video.dart';
-import '../../../utils/async_value_ui.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../themes/colors.dart';
+import '../../../utils/async_value_ui.dart';
 import '../../../widgets/state/loading/video/video_loading.dart';
+import '../model/video.dart';
 import 'video_view_controller.dart';
 import 'widgets/video_bottom_controller_widget.dart';
 import 'widgets/video_mid_controller_widget.dart';

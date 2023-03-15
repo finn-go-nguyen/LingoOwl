@@ -13,7 +13,7 @@ import 'src/locator.dart';
 import 'src/utils/provider_logger.dart';
 
 Future<void> main() async {
-  await initializeApp();
+  await LLocator.initializeApp();
 
   // * Pass all caught errors that are thrown within the Flutter framework to Crashlytics
   FlutterError.onError = (errorDetails) {
