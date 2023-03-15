@@ -33,7 +33,9 @@ class FirestoreCartRepository extends BaseCollectionReference<LCart>
   }
 
   @override
-  Stream<LCart> watchCart(String uid) {
-    return snapshots(uid);
+  Stream<LCart> watchCart(String uid) async* {
+    await for (var cart in snapshots(uid)) {
+      yield cart ?? LCart.empty();
+    }
   }
 }

@@ -226,7 +226,7 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
       GoRoute(
         parentNavigatorKey: LCoordinator.navigatorKey,
         name: LRoutes.course.name,
-        path: '/:id',
+        path: '/course/:id',
         builder: (context, state) => CourseScreen(
           courseId: state.params['id']!,
         ),

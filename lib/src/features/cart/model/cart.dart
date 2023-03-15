@@ -13,5 +13,7 @@ class LCart with _$LCart {
     @Default(<CourseId, TimeStamp>{}) Map<CourseId, TimeStamp> courses,
   }) = _LCart;
 
+  factory LCart.empty() => const LCart();
+
   factory LCart.fromJson(Map<String, Object?> json) => _$LCartFromJson(json);
 }
