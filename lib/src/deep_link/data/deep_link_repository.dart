@@ -35,13 +35,14 @@ class FirebaseDynamicLinkRepository implements DeepLinkRepository {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       ),
-      data: _buildDynamicLinkInfo(courseId),
+      data: _buildDynamicLinkInfo('course/$courseId'),
     );
 
     return res.data['shortLink'];
   }
 
   Map<String, Object?> _buildDynamicLinkInfo([String? subPath]) {
+    log.wtf(Uri.https(_webappUrl, subPath ?? '').toString());
     return {
       'dynamicLinkInfo': {
         'domainUriPrefix': Uri.https(_domainUriPrefix).toString(),
