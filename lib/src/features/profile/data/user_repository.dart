@@ -61,8 +61,10 @@ class FirestoreUserRepository extends BaseCollectionReference<LAppUser>
   }
 
   @override
-  Stream<LAppUser> getUserSnapshot(String uid) {
-    return snapshots(uid);
+  Stream<LAppUser> getUserSnapshot(String uid) async* {
+    await for (var user in snapshots(uid)) {
+      yield user!;
+    }
   }
 
   @override

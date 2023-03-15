@@ -34,10 +34,10 @@ class BaseCollectionReference<T> {
     return ref.doc(id).delete();
   }
 
-  Stream<T> snapshots(String id) async* {
+  Stream<T?> snapshots(String id) async* {
     final documentSnapshotStream = ref.doc(id).snapshots();
     await for (var snapshot in documentSnapshotStream) {
-      yield snapshot.data()!;
+      yield snapshot.data();
     }
   }
 }

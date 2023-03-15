@@ -56,7 +56,9 @@ class FirestoreWishlistRepository extends BaseCollectionReference<LWishList>
   }
 
   @override
-  Stream<LWishList> watchWishlist(String uid) {
-    return snapshots(uid);
+  Stream<LWishList> watchWishlist(String uid) async* {
+    await for (var snapshot in snapshots(uid)) {
+      yield snapshot ?? LWishList.empty();
+    }
   }
 }
