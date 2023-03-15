@@ -49,7 +49,7 @@ class CourseSearchDelegate extends SearchDelegate<CourseId> {
       builder: (context, ref, _) {
         final result = ref.watch(searchViewControllerProvider);
         return result.when(
-          loading: LoadingState.button,
+          loading: LoadingState.small,
           error: (_, __) => const SizedBox.shrink(),
           data: (state) => ListView.builder(
             itemCount: state.courses.length,
@@ -68,7 +68,7 @@ class CourseSearchDelegate extends SearchDelegate<CourseId> {
       builder: (context, ref, _) {
         final result = ref.watch(searchViewControllerProvider);
         return result.when(
-          loading: LoadingState.button,
+          loading: LoadingState.small,
           error: (_, __) => const SizedBox.shrink(),
           data: (state) => state.courses.isEmpty
               ? const Padding(

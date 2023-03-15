@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LectureScreenState {
   List<LSection> get sections => throw _privateConstructorUsedError;
-  List<LLecture> get lectures => throw _privateConstructorUsedError;
   LLecture get selected => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -31,8 +30,7 @@ abstract class $LectureScreenStateCopyWith<$Res> {
           LectureScreenState value, $Res Function(LectureScreenState) then) =
       _$LectureScreenStateCopyWithImpl<$Res, LectureScreenState>;
   @useResult
-  $Res call(
-      {List<LSection> sections, List<LLecture> lectures, LLecture selected});
+  $Res call({List<LSection> sections, LLecture selected});
 
   $LLectureCopyWith<$Res> get selected;
 }
@@ -51,7 +49,6 @@ class _$LectureScreenStateCopyWithImpl<$Res, $Val extends LectureScreenState>
   @override
   $Res call({
     Object? sections = null,
-    Object? lectures = null,
     Object? selected = null,
   }) {
     return _then(_value.copyWith(
@@ -59,10 +56,6 @@ class _$LectureScreenStateCopyWithImpl<$Res, $Val extends LectureScreenState>
           ? _value.sections
           : sections // ignore: cast_nullable_to_non_nullable
               as List<LSection>,
-      lectures: null == lectures
-          ? _value.lectures
-          : lectures // ignore: cast_nullable_to_non_nullable
-              as List<LLecture>,
       selected: null == selected
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -87,8 +80,7 @@ abstract class _$$_LectureScreenStateCopyWith<$Res>
       __$$_LectureScreenStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {List<LSection> sections, List<LLecture> lectures, LLecture selected});
+  $Res call({List<LSection> sections, LLecture selected});
 
   @override
   $LLectureCopyWith<$Res> get selected;
@@ -106,7 +98,6 @@ class __$$_LectureScreenStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sections = null,
-    Object? lectures = null,
     Object? selected = null,
   }) {
     return _then(_$_LectureScreenState(
@@ -114,10 +105,6 @@ class __$$_LectureScreenStateCopyWithImpl<$Res>
           ? _value._sections
           : sections // ignore: cast_nullable_to_non_nullable
               as List<LSection>,
-      lectures: null == lectures
-          ? _value._lectures
-          : lectures // ignore: cast_nullable_to_non_nullable
-              as List<LLecture>,
       selected: null == selected
           ? _value.selected
           : selected // ignore: cast_nullable_to_non_nullable
@@ -130,11 +117,8 @@ class __$$_LectureScreenStateCopyWithImpl<$Res>
 
 class _$_LectureScreenState implements _LectureScreenState {
   const _$_LectureScreenState(
-      {required final List<LSection> sections,
-      required final List<LLecture> lectures,
-      required this.selected})
-      : _sections = sections,
-        _lectures = lectures;
+      {required final List<LSection> sections, required this.selected})
+      : _sections = sections;
 
   final List<LSection> _sections;
   @override
@@ -144,20 +128,12 @@ class _$_LectureScreenState implements _LectureScreenState {
     return EqualUnmodifiableListView(_sections);
   }
 
-  final List<LLecture> _lectures;
-  @override
-  List<LLecture> get lectures {
-    if (_lectures is EqualUnmodifiableListView) return _lectures;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_lectures);
-  }
-
   @override
   final LLecture selected;
 
   @override
   String toString() {
-    return 'LectureScreenState(sections: $sections, lectures: $lectures, selected: $selected)';
+    return 'LectureScreenState(sections: $sections, selected: $selected)';
   }
 
   @override
@@ -166,17 +142,13 @@ class _$_LectureScreenState implements _LectureScreenState {
         (other.runtimeType == runtimeType &&
             other is _$_LectureScreenState &&
             const DeepCollectionEquality().equals(other._sections, _sections) &&
-            const DeepCollectionEquality().equals(other._lectures, _lectures) &&
             (identical(other.selected, selected) ||
                 other.selected == selected));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_sections),
-      const DeepCollectionEquality().hash(_lectures),
-      selected);
+      runtimeType, const DeepCollectionEquality().hash(_sections), selected);
 
   @JsonKey(ignore: true)
   @override
@@ -189,13 +161,10 @@ class _$_LectureScreenState implements _LectureScreenState {
 abstract class _LectureScreenState implements LectureScreenState {
   const factory _LectureScreenState(
       {required final List<LSection> sections,
-      required final List<LLecture> lectures,
       required final LLecture selected}) = _$_LectureScreenState;
 
   @override
   List<LSection> get sections;
-  @override
-  List<LLecture> get lectures;
   @override
   LLecture get selected;
   @override

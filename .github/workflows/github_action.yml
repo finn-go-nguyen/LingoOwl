@@ -87,7 +87,7 @@ jobs:
         shell: pwsh
         env:
           CI_TOKEN: ${{ secrets.CI_TOKEN }}
-          username: finn-go-nguyen
+          username: go-finn-nguyen
       - name: Setup firebase cli
         run: |
           npm install -g firebase-tools

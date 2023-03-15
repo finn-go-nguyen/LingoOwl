@@ -11,4 +11,6 @@ class CollectionName {
   static const customer = 'customers';
   static const checkoutSession = 'checkout_sessions';
   static const order = 'orders';
+  static const reminder = 'reminders';
+  static const course = 'courses';
 }

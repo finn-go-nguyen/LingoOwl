@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:uuid/uuid.dart';
 
 import '../../../../constants/type_defs/type_defs.dart';
 import '../../model/reminder.dart';
@@ -13,8 +12,7 @@ final newReminderControllerProvider = StateNotifierProvider.autoDispose
 });
 
 class NewReminderController extends StateNotifier<LReminder> {
-  NewReminderController(LReminder? reminder)
-      : super(reminder ?? LReminder(id: const Uuid().v1()));
+  NewReminderController(LReminder? reminder) : super(reminder ?? LReminder());
 
   void onReminderTimeChanged(Future<TimeOfDay?> Function() timePicker) async {
     final result = await timePicker();

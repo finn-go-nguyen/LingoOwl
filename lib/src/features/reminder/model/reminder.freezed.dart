@@ -14,9 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+LReminder _$LReminderFromJson(Map<String, dynamic> json) {
+  return _LReminder.fromJson(json);
+}
+
 /// @nodoc
 mixin _$LReminder {
-  String get id => throw _privateConstructorUsedError;
+  @TimeOfDayConverter()
   TimeOfDay get time => throw _privateConstructorUsedError;
   ReminderType get reminderType => throw _privateConstructorUsedError;
   ScheduleType get scheduleType => throw _privateConstructorUsedError;
@@ -24,6 +28,7 @@ mixin _$LReminder {
   /// Weekdays Sunday = 0, Monday = 1, ..., Saturday = 6
   Set<int> get selectedWeekdays => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LReminderCopyWith<LReminder> get copyWith =>
       throw _privateConstructorUsedError;
@@ -35,8 +40,7 @@ abstract class $LReminderCopyWith<$Res> {
       _$LReminderCopyWithImpl<$Res, LReminder>;
   @useResult
   $Res call(
-      {String id,
-      TimeOfDay time,
+      {@TimeOfDayConverter() TimeOfDay time,
       ReminderType reminderType,
       ScheduleType scheduleType,
       Set<int> selectedWeekdays});
@@ -55,17 +59,12 @@ class _$LReminderCopyWithImpl<$Res, $Val extends LReminder>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? time = null,
     Object? reminderType = null,
     Object? scheduleType = null,
     Object? selectedWeekdays = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -94,8 +93,7 @@ abstract class _$$_LReminderCopyWith<$Res> implements $LReminderCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String id,
-      TimeOfDay time,
+      {@TimeOfDayConverter() TimeOfDay time,
       ReminderType reminderType,
       ScheduleType scheduleType,
       Set<int> selectedWeekdays});
@@ -112,17 +110,12 @@ class __$$_LReminderCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? time = null,
     Object? reminderType = null,
     Object? scheduleType = null,
     Object? selectedWeekdays = null,
   }) {
     return _then(_$_LReminder(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
@@ -144,20 +137,22 @@ class __$$_LReminderCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$_LReminder implements _LReminder {
+@JsonSerializable()
+class _$_LReminder extends _LReminder {
   const _$_LReminder(
-      {required this.id,
-      this.time = const TimeOfDay(hour: 12, minute: 0),
+      {@TimeOfDayConverter() this.time = const TimeOfDay(hour: 20, minute: 0),
       this.reminderType = ReminderType.notification,
       this.scheduleType = ScheduleType.everyday,
       final Set<int> selectedWeekdays = const <int>{0}})
-      : _selectedWeekdays = selectedWeekdays;
+      : _selectedWeekdays = selectedWeekdays,
+        super._();
+
+  factory _$_LReminder.fromJson(Map<String, dynamic> json) =>
+      _$$_LReminderFromJson(json);
 
   @override
-  final String id;
-  @override
   @JsonKey()
+  @TimeOfDayConverter()
   final TimeOfDay time;
   @override
   @JsonKey()
@@ -180,7 +175,7 @@ class _$_LReminder implements _LReminder {
 
   @override
   String toString() {
-    return 'LReminder(id: $id, time: $time, reminderType: $reminderType, scheduleType: $scheduleType, selectedWeekdays: $selectedWeekdays)';
+    return 'LReminder(time: $time, reminderType: $reminderType, scheduleType: $scheduleType, selectedWeekdays: $selectedWeekdays)';
   }
 
   @override
@@ -188,7 +183,6 @@ class _$_LReminder implements _LReminder {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LReminder &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.reminderType, reminderType) ||
                 other.reminderType == reminderType) &&
@@ -198,28 +192,38 @@ class _$_LReminder implements _LReminder {
                 .equals(other._selectedWeekdays, _selectedWeekdays));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, time, reminderType,
-      scheduleType, const DeepCollectionEquality().hash(_selectedWeekdays));
+  int get hashCode => Object.hash(runtimeType, time, reminderType, scheduleType,
+      const DeepCollectionEquality().hash(_selectedWeekdays));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$_LReminderCopyWith<_$_LReminder> get copyWith =>
       __$$_LReminderCopyWithImpl<_$_LReminder>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_LReminderToJson(
+      this,
+    );
+  }
 }
 
-abstract class _LReminder implements LReminder {
+abstract class _LReminder extends LReminder {
   const factory _LReminder(
-      {required final String id,
-      final TimeOfDay time,
+      {@TimeOfDayConverter() final TimeOfDay time,
       final ReminderType reminderType,
       final ScheduleType scheduleType,
       final Set<int> selectedWeekdays}) = _$_LReminder;
+  const _LReminder._() : super._();
+
+  factory _LReminder.fromJson(Map<String, dynamic> json) =
+      _$_LReminder.fromJson;
 
   @override
-  String get id;
-  @override
+  @TimeOfDayConverter()
   TimeOfDay get time;
   @override
   ReminderType get reminderType;

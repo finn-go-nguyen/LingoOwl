@@ -28,7 +28,7 @@ class ReviewListView extends StatelessWidget {
             child: ReviewCard(review: reviews[index]),
           ),
         ),
-        if (isLoading) const LoadingState.button(),
+        if (isLoading) const LoadingState.small(),
         Gaps.h64,
       ],
     );
