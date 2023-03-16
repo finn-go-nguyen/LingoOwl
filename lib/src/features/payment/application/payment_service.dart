@@ -57,20 +57,12 @@ class PaymentService {
     }
   }
 
-  // Future<void> showPaymentSheet({void Function()? onPaymentSuccessful}) async {
-  //   try {
-  //     return Stripe.instance
-  //         .presentPaymentSheet()
-  //         .then((value) => log.wtf('show payment end'));
-  //   } catch (e) {
-  //     log.wtf(e);
-  //     rethrow;
-  //   }
-  // }
-
   Future<void> showPaymentSheet() {
     try {
-      return Stripe.instance.presentPaymentSheet().then(
+      return Stripe.instance
+          .presentPaymentSheet(
+              options: const PaymentSheetPresentOptions(timeout: 10))
+          .then(
             (_) => ScaffoldMessenger.of(LCoordinator.context).showSnackBar(
               const SnackBar(
                 content: Text('Payment successfully completed'),
