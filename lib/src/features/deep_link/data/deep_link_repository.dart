@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 
-import '../../utils/logger.dart';
+import '../../../utils/logger.dart';
 
 abstract class DeepLinkRepository {
   Future<String> getCourseLink(String courseId);

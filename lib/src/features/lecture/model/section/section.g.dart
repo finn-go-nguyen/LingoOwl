@@ -18,5 +18,5 @@ Map<String, dynamic> _$$_LSectionToJson(_$_LSection instance) =>
     <String, dynamic>{
       'index': instance.index,
       'name': instance.name,
-      'lectures': instance.lectures,
+      'lectures': instance.lectures.map((e) => e.toJson()).toList(),
     };

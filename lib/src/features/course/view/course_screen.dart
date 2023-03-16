@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../constants/type_defs/type_defs.dart';
-import '../../../deep_link/view/course_share_button.dart';
 import '../../../router/coordinator.dart';
 import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
@@ -12,6 +11,7 @@ import '../../authentication/data/authentication_repository.dart';
 import '../../cart/view/add_to_cart/add_to_cart_button.dart';
 import '../../cart/view/cart_icon_button/cart_icon_button.dart';
 import '../../checkout/view/buy_button.dart';
+import '../../deep_link/view/course_share_button.dart';
 import '../../rating_count/data/rating_count_repository.dart';
 import '../../rating_count/view/review_star_count_section.dart';
 import '../../reviews/application/review_service.dart';

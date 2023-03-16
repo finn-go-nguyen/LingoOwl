@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../utils/async_value_ui.dart';
+import '../../../utils/async_value_ui.dart';
 import 'course_share_button_controller.dart';
 
 class CourseShareButton extends ConsumerWidget {

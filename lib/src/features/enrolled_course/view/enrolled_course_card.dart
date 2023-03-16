@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../course_progress/view/course_progress_bar.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../constants/type_defs/type_defs.dart';
@@ -58,9 +59,7 @@ class EnrolledCourseCard extends ConsumerWidget {
                             name: course.instructorName,
                           ),
                           Gaps.h8,
-                          const LinearProgressIndicator(value: .35),
-                          Gaps.h12,
-                          const Text('35% complete'),
+                          CourseProgressBar(courseId: courseId),
                         ],
                       ),
                     ),

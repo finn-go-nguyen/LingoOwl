@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../constants/type_defs/type_defs.dart';
-import '../../domain_manager.dart';
-import '../../features/course/data/course_repository.dart';
+import '../../../constants/type_defs/type_defs.dart';
+import '../../../domain_manager.dart';
+import '../../course/data/course_repository.dart';
 
 final courseShareButtonProvider = StateNotifierProvider.autoDispose<
     CourseShareButtonController, AsyncValue<void>>((ref) {
