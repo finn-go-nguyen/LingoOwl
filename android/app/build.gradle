@@ -95,3 +95,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.android.gms:play-services-wallet:19.1.0'
 }
+
+android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
