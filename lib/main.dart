@@ -7,7 +7,7 @@ import 'src/app.dart';
 import 'src/domain_manager.dart';
 import 'src/features/cart/application/cart_sync_service.dart';
 import 'src/features/cart/data/local/local_cart_repository_impl.dart';
-import 'src/features/notification/notification_service.dart';
+import 'src/features/notification/application/notification_service.dart';
 import 'src/features/reminder/data/reminder_repository_impl.dart';
 import 'src/locator.dart';
 import 'src/utils/provider_logger.dart';

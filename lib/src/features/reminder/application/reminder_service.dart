@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
+import '../../notification/application/notification_service.dart';
 import '../../notification/data/notification_channels.dart';
-import '../../notification/notification_service.dart';
 import '../data/reminder_repository.dart';
 import '../model/reminder.dart';
 

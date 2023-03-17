@@ -35,6 +35,8 @@ class CourseProgressReference extends BaseCollectionReference<LCourseProgress> {
     Index lectureIndex,
   ) async {
     final courseProgress = await get(id);
+    if (courseProgress?.watchedLectures.contains(lectureIndex) ?? false) return;
+
     final update = courseProgress!.copyWith(watchedLectures: [
       ...courseProgress.watchedLectures,
       lectureIndex,

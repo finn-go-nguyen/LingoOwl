@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/type_defs/type_defs.dart';
-import '../model/section/section.dart';
-import 'widgets/lecture_section.dart';
+import '../../../../constants/type_defs/type_defs.dart';
+import '../../model/section/section.dart';
+import '../widgets/lecture_section.dart';
 
 class LectureSelectionView extends StatefulWidget {
   const LectureSelectionView({

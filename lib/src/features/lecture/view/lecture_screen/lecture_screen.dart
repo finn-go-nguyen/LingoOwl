@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../constants/app_parameters/app_parameters.dart';
-import '../../../constants/type_defs/type_defs.dart';
-import '../../../utils/async_value_ui.dart';
-import '../../../widgets/common/common.dart';
-import '../../../widgets/state/error.dart';
-import '../../../widgets/state/loading/loading.dart';
-import '../../article/model/article.dart';
-import '../../article/view/article_view.dart';
-import '../../course/data/course_repository.dart';
-import '../../note/view/add_note/add_note_controller.dart';
-import '../../video/data/video_repository.dart';
-import '../../video/view/video_view.dart';
-import 'lecture_more_view.dart';
+import '../../../../constants/app_parameters/app_parameters.dart';
+import '../../../../constants/type_defs/type_defs.dart';
+import '../../../../utils/async_value_ui.dart';
+import '../../../../widgets/common/common.dart';
+import '../../../../widgets/state/error.dart';
+import '../../../../widgets/state/loading/loading.dart';
+import '../../../article/model/article.dart';
+import '../../../article/view/article_view.dart';
+import '../../../course/data/course_repository.dart';
+import '../../../note/view/add_note/add_note_controller.dart';
+import '../../../video/data/video_repository.dart';
+import '../../../video/view/video_view.dart';
+import '../lecture_more_view/lecture_more_view.dart';
+import '../lecture_selection_view/lecture_selection_view.dart';
+import '../widgets/lecture_tab_bar.dart';
 import 'lecture_screen_controller.dart';
-import 'lecture_selection_view.dart';
-import 'widgets/lecture_tab_bar.dart';
 
 class LectureScreen extends ConsumerWidget {
   const LectureScreen({
@@ -68,6 +68,10 @@ class LectureScreen extends ConsumerWidget {
                           data: (data) => VideoView(
                             key: ObjectKey(data),
                             video: data,
+                            onVideoEnd: ref
+                                .read(lectureScreenControllerProvider(courseId)
+                                    .notifier)
+                                .onVideoEnd,
                           ),
                         );
                       },

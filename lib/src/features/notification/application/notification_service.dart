@@ -1,9 +1,9 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../themes/colors.dart';
-import 'data/notification_channels.dart';
-import 'notification_controller.dart';
+import '../../../themes/colors.dart';
+import '../data/notification_channels.dart';
+import '../notification_controller.dart';
 
 final notificationServiceProvider = Provider<NotificationService>((ref) {
   final notification = AwesomeNotifications();

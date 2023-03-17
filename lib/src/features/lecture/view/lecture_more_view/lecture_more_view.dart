@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/app_constants/lecture_more_items.dart';
-import '../../../constants/type_defs/type_defs.dart';
-import '../../../router/coordinator.dart';
+import '../../../../constants/app_constants/lecture_more_items.dart';
+import '../../../../constants/type_defs/type_defs.dart';
+import '../../../../router/coordinator.dart';
 
 class LectureMoreView extends StatefulWidget {
   const LectureMoreView({

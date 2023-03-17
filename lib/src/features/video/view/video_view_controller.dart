@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_debounce/easy_throttle.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
@@ -152,6 +153,24 @@ class VideoViewController extends StateNotifier<VideoViewState> {
     if (state.controller == null) return;
     state =
         state.copyWith(position: position ?? state.controller!.value.position);
+  }
+
+  void listenOnVideoEnd({required void Function() onVideoEnd}) {
+    final controller = state.controller;
+    if (controller == null) return;
+
+    controller.addListener(() => _handleVideoEnd(onVideoEnd));
+  }
+
+  void _handleVideoEnd(void Function() onVideoEnd) {
+    EasyThrottle.throttle('_handleVideoEnd', const Duration(seconds: 1), () {
+      final isVideoPause = !(state.controller?.value.isPlaying ?? true);
+      final isVideoEnd =
+          state.position.inSeconds - state.duration.inSeconds == 0;
+      if (isVideoEnd && isVideoPause) {
+        onVideoEnd();
+      }
+    });
   }
 
   void _seekTo(Duration position) async {
