@@ -11,13 +11,12 @@ import '../model/enrolled_course.dart';
 
 final enrolledCoursesProvider =
     FutureProvider.autoDispose<List<EnrolledCourse>>((ref) {
-  ref.keepAlive();
   final enrolledCourseRepository =
       ref.watch(DomainManager.instance.enrolledCourseRepositoryProvider);
 
   final uid = ref.watch(uidProvider);
   if (uid == null) return Future.value(<EnrolledCourse>[]);
-  return enrolledCourseRepository.getEnrolledCourse(uid);
+  return enrolledCourseRepository.getEnrolledCourses(uid);
 });
 
 final enrolledCoursesByStatusProvider = FutureProvider.autoDispose
@@ -34,12 +33,13 @@ final enrolledCoursesByStatusProvider = FutureProvider.autoDispose
 });
 
 abstract class EnrolledCourseRepository {
-  Future<List<EnrolledCourse>> getEnrolledCourse(UserId uid);
+  Future<List<EnrolledCourse>> getEnrolledCourses(UserId uid);
   Future<void> updateStatus(
     UserId uid,
     CourseId courseId,
     EnrolledCourseStatus status,
   );
+  Future<void> addEnrolledCourses(UserId userId, List<CourseId> courseIds);
 }
 
 class FirestoreEnrolledCourseRepository
@@ -66,7 +66,7 @@ class FirestoreEnrolledCourseRepository
         );
 
   @override
-  Future<List<EnrolledCourse>> getEnrolledCourse(UserId uid) async {
+  Future<List<EnrolledCourse>> getEnrolledCourses(UserId uid) async {
     final docSnapshot = await ref.doc(uid).get();
     if (!docSnapshot.exists) return const <EnrolledCourse>[];
 
@@ -78,5 +78,36 @@ class FirestoreEnrolledCourseRepository
       UserId uid, CourseId courseId, EnrolledCourseStatus status) {
     // TODO: implement updateStatus
     throw UnimplementedError();
+  }
+
+  @override
+  Future<void> addEnrolledCourses(
+      UserId userId, List<CourseId> courseIds) async {
+    final docRef = ref.doc(userId);
+    final docSnapshot = await docRef.get();
+
+    if (docSnapshot.exists) {
+      return docRef.update({
+        'courses': FieldValue.arrayUnion(courseIds.map((e) {
+          final enrolledCourse = EnrolledCourse(
+            uid: userId,
+            courseId: e,
+            timeStamp: DateTime.now().millisecondsSinceEpoch,
+          );
+          return enrolledCourse.toJson();
+        }).toList())
+      });
+    }
+
+    return docRef.set(
+      courseIds.map((e) {
+        final enrolledCourse = EnrolledCourse(
+          uid: userId,
+          courseId: e,
+          timeStamp: DateTime.now().millisecondsSinceEpoch,
+        );
+        return enrolledCourse;
+      }).toList(),
+    );
   }
 }
