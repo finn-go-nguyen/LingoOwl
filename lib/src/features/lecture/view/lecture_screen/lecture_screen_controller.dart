@@ -107,16 +107,7 @@ class LectureScreenController
         }
       }
 
-      final asyncValue = await AsyncValue.guard(
-        () => _lectureService.onLectureChanged(
-          value.courseProgress.id,
-          lecture.index,
-        ),
-      );
-
-      if (asyncValue is AsyncError) {
-        state = asyncValue as AsyncError<LectureScreenState>;
-      }
+      _onLectureChanged(value.courseProgress.id, lecture.index);
     });
   }
 
@@ -129,6 +120,22 @@ class LectureScreenController
       state = AsyncData(value.copyWith(
         selected: value.nextLecture,
       ));
+
+      _onLectureChanged(value.courseProgress.id, value.nextLecture.index);
     });
+  }
+
+  Future<void> _onLectureChanged(
+      CourseProgressId courseProgressId, Index lectureIndex) async {
+    final asyncValue = await AsyncValue.guard(
+      () => _lectureService.onLectureChanged(
+        courseProgressId,
+        lectureIndex,
+      ),
+    );
+
+    if (asyncValue is AsyncError) {
+      state = asyncValue as AsyncError<LectureScreenState>;
+    }
   }
 }
