@@ -30,10 +30,7 @@ class CourseProgressBar extends ConsumerWidget {
         children: [
           _buildProgressIndication(data),
           Gaps.h8,
-          Text(
-            '${(data * 100).toInt()}% complete',
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
+          _buildPercentageText(data),
         ],
       ),
     );
@@ -44,6 +41,29 @@ class CourseProgressBar extends ConsumerWidget {
       return LinearProgressIndicator(
         value: data,
         backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
+      );
+    });
+  }
+
+  Widget _buildPercentageText(double data) {
+    final text = data == 1 ? 'complete' : '${(data * 100).toInt()}% complete';
+    return Builder(builder: (context) {
+      return Row(
+        children: [
+          if (data == 1)
+            Padding(
+              padding: const EdgeInsets.only(right: Sizes.p4),
+              child: Icon(
+                Icons.verified,
+                size: 20,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+          Text(
+            text,
+            style: Theme.of(context).textTheme.bodySmall,
+          ),
+        ],
       );
     });
   }
