@@ -8,6 +8,5 @@ part 'search_view_state.freezed.dart';
 class SearchViewState with _$SearchViewState {
   const factory SearchViewState({
     @Default('') String oldQuery,
-    @Default(<LCourse>[]) List<LCourse> courses,
   }) = _SearchViewState;
 }

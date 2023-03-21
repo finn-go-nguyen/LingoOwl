@@ -1,16 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../data/search_repository.dart';
 
-import '../../course/model/course.dart';
+import '../../../domain_manager.dart';
 import 'search_view_state.dart';
 
 final searchViewControllerProvider =
     StateNotifierProvider<SearchViewController, AsyncValue<SearchViewState>>(
         (ref) {
-  return SearchViewController();
+  final searchRepository =
+      ref.watch(DomainManager.instance.searchRepositoryProvider);
+  return SearchViewController(searchRepository);
 });
 
 class SearchViewController extends StateNotifier<AsyncValue<SearchViewState>> {
-  SearchViewController() : super(const AsyncData(SearchViewState()));
+  SearchViewController(this._searchRepository)
+      : super(const AsyncData(SearchViewState()));
+
+  final SearchRepository _searchRepository;
 
   void onQueryChanged(String query) async {
     state.whenData((value) async {
@@ -18,11 +24,16 @@ class SearchViewController extends StateNotifier<AsyncValue<SearchViewState>> {
       if (query.isEmpty || query == value.oldQuery) return;
 
       state = const AsyncLoading();
-      await Future.delayed(const Duration(seconds: 1));
+      _searchRepository.searchCourse(query);
       state = AsyncData(SearchViewState(
-        courses: <LCourse>[],
         oldQuery: query,
       ));
     });
+  }
+
+  @override
+  void dispose() {
+    _searchRepository.dispose();
+    super.dispose();
   }
 }

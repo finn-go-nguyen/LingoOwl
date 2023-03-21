@@ -1,6 +1,7 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../data/algolia_search_repository.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/type_defs/type_defs.dart';
@@ -47,7 +48,7 @@ class CourseSearchDelegate extends SearchDelegate<CourseId> {
   Widget buildResults(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        final result = ref.watch(searchViewControllerProvider);
+        final result = ref.watch(searchDataProvider);
         return result.when(
           loading: LoadingState.small,
           error: (_, __) => const SizedBox.shrink(),
@@ -66,7 +67,7 @@ class CourseSearchDelegate extends SearchDelegate<CourseId> {
   Widget buildSuggestions(BuildContext context) {
     return Consumer(
       builder: (context, ref, _) {
-        final result = ref.watch(searchViewControllerProvider);
+        final result = ref.watch(searchDataProvider);
         return result.when(
           loading: LoadingState.small,
           error: (_, __) => const SizedBox.shrink(),

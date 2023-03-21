@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../constants/enums/question_type.dart';
 import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
 import '../data/quiz_repository.dart';
-
-import '../../../constants/enums/question_type.dart';
 import 'quiz_state.dart';
 
 final quizControllerProvider = StateNotifierProvider.autoDispose
