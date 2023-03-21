@@ -10,8 +10,9 @@ _$_LLecture _$$_LLectureFromJson(Map<String, dynamic> json) => _$_LLecture(
       index: json['index'] as int,
       name: json['name'] as String,
       type: $enumDecode(_$LectureTypeEnumMap, json['type']),
+      seconds: json['seconds'] as int? ?? 0,
       videoId: json['videoId'] as String?,
-      seconds: json['seconds'] as int,
+      quizId: json['quizId'] as String?,
     );
 
 Map<String, dynamic> _$$_LLectureToJson(_$_LLecture instance) =>
@@ -19,11 +20,13 @@ Map<String, dynamic> _$$_LLectureToJson(_$_LLecture instance) =>
       'index': instance.index,
       'name': instance.name,
       'type': _$LectureTypeEnumMap[instance.type]!,
-      'videoId': instance.videoId,
       'seconds': instance.seconds,
+      'videoId': instance.videoId,
+      'quizId': instance.quizId,
     };
 
 const _$LectureTypeEnumMap = {
   LectureType.video: 'video',
   LectureType.article: 'article',
+  LectureType.quiz: 'quiz',
 };

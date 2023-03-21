@@ -15,6 +15,8 @@ class UiParameters {
   static const imageSelectorUploadButtonPadding =
       EdgeInsets.symmetric(horizontal: 20.0);
   static const borderRadius = BorderRadius.all(Radius.circular(24.0));
+  static const radioListTileBorderRadius =
+      BorderRadius.all(Radius.circular(12.0));
 
   static final tableBorder = TableBorder.all(
     borderRadius: borderRadius,

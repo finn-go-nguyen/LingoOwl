@@ -11,6 +11,7 @@ import '../../../article/model/article.dart';
 import '../../../article/view/article_view.dart';
 import '../../../course/data/course_repository.dart';
 import '../../../note/view/add_note/add_note_controller.dart';
+import '../../../quiz/view/quiz_view.dart';
 import '../../../video/data/video_repository.dart';
 import '../../../video/view/video_view.dart';
 import '../lecture_more_view/lecture_more_view.dart';
@@ -58,47 +59,37 @@ class LectureScreen extends ConsumerWidget {
               body: Column(
                 children: [
                   if (data.selected.type.isVideo)
-                    Consumer(
-                      builder: (context, ref, child) {
-                        final video =
-                            ref.watch(videoProvider(data.selected.videoId!));
-                        return video.when(
-                          loading: LoadingState.small,
-                          error: (_, __) => const ErrorState(),
-                          data: (data) => VideoView(
-                            key: ObjectKey(data),
-                            video: data,
-                            onVideoEnd: ref
-                                .read(lectureScreenControllerProvider(courseId)
-                                    .notifier)
-                                .onVideoEnd,
-                          ),
-                        );
-                      },
+                    _buildVideoView(data.selected.videoId!, courseId),
+                  if (data.selected.type.isArticle) _buildArticleView(),
+                  if (data.selected.type.isQuiz)
+                    _buildQuiz(
+                      data.selected.quizId!,
+                      courseId,
+                      data.selected.name,
                     ),
-                  if (data.selected.type.isArticle)
-                    const ArticleView(
-                      article: LArticle(id: '', htmlCode: ''),
-                    ),
-                  Expanded(
-                    child: DefaultTabController(
-                      length: 2,
-                      child: NestedScrollView(
-                        headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                          _buildHeader(),
-                          const LectureTabBar(),
-                        ],
-                        body: TabBarView(
-                          children: [
-                            LectureSelectionView(
-                              courseId: courseId,
-                              sections: data.sections,
-                              selectedIndex: data.selected.index,
-                            ),
-                            LectureMoreView(
-                              courseId: courseId,
-                            ),
+                  Visibility(
+                    visible: data.selected.type.isVideo,
+                    child: Expanded(
+                      child: DefaultTabController(
+                        length: 2,
+                        child: NestedScrollView(
+                          headerSliverBuilder: (context, innerBoxIsScrolled) =>
+                              [
+                            _buildHeader(),
+                            const LectureTabBar(),
                           ],
+                          body: TabBarView(
+                            children: [
+                              LectureSelectionView(
+                                courseId: courseId,
+                                sections: data.sections,
+                                selectedIndex: data.selected.index,
+                              ),
+                              LectureMoreView(
+                                courseId: courseId,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -149,4 +140,49 @@ class LectureScreen extends ConsumerWidget {
       }),
     );
   }
+}
+
+Widget _buildVideoView(VideoId videoId, CourseId courseId) {
+  return Consumer(
+    builder: (context, ref, child) {
+      final video = ref.watch(videoProvider(videoId));
+      return video.when(
+        loading: LoadingState.small,
+        error: (_, __) => const ErrorState(),
+        data: (data) => VideoView(
+          key: ObjectKey(data),
+          video: data,
+          onVideoEnd: ref
+              .read(lectureScreenControllerProvider(courseId).notifier)
+              .onLectureComplete,
+        ),
+      );
+    },
+  );
+}
+
+Widget _buildArticleView() {
+  return const Expanded(
+    child: ArticleView(
+      article: LArticle(id: '', htmlCode: ''),
+    ),
+  );
+}
+
+Widget _buildQuiz(
+  QuizId quizId,
+  CourseId courseId,
+  String title,
+) {
+  return Expanded(
+    child: Consumer(builder: (context, ref, child) {
+      return QuizView(
+        onQuizComplete: ref
+            .read(lectureScreenControllerProvider(courseId).notifier)
+            .onLectureComplete,
+        title: title,
+        quizId: quizId,
+      );
+    }),
+  );
 }

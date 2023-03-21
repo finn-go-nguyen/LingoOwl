@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -47,6 +48,9 @@ class LectureListTile extends ConsumerWidget {
         break;
       case LectureType.article:
         iconData = Icons.article;
+        break;
+      case LectureType.quiz:
+        iconData = Icons.quiz;
         break;
       default:
         iconData = Icons.category;
@@ -104,10 +108,8 @@ class LectureListTile extends ConsumerWidget {
             ),
           ],
         );
-      case LectureType.article:
-        return const Text('Article');
       default:
-        return const SizedBox.shrink();
+        return Text(lecture.type.name.capitalize);
     }
   }
 }

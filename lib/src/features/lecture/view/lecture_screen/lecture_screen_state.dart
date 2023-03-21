@@ -23,7 +23,9 @@ class LectureScreenState with _$LectureScreenState {
     return result;
   }
 
-  bool get isLastLecture => selected == sections.last.lectures.last;
+  List<LSection> get sortedSection =>
+      List.from(sections)..sort((a, b) => a.index.compareTo(b.index));
+  bool get isLastLecture => selected == sortedSection.last.sortedLectures.last;
   LLecture get nextLecture {
     return lectures
         .firstWhere((element) => element.index == selected.index + 1);
