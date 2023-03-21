@@ -127,7 +127,7 @@ class LCoordinator {
     String title,
     CourseId courseId,
   ) {
-    goNamed(
+    pushNamed(
       LRoutes.reviews.name,
       extra: title,
       params: <String, CourseId>{'id': courseId},
