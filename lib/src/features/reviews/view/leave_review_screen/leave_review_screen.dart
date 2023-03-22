@@ -9,7 +9,7 @@ import '../../../../widgets/common/common.dart';
 import '../../../../widgets/state/error.dart';
 import '../../../../widgets/state/loading/loading.dart';
 import '../../application/review_service.dart';
-import '../../model/review/review.dart';
+import '../../model/review.dart';
 import 'course_rating_bar.dart';
 import 'leave_review_screen_controller.dart';
 
@@ -82,63 +82,65 @@ class _LeaveReviewFormState extends ConsumerState<LeaveReviewForm> {
       next.showSuccess(context, content: 'Your review has been submitted!');
     });
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (widget.review != null) ...[
-          Text('You reviewed this course before. Submit again to edit.',
-              textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.labelMedium),
-          Gaps.h24,
-        ],
-        Center(
-          child: Consumer(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          if (widget.review != null) ...[
+            Text('You reviewed this course before. Submit again to edit.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.labelMedium),
+            Gaps.h24,
+          ],
+          Center(
+            child: Consumer(
+              builder: (context, ref, child) {
+                final rating = ref.watch(
+                    leaveReviewControllerProvider(widget.courseId)
+                        .select((state) => state.rating));
+                return CourseRatingBar(
+                  initialRating: rating,
+                  onRatingUpdate: ref
+                      .read(leaveReviewControllerProvider(widget.courseId)
+                          .notifier)
+                      .onRatingUpdate,
+                );
+              },
+            ),
+          ),
+          Gaps.h32,
+          TextField(
+            controller: _controller,
+            textCapitalization: TextCapitalization.sentences,
+            maxLines: 5,
+            decoration: const InputDecoration(
+              labelText: 'Your review (optional)',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          Gaps.h32,
+          Consumer(
             builder: (context, ref, child) {
-              final rating = ref.watch(
+              final canSubmit = ref.watch(
                   leaveReviewControllerProvider(widget.courseId)
-                      .select((state) => state.rating));
-              return CourseRatingBar(
-                initialRating: rating,
-                onRatingUpdate: ref
-                    .read(
-                        leaveReviewControllerProvider(widget.courseId).notifier)
-                    .onRatingUpdate,
+                      .select((state) => state.canSubmit));
+              final status = ref.watch(
+                  leaveReviewControllerProvider(widget.courseId)
+                      .select((state) => state.status));
+              return SubmitButton(
+                onSubmitted: canSubmit
+                    ? () => ref
+                        .read(leaveReviewControllerProvider(widget.courseId)
+                            .notifier)
+                        .onSubmitted(widget.courseId, _controller.text,
+                            onSubmitSuccessfully: LCoordinator.onBack)
+                    : null,
+                isLoading: status.isLoading,
               );
             },
           ),
-        ),
-        Gaps.h32,
-        TextField(
-          controller: _controller,
-          textCapitalization: TextCapitalization.sentences,
-          maxLines: 5,
-          decoration: const InputDecoration(
-            labelText: 'Your review (optional)',
-            border: OutlineInputBorder(),
-          ),
-        ),
-        Gaps.h32,
-        Consumer(
-          builder: (context, ref, child) {
-            final canSubmit = ref.watch(
-                leaveReviewControllerProvider(widget.courseId)
-                    .select((state) => state.canSubmit));
-            final status = ref.watch(
-                leaveReviewControllerProvider(widget.courseId)
-                    .select((state) => state.status));
-            return SubmitButton(
-              onSubmitted: canSubmit
-                  ? () => ref
-                      .read(leaveReviewControllerProvider(widget.courseId)
-                          .notifier)
-                      .onSubmitted(widget.courseId, _controller.text,
-                          onSubmitSuccessfully: LCoordinator.onBack)
-                  : null,
-              isLoading: status.isLoading,
-            );
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

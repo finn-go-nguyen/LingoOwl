@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../constants/firestore/collection_name.dart';
 import '../../../constants/type_defs/type_defs.dart';
 import '../../../utils/base_collection_reference.dart';
-import '../model/review/review.dart';
+import '../model/review.dart';
 
 abstract class ReviewRepository {
   Future<LReview?> fetchReview(CourseId courseId, UserId userId);

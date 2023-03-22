@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'features/search/data/algolia_search_repository.dart';
 
 import 'features/authentication/data/authentication_repository.dart';
 import 'features/cart/data/local/local_cart_repository.dart';
@@ -27,6 +26,7 @@ import 'features/quiz/data/quiz_repository_impl.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
 import 'features/reminder/data/reminder_repository.dart';
 import 'features/reviews/data/review_repository.dart';
+import 'features/search/data/algolia_search_repository.dart';
 import 'features/search/data/search_repository.dart';
 import 'features/video/data/video_repository.dart';
 import 'features/wishlist/data/wishlist_repository.dart';

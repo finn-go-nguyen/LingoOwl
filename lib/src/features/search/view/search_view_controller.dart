@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../data/search_repository.dart';
 
 import '../../../domain_manager.dart';
+import '../data/search_repository.dart';
 import 'search_view_state.dart';
 
 final searchViewControllerProvider =

@@ -10,7 +10,6 @@ import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/rating_bar.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
-import '../../reviews/view/review_screen/widgets/review_button.dart';
 import '../data/rating_count_repository.dart';
 
 class ReviewStarCountSection extends ConsumerWidget {
@@ -58,8 +57,6 @@ class ReviewStarCountSection extends ConsumerWidget {
               count: e.value.count,
             ),
           ),
-          // TODO: Move this button to appropriate place
-          ReviewButton(courseId: courseId),
         ],
       ),
     );

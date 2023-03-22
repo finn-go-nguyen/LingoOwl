@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../model/review/review.dart';
+import '../../model/review.dart';
 
 part 'reviews_state.freezed.dart';
 

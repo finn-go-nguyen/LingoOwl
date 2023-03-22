@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../../../constants/type_defs/type_defs.dart';
+import '../../../constants/type_defs/type_defs.dart';
 
 part 'review.freezed.dart';
 part 'review.g.dart';
