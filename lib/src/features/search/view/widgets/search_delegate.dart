@@ -1,7 +1,6 @@
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../data/algolia_search_repository.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/type_defs/type_defs.dart';
@@ -9,6 +8,7 @@ import '../../../../widgets/common/common.dart';
 import '../../../../widgets/state/loading/loading.dart';
 import '../../../cart/view/cart_icon_button/cart_icon_button.dart';
 import '../../../course/view/course_card.dart';
+import '../../data/algolia_search_repository.dart';
 import '../search_view_controller.dart';
 
 class CourseSearchDelegate extends SearchDelegate<CourseId> {

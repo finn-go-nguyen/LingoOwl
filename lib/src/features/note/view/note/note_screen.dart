@@ -13,9 +13,11 @@ class NoteScreen extends StatelessWidget {
   const NoteScreen({
     super.key,
     required this.courseId,
+    required this.seekTo,
   });
 
   final CourseId courseId;
+  final void Function(Index lectureIndex, Duration position)? seekTo;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class NoteScreen extends StatelessWidget {
                         data: (notes) => NoteListView(
                           controller: scrollController,
                           notes: notes,
+                          seekTo: seekTo,
                         ),
                       );
                     }),

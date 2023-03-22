@@ -140,7 +140,7 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
                 path: 'lecture',
                 pageBuilder: (context, state) => MaterialPage(
                   fullscreenDialog: true,
-                  child: LectureScreen(courseId: state.extra as CourseId),
+                  child: LectureScreen(courseId: state.queryParams['id']!),
                 ),
                 routes: [
                   GoRoute(
@@ -148,7 +148,10 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
                     name: LRoutes.notes.name,
                     path: 'notes',
                     pageBuilder: (context, state) => DialogPage(
-                      child: NoteScreen(courseId: state.extra as CourseId),
+                      child: NoteScreen(
+                        courseId: state.queryParams['id']!,
+                        seekTo: state.extra as void Function(Index, Duration),
+                      ),
                     ),
                   ),
                 ],

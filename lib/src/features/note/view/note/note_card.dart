@@ -30,14 +30,20 @@ class NoteCard extends ConsumerWidget {
     return Card(
       elevation: 2,
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          seekTo?.call(
+            note.lectureIndex,
+            Duration(seconds: note.atSeconds),
+          );
+          LCoordinator.onBack();
+        },
         child: Padding(
           padding: contentPadding,
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: _buildTimeStamp(context),
               ),
               Gaps.w12,
@@ -107,7 +113,7 @@ class NoteCard extends ConsumerWidget {
   }
 
   Widget _buildTimeStamp(BuildContext context) {
-    final textStyle = Theme.of(context).textTheme.bodyMedium?.copyWith(
+    final textStyle = Theme.of(context).textTheme.bodySmall?.copyWith(
           fontWeight: FontWeight.w600,
           color: Theme.of(context).colorScheme.onPrimary,
         );
@@ -117,7 +123,7 @@ class NoteCard extends ConsumerWidget {
       color: Theme.of(context).colorScheme.primary,
       shadowColor: Colors.transparent,
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Consumer(builder: (context, ref, child) {
           final textHelper = ref.watch(textHelpersProvider);
           return Center(

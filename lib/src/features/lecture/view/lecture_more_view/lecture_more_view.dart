@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../lecture_screen/lecture_screen_controller.dart';
+import '../../../video/view/video_view_controller.dart';
 
 import '../../../../constants/type_defs/type_defs.dart';
 import '../../../../router/coordinator.dart';
@@ -26,7 +28,24 @@ class _LectureMoreViewState extends ConsumerState<LectureMoreView>
       child: Column(
         children: [
           ListTile(
-            onTap: () => LCoordinator.showNoteScreen(widget.courseId),
+            onTap: () => LCoordinator.showNoteScreen(
+              widget.courseId,
+              (index, position) async {
+                final isAnotherLecture =
+                    ref.read(lectureScreenCurrentLectureIndexProvider) != index;
+                ref.read(videoControllerProvider.notifier).onNoteTap(
+                      position,
+                      isAnotherLecture: isAnotherLecture,
+                    );
+                await Future.delayed(Duration.zero);
+                if (isAnotherLecture) {
+                  ref
+                      .read(lectureScreenControllerProvider(widget.courseId)
+                          .notifier)
+                      .onLectureTileTapped(index);
+                }
+              },
+            ),
             leading: const Icon(Icons.note_alt_outlined),
             title: const Text('Notes'),
           ),

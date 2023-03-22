@@ -89,15 +89,17 @@ class LectureScreenController
     );
   }
 
-  void onLectureTileTapped(LLecture lecture) async {
+  void onLectureTileTapped(Index lectureIndex) async {
     state.whenData((value) async {
+      final lecture =
+          value.lectures.firstWhere((element) => element.index == lectureIndex);
       state = AsyncData(
         value.copyWith(
           selected: lecture,
         ),
       );
 
-      _onLectureChanged(value.courseProgress.id, lecture.index);
+      _onLectureChanged(value.courseProgress.id, lectureIndex);
     });
   }
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constants/type_defs/type_defs.dart';
 import '../../model/note.dart';
 import 'note_card.dart';
 
@@ -9,10 +10,12 @@ class NoteListView extends ConsumerWidget {
     super.key,
     this.controller,
     required this.notes,
+    required this.seekTo,
   });
 
   final ScrollController? controller;
   final List<LNote> notes;
+  final void Function(Index lectureIndex, Duration position)? seekTo;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -25,6 +28,7 @@ class NoteListView extends ConsumerWidget {
         final note = notes[index];
         return NoteCard(
           note: note,
+          seekTo: seekTo,
         );
       },
     );

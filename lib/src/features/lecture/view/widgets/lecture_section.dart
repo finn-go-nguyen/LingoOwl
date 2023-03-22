@@ -71,7 +71,7 @@ class _LectureSectionState extends ConsumerState<LectureSection> {
                       ref
                           .read(lectureScreenControllerProvider(widget.courseId)
                               .notifier)
-                          .onLectureTileTapped(lecture);
+                          .onLectureTileTapped(lecture.index);
                       ref
                           .read(videoControllerProvider.notifier)
                           .onVideoChanged();
