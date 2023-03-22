@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$SearchViewState {
   String get oldQuery => throw _privateConstructorUsedError;
-  List<LCourse> get courses => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $SearchViewStateCopyWith<SearchViewState> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $SearchViewStateCopyWith<$Res> {
           SearchViewState value, $Res Function(SearchViewState) then) =
       _$SearchViewStateCopyWithImpl<$Res, SearchViewState>;
   @useResult
-  $Res call({String oldQuery, List<LCourse> courses});
+  $Res call({String oldQuery});
 }
 
 /// @nodoc
@@ -47,17 +46,12 @@ class _$SearchViewStateCopyWithImpl<$Res, $Val extends SearchViewState>
   @override
   $Res call({
     Object? oldQuery = null,
-    Object? courses = null,
   }) {
     return _then(_value.copyWith(
       oldQuery: null == oldQuery
           ? _value.oldQuery
           : oldQuery // ignore: cast_nullable_to_non_nullable
               as String,
-      courses: null == courses
-          ? _value.courses
-          : courses // ignore: cast_nullable_to_non_nullable
-              as List<LCourse>,
     ) as $Val);
   }
 }
@@ -70,7 +64,7 @@ abstract class _$$_SearchViewStateCopyWith<$Res>
       __$$_SearchViewStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String oldQuery, List<LCourse> courses});
+  $Res call({String oldQuery});
 }
 
 /// @nodoc
@@ -85,17 +79,12 @@ class __$$_SearchViewStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? oldQuery = null,
-    Object? courses = null,
   }) {
     return _then(_$_SearchViewState(
       oldQuery: null == oldQuery
           ? _value.oldQuery
           : oldQuery // ignore: cast_nullable_to_non_nullable
               as String,
-      courses: null == courses
-          ? _value._courses
-          : courses // ignore: cast_nullable_to_non_nullable
-              as List<LCourse>,
     ));
   }
 }
@@ -103,25 +92,15 @@ class __$$_SearchViewStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_SearchViewState implements _SearchViewState {
-  const _$_SearchViewState(
-      {this.oldQuery = '', final List<LCourse> courses = const <LCourse>[]})
-      : _courses = courses;
+  const _$_SearchViewState({this.oldQuery = ''});
 
   @override
   @JsonKey()
   final String oldQuery;
-  final List<LCourse> _courses;
-  @override
-  @JsonKey()
-  List<LCourse> get courses {
-    if (_courses is EqualUnmodifiableListView) return _courses;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_courses);
-  }
 
   @override
   String toString() {
-    return 'SearchViewState(oldQuery: $oldQuery, courses: $courses)';
+    return 'SearchViewState(oldQuery: $oldQuery)';
   }
 
   @override
@@ -130,13 +109,11 @@ class _$_SearchViewState implements _SearchViewState {
         (other.runtimeType == runtimeType &&
             other is _$_SearchViewState &&
             (identical(other.oldQuery, oldQuery) ||
-                other.oldQuery == oldQuery) &&
-            const DeepCollectionEquality().equals(other._courses, _courses));
+                other.oldQuery == oldQuery));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, oldQuery, const DeepCollectionEquality().hash(_courses));
+  int get hashCode => Object.hash(runtimeType, oldQuery);
 
   @JsonKey(ignore: true)
   @override
@@ -146,14 +123,10 @@ class _$_SearchViewState implements _SearchViewState {
 }
 
 abstract class _SearchViewState implements SearchViewState {
-  const factory _SearchViewState(
-      {final String oldQuery,
-      final List<LCourse> courses}) = _$_SearchViewState;
+  const factory _SearchViewState({final String oldQuery}) = _$_SearchViewState;
 
   @override
   String get oldQuery;
-  @override
-  List<LCourse> get courses;
   @override
   @JsonKey(ignore: true)
   _$$_SearchViewStateCopyWith<_$_SearchViewState> get copyWith =>

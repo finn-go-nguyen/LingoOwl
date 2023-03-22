@@ -18,7 +18,6 @@ class VideoViewState with _$VideoViewState {
     LVideo? video,
     String? currentQuality,
     @Default(Duration.zero) Duration position,
-    Duration? seekTo,
   }) = _VideoViewState;
 
   Duration get duration => controller?.value.duration ?? Duration.zero;

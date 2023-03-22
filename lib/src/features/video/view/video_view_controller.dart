@@ -13,14 +13,18 @@ import 'video_view_state.dart';
 final videoControllerProvider =
     StateNotifierProvider.autoDispose<VideoViewController, VideoViewState>(
         (ref) {
-  ref.keepAlive();
-  return VideoViewController();
+  return VideoViewController(ref);
+});
+
+final _seekToProvider = StateProvider<Duration?>((ref) {
+  return Duration.zero;
 });
 
 class VideoViewController extends StateNotifier<VideoViewState> {
-  VideoViewController() : super(const VideoViewState());
+  VideoViewController(this.ref) : super(const VideoViewState());
 
   Timer? showVideoControllerTimer;
+  final Ref ref;
 
   @override
   void dispose() {
@@ -44,8 +48,8 @@ class VideoViewController extends StateNotifier<VideoViewState> {
     if (asyncValue.hasError) return;
 
     controller.addListener(updatePosition);
-    _play(seekTo: state.seekTo);
-    state = state.copyWith(seekTo: null);
+    _play(seekTo: ref.read(_seekToProvider));
+    ref.read(_seekToProvider.notifier).state = Duration.zero;
   }
 
   void onVideoForward() async {
@@ -132,8 +136,8 @@ class VideoViewController extends StateNotifier<VideoViewState> {
   void onAddNoteButtonPressed() => _pause();
 
   void onVideoQualityChange(String quality) async {
+    ref.read(_seekToProvider.notifier).state = state.position;
     state = state.copyWith(
-      seekTo: state.position,
       currentQuality: quality,
       status: const AsyncLoading(),
     );
@@ -165,10 +169,10 @@ class VideoViewController extends StateNotifier<VideoViewState> {
 
   void onNoteTap(Duration position, {required bool isAnotherLecture}) {
     if (isAnotherLecture) {
+      ref.read(_seekToProvider.notifier).state = position;
       state.controller?.pause();
       state = state.copyWith(
         status: const AsyncLoading(),
-        seekTo: position,
         showController: true,
       );
       return;
