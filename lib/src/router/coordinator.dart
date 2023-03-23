@@ -153,4 +153,10 @@ class LCoordinator {
       queryParams: {'id': courseId},
     );
   }
+
+  static void showEnrolledCourseScreen() {
+    goNamed(
+      LRoutes.myLearning.name,
+    );
+  }
 }

@@ -13,10 +13,14 @@ class EnrolledCourseListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sortedCourses = List<EnrolledCourse>.from(courses)
+      ..sort(
+        (a, b) => b.timeStamp.compareTo(a.timeStamp),
+      );
     return ListView.builder(
-      itemCount: courses.length,
+      itemCount: sortedCourses.length,
       itemBuilder: (context, index) {
-        final enrolledCourse = courses[index];
+        final enrolledCourse = sortedCourses[index];
         return EnrolledCourseCard(courseId: enrolledCourse.courseId);
       },
     );

@@ -29,7 +29,7 @@ class BuyButton extends ConsumerWidget {
                   uid: ref.watch(uidProvider),
                   courseId: courseId,
                   price: price,
-                  onPaymentSuccessful: () => LCoordinator.showHomeScreen(),
+                  onPaymentSuccessful: LCoordinator.showEnrolledCourseScreen,
                   signInRequired: () => showSignInRequiredDialog(
                     context: context,
                     content: 'Sign in to enroll in this course.',

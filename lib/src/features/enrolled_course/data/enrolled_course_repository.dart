@@ -10,12 +10,12 @@ import '../../authentication/data/authentication_repository.dart';
 import '../model/enrolled_course.dart';
 
 final enrolledCoursesProvider =
-    FutureProvider.autoDispose<List<EnrolledCourse>>((ref) {
+    StreamProvider.autoDispose<List<EnrolledCourse>>((ref) {
   final enrolledCourseRepository =
       ref.watch(DomainManager.instance.enrolledCourseRepositoryProvider);
 
   final uid = ref.watch(uidProvider);
-  if (uid == null) return Future.value(<EnrolledCourse>[]);
+  if (uid == null) return Stream.value(<EnrolledCourse>[]);
   return enrolledCourseRepository.getEnrolledCourses(uid);
 });
 
@@ -42,7 +42,7 @@ final enrolledCourseIdsProvider = Provider.autoDispose<List<CourseId>>((
 });
 
 abstract class EnrolledCourseRepository {
-  Future<List<EnrolledCourse>> getEnrolledCourses(UserId uid);
+  Stream<List<EnrolledCourse>> getEnrolledCourses(UserId uid);
   Future<void> updateStatus(
     UserId uid,
     CourseId courseId,
@@ -75,11 +75,10 @@ class FirestoreEnrolledCourseRepository
         );
 
   @override
-  Future<List<EnrolledCourse>> getEnrolledCourses(UserId uid) async {
-    final docSnapshot = await ref.doc(uid).get();
-    if (!docSnapshot.exists) return const <EnrolledCourse>[];
-
-    return docSnapshot.data()!;
+  Stream<List<EnrolledCourse>> getEnrolledCourses(UserId uid) async* {
+    await for (var element in snapshots(uid)) {
+      yield element ?? <EnrolledCourse>[];
+    }
   }
 
   @override

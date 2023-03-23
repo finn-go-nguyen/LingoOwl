@@ -12,6 +12,7 @@ import '../../cart/view/add_to_cart/add_to_cart_button.dart';
 import '../../cart/view/cart_icon_button/cart_icon_button.dart';
 import '../../checkout/view/buy_button.dart';
 import '../../deep_link/view/course_share_button.dart';
+import '../../enrolled_course/data/enrolled_course_repository.dart';
 import '../../rating_count/data/rating_count_repository.dart';
 import '../../rating_count/view/review_star_count_section.dart';
 import '../../reviews/application/review_service.dart';
@@ -22,6 +23,13 @@ import '../data/course_repository.dart';
 import '../model/course.dart';
 import 'course_information_section.dart';
 import 'course_what_you_will_learn_section.dart';
+
+final isCourseEnrolledProvider =
+    Provider.autoDispose.family<bool, CourseId>((ref, courseId) {
+  ref.keepAlive();
+  final enrolledCourseIds = ref.watch(enrolledCourseIdsProvider);
+  return enrolledCourseIds.contains(courseId);
+});
 
 class CourseScreen extends ConsumerWidget {
   const CourseScreen({
@@ -136,41 +144,50 @@ class CourseScreen extends ConsumerWidget {
 
   Widget _buildBuySection(LCourse course) {
     return Consumer(builder: (context, ref, child) {
-      // final isEnrolled = ref.watch(enrolledCoursesProvider);
-      return Column(
-        children: [
-          BuyButton(
-            courseId: courseId,
-            price: course.salePrice ?? course.price,
-          ),
-          Consumer(
-            builder: (context, ref, child) {
-              final isSignedIn = ref.watch(isSignedInProvider);
-              return Row(
-                children: [
-                  Expanded(
-                    child: AddToCartButton(
-                      courseId: courseId,
-                    ),
-                  ),
-                  Visibility(
-                    visible: isSignedIn,
-                    child: Gaps.w8,
-                  ),
-                  Visibility(
-                    visible: isSignedIn,
-                    child: Expanded(
-                      child: AddToWishlistButton(
-                        id: courseId,
-                      ),
-                    ),
-                  )
-                ],
-              );
-            },
-          ),
-        ],
-      );
+      final isEnrolled = ref.watch(isCourseEnrolledProvider(courseId));
+
+      return isEnrolled
+          ? Text(
+              'You have enrolled in this course',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium
+                  ?.copyWith(color: Theme.of(context).colorScheme.outline),
+            )
+          : Column(
+              children: [
+                BuyButton(
+                  courseId: courseId,
+                  price: course.salePrice ?? course.price,
+                ),
+                Consumer(
+                  builder: (context, ref, child) {
+                    final isSignedIn = ref.watch(isSignedInProvider);
+                    return Row(
+                      children: [
+                        Expanded(
+                          child: AddToCartButton(
+                            courseId: courseId,
+                          ),
+                        ),
+                        Visibility(
+                          visible: isSignedIn,
+                          child: Gaps.w8,
+                        ),
+                        Visibility(
+                          visible: isSignedIn,
+                          child: Expanded(
+                            child: AddToWishlistButton(
+                              id: courseId,
+                            ),
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
+              ],
+            );
     });
   }
 }
