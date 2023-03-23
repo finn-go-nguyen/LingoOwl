@@ -13,4 +13,5 @@ class CollectionName {
   static const order = 'orders';
   static const reminder = 'reminders';
   static const course = 'courses';
+  static const courseProgress = 'courseProgresses';
 }

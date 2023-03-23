@@ -30,6 +30,14 @@ final lectureNameProvider =
   return lecture.name;
 });
 
+final lectureCountProvider =
+    FutureProvider.family<int, CourseId>((ref, courseId) async {
+  final sections = await ref.watch(sectionsProvider(courseId).future);
+  int count = sections.fold(
+      0, (previousValue, element) => previousValue + element.lectures.length);
+  return count;
+});
+
 abstract class LectureRepository {
   Future<List<LSection>> getSections(CourseId courseId);
 }

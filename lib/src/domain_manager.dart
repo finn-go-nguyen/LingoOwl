@@ -4,15 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'features/checkout/data/order_repository.dart';
 
-import 'deep_link/data/deep_link_repository.dart';
 import 'features/authentication/data/authentication_repository.dart';
 import 'features/cart/data/local/local_cart_repository.dart';
 import 'features/cart/data/remote/remote_cart_repository.dart';
+import 'features/checkout/data/order_repository.dart';
 import 'features/checkout/data/order_repository_impl.dart.dart';
 import 'features/course/data/course_repository.dart';
 import 'features/course/data/course_repository_impl.dart';
+import 'features/course_progress/data/course_progress_repository.dart';
+import 'features/course_progress/data/course_progress_repository_impl.dart';
+import 'features/deep_link/data/deep_link_repository.dart';
 import 'features/enrolled_course/data/enrolled_course_repository.dart';
 import 'features/lecture/data/lecture_repository.dart';
 import 'features/note/data/firestore_note_repository.dart';
@@ -106,5 +108,10 @@ class DomainManager {
   final deepLinkRepositoryProvider = Provider<DeepLinkRepository>((ref) {
     final dio = ref.watch(dioProvider);
     return FirebaseDynamicLinkRepository(dio);
+  });
+
+  final courseProgressRepositoryProvider =
+      Provider<CourseProgressRepository>((ref) {
+    return CourseProgressRepositoryImpl();
   });
 }
