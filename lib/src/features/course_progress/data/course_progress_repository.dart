@@ -1,8 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain_manager.dart';
-import '../../authentication/data/authentication_repository.dart';
 
 import '../../../constants/type_defs/type_defs.dart';
+import '../../../domain_manager.dart';
+import '../../authentication/data/authentication_repository.dart';
 import '../../lecture/data/lecture_repository.dart';
 import '../model/course_progress.dart';
 

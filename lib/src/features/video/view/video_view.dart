@@ -16,9 +16,11 @@ class VideoView extends ConsumerStatefulWidget {
   const VideoView({
     super.key,
     required this.video,
+    this.onVideoEnd,
   });
 
   final LVideo video;
+  final VoidCallback? onVideoEnd;
 
   @override
   ConsumerState<VideoView> createState() => _VideoViewState();
@@ -28,9 +30,7 @@ class _VideoViewState extends ConsumerState<VideoView> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(videoControllerProvider.notifier).init(widget.video);
-    });
+    ref.read(videoControllerProvider.notifier).init(widget.video);
   }
 
   @override
@@ -38,6 +38,13 @@ class _VideoViewState extends ConsumerState<VideoView> {
     ref.listen(videoControllerProvider.select((value) => value.status),
         (previous, next) {
       next.showError(context);
+    });
+
+    ref.listen(videoControllerProvider.select((value) => value.isInitialized),
+        (previous, next) {
+      ref.read(videoControllerProvider.notifier).listenOnVideoEnd(
+            onVideoEnd: () => widget.onVideoEnd?.call(),
+          );
     });
 
     final isInitialized = ref

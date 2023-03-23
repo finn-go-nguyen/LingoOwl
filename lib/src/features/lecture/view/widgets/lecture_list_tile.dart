@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/enums/lecture_type.dart';
 import '../../../../utils/text_helpers.dart';
 import '../../../../widgets/dialog/alert_dialog.dart';
 import '../../model/lecture/lecture.dart';
+import '../lecture_screen/lecture_screen_controller.dart';
 
 class LectureListTile extends ConsumerWidget {
   const LectureListTile({
@@ -32,15 +34,7 @@ class LectureListTile extends ConsumerWidget {
               icon: const Icon(Icons.download_for_offline_outlined),
             )
           : null,
-      title: Text(
-        lecture.name,
-        overflow: TextOverflow.ellipsis,
-        maxLines: 1,
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge
-            ?.copyWith(fontWeight: isSelected ? FontWeight.bold : null),
-      ),
+      title: _buildTitle(),
       subtitle: _buildSubtitle(),
     );
   }
@@ -63,6 +57,36 @@ class LectureListTile extends ConsumerWidget {
         iconData,
       ),
     );
+  }
+
+  Widget _buildTitle() {
+    return Consumer(builder: (context, ref, child) {
+      final isWatched = ref.watch(watchCheckProvider(lecture.index));
+      return Row(
+        children: [
+          if (isWatched)
+            Padding(
+              padding: const EdgeInsets.only(right: Sizes.p4),
+              child: Icon(
+                Icons.check_circle,
+                color: Theme.of(context).colorScheme.primaryContainer,
+                size: 20,
+              ),
+            ),
+          Expanded(
+            child: Text(
+              lecture.name,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge
+                  ?.copyWith(fontWeight: isSelected ? FontWeight.bold : null),
+            ),
+          ),
+        ],
+      );
+    });
   }
 
   Widget _buildSubtitle() {

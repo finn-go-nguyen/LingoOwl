@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../course_progress/view/course_progress_bar.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../constants/type_defs/type_defs.dart';
@@ -10,6 +9,7 @@ import '../../../widgets/common/common.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
 import '../../course/data/course_repository.dart';
+import '../../course_progress/view/course_progress_bar.dart';
 
 class EnrolledCourseCard extends ConsumerWidget {
   const EnrolledCourseCard({

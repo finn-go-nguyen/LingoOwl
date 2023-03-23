@@ -7,7 +7,7 @@ import '../../../../widgets/dialog/alert_dialog.dart';
 import '../../../video/view/video_view_controller.dart';
 import '../../model/lecture/lecture.dart';
 import '../../model/section/section.dart';
-import '../lecture_screen_controller.dart';
+import '../lecture_screen/lecture_screen_controller.dart';
 import 'lecture_list_tile.dart';
 
 class LectureSection extends ConsumerStatefulWidget {
