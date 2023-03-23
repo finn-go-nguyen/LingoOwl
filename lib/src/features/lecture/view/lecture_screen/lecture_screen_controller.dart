@@ -97,24 +97,21 @@ class LectureScreenController
         ),
       );
 
-      if (value.selected.type.isArticle) {
-        final asyncValue = await AsyncValue.guard(
-          () => _lectureService.onLectureComplete(
-              value.courseProgress.id, value.selected.index),
-        );
-        if (asyncValue is AsyncError) {
-          state = asyncValue as AsyncError<LectureScreenState>;
-        }
-      }
-
       _onLectureChanged(value.courseProgress.id, lecture.index);
     });
   }
 
-  void onVideoEnd() {
-    state.whenData((value) {
-      _lectureService.onLectureComplete(
-          value.courseProgress.id, value.selected.index);
+  void onLectureComplete() {
+    state.whenData((value) async {
+      final asyncValue = await AsyncValue.guard(
+        () => _lectureService.onLectureComplete(
+            value.courseProgress.id, value.selected.index),
+      );
+
+      if (asyncValue is AsyncError) {
+        state = asyncValue as AsyncError<LectureScreenState>;
+      }
+
       if (value.isLastLecture) return;
 
       state = AsyncData(value.copyWith(

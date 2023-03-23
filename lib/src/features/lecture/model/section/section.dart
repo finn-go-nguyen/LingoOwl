@@ -26,4 +26,9 @@ class LSection with _$LSection {
       return false;
     }
   }
+
+  List<LLecture> get sortedLectures => List.from(lectures)
+    ..sort(
+      (a, b) => a.index.compareTo(b.index),
+    );
 }

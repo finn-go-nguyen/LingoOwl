@@ -21,6 +21,8 @@ import 'features/note/data/firestore_note_repository.dart';
 import 'features/note/data/note_repository.dart';
 import 'features/payment/data/payment_repository.dart';
 import 'features/profile/data/user_repository.dart';
+import 'features/quiz/data/quiz_repository.dart';
+import 'features/quiz/data/quiz_repository_impl.dart';
 import 'features/rating_count/data/rating_count_repository.dart';
 import 'features/reminder/data/reminder_repository.dart';
 import 'features/reviews/data/review_repository.dart';
@@ -113,5 +115,9 @@ class DomainManager {
   final courseProgressRepositoryProvider =
       Provider<CourseProgressRepository>((ref) {
     return CourseProgressRepositoryImpl();
+  });
+
+  final quizRepositoryProvider = Provider<QuizRepository>((ref) {
+    return QuizRepositoryImpl();
   });
 }

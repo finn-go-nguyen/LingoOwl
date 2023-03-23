@@ -14,8 +14,9 @@ class LLecture with _$LLecture {
     required Index index,
     required String name,
     required LectureType type,
+    @Default(0) int seconds,
     VideoId? videoId,
-    required int seconds,
+    QuizId? quizId,
   }) = _LLecture;
 
   factory LLecture.fromJson(Map<String, Object?> json) =>
