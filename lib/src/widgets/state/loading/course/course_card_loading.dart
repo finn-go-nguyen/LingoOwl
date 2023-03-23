@@ -11,10 +11,9 @@ class CourseCardPortraitLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: UiParameters.courseCardPortraitPadding,
-      child: SizedBox.fromSize(
-        size: UiParameters.courseCardPortraitSize,
+    return Shimmer(
+      child: SizedBox(
+        width: UiParameters.courseCardPortraitSize.width,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,

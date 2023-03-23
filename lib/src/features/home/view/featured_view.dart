@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../course/model/course.dart';
+import '../../enrolled_course/data/enrolled_course_repository.dart';
 
 import '../../../../gen/assets.gen.dart';
 import '../../../constants/app_parameters/app_parameters.dart';
@@ -14,12 +16,22 @@ import '../../course/view/course_card.dart';
 import '../../profile/data/user_repository.dart';
 import 'widgets/banner_section.dart';
 
+final unEnrolledCoursesProvider =
+    FutureProvider.autoDispose<List<LCourse>>((ref) async {
+  ref.keepAlive();
+  final courses = await ref.watch(coursesProvider.future);
+  final enrolledCourseIds = ref.watch(enrolledCourseIdsProvider);
+  final update = List<LCourse>.from(courses)
+    ..removeWhere((element) => enrolledCourseIds.contains(element.id));
+  return update;
+});
+
 class FeaturedView extends ConsumerWidget {
   const FeaturedView({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final courseValue = ref.watch(coursesProvider);
+    final courseValue = ref.watch(unEnrolledCoursesProvider);
     return LScaffold(
       appBar: const LAppBarWithCartIconButton(),
       body: SingleChildScrollView(
@@ -41,27 +53,35 @@ class FeaturedView extends ConsumerWidget {
               ),
             ),
             Gaps.h12,
-            courseValue.when(
-              loading: () => const CourseCardListLoading(axis: Axis.horizontal),
-              error: (error, stackTrace) => const ErrorState(),
-              data: (data) {
-                final shuffle = List.from(data)..shuffle();
-                return SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  padding: UiParameters.screenPadding,
-                  child: SizedBox(
-                    height: UiParameters.courseCardPortraitSize.height +
-                        UiParameters.courseCardPortraitPadding.top * 2,
-                    child: Row(
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              padding: UiParameters.screenPadding,
+              child: SizedBox(
+                height: UiParameters.courseCardPortraitSize.height +
+                    UiParameters.courseCardPortraitPadding.top * 2,
+                child: Builder(builder: (context) {
+                  return courseValue.when(
+                    error: (error, stackTrace) => const ErrorState(),
+                    loading: () => Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: List.generate(
-                        shuffle.length,
-                        (index) => CourseCardPortrait(course: shuffle[index]),
+                        10,
+                        (index) => const CourseCardPortraitLoading(),
                       ),
                     ),
-                  ),
-                );
-              },
+                    data: (data) {
+                      final shuffle = List.from(data)..shuffle();
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: List.generate(
+                          shuffle.length,
+                          (index) => CourseCardPortrait(course: shuffle[index]),
+                        ),
+                      );
+                    },
+                  );
+                }),
+              ),
             ),
             Gaps.h32,
             Padding(

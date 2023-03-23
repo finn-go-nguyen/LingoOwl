@@ -32,6 +32,15 @@ final enrolledCoursesByStatusProvider = FutureProvider.autoDispose
   return enrolledCourses.where((element) => element.status == status).toList();
 });
 
+final enrolledCourseIdsProvider = Provider.autoDispose<List<CourseId>>((
+  ref,
+) {
+  ref.keepAlive();
+  final enrolledCourses = ref.watch(enrolledCoursesProvider).value;
+  if (enrolledCourses == null) return <CourseId>[];
+  return enrolledCourses.map((e) => e.courseId).toList();
+});
+
 abstract class EnrolledCourseRepository {
   Future<List<EnrolledCourse>> getEnrolledCourses(UserId uid);
   Future<void> updateStatus(

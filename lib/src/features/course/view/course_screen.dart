@@ -19,6 +19,7 @@ import '../../reviews/view/review_screen/reviews_screen_controller.dart';
 import '../../reviews/view/review_screen/widgets/review_list_view.dart';
 import '../../wishlist/view/add_to_wishlist/add_to_wishlist_button.dart';
 import '../data/course_repository.dart';
+import '../model/course.dart';
 import 'course_information_section.dart';
 import 'course_what_you_will_learn_section.dart';
 
@@ -88,36 +89,7 @@ class CourseScreen extends ConsumerWidget {
                           isLargeText: true,
                         ),
                         Gaps.h16,
-                        BuyButton(
-                          courseId: courseId,
-                          price: course.salePrice ?? course.price,
-                        ),
-                        Consumer(
-                          builder: (context, ref, child) {
-                            final isSignedIn = ref.watch(isSignedInProvider);
-                            return Row(
-                              children: [
-                                Expanded(
-                                  child: AddToCartButton(
-                                    courseId: courseId,
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: isSignedIn,
-                                  child: Gaps.w8,
-                                ),
-                                Visibility(
-                                  visible: isSignedIn,
-                                  child: Expanded(
-                                    child: AddToWishlistButton(
-                                      id: courseId,
-                                    ),
-                                  ),
-                                )
-                              ],
-                            );
-                          },
-                        ),
+                        _buildBuySection(course),
                         Gaps.h12,
                         WhatYouWillLearn(
                           contents: course.youWillLearn,
@@ -160,5 +132,45 @@ class CourseScreen extends ConsumerWidget {
         ],
       ),
     );
+  }
+
+  Widget _buildBuySection(LCourse course) {
+    return Consumer(builder: (context, ref, child) {
+      // final isEnrolled = ref.watch(enrolledCoursesProvider);
+      return Column(
+        children: [
+          BuyButton(
+            courseId: courseId,
+            price: course.salePrice ?? course.price,
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              final isSignedIn = ref.watch(isSignedInProvider);
+              return Row(
+                children: [
+                  Expanded(
+                    child: AddToCartButton(
+                      courseId: courseId,
+                    ),
+                  ),
+                  Visibility(
+                    visible: isSignedIn,
+                    child: Gaps.w8,
+                  ),
+                  Visibility(
+                    visible: isSignedIn,
+                    child: Expanded(
+                      child: AddToWishlistButton(
+                        id: courseId,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            },
+          ),
+        ],
+      );
+    });
   }
 }
