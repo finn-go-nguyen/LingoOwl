@@ -17,10 +17,12 @@ class LTheme {
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         fontFamily: _fontFamily,
         subThemesData: subThemesData,
+        // onPrimary: Colors.red,
+        onSurface: Colors.black87,
       );
 
   static ThemeData get dark => FlexThemeData.dark(
-        appBarElevation: 2,
+        appBarElevation: 0.5,
         scheme: _scheme,
         useMaterial3: true,
         useMaterial3ErrorColors: true,

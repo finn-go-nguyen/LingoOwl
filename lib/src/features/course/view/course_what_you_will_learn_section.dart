@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../widgets/common/section_headline.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 
@@ -16,7 +17,7 @@ class WhatYouWillLearn extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('What you\'ll learn'),
+        const SectionHeadline(text: 'What you\'ll learn'),
         Gaps.h12,
         ...List.generate(
           contents.length,

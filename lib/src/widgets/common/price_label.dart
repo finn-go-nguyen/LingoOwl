@@ -31,7 +31,8 @@ class PriceLabel extends ConsumerWidget {
           )
         : Row(
             mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
                 ref.read(currencyFormatterProvider).format(salePrice),

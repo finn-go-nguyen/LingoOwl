@@ -33,7 +33,7 @@ class _CloseAccountConfirmationScreenState
   Widget build(BuildContext context) {
     return LScaffold(
       appBar: const LAppBar(
-        title: 'Account security',
+        title: Text('Account security'),
       ),
       body: SingleChildScrollView(
         padding: UiParameters.screenPadding,

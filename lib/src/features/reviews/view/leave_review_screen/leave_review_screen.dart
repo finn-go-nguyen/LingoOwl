@@ -22,7 +22,7 @@ class LeaveReviewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LScaffold(
       appBar: const LAppBar(
-        title: 'Leave a review',
+        title: Text('Leave a review'),
       ),
       body: Padding(
         padding: UiParameters.screenPadding,

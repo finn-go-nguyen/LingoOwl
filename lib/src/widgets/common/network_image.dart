@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+import '../../../gen/assets.gen.dart';
 import '../../themes/colors.dart';
 
 class LNetworkImage extends StatelessWidget {
@@ -22,11 +23,12 @@ class LNetworkImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final loading = Container(
-      height: double.infinity,
-      width: double.infinity,
+      constraints: const BoxConstraints.expand(),
       color: LColors.loading,
     ).animate().shimmer();
-    const error = FlutterLogo();
+    final error = Image.asset(
+      Assets.icons.appIcon.path,
+    );
     return SizedBox.square(
       dimension: dimension,
       child: ClipRRect(
@@ -35,7 +37,6 @@ class LNetworkImage extends StatelessWidget {
             ? Image.network(
                 url,
                 fit: fit,
-                loadingBuilder: (_, __, ___) => loading,
                 errorBuilder: (_, __, ___) => error,
               )
             : CachedNetworkImage(

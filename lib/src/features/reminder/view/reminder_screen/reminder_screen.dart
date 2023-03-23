@@ -12,7 +12,7 @@ class ReminderScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      appBar: const LAppBar(title: 'Learning reminders'),
+      appBar: const LAppBar(title: Text('Learning reminders')),
       body: SingleChildScrollView(
         child: Column(
           children: [

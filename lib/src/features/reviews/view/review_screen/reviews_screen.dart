@@ -54,7 +54,7 @@ class _ReviewsScreenState extends ConsumerState<ReviewsScreen> {
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      appBar: LAppBar(title: widget.courseName),
+      appBar: LAppBar(title: Text(widget.courseName)),
       body: SingleChildScrollView(
         controller: _controller,
         padding: UiParameters.screenPadding,

@@ -10,7 +10,7 @@ class WishlistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const LScaffold(
-      appBar: LAppBar(title: 'Wishlist'),
+      appBar: LAppBar(title: Text('Wishlist')),
       body: WishlistListView(),
     );
   }

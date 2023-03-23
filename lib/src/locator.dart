@@ -50,6 +50,7 @@ class LLocator {
   }
 
   static Future<void> _initPayment() async {
+    if (kIsWeb) return;
     Stripe.publishableKey =
         const String.fromEnvironment('STRIPE_PUBLISHABLE_KEY');
     Stripe.merchantIdentifier = 'merchant.flutter.stripe.test';

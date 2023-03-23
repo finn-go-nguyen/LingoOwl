@@ -25,7 +25,10 @@ class CourseShareButton extends ConsumerWidget {
       onPressed: () => ref
           .read(courseShareButtonProvider.notifier)
           .onShareButtonPressed(courseId),
-      icon: const Icon(Icons.share),
+      icon: Icon(
+        Icons.share,
+        color: Theme.of(context).colorScheme.primary,
+      ),
     );
   }
 }

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../lecture_screen/lecture_screen_controller.dart';
-import '../../../video/view/video_view_controller.dart';
 
 import '../../../../constants/type_defs/type_defs.dart';
 import '../../../../router/coordinator.dart';
 import '../../../deep_link/view/course_share_button_controller.dart';
+import '../../../video/view/video_view_controller.dart';
+import '../lecture_screen/lecture_screen_controller.dart';
 
 class LectureMoreView extends ConsumerStatefulWidget {
   const LectureMoreView({

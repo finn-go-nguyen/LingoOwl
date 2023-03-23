@@ -55,7 +55,7 @@ class WishlistItem extends ConsumerWidget {
             InkWell(
               onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
               child: Padding(
-                padding: UiParameters.courseCardPadding,
+                padding: UiParameters.courseCardLandscapePadding,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -99,7 +99,7 @@ class WishlistItem extends ConsumerWidget {
                 ),
               ),
             ),
-            const Divider(),
+            Gaps.divider,
           ],
         ),
       ),

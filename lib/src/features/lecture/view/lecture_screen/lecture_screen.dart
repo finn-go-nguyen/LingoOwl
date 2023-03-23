@@ -43,7 +43,7 @@ class LectureScreen extends ConsumerWidget {
     return LScaffold(
       body: state.when(
         loading: LoadingState.new,
-        error: (_, __) => const ErrorState(),
+        error: (_, __) => const Center(child: Text('No lectures')),
         data: (data) {
           final lectureIndex = data.selected.index;
           final sectionIndex = data.selected.getSectionIndex(data.sections);

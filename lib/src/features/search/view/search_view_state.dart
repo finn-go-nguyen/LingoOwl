@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../course/model/course.dart';
-
 part 'search_view_state.freezed.dart';
 
 @freezed
