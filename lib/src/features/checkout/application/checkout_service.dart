@@ -7,6 +7,7 @@ import '../../../domain_manager.dart';
 import '../../cart/data/remote/remote_cart_repository.dart';
 import '../../cart/model/mutable_cart.dart';
 import '../../course_progress/data/course_progress_repository.dart';
+import '../../enrolled_course/data/enrolled_course_repository.dart';
 import '../../payment/application/payment_service.dart';
 import '../../wishlist/data/wishlist_repository.dart';
 import '../../wishlist/model/mutable_wishlist.dart';
@@ -23,6 +24,8 @@ final checkoutServiceProvider = Provider<CheckoutService>((ref) {
       ref.watch(DomainManager.instance.wishlistRepositoryProvider);
   final courseProgressRepository =
       ref.watch(DomainManager.instance.courseProgressRepositoryProvider);
+  final enrolledCourseRepository =
+      ref.watch(DomainManager.instance.enrolledCourseRepositoryProvider);
 
   return CheckoutService(
     paymentService,
@@ -30,6 +33,7 @@ final checkoutServiceProvider = Provider<CheckoutService>((ref) {
     cartRepository,
     wishlistRepository,
     courseProgressRepository,
+    enrolledCourseRepository,
   );
 });
 
@@ -40,6 +44,7 @@ class CheckoutService {
     this._remoteCartRepository,
     this._wishlistRepository,
     this._courseProgressRepository,
+    this._enrolledCourseRepository,
   );
 
   final PaymentService _service;
@@ -47,6 +52,7 @@ class CheckoutService {
   final RemoteCartRepository _remoteCartRepository;
   final WishlistRepository _wishlistRepository;
   final CourseProgressRepository _courseProgressRepository;
+  final EnrolledCourseRepository _enrolledCourseRepository;
 
   Future<void> initPayment(
     LOrder order,
@@ -75,6 +81,7 @@ class CheckoutService {
     _removeItemsInCartIfExist(uid, courseIds);
     _removeItemsInWishlistIfExist(uid, courseIds);
     _createInitCourseProgress(uid, courseIds);
+    _addToMyCourses(uid, courseIds);
   }
 
   Future<void> _removeItemsInCartIfExist(
@@ -98,5 +105,12 @@ class CheckoutService {
     for (var courseId in courseIds) {
       _courseProgressRepository.createInitProgress(uid, courseId);
     }
+  }
+
+  Future<void> _addToMyCourses(
+    UserId uid,
+    List<CourseId> courseIds,
+  ) {
+    return _enrolledCourseRepository.addEnrolledCourses(uid, courseIds);
   }
 }
