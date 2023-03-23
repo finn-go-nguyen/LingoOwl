@@ -5,8 +5,8 @@ import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
 import '../../course/data/course_repository.dart';
 
-final courseShareButtonProvider = StateNotifierProvider.autoDispose<
-    CourseShareButtonController, AsyncValue<void>>((ref) {
+final courseShareButtonProvider =
+    StateNotifierProvider<CourseShareButtonController, AsyncValue<void>>((ref) {
   return CourseShareButtonController(ref);
 });
 

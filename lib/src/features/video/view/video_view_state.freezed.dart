@@ -24,7 +24,6 @@ mixin _$VideoViewState {
   LVideo? get video => throw _privateConstructorUsedError;
   String? get currentQuality => throw _privateConstructorUsedError;
   Duration get position => throw _privateConstructorUsedError;
-  Duration? get seekTo => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $VideoViewStateCopyWith<VideoViewState> get copyWith =>
@@ -45,8 +44,7 @@ abstract class $VideoViewStateCopyWith<$Res> {
       bool isFullscreen,
       LVideo? video,
       String? currentQuality,
-      Duration position,
-      Duration? seekTo});
+      Duration position});
 
   $LVideoCopyWith<$Res>? get video;
 }
@@ -72,7 +70,6 @@ class _$VideoViewStateCopyWithImpl<$Res, $Val extends VideoViewState>
     Object? video = freezed,
     Object? currentQuality = freezed,
     Object? position = null,
-    Object? seekTo = freezed,
   }) {
     return _then(_value.copyWith(
       status: null == status
@@ -107,10 +104,6 @@ class _$VideoViewStateCopyWithImpl<$Res, $Val extends VideoViewState>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as Duration,
-      seekTo: freezed == seekTo
-          ? _value.seekTo
-          : seekTo // ignore: cast_nullable_to_non_nullable
-              as Duration?,
     ) as $Val);
   }
 
@@ -143,8 +136,7 @@ abstract class _$$_VideoViewStateCopyWith<$Res>
       bool isFullscreen,
       LVideo? video,
       String? currentQuality,
-      Duration position,
-      Duration? seekTo});
+      Duration position});
 
   @override
   $LVideoCopyWith<$Res>? get video;
@@ -169,7 +161,6 @@ class __$$_VideoViewStateCopyWithImpl<$Res>
     Object? video = freezed,
     Object? currentQuality = freezed,
     Object? position = null,
-    Object? seekTo = freezed,
   }) {
     return _then(_$_VideoViewState(
       status: null == status
@@ -204,10 +195,6 @@ class __$$_VideoViewStateCopyWithImpl<$Res>
           ? _value.position
           : position // ignore: cast_nullable_to_non_nullable
               as Duration,
-      seekTo: freezed == seekTo
-          ? _value.seekTo
-          : seekTo // ignore: cast_nullable_to_non_nullable
-              as Duration?,
     ));
   }
 }
@@ -223,8 +210,7 @@ class _$_VideoViewState extends _VideoViewState {
       this.isFullscreen = false,
       this.video,
       this.currentQuality,
-      this.position = Duration.zero,
-      this.seekTo})
+      this.position = Duration.zero})
       : super._();
 
   @override
@@ -248,12 +234,10 @@ class _$_VideoViewState extends _VideoViewState {
   @override
   @JsonKey()
   final Duration position;
-  @override
-  final Duration? seekTo;
 
   @override
   String toString() {
-    return 'VideoViewState(status: $status, isInitialized: $isInitialized, controller: $controller, showController: $showController, isFullscreen: $isFullscreen, video: $video, currentQuality: $currentQuality, position: $position, seekTo: $seekTo)';
+    return 'VideoViewState(status: $status, isInitialized: $isInitialized, controller: $controller, showController: $showController, isFullscreen: $isFullscreen, video: $video, currentQuality: $currentQuality, position: $position)';
   }
 
   @override
@@ -274,8 +258,7 @@ class _$_VideoViewState extends _VideoViewState {
             (identical(other.currentQuality, currentQuality) ||
                 other.currentQuality == currentQuality) &&
             (identical(other.position, position) ||
-                other.position == position) &&
-            (identical(other.seekTo, seekTo) || other.seekTo == seekTo));
+                other.position == position));
   }
 
   @override
@@ -288,8 +271,7 @@ class _$_VideoViewState extends _VideoViewState {
       isFullscreen,
       video,
       currentQuality,
-      position,
-      seekTo);
+      position);
 
   @JsonKey(ignore: true)
   @override
@@ -307,8 +289,7 @@ abstract class _VideoViewState extends VideoViewState {
       final bool isFullscreen,
       final LVideo? video,
       final String? currentQuality,
-      final Duration position,
-      final Duration? seekTo}) = _$_VideoViewState;
+      final Duration position}) = _$_VideoViewState;
   const _VideoViewState._() : super._();
 
   @override
@@ -327,8 +308,6 @@ abstract class _VideoViewState extends VideoViewState {
   String? get currentQuality;
   @override
   Duration get position;
-  @override
-  Duration? get seekTo;
   @override
   @JsonKey(ignore: true)
   _$$_VideoViewStateCopyWith<_$_VideoViewState> get copyWith =>

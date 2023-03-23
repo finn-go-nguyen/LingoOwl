@@ -13,13 +13,18 @@ import 'video_view_state.dart';
 final videoControllerProvider =
     StateNotifierProvider.autoDispose<VideoViewController, VideoViewState>(
         (ref) {
-  return VideoViewController();
+  return VideoViewController(ref);
+});
+
+final _seekToProvider = StateProvider<Duration?>((ref) {
+  return Duration.zero;
 });
 
 class VideoViewController extends StateNotifier<VideoViewState> {
-  VideoViewController() : super(const VideoViewState());
+  VideoViewController(this.ref) : super(const VideoViewState());
 
   Timer? showVideoControllerTimer;
+  final Ref ref;
 
   @override
   void dispose() {
@@ -39,12 +44,12 @@ class VideoViewController extends StateNotifier<VideoViewState> {
       video: video,
       currentQuality: quality,
       isInitialized: !asyncValue.hasError,
-      seekTo: video != state.video ? null : state.seekTo,
     );
     if (asyncValue.hasError) return;
 
     controller.addListener(updatePosition);
-    _play(seekTo: state.seekTo);
+    _play(seekTo: ref.read(_seekToProvider));
+    ref.read(_seekToProvider.notifier).state = Duration.zero;
   }
 
   void onVideoForward() async {
@@ -131,8 +136,8 @@ class VideoViewController extends StateNotifier<VideoViewState> {
   void onAddNoteButtonPressed() => _pause();
 
   void onVideoQualityChange(String quality) async {
+    ref.read(_seekToProvider.notifier).state = state.position;
     state = state.copyWith(
-      seekTo: state.position,
       currentQuality: quality,
       status: const AsyncLoading(),
     );
@@ -160,6 +165,23 @@ class VideoViewController extends StateNotifier<VideoViewState> {
     if (controller == null) return;
 
     controller.addListener(() => _handleVideoEnd(onVideoEnd));
+  }
+
+  void onNoteTap(Duration position, {required bool isAnotherLecture}) {
+    if (isAnotherLecture) {
+      ref.read(_seekToProvider.notifier).state = position;
+      state.controller?.pause();
+      state = state.copyWith(
+        status: const AsyncLoading(),
+        showController: true,
+      );
+      return;
+    }
+    state = state.copyWith(
+      status: const AsyncLoading(),
+      showController: true,
+    );
+    _seekTo(position);
   }
 
   void _handleVideoEnd(void Function() onVideoEnd) {

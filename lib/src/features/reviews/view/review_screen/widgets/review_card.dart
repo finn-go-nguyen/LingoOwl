@@ -7,7 +7,7 @@ import '../../../../../utils/text_helpers.dart';
 import '../../../../../utils/text_style_helper.dart';
 import '../../../../../widgets/common/common.dart';
 import '../../../../profile/data/user_repository.dart';
-import '../../../model/review/review.dart';
+import '../../../model/review.dart';
 
 class ReviewCard extends ConsumerWidget {
   const ReviewCard({

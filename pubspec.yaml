@@ -67,7 +67,6 @@ dependencies:
   url_launcher: ^6.1.7
   lottie: ^2.2.0
   cached_network_image: ^3.2.3
-  shimmer: ^2.0.0
   image_picker: ^0.8.6
   firebase_storage: ^11.0.10
   font_awesome_flutter: ^10.3.0

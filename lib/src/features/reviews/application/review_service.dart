@@ -5,7 +5,7 @@ import '../../../constants/type_defs/type_defs.dart';
 import '../../../domain_manager.dart';
 import '../../authentication/data/authentication_repository.dart';
 import '../data/review_repository.dart';
-import '../model/review/review.dart';
+import '../model/review.dart';
 
 final reviewServiceProvider = Provider<ReviewService>((ref) {
   final authRepository =

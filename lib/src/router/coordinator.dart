@@ -127,7 +127,7 @@ class LCoordinator {
     String title,
     CourseId courseId,
   ) {
-    goNamed(
+    pushNamed(
       LRoutes.reviews.name,
       extra: title,
       params: <String, CourseId>{'id': courseId},
@@ -139,10 +139,18 @@ class LCoordinator {
   }
 
   static void showLectureScreen(CourseId courseId) {
-    goNamed(LRoutes.lecture.name, extra: courseId);
+    goNamed(
+      LRoutes.lecture.name,
+      queryParams: {'id': courseId},
+    );
   }
 
-  static void showNoteScreen(CourseId courseId) {
-    goNamed(LRoutes.notes.name, extra: courseId);
+  static void showNoteScreen(
+      CourseId courseId, void Function(Index, Duration) seekTo) {
+    goNamed(
+      LRoutes.notes.name,
+      extra: seekTo,
+      queryParams: {'id': courseId},
+    );
   }
 }

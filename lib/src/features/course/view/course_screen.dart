@@ -63,6 +63,8 @@ class CourseScreen extends ConsumerWidget {
                       children: [
                         Gaps.h12,
                         SizedBox(
+                          height: MediaQuery.of(context).size.width /
+                              UiParameters.videoAspectRatio,
                           width: MediaQuery.of(context).size.width,
                           child: ClipRRect(
                             borderRadius: UiParameters.thumbnailBorderRadius,
