@@ -88,6 +88,7 @@ dependencies:
   dio: ^5.0.2
   firebase_dynamic_links: ^5.0.16
   flutter_stripe: ^9.0.0+1
+  algolia_helper_flutter: ^0.2.3
 
 dependency_overrides:
   intl: ^0.18.0

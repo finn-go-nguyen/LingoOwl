@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../model/question/question.dart';
 
+import '../model/question/question.dart';
 import '../model/quiz/quiz.dart';
 
 part 'quiz_state.freezed.dart';
