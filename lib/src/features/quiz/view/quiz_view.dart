@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
 import '../../../constants/type_defs/type_defs.dart';
+import '../../../themes/colors.dart';
 import '../../../widgets/common/non_video_viewport.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
@@ -116,7 +117,7 @@ class QuestionView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Question: $index',
+            'Question $index: ',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           Gaps.h12,
@@ -142,6 +143,28 @@ class QuestionView extends StatelessWidget {
                       .onAnswerChanged,
                 );
               }),
+            ),
+          ),
+          Consumer(
+            builder: (context, ref, child) {
+              final hasCorrectAnswer = ref.watch(quizControllerProvider(quizId)
+                  .select((value) => value.hasCorrectAnswer));
+              return Visibility(visible: hasCorrectAnswer, child: child!);
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Gaps.h12,
+                const Text('Explanation:'),
+                Gaps.h8,
+                Card(
+                  color: LColors.correct,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(question.explanation!),
+                  ),
+                ),
+              ],
             ),
           ),
           const Spacer(),
@@ -198,7 +221,7 @@ class QuestionListTile extends StatelessWidget {
     if (isCorrect == null) {
       backgroundColor = Theme.of(context).colorScheme.secondaryContainer;
     } else if (isCorrect!) {
-      backgroundColor = Colors.green[200]!;
+      backgroundColor = LColors.correct;
     } else {
       backgroundColor = Theme.of(context).colorScheme.errorContainer;
     }

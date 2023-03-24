@@ -28,4 +28,6 @@ class LColors {
   static const videoProgressBarBackground = Color.fromARGB(50, 255, 255, 255);
   static const videoProgressBarBuffer = Color.fromARGB(50, 255, 255, 255);
   static const videoPlayerBackground = Colors.black;
+
+  static final correct = Colors.green[200]!;
 }
