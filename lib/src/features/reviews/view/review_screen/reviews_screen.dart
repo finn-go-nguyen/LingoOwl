@@ -65,7 +65,7 @@ class _ReviewsScreenState extends ConsumerState<ReviewsScreen> {
             ),
             Consumer(
               builder: (context, ref, child) {
-                ref.listen(
+                ref.listen<AsyncValue<void>>(
                     reviewsControllerProvider(widget.courseId)
                         .select((state) => state.status), (_, next) {
                   next.showError(context);

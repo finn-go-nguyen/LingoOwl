@@ -15,7 +15,7 @@ class CartScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(cartControllerProvider, (previous, next) {
+    ref.listen<AsyncValue<void>>(cartControllerProvider, (previous, next) {
       next.showError(context);
     });
 

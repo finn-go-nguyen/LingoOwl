@@ -33,7 +33,7 @@ class LectureScreen extends ConsumerWidget {
         (previous, next) {
       next.showError(context);
     });
-    ref.listen(addNoteControllerProvider, (previous, next) {
+    ref.listen<AsyncValue<void>>(addNoteControllerProvider, (previous, next) {
       next.showSuccess(context, content: 'Note added!');
       next.showError(context);
     });

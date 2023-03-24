@@ -31,8 +31,10 @@ class _EmailPasswordSignInScreenState
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(emailPasswordSignInControllerProvider, (previous, next) {
-      next.status.showError(context,
+    ref.listen<AsyncValue<void>>(
+        emailPasswordSignInControllerProvider.select((value) => value.status),
+        (previous, next) {
+      next.showError(context,
           errorMessage: ErrorTextConstants.wrongPasswordOrUserNotFound);
     });
     return LScaffold(

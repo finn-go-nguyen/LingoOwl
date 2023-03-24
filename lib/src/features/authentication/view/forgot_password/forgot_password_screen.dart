@@ -33,7 +33,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(forgotPasswordControllerProvider, (_, next) {
+    ref.listen<AsyncValue<void>>(forgotPasswordControllerProvider, (_, next) {
       next.showError(context);
     });
 

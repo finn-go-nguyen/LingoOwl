@@ -35,12 +35,14 @@ class _VideoViewState extends ConsumerState<VideoView> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen(videoControllerProvider.select((value) => value.status),
+    ref.listen<AsyncValue<void>>(
+        videoControllerProvider.select((value) => value.status),
         (previous, next) {
       next.showError(context);
     });
 
-    ref.listen(videoControllerProvider.select((value) => value.isInitialized),
+    ref.listen<bool>(
+        videoControllerProvider.select((value) => value.isInitialized),
         (previous, next) {
       ref.read(videoControllerProvider.notifier).listenOnVideoEnd(
             onVideoEnd: () => widget.onVideoEnd?.call(),

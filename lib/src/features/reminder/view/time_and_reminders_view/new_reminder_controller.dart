@@ -12,7 +12,8 @@ final newReminderControllerProvider = StateNotifierProvider.autoDispose
 });
 
 class NewReminderController extends StateNotifier<LReminder> {
-  NewReminderController(LReminder? reminder) : super(reminder ?? LReminder());
+  NewReminderController(LReminder? reminder)
+      : super(reminder ?? const LReminder());
 
   void onReminderTimeChanged(Future<TimeOfDay?> Function() timePicker) async {
     final result = await timePicker();

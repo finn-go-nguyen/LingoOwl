@@ -15,7 +15,8 @@ class SignInScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(socialSignInControllerProvider, (previous, next) {
+    ref.listen<AsyncValue<void>>(socialSignInControllerProvider,
+        (previous, next) {
       next.showError(context);
       next.showLoadingDialog(context, previous);
     });

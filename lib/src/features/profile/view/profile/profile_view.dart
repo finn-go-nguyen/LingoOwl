@@ -38,7 +38,8 @@ class ProfileView extends StatelessWidget {
                     children: [
                       Consumer(
                         builder: (context, ref, child) {
-                          ref.listen(profileControllerProvider, (_, next) {
+                          ref.listen<AsyncValue<void>>(
+                              profileControllerProvider, (_, next) {
                             next.showSuccess(
                               context,
                               content: 'Your profile update successfully!',

@@ -18,7 +18,7 @@ class AddToCartButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(addToCartControllerProvider, (previous, next) {
+    ref.listen<AsyncValue<void>>(addToCartControllerProvider, (previous, next) {
       next.showError(context);
     });
 

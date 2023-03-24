@@ -17,7 +17,8 @@ class AddToWishlistButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(addToWishlistControllerProvider, (previous, next) {
+    ref.listen<AsyncValue<void>>(addToWishlistControllerProvider,
+        (previous, next) {
       next.showError(context);
     });
 

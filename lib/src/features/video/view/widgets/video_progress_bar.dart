@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:video_player/video_player.dart';
 
 import '../../../../themes/colors.dart';
-import '../../../../utils/text_helpers.dart';
 import '../video_view_controller.dart';
 
 class VideoProgressBar extends ConsumerWidget {
@@ -20,7 +19,6 @@ class VideoProgressBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final controller =
         ref.watch(videoControllerProvider.select((value) => value.controller));
-    final textHelpers = ref.watch(textHelpersProvider);
     final durationInMilliseconds = duration.inMilliseconds;
 
     int maxBufferingInMilliseconds = 0;
