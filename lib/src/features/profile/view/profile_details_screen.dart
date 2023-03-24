@@ -19,7 +19,7 @@ class ProfileDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LScaffold(
-      appBar: const LAppBar(title: 'Account Security'),
+      appBar: const LAppBar(title: Text('Account Security')),
       body: SizedBox.expand(
         child: SingleChildScrollView(
           padding: UiParameters.screenPadding,

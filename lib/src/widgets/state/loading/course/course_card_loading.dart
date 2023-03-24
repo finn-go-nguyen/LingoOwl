@@ -12,7 +12,7 @@ class CourseCardPortraitLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: UiParameters.courseCardPadding,
+      padding: UiParameters.courseCardPortraitPadding,
       child: SizedBox.fromSize(
         size: UiParameters.courseCardPortraitSize,
         child: Column(
@@ -69,7 +69,7 @@ class CourseCardLandscapeLoading extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: UiParameters.courseCardPadding,
+            padding: UiParameters.courseCardLandscapePadding,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

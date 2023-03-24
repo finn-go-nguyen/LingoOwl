@@ -24,7 +24,7 @@ class SettingsScreen extends ConsumerWidget {
 
     return LScaffold(
       appBar: const LAppBar(
-        title: 'Account',
+        title: Text('Account'),
         actions: [CartIconButton()],
       ),
       body: SingleChildScrollView(

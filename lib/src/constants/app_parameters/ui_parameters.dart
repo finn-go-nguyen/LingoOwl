@@ -28,8 +28,9 @@ class UiParameters {
   static const lottiesDimension = 300.0;
 
   // Course card
-  static const courseCardPadding = EdgeInsets.all(8.0);
-  static const courseCardPortraitSize = Size(200.0, 300.0);
+  static const courseCardLandscapePadding = EdgeInsets.all(8.0);
+  static const courseCardPortraitPadding = EdgeInsets.all(4.0);
+  static const courseCardPortraitSize = Size(200.0, 280.0);
   static const courseCardThumbnailDimension = 60.0;
   static const courseCardBorderRadius = BorderRadius.all(Radius.circular(6.0));
 

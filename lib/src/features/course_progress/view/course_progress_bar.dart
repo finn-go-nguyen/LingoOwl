@@ -17,7 +17,14 @@ class CourseProgressBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final percentageValue = ref.watch(progressPercentageProvider(courseId));
     return percentageValue.when(
-      error: (_, __) => const SizedBox.shrink(),
+      error: (_, __) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildProgressIndication(0.0),
+          Gaps.h8,
+          _buildPercentageText(0.0),
+        ],
+      ),
       loading: () => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

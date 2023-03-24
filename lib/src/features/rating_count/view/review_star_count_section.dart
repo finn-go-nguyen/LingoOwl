@@ -8,6 +8,7 @@ import '../../../constants/type_defs/type_defs.dart';
 import '../../../utils/formatter.dart';
 import '../../../utils/text_style_helper.dart';
 import '../../../widgets/common/rating_bar.dart';
+import '../../../widgets/common/section_headline.dart';
 import '../../../widgets/state/error.dart';
 import '../../../widgets/state/loading/loading.dart';
 import '../data/rating_count_repository.dart';
@@ -32,12 +33,10 @@ class ReviewStarCountSection extends ConsumerWidget {
       data: (starCount) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Student Feedback',
-            style: textStyleHelper.studentFeedback,
-          ),
+          const SectionHeadline(text: 'Student Feedback'),
           Row(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.baseline,
+            textBaseline: TextBaseline.alphabetic,
             children: [
               Text(
                 starCount.average.toStringAsFixed(1),
@@ -101,7 +100,13 @@ class PercentageBar extends StatelessWidget {
           Consumer(
             builder: (context, ref, child) {
               final numberFormatter = ref.watch(compactNumberFormatterProvider);
-              return Text(numberFormatter.format(count));
+              return Text(
+                numberFormatter.format(count),
+                style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+              );
             },
           ),
         ],

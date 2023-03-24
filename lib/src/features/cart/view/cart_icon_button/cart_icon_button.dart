@@ -15,7 +15,10 @@ class CartIconButton extends ConsumerWidget {
       icon: Badge.count(
         count: cartItemCount,
         isLabelVisible: cartItemCount != 0,
-        child: const Icon(Icons.shopping_bag_outlined),
+        child: Icon(
+          Icons.shopping_bag_outlined,
+          color: Theme.of(context).colorScheme.primary,
+        ),
       ),
     );
   }

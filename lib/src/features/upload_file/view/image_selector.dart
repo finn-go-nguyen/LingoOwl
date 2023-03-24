@@ -57,7 +57,7 @@ class ImageSelector extends ConsumerWidget {
                   icon: const Icon(Icons.upload_file),
                   label: Text(
                     'Upload image',
-                    style: Theme.of(context).primaryTextTheme.labelLarge,
+                    style: Theme.of(context).textTheme.labelLarge,
                   ),
                 );
               }),

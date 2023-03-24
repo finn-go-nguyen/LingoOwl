@@ -12,13 +12,13 @@ class LAppBar extends StatelessWidget implements PreferredSizeWidget {
   });
 
   final Widget? leading;
-  final String title;
+  final Widget? title;
   final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: title,
       actions: actions,
       automaticallyImplyLeading: leading == null,
       leading: leading,
@@ -30,12 +30,12 @@ class LAppBar extends StatelessWidget implements PreferredSizeWidget {
 }
 
 class LAppBarWithCartIconButton extends LAppBar {
-  const LAppBarWithCartIconButton({super.key, required super.title});
+  const LAppBarWithCartIconButton({super.key, super.title});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title),
+      title: title,
       actions: const [CartIconButton()],
     );
   }

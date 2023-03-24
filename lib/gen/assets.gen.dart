@@ -5,9 +5,28 @@
 
 // coverage:ignore-file
 // ignore_for_file: type=lint
-// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal
+// ignore_for_file: directives_ordering,unnecessary_import,implicit_dynamic_list_literal,deprecated_member_use
 
 import 'package:flutter/widgets.dart';
+
+class $AssetsBannersGen {
+  const $AssetsBannersGen();
+
+  /// File path: assets/banners/banner1.jpg
+  AssetGenImage get banner1 =>
+      const AssetGenImage('assets/banners/banner1.jpg');
+
+  /// File path: assets/banners/banner2.png
+  AssetGenImage get banner2 =>
+      const AssetGenImage('assets/banners/banner2.png');
+
+  /// File path: assets/banners/banner3.jpg
+  AssetGenImage get banner3 =>
+      const AssetGenImage('assets/banners/banner3.jpg');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [banner1, banner2, banner3];
+}
 
 class $AssetsIconsGen {
   const $AssetsIconsGen();
@@ -15,6 +34,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/account_circle.png
   AssetGenImage get accountCircle =>
       const AssetGenImage('assets/icons/account_circle.png');
+
+  /// File path: assets/icons/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
 
   /// File path: assets/icons/envelope.png
   AssetGenImage get envelope =>
@@ -36,8 +58,15 @@ class $AssetsIconsGen {
       const AssetGenImage('assets/icons/microsoft.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [accountCircle, envelope, envelopeDark, facebook, google, microsoft];
+  List<AssetGenImage> get values => [
+        accountCircle,
+        appIcon,
+        envelope,
+        envelopeDark,
+        facebook,
+        google,
+        microsoft
+      ];
 }
 
 class $AssetsIllustrationsGen {
@@ -72,6 +101,7 @@ class $AssetsLottiesGen {
 class Assets {
   Assets._();
 
+  static const $AssetsBannersGen banners = $AssetsBannersGen();
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsIllustrationsGen illustrations =
       $AssetsIllustrationsGen();

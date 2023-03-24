@@ -16,27 +16,27 @@ class TextStyleHelpers {
       ?.copyWith(color: Theme.of(context).colorScheme.outline);
 
   TextStyle? get majorPriceMedium =>
-      Theme.of(context).textTheme.titleLarge?.copyWith(
+      Theme.of(context).textTheme.titleMedium?.copyWith(
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: FontWeight.bold,
           );
 
   TextStyle? get majorPriceLarge =>
-      Theme.of(context).textTheme.titleLarge?.copyWith(
+      Theme.of(context).textTheme.headlineLarge?.copyWith(
             fontWeight: FontWeight.bold,
-            fontSize: 40.0,
+            color: Theme.of(context).colorScheme.secondary,
           );
 
   TextStyle? get lineThroughPriceMedium =>
-      Theme.of(context).textTheme.bodyLarge?.copyWith(
+      Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: Theme.of(context).colorScheme.outlineVariant,
             decoration: TextDecoration.lineThrough,
           );
 
   TextStyle? get lineThroughPriceLarge =>
-      Theme.of(context).textTheme.bodyLarge?.copyWith(
+      Theme.of(context).textTheme.headlineMedium?.copyWith(
             color: Theme.of(context).colorScheme.outlineVariant,
             decoration: TextDecoration.lineThrough,
-            fontSize: 30.0,
           );
 
   TextStyle? get courseNameLarge =>
@@ -44,20 +44,21 @@ class TextStyleHelpers {
             fontWeight: FontWeight.bold,
           );
 
-  TextStyle? get courseNameMedium =>
-      Theme.of(context).textTheme.titleMedium?.copyWith(
+  TextStyle? get courseNameSmall =>
+      Theme.of(context).textTheme.titleSmall?.copyWith(
             fontWeight: FontWeight.bold,
           );
 
   TextStyle? get ratingValue =>
       Theme.of(context).textTheme.labelLarge?.copyWith(
             color: Colors.orange,
-            fontWeight: FontWeight.bold,
+            // fontWeight: FontWeight.bold,
           );
 
   TextStyle? get courseRating =>
       Theme.of(context).textTheme.displaySmall?.copyWith(
             fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.secondary,
           );
 
   TextStyle? get reviewerName =>

@@ -18,17 +18,15 @@ class CourseCardPortrait extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyleHelper = ref.watch(textStyleHelperProvider(context));
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      clipBehavior: Clip.hardEdge,
-      child: InkWell(
-        onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
-        child: Padding(
-          padding: UiParameters.courseCardPadding,
-          child: SizedBox(
-            width: UiParameters.courseCardPortraitSize.width,
+    return SizedBox(
+      width: UiParameters.courseCardPortraitSize.width,
+      child: Card(
+        child: InkWell(
+          onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
+          child: Padding(
+            padding: UiParameters.courseCardPortraitPadding,
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              // mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AspectRatio(
@@ -41,7 +39,7 @@ class CourseCardPortrait extends ConsumerWidget {
                 Gaps.h8,
                 Text(
                   course.name,
-                  style: textStyleHelper.courseNameMedium,
+                  style: textStyleHelper.courseNameSmall,
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -49,7 +47,7 @@ class CourseCardPortrait extends ConsumerWidget {
                 InstructionNameLabel(
                   name: course.instructorName,
                 ),
-                Gaps.h8,
+                const Spacer(),
                 LRatingBar(
                   courseId: course.id,
                 ),
@@ -78,56 +76,53 @@ class CourseCardLandscape extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textStyleHelper = ref.watch(textStyleHelperProvider(context));
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        children: [
-          InkWell(
-            onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
-            child: Padding(
-              padding: UiParameters.courseCardPadding,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  LNetworkImage(
-                    course.thumbnail,
-                    dimension: UiParameters.courseCardThumbnailDimension,
-                    fit: BoxFit.cover,
-                    borderRadius: UiParameters.courseCardBorderRadius,
+    return Card(
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        child: InkWell(
+          onTap: () => LCoordinator.showCourseDetailsScreen(course.id),
+          child: Padding(
+            padding: UiParameters.courseCardLandscapePadding,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                LNetworkImage(
+                  course.thumbnail,
+                  dimension: UiParameters.courseCardThumbnailDimension,
+                  fit: BoxFit.cover,
+                  borderRadius: UiParameters.courseCardBorderRadius,
+                ),
+                Gaps.w12,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        course.name,
+                        style: textStyleHelper.courseNameSmall,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      Gaps.h4,
+                      InstructionNameLabel(
+                        name: course.instructorName,
+                      ),
+                      Gaps.h4,
+                      LRatingBar(
+                        courseId: course.id,
+                      ),
+                      Gaps.h4,
+                      PriceLabel(
+                        price: course.price,
+                        salePrice: course.salePrice,
+                      ),
+                    ],
                   ),
-                  Gaps.w12,
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          course.name,
-                          style: textStyleHelper.courseNameMedium,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Gaps.h4,
-                        InstructionNameLabel(
-                          name: course.instructorName,
-                        ),
-                        Gaps.h4,
-                        LRatingBar(
-                          courseId: course.id,
-                        ),
-                        Gaps.h4,
-                        PriceLabel(
-                          price: course.price,
-                          salePrice: course.salePrice,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-          const Divider(),
-        ],
+        ),
       ),
     );
   }

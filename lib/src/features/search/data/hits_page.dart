@@ -1,4 +1,5 @@
 import 'package:algolia_helper_flutter/algolia_helper_flutter.dart';
+
 import '../../course/model/course.dart';
 
 class HitsPage {

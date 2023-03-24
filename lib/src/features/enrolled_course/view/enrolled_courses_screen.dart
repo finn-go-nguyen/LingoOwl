@@ -18,7 +18,7 @@ class EnrolledCoursesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return LScaffold(
       appBar: const LAppBar(
-        title: 'My courses',
+        title: Text('My courses'),
         actions: [
           // TODO: Add search icon button
           CartIconButton(),

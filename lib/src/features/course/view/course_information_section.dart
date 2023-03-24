@@ -42,33 +42,27 @@ class CourseInformationSection extends ConsumerWidget {
         Gaps.h12,
         Text(
           'Created by $instructorName',
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         Gaps.h12,
         Row(
-          children: const [
+          children: [
             Icon(
               Icons.update,
+              color: Theme.of(context).colorScheme.primary,
             ),
             Gaps.w8,
-            Text('Last update 1/2023'),
+            const Text('Last update 1/2023'),
           ],
         ),
         Row(
-          children: const [
+          children: [
             Icon(
               Icons.public,
+              color: Theme.of(context).colorScheme.primary,
             ),
             Gaps.w8,
-            Text('English'),
-          ],
-        ),
-        Row(
-          children: const [
-            Icon(
-              Icons.closed_caption,
-            ),
-            Gaps.w8,
-            Text('English'),
+            const Text('English'),
           ],
         ),
       ],

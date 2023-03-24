@@ -42,7 +42,7 @@ class NonVideoViewport extends ConsumerWidget {
       },
       child: Scaffold(
         appBar: LAppBar(
-          title: title,
+          title: Text(title),
           leading: BackButton(
             onPressed: () {
               if (isQuiz) {

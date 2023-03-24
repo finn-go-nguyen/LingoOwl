@@ -33,7 +33,7 @@ class EnrolledCourseCard extends ConsumerWidget {
             InkWell(
               onTap: () => LCoordinator.showLectureScreen(course.id),
               child: Padding(
-                padding: UiParameters.courseCardPadding,
+                padding: UiParameters.courseCardLandscapePadding,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,7 +50,7 @@ class EnrolledCourseCard extends ConsumerWidget {
                         children: [
                           Text(
                             course.name,
-                            style: textStyleHelper.courseNameMedium,
+                            style: textStyleHelper.courseNameSmall,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -67,7 +67,7 @@ class EnrolledCourseCard extends ConsumerWidget {
                 ),
               ),
             ),
-            const Divider(),
+            Gaps.divider,
           ],
         ),
       ),

@@ -38,7 +38,7 @@ class NoteScreen extends StatelessWidget {
             child: Column(
               children: [
                 const LAppBar(
-                  title: 'Notes',
+                  title: Text('Notes'),
                   leading: CloseButton(),
                 ),
                 Expanded(
