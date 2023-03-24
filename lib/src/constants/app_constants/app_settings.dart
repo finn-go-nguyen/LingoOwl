@@ -31,7 +31,7 @@ class AppSettings {
   );
 
   static const settingList = <LSettingSection>[
-    _videoPreferences,
+    // _videoPreferences,
     _accountSettings,
   ];
 }

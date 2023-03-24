@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_parameters/app_parameters.dart';
-import '../../../widgets/common/common.dart';
 import 'widgets/search_bar.dart';
 
 class SearchView extends StatelessWidget {
@@ -16,8 +15,8 @@ class SearchView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: Sizes.p16),
           child: SearchBar(),
         ),
-        Gaps.h16,
-        BrowseCategories(hideTitle: true),
+        // Gaps.h16,
+        // BrowseCategories(hideTitle: true),
       ],
     );
   }

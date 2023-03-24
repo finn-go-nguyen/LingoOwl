@@ -13,25 +13,26 @@ class VideoTopControllerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Row(
-      children: [
-        const IconButton(
+      children: const [
+        IconButton(
           onPressed: LCoordinator.onBack,
           icon: Icon(Icons.expand_more),
         ),
-        const Spacer(),
-        const VideoQualityButton(),
-        TextButton(
-          onPressed: () {},
-          child: const Text('CC'),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: const Text('1.0X'),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.more_vert),
-        )
+        Spacer(),
+        VideoQualityButton(),
+        Gaps.w16,
+        // TextButton(
+        //   onPressed: () {},
+        //   child: const Text('CC'),
+        // ),
+        // TextButton(
+        //   onPressed: () {},
+        //   child: const Text('1.0X'),
+        // ),
+        // IconButton(
+        //   onPressed: () {},
+        //   icon: const Icon(Icons.more_vert),
+        // )
       ],
     );
   }

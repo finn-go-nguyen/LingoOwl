@@ -56,13 +56,14 @@ class CartItemCard extends ConsumerWidget {
                     ),
                     Row(
                       children: [
+                        // TextButton(
+                        //   style: TextButton.styleFrom(padding: EdgeInsets.zero),
+                        //   onPressed: () {},
+                        //   child: const Text('Save for later'),
+                        // ),
+                        // Gaps.w8,
                         TextButton(
                           style: TextButton.styleFrom(padding: EdgeInsets.zero),
-                          onPressed: () {},
-                          child: const Text('Save for later'),
-                        ),
-                        Gaps.w8,
-                        TextButton(
                           onPressed: () {
                             showAlertDialog(
                               context: context,

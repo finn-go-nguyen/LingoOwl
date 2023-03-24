@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constants/app_parameters/app_parameters.dart';
-import '../../../../widgets/dialog/alert_dialog.dart';
 import 'search_delegate.dart';
 
 class SearchBar extends StatelessWidget {
@@ -18,7 +17,7 @@ class SearchBar extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(
-          // vertical: Sizes.p12,
+          vertical: Sizes.p12,
           horizontal: Sizes.p20,
         ),
         child: Row(
@@ -39,10 +38,10 @@ class SearchBar extends StatelessWidget {
                 );
               }),
             ),
-            IconButton(
-              onPressed: () => showNotImplementedAlertDialog(context: context),
-              icon: const Icon(Icons.mic),
-            )
+            // IconButton(
+            //   onPressed: () => showNotImplementedAlertDialog(context: context),
+            //   icon: const Icon(Icons.mic),
+            // )
           ],
         ),
       ),

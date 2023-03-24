@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../../constants/app_constants/tab_items.dart';
-import '../../../../widgets/dialog/alert_dialog.dart';
 
 class LectureTabBar extends StatelessWidget {
   const LectureTabBar({super.key});
@@ -39,12 +38,12 @@ class _MySliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
         children: [
           tabBar,
           const Spacer(),
-          IconButton(
-            onPressed: () => showNotImplementedAlertDialog(context: context),
-            icon: const Icon(
-              Icons.download_for_offline,
-            ),
-          )
+          // IconButton(
+          //   onPressed: () => showNotImplementedAlertDialog(context: context),
+          //   icon: const Icon(
+          //     Icons.download_for_offline,
+          //   ),
+          // )
         ],
       ),
     );

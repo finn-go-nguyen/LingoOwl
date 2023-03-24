@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../constants/app_parameters/app_sizes.dart';
 import '../../../../constants/type_defs/type_defs.dart';
-import '../../../../widgets/dialog/alert_dialog.dart';
 import '../../../video/view/video_view_controller.dart';
 import '../../model/lecture/lecture.dart';
 import '../../model/section/section.dart';
@@ -43,6 +42,7 @@ class _LectureSectionState extends ConsumerState<LectureSection> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Gaps.h12,
         Row(
           children: [
             Gaps.w16,
@@ -54,10 +54,10 @@ class _LectureSectionState extends ConsumerState<LectureSection> {
                 style: Theme.of(context).textTheme.titleSmall,
               ),
             ),
-            IconButton(
-              onPressed: () => showNotImplementedAlertDialog(context: context),
-              icon: const Icon(Icons.download_for_offline_outlined),
-            )
+            // IconButton(
+            //   onPressed: () => showNotImplementedAlertDialog(context: context),
+            //   icon: const Icon(Icons.download_for_offline_outlined),
+            // )
           ],
         ),
         ...List.generate(

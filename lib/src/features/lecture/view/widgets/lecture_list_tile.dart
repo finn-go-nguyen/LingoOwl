@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../constants/app_parameters/app_parameters.dart';
 import '../../../../constants/enums/lecture_type.dart';
 import '../../../../utils/text_helpers.dart';
-import '../../../../widgets/dialog/alert_dialog.dart';
 import '../../model/lecture/lecture.dart';
 import '../lecture_screen/lecture_screen_controller.dart';
 
@@ -29,12 +28,12 @@ class LectureListTile extends ConsumerWidget {
       selected: isSelected,
       contentPadding: EdgeInsets.zero,
       leading: _buildLeading(),
-      trailing: lecture.type.isVideo
-          ? IconButton(
-              onPressed: () => showNotImplementedAlertDialog(context: context),
-              icon: const Icon(Icons.download_for_offline_outlined),
-            )
-          : null,
+      // trailing: lecture.type.isVideo
+      //     ? IconButton(
+      //         onPressed: () => showNotImplementedAlertDialog(context: context),
+      //         icon: const Icon(Icons.download_for_offline_outlined),
+      //       )
+      //     : null,
       title: _buildTitle(),
       subtitle: _buildSubtitle(),
     );
